@@ -8,11 +8,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Startup Management & Reporting System",
   description: "Track your startup journey from ideation to scale",
-  icons: {
-    icon: '/favfav.png',
-    shortcut: '/favfav.png',
-    apple: '/favfav.png',
-  },
 };
 
 export default function RootLayout({
@@ -22,6 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favfav.png" type="image/png" />
+        <link rel="shortcut icon" href="/favfav.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favfav.png" />
+      </head>
       <body className={inter.className} suppressHydrationWarning>
         <AuthProvider>
           {children}
