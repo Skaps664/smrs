@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { FileText, Plus, X, Upload, Download, Trash2, AlertCircle } from "lucide-react"
 import { format } from "date-fns"
+import type { Startup, Document } from "@/types"
 
 const categories = [
   { value: "LEGAL", label: "Legal", color: "bg-red-100 text-red-700" },
@@ -14,8 +15,8 @@ const categories = [
 ]
 
 export default function DocumentsPage() {
-  const [startup, setStartup] = useState<any>(null)
-  const [documents, setDocuments] = useState<any[]>([])
+  const [startup, setStartup] = useState<Startup | null>(null)
+  const [documents, setDocuments] = useState<Document[]>([])
   const [showForm, setShowForm] = useState(false)
   const [loading, setLoading] = useState(false)
   const [uploading, setUploading] = useState(false)
@@ -128,7 +129,7 @@ export default function DocumentsPage() {
     }
   }
 
-  const handleDownload = (doc: any) => {
+  const handleDownload = (doc: Document) => {
     const link = document.createElement("a")
     link.href = doc.fileUrl
     link.download = doc.name
@@ -149,7 +150,7 @@ export default function DocumentsPage() {
     return documents.filter(d => d.category === category)
   }
 
-  const isExpiring = (doc: any) => {
+  const isExpiring = (doc: Document) => {
     if (!doc.expiryDate) return false
     const daysUntilExpiry = Math.floor(
       (new Date(doc.expiryDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
@@ -157,7 +158,7 @@ export default function DocumentsPage() {
     return daysUntilExpiry >= 0 && daysUntilExpiry <= 30
   }
 
-  const isExpired = (doc: any) => {
+  const isExpired = (doc: Document) => {
     if (!doc.expiryDate) return false
     return new Date(doc.expiryDate) < new Date()
   }

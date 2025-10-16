@@ -1,15 +1,8 @@
 import jsPDF from "jspdf"
 import html2canvas from "html2canvas"
+import type { ReportData, WeeklyTracker, MonthlyTracker, KPI, Milestone, Document, MentorFeedback } from "@/types"
 
-export interface ReportData {
-  startup: any
-  weeklyTrackers: any[]
-  monthlyTrackers: any[]
-  kpis: any[]
-  milestones: any[]
-  documents: any[]
-  feedbacks: any[]
-}
+export type { ReportData }
 
 export async function generatePDFReport(data: ReportData) {
   const doc = new jsPDF()
@@ -70,7 +63,7 @@ export async function generatePDFReport(data: ReportData) {
 
   if (data.weeklyTrackers.length > 0 && yPos < pageHeight - 60) {
     yPos += 10
-    const recent = data.weeklyTrackers[0]
+    const recent: WeeklyTracker = data.weeklyTrackers[0]
     doc.setFontSize(9)
     doc.text(`Latest Entry (${new Date(recent.startDate).toLocaleDateString()}):`, 20, yPos)
     yPos += 7
@@ -99,7 +92,7 @@ export async function generatePDFReport(data: ReportData) {
 
   if (data.monthlyTrackers.length > 0 && yPos < pageHeight - 40) {
     yPos += 10
-    const recent = data.monthlyTrackers[0]
+    const recent: MonthlyTracker = data.monthlyTrackers[0]
     doc.setFontSize(9)
     doc.text(`Latest Month:`, 20, yPos)
     yPos += 7
@@ -128,7 +121,7 @@ export async function generatePDFReport(data: ReportData) {
 
   const categories = ["MARKETING", "SALES", "PRODUCT", "OPERATIONS"]
   categories.forEach(cat => {
-    const count = data.kpis.filter((k: any) => k.category === cat).length
+    const count = data.kpis.filter((k: KPI) => k.category === cat).length
     yPos += 7
     if (yPos > pageHeight - 20) {
       doc.addPage()
@@ -151,7 +144,7 @@ export async function generatePDFReport(data: ReportData) {
   yPos += 10
   doc.setFontSize(10)
   doc.setTextColor(107, 114, 128)
-  const completedMilestones = data.milestones.filter((m: any) => m.completed).length
+  const completedMilestones = data.milestones.filter((m: Milestone) => m.completed).length
   doc.text(`Total: ${data.milestones.length} | Completed: ${completedMilestones}`, 20, yPos)
   yPos += 7
   const progress = data.milestones.length > 0
@@ -177,7 +170,7 @@ export async function generatePDFReport(data: ReportData) {
 
   const docCategories = ["LEGAL", "FINANCIAL", "PITCH_DECK", "PRODUCT_PHOTOS", "CERTIFICATES", "OTHER"]
   docCategories.forEach(cat => {
-    const count = data.documents.filter((d: any) => d.category === cat).length
+    const count = data.documents.filter((d: Document) => d.category === cat).length
     if (count > 0) {
       yPos += 7
       if (yPos > pageHeight - 20) {
@@ -206,9 +199,9 @@ export async function generatePDFReport(data: ReportData) {
 
   if (data.feedbacks.length > 0) {
     const avgScore = data.feedbacks
-      .filter((f: any) => f.progressScore)
-      .reduce((acc: number, f: any) => acc + f.progressScore, 0) / 
-      data.feedbacks.filter((f: any) => f.progressScore).length
+      .filter((f: MentorFeedback) => f.progressScore)
+      .reduce((acc: number, f: MentorFeedback) => acc + (f.progressScore || 0), 0) / 
+      data.feedbacks.filter((f: MentorFeedback) => f.progressScore).length
     
     yPos += 7
     doc.text(`Average Progress Score: ${avgScore.toFixed(1)}/10`, 20, yPos)
