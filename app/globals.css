@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Force dark text on light backgrounds for all inputs and text elements */
+input,
+textarea,
+select,
+label,
+p,
+h1, h2, h3, h4, h5, h6,
+span,
+div {
+  color: #111827;
+}
+
+/* Specific overrides for better contrast */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+  color: #111827 !important;
+  background-color: #ffffff !important;
+}
+
+/* Ensure placeholder text is visible */
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* Fix text color in forms */
+form {
+  color: #111827;
+}
+
+/* Ensure labels are dark */
+label {
+  color: #374151 !important;
+}
+
+/* Button text should be appropriate */
+button {
+  color: inherit;
+}

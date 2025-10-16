@@ -1,0 +1,236 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String    @unique
+  password      String
+  name          String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  startups      Startup[]
+}
+
+model Startup {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String              @db.ObjectId
+  user                  User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Basic Information
+  name                  String
+  founders              String[]
+  industry              String
+  niche                 String
+  stage                 StartupStage        @default(IDEATION)
+  
+  // Registration Details
+  secpRegistered        Boolean             @default(false)
+  secpNumber            String?
+  fbrRegistered         Boolean             @default(false)
+  ntnNumber             String?
+  trademarkFiled        Boolean             @default(false)
+  trademarkNumber       String?
+  
+  // Brand Details
+  vision                String?
+  mission               String?
+  tagline               String?
+  logoUrl               String?
+  bannerUrl             String?
+  
+  // Contact Details
+  email                 String?
+  phone                 String?
+  address               String?
+  website               String?
+  
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  
+  // Relations
+  weeklyTrackers        WeeklyTracker[]
+  monthlyTrackers       MonthlyTracker[]
+  kpis                  KPI[]
+  milestones            Milestone[]
+  documents             Document[]
+  mentorFeedback        MentorFeedback[]
+}
+
+enum StartupStage {
+  IDEATION
+  PROTOTYPE
+  VALIDATION
+  INCUBATION
+  ACCELERATION
+  GROWTH
+  SCALE
+}
+
+model WeeklyTracker {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String    @db.ObjectId
+  startup               Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  weekNumber            Int
+  month                 String
+  year                  Int
+  
+  milestonesAchieved    String[]
+  newActivities         String[]
+  challenges            String[]
+  actionsTaken          String[]
+  nextGoals             String[]
+  supportNeeded         String[]
+  
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  
+  @@index([startupId, year, month, weekNumber])
+}
+
+model MonthlyTracker {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String    @db.ObjectId
+  startup               Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  month                 String
+  year                  Int
+  
+  summary               String
+  keyAchievements       String[]
+  majorChallenges       String[]
+  lessonsLearned        String[]
+  nextMonthPlans        String[]
+  
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  
+  @@index([startupId, year, month])
+}
+
+model KPI {
+  id                    String      @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String      @db.ObjectId
+  startup               Startup     @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  date                  DateTime
+  category              KPICategory
+  
+  // Marketing Metrics
+  socialFollowers       Int?
+  reach                 Int?
+  engagementRate        Float?
+  adSpend               Float?
+  leadsGenerated        Int?
+  
+  // Sales & Financials
+  ordersPlaced          Int?
+  unitsSold             Int?
+  revenue               Float?
+  profitMargin          Float?
+  customerReturnRate    Float?
+  
+  // Product Development
+  featuresCompleted     Int?
+  prototypesTested      Int?
+  qaResults             String?
+  
+  // Operations
+  suppliersOnboarded    Int?
+  employeesAdded        Int?
+  collaborators         Int?
+  
+  notes                 String?
+  
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+  
+  @@index([startupId, date, category])
+}
+
+enum KPICategory {
+  MARKETING
+  SALES
+  PRODUCT
+  OPERATIONS
+  GENERAL
+}
+
+model Milestone {
+  id                    String         @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String         @db.ObjectId
+  startup               Startup        @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  stage                 StartupStage
+  title                 String
+  description           String?
+  completed             Boolean        @default(false)
+  completedDate         DateTime?
+  criteria              String[]
+  
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  
+  @@index([startupId, stage])
+}
+
+model Document {
+  id                    String         @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String         @db.ObjectId
+  startup               Startup        @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  name                  String
+  category              DocumentCategory
+  fileUrl               String
+  fileSize              Int?
+  fileType              String?
+  
+  expiryDate            DateTime?
+  reminderSet           Boolean        @default(false)
+  
+  notes                 String?
+  
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  
+  @@index([startupId, category])
+}
+
+enum DocumentCategory {
+  LEGAL
+  FINANCIAL
+  PITCH_DECK
+  PRODUCT_PHOTOS
+  CERTIFICATES
+  CONTRACTS
+  OTHER
+}
+
+model MentorFeedback {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String    @db.ObjectId
+  startup               Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  mentorName            String
+  mentorEmail           String?
+  
+  meetingDate           DateTime
+  meetingNotes          String
+  feedback              String
+  assignedTasks         String[]
+  progressScore         Int?      // 1-10 scale
+  
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  
+  @@index([startupId, meetingDate])
+}
