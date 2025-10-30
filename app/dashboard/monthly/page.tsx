@@ -127,7 +127,7 @@ export default function MonthlyTrackerPage() {
         <button
           type="button"
           onClick={() => addField(field)}
-          className="text-blue-600 text-sm hover:text-blue-700"
+          className="text-orange-600 text-sm hover:text-orange-700"
         >
           + Add More
         </button>
@@ -140,7 +140,7 @@ export default function MonthlyTrackerPage() {
               value={value}
               onChange={(e) => updateField(field, index, e.target.value)}
               placeholder={placeholder}
-              className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-900"
+              className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
             />
             {(formData[field] as string[]).length > 1 && (
               <button
@@ -163,18 +163,18 @@ export default function MonthlyTrackerPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold flex items-center text-gray-900">
-            <Calendar className="w-7 h-7 mr-3 text-blue-600" />
+            <Calendar className="w-7 h-7 mr-3 text-orange-600" />
             Monthly Progress Tracker
           </h1>
           <p className="text-gray-600 mt-1">Track your monthly achievements and learnings</p>
         </div>
         {!showForm && (
-          <button
+                    <button
             onClick={() => setShowForm(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center"
+            className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 flex items-center"
           >
             <Plus className="w-5 h-5 mr-2" />
-            New Entry
+            Add Monthly Tracker
           </button>
         )}
       </div>
@@ -202,7 +202,7 @@ export default function MonthlyTrackerPage() {
                   value={formData.month}
                   onChange={(e) => setFormData({ ...formData, month: e.target.value })}
                   placeholder="e.g., October"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
                 />
               </div>
               <div>
@@ -211,7 +211,7 @@ export default function MonthlyTrackerPage() {
                   type="number"
                   value={formData.year}
                   onChange={(e) => setFormData({ ...formData, year: Number(e.target.value) })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
                 />
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function MonthlyTrackerPage() {
                 onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
                 rows={4}
                 placeholder="Overall summary of what happened this month..."
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
               />
             </div>
 
@@ -236,9 +236,9 @@ export default function MonthlyTrackerPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 disabled:opacity-50"
             >
-              {loading ? "Saving..." : "Save Monthly Entry"}
+              {loading ? "Saving..." : "Save Monthly Tracker"}
             </button>
           </form>
         </div>
@@ -259,7 +259,7 @@ export default function MonthlyTrackerPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {tracker.keyAchievements.length > 0 && (
                 <div>
-                  <p className="font-medium text-sm text-green-700 mb-2">✓ Key Achievements:</p>
+                  <p className="font-medium text-sm text-amber-700 mb-2">✓ Key Achievements:</p>
                   <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                     {tracker.keyAchievements.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
@@ -281,7 +281,7 @@ export default function MonthlyTrackerPage() {
 
               {tracker.lessonsLearned.length > 0 && (
                 <div>
-                  <p className="font-medium text-sm text-blue-700 mb-2">💡 Lessons Learned:</p>
+                  <p className="font-medium text-sm text-orange-700 mb-2">💡 Lessons Learned:</p>
                   <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                     {tracker.lessonsLearned.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
@@ -292,7 +292,7 @@ export default function MonthlyTrackerPage() {
 
               {tracker.nextMonthPlans.length > 0 && (
                 <div>
-                  <p className="font-medium text-sm text-purple-700 mb-2">→ Next Month Plans:</p>
+                  <p className="font-medium text-sm text-orange-700 mb-2">→ Next Month Plans:</p>
                   <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                     {tracker.nextMonthPlans.map((item: string, i: number) => (
                       <li key={i}>{item}</li>

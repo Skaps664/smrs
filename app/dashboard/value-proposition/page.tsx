@@ -468,7 +468,7 @@ export default function ValuePropositionPage() {
 
                 {/* Customer Segment Side */}
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-200">
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-orange-200">
                     <h3 className="text-xl font-bold text-blue-900 mb-4">Customer Segment</h3>
 
                     {/* Customer Gains */}
@@ -488,7 +488,7 @@ export default function ValuePropositionPage() {
                               updateArrayItem("customerGains", index, e.target.value)
                             }
                             placeholder="What gains do customers expect?"
-                            className="flex-1 px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.customerGains.length > 1 && (
                             <button
@@ -525,7 +525,7 @@ export default function ValuePropositionPage() {
                               updateArrayItem("customerPains", index, e.target.value)
                             }
                             placeholder="What frustrates customers?"
-                            className="flex-1 px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.customerPains.length > 1 && (
                             <button
@@ -562,7 +562,7 @@ export default function ValuePropositionPage() {
                               updateArrayItem("customerJobs", index, e.target.value)
                             }
                             placeholder="What job needs to be done?"
-                            className="flex-1 px-3 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.customerJobs.length > 1 && (
                             <button
@@ -711,7 +711,7 @@ export default function ValuePropositionPage() {
                 </div>
 
                 {/* Customer Segment View */}
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-200">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-orange-200">
                   <h3 className="text-xl font-bold text-blue-900 mb-4">Customer Segment</h3>
 
                   <div className="mb-6">

@@ -5,9 +5,9 @@ import { Target, CheckCircle2, Circle, Plus, X } from "lucide-react"
 
 const stages = [
   { value: "IDEATION", label: "Ideation", color: "bg-gray-100 text-gray-700" },
-  { value: "PROTOTYPE", label: "Prototype", color: "bg-blue-100 text-blue-700" },
-  { value: "VALIDATION", label: "Validation", color: "bg-purple-100 text-purple-700" },
-  { value: "INCUBATION", label: "Incubation", color: "bg-green-100 text-green-700" },
+  { value: "PROTOTYPE", label: "Prototype", color: "bg-orange-100 text-orange-700" },
+  { value: "VALIDATION", label: "Validation", color: "bg-amber-100 text-amber-700" },
+  { value: "INCUBATION", label: "Incubation", color: "bg-yellow-100 text-yellow-700" },
   { value: "ACCELERATION", label: "Acceleration", color: "bg-yellow-100 text-yellow-700" },
   { value: "GROWTH", label: "Growth", color: "bg-orange-100 text-orange-700" },
   { value: "SCALE", label: "Scale", color: "bg-red-100 text-red-700" },
@@ -146,8 +146,8 @@ export default function TimelinePage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold flex items-center text-gray-900">
-            <Target className="w-7 h-7 mr-3 text-purple-600" />
-            Startup Timeline & Milestones
+            <Target className="w-7 h-7 mr-3 text-orange-600" />
+            Startup Timeline
           </h1>
           <p className="text-gray-600 mt-1">
             Track your progress through each stage - Current: <strong>{startup.stage}</strong>
@@ -156,7 +156,7 @@ export default function TimelinePage() {
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 flex items-center"
+            className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 flex items-center"
           >
             <Plus className="w-5 h-5 mr-2" />
             Add Milestone
@@ -172,7 +172,7 @@ export default function TimelinePage() {
         </div>
         <div className="w-full bg-gray-200 rounded-full h-3">
           <div
-            className="bg-purple-600 h-3 rounded-full transition-all duration-300"
+            className="bg-orange-500 h-3 rounded-full transition-all duration-300"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -200,7 +200,7 @@ export default function TimelinePage() {
               <select
                 value={formData.stage}
                 onChange={(e) => setFormData({ ...formData, stage: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
               >
                 {stages.map(stage => (
                   <option key={stage.value} value={stage.value}>{stage.label}</option>
@@ -216,7 +216,7 @@ export default function TimelinePage() {
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 placeholder="e.g., Complete market research"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
               />
             </div>
 
@@ -227,7 +227,7 @@ export default function TimelinePage() {
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={3}
                 placeholder="Optional details..."
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
               />
             </div>
 
@@ -237,7 +237,7 @@ export default function TimelinePage() {
                 <button
                   type="button"
                   onClick={addCriteria}
-                  className="text-purple-600 text-sm hover:text-purple-700"
+                  className="text-orange-600 text-sm hover:text-orange-700"
                 >
                   + Add Criteria
                 </button>
@@ -250,7 +250,7 @@ export default function TimelinePage() {
                       value={criteria}
                       onChange={(e) => updateCriteria(index, e.target.value)}
                       placeholder="e.g., Survey 50+ potential customers"
-                      className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 text-gray-900"
+                      className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
                     />
                     {formData.criteria.length > 1 && (
                       <button
@@ -269,9 +269,9 @@ export default function TimelinePage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 disabled:opacity-50"
+              className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 disabled:opacity-50"
             >
-              {loading ? "Adding..." : "Add Milestone"}
+              {loading ? "Saving..." : "Save Milestone"}
             </button>
           </form>
         </div>
@@ -291,7 +291,7 @@ export default function TimelinePage() {
                     {stage.label}
                   </div>
                   {isCurrentStage && (
-                    <span className="ml-3 text-xs bg-blue-600 text-white px-2 py-1 rounded">
+                    <span className="ml-3 text-xs bg-orange-500 text-white px-2 py-1 rounded">
                       Current Stage
                     </span>
                   )}

@@ -58,6 +58,11 @@ export async function POST(request: Request) {
         phone: body.phone,
         address: body.address,
         website: body.website,
+        headquarters: body.headquarters,
+        operationLocations: body.operationLocations || [],
+        socialMediaLinks: body.socialMediaLinks,
+        otherLinks: body.otherLinks,
+        tipsAndTricks: body.tipsAndTricks || [],
       },
     })
 

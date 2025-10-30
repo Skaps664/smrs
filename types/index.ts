@@ -145,6 +145,94 @@ export interface ValueProposition {
   updatedAt: Date
 }
 
+// Business Model Canvas Types
+export interface CustomerSegment {
+  segment: string
+  description: string
+  size?: string
+  demographics?: string
+  psychographics?: string
+}
+
+export interface ValuePropositionBMC {
+  proposition: string
+  problem: string
+  solution: string
+  uniqueness?: string
+}
+
+export interface Channel {
+  channel: string
+  phase: string
+  type: string
+  direct: boolean
+}
+
+export interface CustomerRelationship {
+  type: string
+  description: string
+  strategy?: string
+  automation?: boolean
+}
+
+export interface RevenueStream {
+  stream: string
+  type: string
+  pricingModel: string
+  frequency: string
+}
+
+export interface KeyResource {
+  resource: string
+  type: string
+  ownership: string
+  importance: string
+}
+
+export interface KeyActivity {
+  activity: string
+  category: string
+  frequency: string
+  owner?: string
+}
+
+export interface KeyPartnership {
+  partner: string
+  type: string
+  value: string
+  relationship?: string
+}
+
+export interface CostStructure {
+  cost: string
+  type: string
+  fixed: boolean
+  frequency: string
+  importance: string
+}
+
+export interface BusinessModelCanvas {
+  id: string
+  startupId: string
+  versionName: string
+  versionNumber: number
+  status: 'DRAFT' | 'ACTIVE' | 'ARCHIVED' | 'TESTING'
+  customerSegments: CustomerSegment[]
+  valuePropositions: ValuePropositionBMC[]
+  channels: Channel[]
+  customerRelationships: CustomerRelationship[]
+  revenueStreams: RevenueStream[]
+  keyResources: KeyResource[]
+  keyActivities: KeyActivity[]
+  keyPartnerships: KeyPartnership[]
+  costStructure: CostStructure[]
+  notes?: string
+  targetMarket?: string
+  completionPercentage?: number
+  createdAt: Date
+  updatedAt: Date
+}
+
 export interface ReportData {
   startup: Startup
   weeklyTrackers: WeeklyTracker[]

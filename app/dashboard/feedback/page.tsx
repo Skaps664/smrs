@@ -147,7 +147,7 @@ export default function MentorFeedbackPage() {
             {avgScore > 0 ? avgScore.toFixed(1) : "N/A"} / 10
           </p>
         </div>
-        <div className="bg-blue-50 rounded-lg shadow-sm p-4 border border-blue-200">
+        <div className="bg-blue-50 rounded-lg shadow-sm p-4 border border-orange-200">
           <p className="text-sm text-gray-600">Total Tasks Assigned</p>
           <p className="text-2xl font-bold text-blue-700">
             {feedbacks.reduce((acc, f) => acc + f.assignedTasks.length, 0)}

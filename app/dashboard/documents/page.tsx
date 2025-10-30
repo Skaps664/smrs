@@ -8,7 +8,7 @@ import type { Startup, Document } from "@/types"
 const categories = [
   { value: "LEGAL", label: "Legal", color: "bg-red-100 text-red-700" },
   { value: "FINANCIAL", label: "Financial", color: "bg-green-100 text-green-700" },
-  { value: "PITCH_DECK", label: "Pitch Deck", color: "bg-blue-100 text-blue-700" },
+  { value: "PITCH_DECK", label: "Pitch Deck", color: "bg-orange-100 text-orange-700" },
   { value: "PRODUCT_PHOTOS", label: "Product Photos", color: "bg-purple-100 text-purple-700" },
   { value: "CERTIFICATES", label: "Certificates", color: "bg-yellow-100 text-yellow-700" },
   { value: "OTHER", label: "Other", color: "bg-gray-100 text-gray-700" },
@@ -169,8 +169,8 @@ export default function DocumentsPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold flex items-center text-gray-900">
-            <FileText className="w-7 h-7 mr-3 text-indigo-600" />
-            Document Management
+                        <FileText className="w-7 h-7 mr-3 text-orange-600" />
+            Document Library
           </h1>
           <p className="text-gray-600 mt-1">
             Upload and organize your startup documents
@@ -179,7 +179,7 @@ export default function DocumentsPage() {
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 flex items-center"
+            className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 flex items-center"
           >
             <Plus className="w-5 h-5 mr-2" />
             Upload Document
@@ -233,7 +233,7 @@ export default function DocumentsPage() {
                   className="w-full text-sm text-gray-900"
                   accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                 />
-                {uploading && <p className="text-sm text-blue-600 mt-2">Uploading...</p>}
+                {uploading && <p className="text-sm text-orange-600 mt-2">Uploading...</p>}
                 {formData.fileUrl && !uploading && (
                   <p className="text-sm text-green-600 mt-2">✓ File ready</p>
                 )}
@@ -254,7 +254,7 @@ export default function DocumentsPage() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g., Business Registration"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
                 />
               </div>
 
@@ -263,7 +263,7 @@ export default function DocumentsPage() {
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
                 >
                   {categories.map(cat => (
                     <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -280,7 +280,7 @@ export default function DocumentsPage() {
                 type="date"
                 value={formData.expiryDate}
                 onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
               />
             </div>
 
@@ -291,14 +291,14 @@ export default function DocumentsPage() {
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 rows={3}
                 placeholder="Additional notes..."
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading || !formData.fileUrl}
-              className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+              className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 disabled:opacity-50"
             >
               {loading ? "Uploading..." : "Upload Document"}
             </button>
@@ -368,7 +368,7 @@ export default function DocumentsPage() {
                       <div className="flex gap-2 ml-4">
                         <button
                           onClick={() => handleDownload(doc)}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                          className="p-2 text-orange-600 hover:bg-orange-50 rounded-lg"
                           title="Download"
                         >
                           <Download className="w-5 h-5" />

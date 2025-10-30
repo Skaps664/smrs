@@ -13,6 +13,7 @@ import {
   MessageSquare, 
   FileDown,
   Lightbulb,
+  Layers,
   LogOut,
   Menu,
   X
@@ -27,6 +28,7 @@ const navigation = [
   { name: "KPI Dashboard", href: "/dashboard/kpis", icon: BarChart3 },
   { name: "Timeline", href: "/dashboard/timeline", icon: Target },
   { name: "Value Proposition", href: "/dashboard/value-proposition", icon: Lightbulb },
+  { name: "Business Model", href: "/dashboard/business-model", icon: Layers },
   { name: "Documents", href: "/dashboard/documents", icon: FileText },
   { name: "Mentor Feedback", href: "/dashboard/feedback", icon: MessageSquare },
   { name: "Reports", href: "/dashboard/reports", icon: FileDown },
@@ -60,7 +62,7 @@ export default function DashboardLayout({
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-            <h1 className="text-xl font-bold text-blue-600">SMRS</h1>
+            <h1 className="text-xl font-bold text-orange-600">SMRS</h1>
             <button
               onClick={() => setSidebarOpen(false)}
               className="lg:hidden"
@@ -81,8 +83,8 @@ export default function DashboardLayout({
                   onClick={() => setSidebarOpen(false)}
                   className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                     isActive
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-gray-700 hover:bg-gray-50"
+                      ? "bg-orange-50 text-orange-600 border-l-4 border-orange-600"
+                      : "text-gray-700 hover:bg-orange-50/50"
                   }`}
                 >
                   <Icon className="w-5 h-5 mr-3" />
@@ -93,9 +95,9 @@ export default function DashboardLayout({
           </nav>
 
           {/* User section */}
-          <div className="p-4 border-t border-gray-200">
-            <div className="flex items-center mb-3">
-              <div className="flex-1">
+          <div className="p-4 border-t border-gray-200" suppressHydrationWarning>
+            <div className="flex items-center mb-3" suppressHydrationWarning>
+              <div className="flex-1" suppressHydrationWarning>
                 <p className="text-sm font-medium text-gray-900">
                   {session?.user?.name}
                 </p>

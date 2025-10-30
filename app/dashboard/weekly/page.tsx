@@ -131,7 +131,7 @@ export default function WeeklyTrackerPage() {
         <button
           type="button"
           onClick={() => addField(field)}
-          className="text-blue-600 text-sm hover:text-blue-700"
+          className="text-orange-600 text-sm hover:text-orange-700"
         >
           + Add More
         </button>
@@ -144,7 +144,7 @@ export default function WeeklyTrackerPage() {
               value={value}
               onChange={(e) => updateField(field, index, e.target.value)}
               placeholder={placeholder}
-              className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
             />
             {(formData[field] as string[]).length > 1 && (
               <button
@@ -166,8 +166,8 @@ export default function WeeklyTrackerPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold flex items-center">
-            <Calendar className="w-7 h-7 mr-3 text-blue-600" />
+          <h1 className="text-2xl font-bold flex items-center text-gray-900">
+            <Calendar className="w-7 h-7 mr-3 text-orange-600" />
             Weekly Progress Tracker
           </h1>
           <p className="text-gray-600 mt-1">Log your weekly activities and milestones</p>
@@ -175,7 +175,7 @@ export default function WeeklyTrackerPage() {
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center"
+            className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 flex items-center"
           >
             <Plus className="w-5 h-5 mr-2" />
             New Entry
@@ -207,7 +207,7 @@ export default function WeeklyTrackerPage() {
                   max="52"
                   value={formData.weekNumber}
                   onChange={(e) => setFormData({ ...formData, weekNumber: Number(e.target.value) })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
               </div>
               <div>
@@ -216,7 +216,7 @@ export default function WeeklyTrackerPage() {
                   type="text"
                   value={formData.month}
                   onChange={(e) => setFormData({ ...formData, month: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
               </div>
               <div>
@@ -225,7 +225,7 @@ export default function WeeklyTrackerPage() {
                   type="number"
                   value={formData.year}
                   onChange={(e) => setFormData({ ...formData, year: Number(e.target.value) })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
               </div>
             </div>
@@ -240,9 +240,9 @@ export default function WeeklyTrackerPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 disabled:opacity-50"
             >
-              {loading ? "Saving..." : "Save Weekly Entry"}
+              {loading ? "Saving..." : "Save Weekly Tracker"}
             </button>
           </form>
         </div>

@@ -53,10 +53,18 @@ model Startup {
   address               String?
   website               String?
   
+  // Extended Details
+  headquarters          String?
+  operationLocations    String[]            @default([])
+  socialMediaLinks      Json?               // {linkedin, twitter, facebook, instagram, youtube, etc.}
+  otherLinks            Json?               // {crunchbase, angellist, github, etc.}
+  tipsAndTricks         String[]            @default([])
+  
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
   
   // Relations
+  teamMembers           TeamMember[]
   weeklyTrackers        WeeklyTracker[]
   monthlyTrackers       MonthlyTracker[]
   kpis                  KPI[]
@@ -64,6 +72,23 @@ model Startup {
   documents             Document[]
   mentorFeedback        MentorFeedback[]
   valuePropositions     ValueProposition[]
+  businessModels        BusinessModelCanvas[]
+}
+
+model TeamMember {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String    @db.ObjectId
+  startup               Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  name                  String
+  role                  String
+  email                 String?
+  phone                 String?
+  
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  
+  @@index([startupId])
 }
 
 enum StartupStage {
@@ -271,4 +296,62 @@ enum ValuePropositionStatus {
   DRAFT
   ACTIVE
   ARCHIVED
+}
+
+model BusinessModelCanvas {
+  id                    String                  @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String                  @db.ObjectId
+  startup               Startup                 @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  // Version Information
+  versionName           String
+  versionNumber         Int                     @default(1)
+  status                BusinessModelStatus     @default(DRAFT)
+  
+  // The 9 Building Blocks of Business Model Canvas
+  
+  // 1. Customer Segments - Who are your customers?
+  customerSegments      Json[]                  // [{ segment, description, size, demographics, psychographics }]
+  
+  // 2. Value Propositions - What value do you deliver?
+  valuePropositions     Json[]                  // [{ proposition, problem, solution, uniqueness }]
+  
+  // 3. Channels - How do you reach customers?
+  channels              Json[]                  // [{ channel, phase, type, direct }]
+  
+  // 4. Customer Relationships - How do you interact with customers?
+  customerRelationships Json[]                  // [{ type, description, strategy, automation }]
+  
+  // 5. Revenue Streams - How do you make money?
+  revenueStreams        Json[]                  // [{ stream, type, pricingModel, frequency }]
+  
+  // 6. Key Resources - What assets are essential?
+  keyResources          Json[]                  // [{ resource, type, ownership, importance }]
+  
+  // 7. Key Activities - What key actions drive the business?
+  keyActivities         Json[]                  // [{ activity, category, frequency, owner }]
+  
+  // 8. Key Partnerships - Who helps you succeed?
+  keyPartnerships       Json[]                  // [{ partner, type, value, relationship }]
+  
+  // 9. Cost Structure - What are your major costs?
+  costStructure         Json[]                  // [{ cost, type, fixed, frequency, importance }]
+  
+  // Additional Information
+  notes                 String?
+  targetMarket          String?
+  completionPercentage  Int?                    @default(0)
+  
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  
+  @@index([startupId, versionNumber])
+  @@index([startupId, status])
+}
+
+enum BusinessModelStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+  TESTING
 }

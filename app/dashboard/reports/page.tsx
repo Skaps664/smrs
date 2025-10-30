@@ -99,7 +99,7 @@ export default function ReportsPage() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold flex items-center text-gray-900">
-          <FileDown className="w-7 h-7 mr-3 text-purple-600" />
+          <FileDown className="w-7 h-7 mr-3 text-orange-600" />
           Generate Reports
         </h1>
         <p className="text-gray-600 mt-1">
@@ -143,32 +143,32 @@ export default function ReportsPage() {
           
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <span className="text-gray-900">Weekly Progress Trackers</span>
-            <span className="text-sm font-medium text-blue-600">{stats.weekly} entries</span>
+            <span className="text-sm font-medium text-orange-600">{stats.weekly} entries</span>
           </div>
           
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <span className="text-gray-900">Monthly Progress Reports</span>
-            <span className="text-sm font-medium text-blue-600">{stats.monthly} entries</span>
+            <span className="text-sm font-medium text-orange-600">{stats.monthly} entries</span>
           </div>
           
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <span className="text-gray-900">KPI Metrics</span>
-            <span className="text-sm font-medium text-blue-600">{stats.kpis} entries</span>
+            <span className="text-sm font-medium text-orange-600">{stats.kpis} entries</span>
           </div>
           
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <span className="text-gray-900">Milestones & Timeline</span>
-            <span className="text-sm font-medium text-blue-600">{stats.milestones} milestones</span>
+            <span className="text-sm font-medium text-orange-600">{stats.milestones} milestones</span>
           </div>
           
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <span className="text-gray-900">Document Summary</span>
-            <span className="text-sm font-medium text-blue-600">{stats.documents} documents</span>
+            <span className="text-sm font-medium text-orange-600">{stats.documents} documents</span>
           </div>
           
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <span className="text-gray-900">Mentor Feedback</span>
-            <span className="text-sm font-medium text-blue-600">{stats.feedbacks} meetings</span>
+            <span className="text-sm font-medium text-orange-600">{stats.feedbacks} meetings</span>
           </div>
         </div>
       </div>
@@ -183,7 +183,7 @@ export default function ReportsPage() {
         <button
           onClick={handleGenerateReport}
           disabled={generating}
-          className="bg-purple-600 text-white px-8 py-4 rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center mx-auto text-lg font-medium"
+          className="bg-orange-500 text-white px-8 py-4 rounded-lg hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center mx-auto text-lg font-medium"
         >
           {generating ? (
             <>
@@ -204,9 +204,9 @@ export default function ReportsPage() {
       </div>
 
       {/* Info Card */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h4 className="font-medium text-blue-900 mb-2">📄 Report Features</h4>
-        <ul className="text-sm text-blue-800 space-y-1">
+      <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+        <h4 className="font-medium text-orange-900 mb-2">📄 Report Features</h4>
+        <ul className="text-sm text-orange-800 space-y-1">
           <li>• Professional formatting with startup branding</li>
           <li>• Complete data summary across all modules</li>
           <li>• Progress statistics and KPI trends</li>
