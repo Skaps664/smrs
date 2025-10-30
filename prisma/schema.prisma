@@ -63,6 +63,7 @@ model Startup {
   milestones            Milestone[]
   documents             Document[]
   mentorFeedback        MentorFeedback[]
+  valuePropositions     ValueProposition[]
 }
 
 enum StartupStage {
@@ -233,4 +234,41 @@ model MentorFeedback {
   updatedAt             DateTime  @updatedAt
   
   @@index([startupId, meetingDate])
+}
+
+model ValueProposition {
+  id                    String                  @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String                  @db.ObjectId
+  startup               Startup                 @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  // Version Information
+  versionName           String                  // e.g., "Initial Canvas", "Pivot Version", "Q2 2025"
+  versionNumber         Int                     @default(1)
+  status                ValuePropositionStatus  @default(DRAFT)
+  
+  // Value Proposition Side
+  gainCreators          String[]                // What creates gains for customers
+  productsServices      String[]                // Core products/services offered
+  painRelievers         String[]                // What relieves customer pains
+  
+  // Customer Segment Side
+  customerGains         String[]                // Outcomes/benefits customers want
+  customerPains         String[]                // Problems/frustrations customers face
+  customerJobs          String[]                // Functional, social, emotional jobs customers need done
+  
+  // Additional Context
+  notes                 String?
+  targetAudience        String?                 // Who is this for
+  
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  
+  @@index([startupId, versionNumber])
+  @@index([startupId, createdAt])
+}
+
+enum ValuePropositionStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
 }

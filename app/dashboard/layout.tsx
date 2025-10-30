@@ -12,6 +12,7 @@ import {
   FileText, 
   MessageSquare, 
   FileDown,
+  Lightbulb,
   LogOut,
   Menu,
   X
@@ -25,6 +26,7 @@ const navigation = [
   { name: "Monthly Tracker", href: "/dashboard/monthly", icon: Calendar },
   { name: "KPI Dashboard", href: "/dashboard/kpis", icon: BarChart3 },
   { name: "Timeline", href: "/dashboard/timeline", icon: Target },
+  { name: "Value Proposition", href: "/dashboard/value-proposition", icon: Lightbulb },
   { name: "Documents", href: "/dashboard/documents", icon: FileText },
   { name: "Mentor Feedback", href: "/dashboard/feedback", icon: MessageSquare },
   { name: "Reports", href: "/dashboard/reports", icon: FileDown },

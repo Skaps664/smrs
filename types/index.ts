@@ -127,6 +127,24 @@ export interface MentorFeedback {
   updatedAt: Date
 }
 
+export interface ValueProposition {
+  id: string
+  startupId: string
+  versionName: string
+  versionNumber: number
+  status: 'DRAFT' | 'ACTIVE' | 'ARCHIVED'
+  gainCreators: string[]
+  productsServices: string[]
+  painRelievers: string[]
+  customerGains: string[]
+  customerPains: string[]
+  customerJobs: string[]
+  notes?: string
+  targetAudience?: string
+  createdAt: Date
+  updatedAt: Date
+}
+
 export interface ReportData {
   startup: Startup
   weeklyTrackers: WeeklyTracker[]
