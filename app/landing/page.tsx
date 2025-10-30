@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { 
   Rocket, TrendingUp, Target, FileText, BarChart3, Users, CheckCircle, 
@@ -7,29 +9,29 @@ import {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gray-900 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 overflow-x-hidden">
       {/* Animated Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-yellow-200/30 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
       {/* Header/Nav */}
-      <nav className="relative bg-black/40 backdrop-blur-md border-b border-orange-500/20 sticky top-0 z-50">
+      <nav className="relative bg-white/80 backdrop-blur-md border-b border-orange-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30 transform hover:rotate-6 transition-transform">
               <Rocket className="w-7 h-7 text-white" />
             </div>
-            <span className="text-3xl font-black bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+            <span className="text-3xl font-black bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
               SMRS
             </span>
           </div>
           <div className="flex items-center gap-6">
             <Link
               href="/login"
-              className="text-gray-300 font-medium hover:text-orange-400 transition-colors hidden sm:block"
+              className="text-gray-700 font-medium hover:text-orange-600 transition-colors hidden sm:block"
             >
               Sign In
             </Link>
@@ -44,31 +46,31 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <div className="relative">
+      <div className="relative z-10">
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
           <div className="text-center mb-16">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-500/30 text-orange-400 px-5 py-2.5 rounded-full mb-8 font-semibold backdrop-blur-sm animate-pulse">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-100 to-amber-100 border border-orange-300 text-orange-700 px-5 py-2.5 rounded-full mb-8 font-semibold backdrop-blur-sm animate-pulse">
               <Sparkles className="w-4 h-4" />
               <span>Trusted by 500+ Startups</span>
             </div>
             
             {/* Main Heading */}
             <h1 className="text-5xl md:text-8xl font-black mb-8 leading-tight">
-              <span className="block text-white mb-2">DESIGNING +</span>
-              <span className="block bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent animate-gradient">
+              <span className="block text-gray-900 mb-2">DESIGNING +</span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600">
                 BUILDING
               </span>
-              <span className="block text-white mt-2">HIGH-PERFORMING</span>
-              <span className="block text-white">STARTUPS</span>
+              <span className="block text-gray-900 mt-2">HIGH-PERFORMING</span>
+              <span className="block text-gray-900">STARTUPS</span>
             </h1>
             
             {/* Subheading */}
-            <p className="text-lg md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Hello there. I&apos;m <span className="text-orange-400 font-bold">SMRS</span> + I craft powerful tools and our user-friendly 
-              platform is <span className="text-amber-400 font-bold">designed to inspire</span> growth. We want to create a 
-              positive impact with our <span className="text-yellow-400 font-bold">template to inspire growth</span>.
+            <p className="text-lg md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Hello there. I&apos;m <span className="text-orange-600 font-bold">SMRS</span> + I craft powerful tools and our user-friendly 
+              platform is <span className="text-amber-600 font-bold">designed to inspire</span> growth. We want to create a 
+              positive impact with our <span className="text-yellow-700 font-bold">template to inspire growth</span>.
             </p>
             
             {/* CTA Buttons */}
@@ -84,21 +86,21 @@ export default function LandingPage() {
             </div>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-sm text-gray-500">
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-sm text-gray-600">
               <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-orange-500" />
+                <Shield className="w-5 h-5 text-orange-600" />
                 <span>Enterprise Security</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-amber-500" />
+                <Clock className="w-5 h-5 text-amber-600" />
                 <span>24/7 Support</span>
               </div>
               <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-yellow-500" />
+                <Award className="w-5 h-5 text-yellow-600" />
                 <span>Award Winning</span>
               </div>
               <div className="flex items-center gap-2">
-                <Globe className="w-5 h-5 text-orange-500" />
+                <Globe className="w-5 h-5 text-orange-600" />
                 <span>Global Reach</span>
               </div>
             </div>
@@ -106,37 +108,37 @@ export default function LandingPage() {
 
           {/* Featured Image/Dashboard Preview */}
           <div className="relative max-w-6xl mx-auto mb-20">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-orange-500/20 border-4 border-orange-500/30 backdrop-blur-sm bg-black/20 transform hover:scale-105 transition-transform duration-500">
-              <div className="aspect-video bg-gradient-to-br from-gray-800 via-gray-900 to-black p-8">
-                <div className="h-full rounded-2xl bg-gradient-to-br from-orange-500/10 to-amber-500/10 border border-orange-500/30 flex items-center justify-center">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-orange-300/40 border-4 border-orange-200 backdrop-blur-sm bg-white transform hover:scale-105 transition-transform duration-500">
+              <div className="aspect-video bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 p-8">
+                <div className="h-full rounded-2xl bg-gradient-to-br from-orange-100 to-amber-100 border-2 border-orange-300 flex items-center justify-center">
                   <div className="text-center">
-                    <BarChart3 className="w-24 h-24 text-orange-400 mx-auto mb-4 animate-pulse" />
-                    <p className="text-2xl font-bold text-white">Your Startup Dashboard</p>
-                    <p className="text-gray-400 mt-2">Real-time insights at your fingertips</p>
+                    <BarChart3 className="w-24 h-24 text-orange-600 mx-auto mb-4 animate-pulse" />
+                    <p className="text-2xl font-bold text-gray-900">Your Startup Dashboard</p>
+                    <p className="text-gray-600 mt-2">Real-time insights at your fingertips</p>
                   </div>
                 </div>
               </div>
             </div>
             {/* Floating Cards */}
-            <div className="absolute -top-8 -left-8 bg-white/10 backdrop-blur-md border border-orange-500/30 rounded-2xl p-4 shadow-xl hidden lg:block animate-float">
+            <div className="absolute -top-8 -left-8 bg-white backdrop-blur-md border-2 border-orange-300 rounded-2xl p-4 shadow-xl hidden lg:block animate-float">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center">
                   <TrendingUp className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-white font-bold">Growth</p>
-                  <p className="text-orange-400 text-sm">+45% This Month</p>
+                  <p className="text-gray-900 font-bold">Growth</p>
+                  <p className="text-orange-600 text-sm">+45% This Month</p>
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-8 -right-8 bg-white/10 backdrop-blur-md border border-amber-500/30 rounded-2xl p-4 shadow-xl hidden lg:block animate-float-delayed">
+            <div className="absolute -bottom-8 -right-8 bg-white backdrop-blur-md border-2 border-amber-300 rounded-2xl p-4 shadow-xl hidden lg:block animate-float-delayed">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-xl flex items-center justify-center">
                   <Users className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-white font-bold">Team</p>
-                  <p className="text-amber-400 text-sm">12 Active Members</p>
+                  <p className="text-gray-900 font-bold">Team</p>
+                  <p className="text-amber-600 text-sm">12 Active Members</p>
                 </div>
               </div>
             </div>
@@ -150,30 +152,30 @@ export default function LandingPage() {
               { number: '98%', label: 'Satisfaction Rate', icon: Star },
               { number: '24/7', label: 'Support Available', icon: Clock }
             ].map((stat, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-md border border-orange-500/20 rounded-2xl p-6 text-center hover:bg-white/10 transition-all hover:scale-105 transform group">
-                <stat.icon className="w-10 h-10 text-orange-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                <div className="text-3xl md:text-4xl font-black text-white mb-2">{stat.number}</div>
-                <div className="text-gray-400 font-medium text-sm md:text-base">{stat.label}</div>
+              <div key={index} className="bg-white backdrop-blur-md border-2 border-orange-200 rounded-2xl p-6 text-center hover:border-orange-300 hover:shadow-xl transition-all hover:scale-105 transform group">
+                <stat.icon className="w-10 h-10 text-orange-600 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                <div className="text-3xl md:text-4xl font-black text-gray-900 mb-2">{stat.number}</div>
+                <div className="text-gray-600 font-medium text-sm md:text-base">{stat.label}</div>
               </div>
             ))}
           </div>
 
           {/* Position Yourself Section */}
-          <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 border border-orange-500/30 rounded-3xl p-8 sm:p-12 mb-32 backdrop-blur-sm hover:from-orange-500/15 hover:to-amber-500/15 transition-all">
+          <div className="bg-white border-2 border-orange-200 rounded-3xl p-8 sm:p-12 mb-32 shadow-lg hover:shadow-xl transition-all">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+              <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
                 POSITION YOURSELF<br />
-                <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
                   AS AN EXPERT
                 </span> WITH A<br />
                 HIGH-PERFORMING<br />
                 PLATFORM
               </h2>
-              <p className="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
                 This platform has that awesome vibe! It needed to elevate the brand in a certain way, 
                 yet need to make a positive impact. We need our template to inspire growth. 
                 If you ever want to stand out from the competition, you need to follow best 
-                practices and trends to deliver a <span className="text-orange-400 font-bold">quality product</span>.
+                practices and trends to deliver a <span className="text-orange-600 font-bold">quality product</span>.
               </p>
               <div className="grid md:grid-cols-2 gap-4 mb-8">
                 {[
@@ -182,15 +184,15 @@ export default function LandingPage() {
                   '✓ FASTER LOADS',
                   '✓ SECURE SSL'
                 ].map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-orange-500/20 rounded-xl p-4 hover:bg-white/10 transition-all group">
-                    <CheckCircle className="w-6 h-6 text-orange-400 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                    <span className="text-white font-bold">{feature}</span>
+                  <div key={index} className="flex items-center gap-3 bg-orange-50 border-2 border-orange-200 rounded-xl p-4 hover:bg-orange-100 hover:border-orange-300 transition-all group">
+                    <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                    <span className="text-gray-900 font-bold">{feature}</span>
                   </div>
                 ))}
               </div>
               <Link
                 href="/register"
-                className="inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-xl font-black hover:bg-gray-100 transition-all shadow-xl group"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-8 py-4 rounded-xl font-black hover:from-orange-600 hover:to-amber-600 transition-all shadow-xl group"
               >
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                 Visit site
@@ -200,32 +202,32 @@ export default function LandingPage() {
 
           {/* Features Section */}
           <div className="grid md:grid-cols-3 gap-8 mb-32">
-            <div className="group bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-orange-500/30 p-10 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-orange-500/20 transition-all hover:scale-105 transform">
+            <div className="group bg-white border-2 border-orange-200 p-10 rounded-3xl shadow-lg hover:shadow-2xl hover:shadow-orange-300/40 transition-all hover:scale-105 transform">
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform shadow-lg shadow-orange-500/50">
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-black mb-4 text-white">Track Progress</h3>
-              <p className="text-gray-400 leading-relaxed text-lg">
+              <h3 className="text-2xl font-black mb-4 text-gray-900">Track Progress</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
                 Log weekly and monthly activities, milestones, and challenges. Keep your entire team aligned with real-time updates.
               </p>
             </div>
 
-            <div className="group bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-amber-500/30 p-10 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-amber-500/20 transition-all hover:scale-105 transform">
+            <div className="group bg-white border-2 border-amber-200 p-10 rounded-3xl shadow-lg hover:shadow-2xl hover:shadow-amber-300/40 transition-all hover:scale-105 transform">
               <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform shadow-lg shadow-amber-500/50">
                 <BarChart3 className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-black mb-4 text-white">Monitor KPIs</h3>
-              <p className="text-gray-400 leading-relaxed text-lg">
+              <h3 className="text-2xl font-black mb-4 text-gray-900">Monitor KPIs</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
                 Visualize marketing, sales, product, and operational metrics with beautiful interactive charts and dashboards.
               </p>
             </div>
 
-            <div className="group bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-yellow-500/30 p-10 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-yellow-500/20 transition-all hover:scale-105 transform">
+            <div className="group bg-white border-2 border-yellow-200 p-10 rounded-3xl shadow-lg hover:shadow-2xl hover:shadow-yellow-300/40 transition-all hover:scale-105 transform">
               <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform shadow-lg shadow-yellow-500/50">
                 <FileText className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-black mb-4 text-white">Generate Reports</h3>
-              <p className="text-gray-400 leading-relaxed text-lg">
+              <h3 className="text-2xl font-black mb-4 text-gray-900">Generate Reports</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
                 Auto-generate professional PDF reports for your incubation center with one click. Save hours of manual work.
               </p>
             </div>
@@ -260,10 +262,10 @@ export default function LandingPage() {
 
           {/* Tools Showcase */}
           <div className="mb-32">
-            <h2 className="text-4xl md:text-5xl font-black text-center mb-4 text-white">
+            <h2 className="text-4xl md:text-5xl font-black text-center mb-4 text-gray-900">
               POWERFUL TOOLS FOR
             </h2>
-            <h2 className="text-4xl md:text-5xl font-black text-center mb-12 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-black text-center mb-12 bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
               MODERN STARTUPS
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -273,21 +275,21 @@ export default function LandingPage() {
                 { icon: LineChart, title: 'KPI Dashboard', desc: 'Track metrics' },
                 { icon: Calendar, title: 'Progress Trackers', desc: 'Weekly & monthly' }
               ].map((tool, index) => (
-                <div key={index} className="bg-white/5 backdrop-blur-md border border-orange-500/20 rounded-2xl p-8 text-center hover:bg-white/10 transition-all hover:scale-105 transform group">
-                  <tool.icon className="w-12 h-12 text-orange-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-lg md:text-xl font-bold text-white mb-2">{tool.title}</h4>
-                  <p className="text-gray-400 text-sm md:text-base">{tool.desc}</p>
+                <div key={index} className="bg-white border-2 border-orange-200 rounded-2xl p-8 text-center hover:border-orange-300 hover:shadow-xl transition-all hover:scale-105 transform group">
+                  <tool.icon className="w-12 h-12 text-orange-600 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                  <h4 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{tool.title}</h4>
+                  <p className="text-gray-600 text-sm md:text-base">{tool.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Stages Timeline */}
-          <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md border border-orange-500/30 rounded-3xl shadow-2xl p-8 sm:p-12 mb-32">
-            <h2 className="text-4xl md:text-5xl font-black text-center mb-4 text-white">
+          <div className="bg-white border-2 border-orange-200 rounded-3xl shadow-xl p-8 sm:p-12 mb-32">
+            <h2 className="text-4xl md:text-5xl font-black text-center mb-4 text-gray-900">
               Track Every Stage
             </h2>
-            <h3 className="text-xl md:text-2xl text-center mb-12 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent font-bold">
+            <h3 className="text-xl md:text-2xl text-center mb-12 bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent font-bold">
               From First Idea to Global Scale
             </h3>
             <div className="flex flex-wrap justify-center gap-4">
@@ -366,7 +368,7 @@ export default function LandingPage() {
       </div>
 
       {/* Footer */}
-      <footer className="relative bg-black border-t border-orange-500/20 py-12">
+      <footer className="relative bg-gray-900 border-t border-orange-300 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div className="col-span-2 md:col-span-1">
@@ -376,13 +378,13 @@ export default function LandingPage() {
                 </div>
                 <span className="text-2xl font-black text-white">SMRS</span>
               </div>
-              <p className="text-gray-400">
+              <p className="text-gray-300">
                 Empowering startups with powerful management tools.
               </p>
             </div>
             <div>
               <h4 className="text-white font-bold mb-4">Product</h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-gray-300">
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Features</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Pricing</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Use Cases</Link></li>
@@ -390,7 +392,7 @@ export default function LandingPage() {
             </div>
             <div>
               <h4 className="text-white font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-gray-300">
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">About</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Blog</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Careers</Link></li>
@@ -398,18 +400,18 @@ export default function LandingPage() {
             </div>
             <div>
               <h4 className="text-white font-bold mb-4">Support</h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-gray-300">
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Help Center</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Contact</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Privacy</Link></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-orange-500/20 pt-8 text-center">
-            <p className="text-gray-500">
-              © 2025 <span className="text-orange-400 font-bold">SMRS</span> - Startup Management & Reporting System. 
+          <div className="border-t border-orange-300 pt-8 text-center">
+            <p className="text-gray-300">
+              © 2025 <span className="text-orange-500 font-bold">SMRS</span> - Startup Management & Reporting System. 
               <br className="sm:hidden" />
-              <span className="text-gray-600"> Built for entrepreneurs, by entrepreneurs.</span>
+              <span className="text-gray-400"> Built for entrepreneurs, by entrepreneurs.</span>
             </p>
           </div>
         </div>
