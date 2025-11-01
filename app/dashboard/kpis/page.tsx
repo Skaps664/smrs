@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { BarChart3, Plus, X, TrendingUp } from "lucide-react"
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
 import { format } from "date-fns"
+import { useStartupData } from "@/hooks/useStartupData"
+import MentorFeedbackButton from "@/components/MentorFeedbackButton"
 
 const categories = [
   { value: "MARKETING", label: "Marketing", color: "#f59e0b" },
@@ -40,7 +42,7 @@ const categoryFields = {
 }
 
 export default function KPIDashboardPage() {
-  const [startup, setStartup] = useState<any>(null)
+  const { startup, loading: startupLoading, isReadOnly } = useStartupData()
   const [kpis, setKpis] = useState<any[]>([])
   const [activeCategory, setActiveCategory] = useState("MARKETING")
   const [showForm, setShowForm] = useState(false)
@@ -52,22 +54,28 @@ export default function KPIDashboardPage() {
   })
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    if (startup?.id) {
+      fetchKPIs()
+    }
+  }, [startup])
 
-  const fetchData = async () => {
+  const fetchKPIs = async () => {
+    if (!startup?.id) return
+    
     try {
-      const startupRes = await fetch("/api/startup")
-      const startupData = await startupRes.json()
-      if (startupData.length > 0) {
-        setStartup(startupData[0])
-        
-        const kpiRes = await fetch(`/api/kpi?startupId=${startupData[0].id}`)
-        const kpiData = await kpiRes.json()
+      const kpiRes = await fetch(`/api/kpi?startupId=${startup.id}`)
+      const kpiData = await kpiRes.json()
+      
+      // Handle both array response and error response
+      if (Array.isArray(kpiData)) {
         setKpis(kpiData)
+      } else {
+        console.error("Invalid KPI data:", kpiData)
+        setKpis([])
       }
     } catch (error) {
-      console.error("Error fetching data:", error)
+      console.error("Error fetching KPIs:", error)
+      setKpis([])
     }
   }
 
@@ -90,7 +98,7 @@ export default function KPIDashboardPage() {
 
       if (res.ok) {
         setShowForm(false)
-        fetchData()
+        fetchKPIs()
         setFormData({
           date: new Date().toISOString().split("T")[0],
           category: "MARKETING",
@@ -139,7 +147,7 @@ export default function KPIDashboardPage() {
           </h1>
           <p className="text-gray-600 mt-1">Track key metrics and visualize trends</p>
         </div>
-        {!showForm && (
+        {!showForm && !isReadOnly && (
           <button
             onClick={() => setShowForm(true)}
             className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 flex items-center"
@@ -359,6 +367,16 @@ export default function KPIDashboardPage() {
           </div>
         </div>
       )}
+
+      {/* Mentor Feedback Button */}
+      <MentorFeedbackButton
+        section="KPI Dashboard"
+        sectionData={{
+          startupName: startup?.name,
+          totalKPIs: kpis.length,
+          categories: Array.from(new Set(kpis.map(k => k.category))),
+        }}
+      />
     </div>
   )
 }

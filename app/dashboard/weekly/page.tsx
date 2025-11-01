@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react"
 import { Calendar, Plus, X } from "lucide-react"
 import { format } from "date-fns"
+import { useStartupData } from "@/hooks/useStartupData"
+import MentorFeedbackButton from "@/components/MentorFeedbackButton"
 
 export default function WeeklyTrackerPage() {
-  const [startup, setStartup] = useState<any>(null)
+  const { startup, loading: startupLoading, isReadOnly } = useStartupData()
   const [trackers, setTrackers] = useState<any[]>([])
   const [showForm, setShowForm] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -22,22 +24,28 @@ export default function WeeklyTrackerPage() {
   })
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    if (startup?.id) {
+      fetchTrackers()
+    }
+  }, [startup])
 
-  const fetchData = async () => {
+  const fetchTrackers = async () => {
+    if (!startup?.id) return
+    
     try {
-      const startupRes = await fetch("/api/startup")
-      const startupData = await startupRes.json()
-      if (startupData.length > 0) {
-        setStartup(startupData[0])
-        
-        const trackersRes = await fetch(`/api/weekly?startupId=${startupData[0].id}`)
-        const trackersData = await trackersRes.json()
+      const trackersRes = await fetch(`/api/weekly?startupId=${startup.id}`)
+      const trackersData = await trackersRes.json()
+      
+      // Handle both array response and error response
+      if (Array.isArray(trackersData)) {
         setTrackers(trackersData)
+      } else {
+        console.error("Invalid trackers data:", trackersData)
+        setTrackers([])
       }
     } catch (error) {
-      console.error("Error fetching data:", error)
+      console.error("Error fetching trackers:", error)
+      setTrackers([])
     }
   }
 
@@ -91,7 +99,7 @@ export default function WeeklyTrackerPage() {
 
       if (res.ok) {
         setShowForm(false)
-        fetchData()
+        fetchTrackers()
         // Reset form
         setFormData({
           weekNumber: 1,
@@ -172,7 +180,7 @@ export default function WeeklyTrackerPage() {
           </h1>
           <p className="text-gray-600 mt-1">Log your weekly activities and milestones</p>
         </div>
-        {!showForm && (
+        {!showForm && !isReadOnly && (
           <button
             onClick={() => setShowForm(true)}
             className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 flex items-center"
@@ -304,6 +312,16 @@ export default function WeeklyTrackerPage() {
           </div>
         ))}
       </div>
+
+      {/* Mentor Feedback Button */}
+      <MentorFeedbackButton
+        section="Weekly Tracker"
+        sectionData={{
+          startupName: startup?.name,
+          totalTrackers: trackers.length,
+          latestWeek: trackers[0] ? `Week ${trackers[0].weekNumber}, ${trackers[0].month} ${trackers[0].year}` : "No data",
+        }}
+      />
     </div>
   )
 }

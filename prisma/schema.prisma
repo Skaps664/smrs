@@ -11,13 +11,38 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  email         String    @unique
-  password      String
-  name          String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  startups      Startup[]
+  id                String              @id @default(auto()) @map("_id") @db.ObjectId
+  email             String              @unique
+  password          String
+  name              String
+  role              UserRole            @default(STARTUP)
+  phone             String?
+  
+  // Startup Founder specific
+  currentStage      StartupStage?
+  
+  // Mentor specific
+  mentorCompany     String?
+  mentorLinkedin    String?
+  mentorLocation    String?
+  
+  // Investor specific
+  investorPortfolio String?
+  investorLocation  String?
+  
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  
+  startups          Startup[]
+  mentorAccess      StartupMentorAccess[]
+  investorAccess    StartupInvestorAccess[]
+  invitesSent       InviteLink[]
+}
+
+enum UserRole {
+  STARTUP
+  MENTOR
+  INVESTOR
 }
 
 model Startup {
@@ -73,6 +98,9 @@ model Startup {
   mentorFeedback        MentorFeedback[]
   valuePropositions     ValueProposition[]
   businessModels        BusinessModelCanvas[]
+  mentorAccess          StartupMentorAccess?
+  investorAccess        StartupInvestorAccess[]
+  inviteLinks           InviteLink[]
 }
 
 model TeamMember {
@@ -255,10 +283,21 @@ model MentorFeedback {
   assignedTasks         String[]
   progressScore         Int?      // 1-10 scale
   
+  // Section-specific feedback fields
+  sectionId             String?   // e.g., "weekly-tracker", "kpi-dashboard", "business-model"
+  sectionName           String?   // Human-readable section name
+  rating                Int?      // 1-10 rating for the specific section
+  suggestions           String?   // Specific suggestions for improvement
+  
+  // Read status
+  isRead                Boolean   @default(false)
+  readAt                DateTime?
+  
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
   
   @@index([startupId, meetingDate])
+  @@index([startupId, sectionId])
 }
 
 model ValueProposition {
@@ -354,4 +393,60 @@ enum BusinessModelStatus {
   ACTIVE
   ARCHIVED
   TESTING
+}
+
+model StartupMentorAccess {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String    @unique @db.ObjectId
+  startup               Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  mentorId              String    @db.ObjectId
+  mentor                User      @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  
+  joinedAt              DateTime  @default(now())
+  
+  @@index([mentorId])
+}
+
+model StartupInvestorAccess {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String    @db.ObjectId
+  startup               Startup   @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  investorId            String    @db.ObjectId
+  investor              User      @relation(fields: [investorId], references: [id], onDelete: Cascade)
+  
+  joinedAt              DateTime  @default(now())
+  
+  @@index([startupId])
+  @@index([investorId])
+}
+
+model InviteLink {
+  id                    String        @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String        @db.ObjectId
+  startup               Startup       @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  createdById           String        @db.ObjectId
+  createdBy             User          @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  
+  inviteType            InviteType
+  token                 String        @unique
+  email                 String?       // Optional: for targeted invites
+  
+  expiresAt             DateTime
+  usedAt                DateTime?
+  usedBy                String?       // Email of user who used it
+  
+  isActive              Boolean       @default(true)
+  
+  createdAt             DateTime      @default(now())
+  
+  @@index([startupId])
+  @@index([expiresAt])
+}
+
+enum InviteType {
+  MENTOR
+  INVESTOR
 }

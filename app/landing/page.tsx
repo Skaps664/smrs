@@ -368,7 +368,7 @@ export default function LandingPage() {
       </div>
 
       {/* Footer */}
-      <footer className="relative bg-gray-900 border-t border-orange-300 py-12">
+      <footer className="relative bg-white/80 backdrop-blur-md border-t border-orange-200 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div className="col-span-2 md:col-span-1">
@@ -384,7 +384,7 @@ export default function LandingPage() {
             </div>
             <div>
               <h4 className="text-white font-bold mb-4">Product</h4>
-              <ul className="space-y-2 text-gray-300">
+              <ul className="space-y-2 text-gray-800">
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Features</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Pricing</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Use Cases</Link></li>
@@ -392,7 +392,7 @@ export default function LandingPage() {
             </div>
             <div>
               <h4 className="text-white font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-300">
+              <ul className="space-y-2 text-gray-800">
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">About</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Blog</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Careers</Link></li>
@@ -400,14 +400,14 @@ export default function LandingPage() {
             </div>
             <div>
               <h4 className="text-white font-bold mb-4">Support</h4>
-              <ul className="space-y-2 text-gray-300">
+              <ul className="space-y-2 text-gray-800">
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Help Center</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Contact</Link></li>
                 <li><Link href="/register" className="hover:text-orange-400 transition-colors">Privacy</Link></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-orange-300 pt-8 text-center">
+          <div className="border-t border-orange-800 pt-8 text-center">
             <p className="text-gray-300">
               © 2025 <span className="text-orange-500 font-bold">SMRS</span> - Startup Management & Reporting System. 
               <br className="sm:hidden" />

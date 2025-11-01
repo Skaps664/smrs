@@ -1,9 +1,19 @@
 // Type definitions for the application
 
+export type UserRole = 'STARTUP' | 'MENTOR' | 'INVESTOR'
+
 export interface User {
   id: string
   email: string
   name: string
+  role: UserRole
+  phone?: string
+  currentStage?: string
+  mentorCompany?: string
+  mentorLinkedin?: string
+  mentorLocation?: string
+  investorPortfolio?: string
+  investorLocation?: string
   createdAt: Date
   updatedAt: Date
 }
@@ -365,4 +375,36 @@ export interface ReportData {
   documents: Document[]
   feedbacks: MentorFeedback[]
   marketResearch?: MarketResearchData
+}
+
+export type InviteType = 'MENTOR' | 'INVESTOR'
+
+export interface InviteLink {
+  id: string
+  startupId: string
+  createdById: string
+  inviteType: InviteType
+  token: string
+  email?: string
+  expiresAt: Date
+  usedAt?: Date
+  usedBy?: string
+  isActive: boolean
+  createdAt: Date
+}
+
+export interface StartupMentorAccess {
+  id: string
+  startupId: string
+  mentorId: string
+  mentor?: User
+  joinedAt: Date
+}
+
+export interface StartupInvestorAccess {
+  id: string
+  startupId: string
+  investorId: string
+  investor?: User
+  joinedAt: Date
 }

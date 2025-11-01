@@ -17,13 +17,36 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Startup ID required" }, { status: 400 })
     }
 
-    // Verify ownership
+    // Verify access: owner, mentor, or investor
     const startup = await prisma.startup.findUnique({
       where: { id: startupId },
+      include: {
+        mentorAccess: true,
+        investorAccess: true,
+      },
     })
 
-    if (!startup || startup.userId !== session.user.id) {
-      return NextResponse.json({ error: "Not found" }, { status: 404 })
+    if (!startup) {
+      return NextResponse.json({ error: "Startup not found" }, { status: 404 })
+    }
+
+    // Check if user has access
+    const isOwner = startup.userId === session.user.id
+    const isMentor = startup.mentorAccess?.mentorId === session.user.id
+    const isInvestor = startup.investorAccess?.some((inv: { investorId: string }) => inv.investorId === session.user.id)
+
+    console.log('Weekly API Access Check:', {
+      startupId,
+      userId: session.user.id,
+      isOwner,
+      isMentor,
+      isInvestor,
+      hasMentorAccess: !!startup.mentorAccess,
+      mentorId: startup.mentorAccess?.mentorId
+    })
+
+    if (!isOwner && !isMentor && !isInvestor) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
 
     const trackers = await prisma.weeklyTracker.findMany({

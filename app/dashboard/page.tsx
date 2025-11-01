@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import Link from "next/link"
 import fs from "fs/promises"
 import path from "path"
+import MentorsInvestorsSection from "@/components/MentorsInvestorsSection"
 import { 
   Building2, 
   Calendar, 
@@ -57,51 +58,119 @@ async function loadMarketResearch(userEmail: string) {
   }
 }
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ startupId?: string }>
+}) {
   const session = await getServerSession(authOptions)
 
   if (!session?.user?.id) {
     redirect("/login")
   }
 
-  // Get user's startups with comprehensive data
-  const startups = await prisma.startup.findMany({
-    where: {
-      userId: session.user.id,
-    },
-    include: {
-      weeklyTrackers: {
-        orderBy: { createdAt: "desc" },
-        take: 4,
-      },
-      monthlyTrackers: {
-        orderBy: { createdAt: "desc" },
-        take: 3,
-      },
-      kpis: {
-        orderBy: { date: "desc" },
-        take: 10,
-      },
-      documents: true,
-      mentorFeedback: {
-        orderBy: { meetingDate: "desc" },
-        take: 3,
-      },
-      valuePropositions: {
-        orderBy: { createdAt: "desc" },
-        take: 1,
-      },
-      teamMembers: {
-        orderBy: { createdAt: "desc" },
-      },
-    },
+  // Await the searchParams
+  const params = await searchParams
+  const startupIdParam = params.startupId
+
+  // Get the user to check their role
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { role: true },
   })
 
-  const hasStartup = startups.length > 0
-  const currentStartup = startups[0]
+  // If mentor/investor is viewing a specific startup (has startupId), allow them to view
+  // Otherwise redirect them to their startups list
+  if ((user?.role === "MENTOR" || user?.role === "INVESTOR") && !startupIdParam) {
+    redirect("/dashboard/my-startups")
+  }
 
-  // Load market research data
-  const marketResearch = session.user.email ? await loadMarketResearch(session.user.email) : null
+  // Determine which startup to display
+  let startups
+  let currentStartup
+  
+  if (startupIdParam && (user?.role === "MENTOR" || user?.role === "INVESTOR")) {
+    // Mentor/Investor viewing a specific startup
+    const startup = await prisma.startup.findUnique({
+      where: { id: startupIdParam },
+      include: {
+        weeklyTrackers: {
+          orderBy: { createdAt: "desc" },
+          take: 4,
+        },
+        monthlyTrackers: {
+          orderBy: { createdAt: "desc" },
+          take: 3,
+        },
+        kpis: {
+          orderBy: { date: "desc" },
+          take: 10,
+        },
+        documents: true,
+        mentorFeedback: {
+          orderBy: { meetingDate: "desc" },
+          take: 3,
+        },
+        valuePropositions: {
+          orderBy: { createdAt: "desc" },
+          take: 1,
+        },
+        teamMembers: {
+          orderBy: { createdAt: "desc" },
+        },
+        user: {
+          select: { name: true, email: true },
+        },
+      },
+    })
+
+    if (!startup) {
+      redirect("/dashboard/my-startups")
+    }
+
+    currentStartup = startup
+    startups = [startup]
+  } else {
+    // Regular startup user viewing their own startups
+    startups = await prisma.startup.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      include: {
+        weeklyTrackers: {
+          orderBy: { createdAt: "desc" },
+          take: 4,
+        },
+        monthlyTrackers: {
+          orderBy: { createdAt: "desc" },
+          take: 3,
+        },
+        kpis: {
+          orderBy: { date: "desc" },
+          take: 10,
+        },
+        documents: true,
+        mentorFeedback: {
+          orderBy: { meetingDate: "desc" },
+          take: 3,
+        },
+        valuePropositions: {
+          orderBy: { createdAt: "desc" },
+          take: 1,
+        },
+        teamMembers: {
+          orderBy: { createdAt: "desc" },
+        },
+      },
+    })
+    currentStartup = startups[0]
+  }
+
+  const hasStartup = startups.length > 0
+
+  // Load market research data - use founder's email for mentor/investor view
+  const marketResearchEmail = currentStartup?.user?.email || session.user.email
+  const marketResearch = marketResearchEmail ? await loadMarketResearch(marketResearchEmail) : null
 
   if (!hasStartup) {
     return (
@@ -202,12 +271,21 @@ export default async function DashboardPage() {
     },
   ]
 
+  const isReadOnlyView = (user?.role === "MENTOR" || user?.role === "INVESTOR") && startupIdParam
+
   return (
     <div className="space-y-8">
       {/* Welcome Section */}
       <div className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-lg shadow-lg p-8 text-white">
-        <h1 className="text-3xl font-bold mb-2">Welcome back, {session.user.name}!</h1>
-        <p className="text-orange-100">Here's what's happening with {currentStartup.name}</p>
+        <h1 className="text-3xl font-bold mb-2">
+          {isReadOnlyView ? `Viewing: ${currentStartup.name}` : `Welcome back, ${session.user.name}!`}
+        </h1>
+        <p className="text-orange-100">
+          {isReadOnlyView 
+            ? `Dashboard for ${currentStartup.user?.name || 'this startup'}`
+            : `Here's what's happening with ${currentStartup.name}`
+          }
+        </p>
       </div>
 
       {/* Stats Grid */}
@@ -404,6 +482,9 @@ export default async function DashboardPage() {
           )}
         </div>
       )}
+
+      {/* Mentors & Investors Section */}
+      <MentorsInvestorsSection startupId={currentStartup.id} />
 
       {/* Startup Details Card */}
       <div className="bg-white rounded-lg shadow-sm p-6">

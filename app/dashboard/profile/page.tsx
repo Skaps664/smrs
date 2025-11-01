@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import MentorsInvestorsSection from "@/components/MentorsInvestorsSection"
+import MentorFeedbackButton from "@/components/MentorFeedbackButton"
+import { useReadOnly } from "@/contexts/ReadOnlyContext"
 import { 
   Building2, Save, Sparkles, TrendingUp, Users, Globe, 
   Award, Zap, Calendar, Mail, Phone, MapPin, Rocket,
@@ -63,6 +66,7 @@ const stageFunFacts = {
 
 export default function StartupProfilePage() {
   const router = useRouter()
+  const { isReadOnly, viewingStartupId } = useReadOnly()
   const [loading, setLoading] = useState(false)
   const [existing, setExisting] = useState<any>(null)
   const [showVideo, setShowVideo] = useState(false)
@@ -140,14 +144,22 @@ export default function StartupProfilePage() {
 
   useEffect(() => {
     fetchStartup()
-  }, [])
+  }, [viewingStartupId])
 
   const fetchStartup = async () => {
     try {
-      const res = await fetch("/api/startup")
+      // If viewing as mentor/investor, fetch the specific startup
+      // Otherwise, fetch the current user's startup
+      const url = viewingStartupId 
+        ? `/api/startup/${viewingStartupId}`
+        : "/api/startup"
+      const res = await fetch(url)
       const data = await res.json()
-      if (data.length > 0) {
-        const startup = data[0]
+      
+      // Handle both response formats: array from /api/startup or single object from /api/startup/[id]
+      const startup = viewingStartupId ? data : (data.length > 0 ? data[0] : null)
+      
+      if (startup) {
         setExisting(startup)
         setFormData({
           name: startup.name || "",
@@ -248,6 +260,13 @@ export default function StartupProfilePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Prevent submission if in read-only mode
+    if (isReadOnly) {
+      alert("You cannot edit this startup in read-only mode")
+      return
+    }
+    
     setLoading(true)
 
     try {
@@ -357,6 +376,9 @@ export default function StartupProfilePage() {
         </div>
       </div>
 
+      {/* Mentors & Investors Section */}
+      <MentorsInvestorsSection startupId={existing?.id || ''} />
+
       {/* Startup Journey Timeline */}
       <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
         <h2 className="text-xl font-bold mb-6 flex items-center text-gray-800">
@@ -432,7 +454,18 @@ export default function StartupProfilePage() {
 
         <div className="p-8">
           {activeTab === 'edit' ? (
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className={`space-y-8 ${isReadOnly ? 'pointer-events-none opacity-75' : ''}`}>
+              {isReadOnly && (
+                <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-6">
+                  <div className="flex items-center gap-2 text-blue-800">
+                    <Info className="w-5 h-5" />
+                    <p className="font-semibold">Read-Only Mode</p>
+                  </div>
+                  <p className="text-sm text-blue-700 mt-2">
+                    You are viewing this startup's profile. You cannot make changes.
+                  </p>
+                </div>
+              )}
               {/* Basic Information */}
               <div className="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
                 <h2 className="text-xl font-bold mb-4 flex items-center text-gray-800">
@@ -711,11 +744,12 @@ export default function StartupProfilePage() {
 
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full bg-orange-500 text-white py-4 px-8 rounded-xl hover:bg-orange-600 disabled:opacity-50 flex items-center justify-center transition-all shadow-lg hover:shadow-xl transform hover:scale-105 font-semibold text-lg border-2 border-orange-600"
+                disabled={loading || isReadOnly}
+                className="w-full bg-orange-500 text-white py-4 px-8 rounded-xl hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-all shadow-lg hover:shadow-xl transform hover:scale-105 font-semibold text-lg border-2 border-orange-600"
+                title={isReadOnly ? "Read-only mode: Cannot edit this startup" : ""}
               >
                 <Save className="w-6 h-6 mr-3" />
-                {loading ? "Saving..." : existing ? "🚀 Update Profile" : "🎉 Create Profile"}
+                {isReadOnly ? "🔒 Read-Only Mode" : loading ? "Saving..." : existing ? "🚀 Update Profile" : "🎉 Create Profile"}
               </button>
             </form>
           ) : (
@@ -1325,6 +1359,17 @@ export default function StartupProfilePage() {
           </div>
         </div>
       )}
+
+      {/* Mentor Feedback Button - Floating */}
+      <MentorFeedbackButton 
+        section="Startup Profile" 
+        sectionData={{
+          startupName: formData.name,
+          stage: formData.stage,
+          industry: formData.industry,
+          profileCompletion: metrics.profileCompletion,
+        }}
+      />
     </div>
   )
 }
