@@ -14,6 +14,7 @@ export default function ReportsPage() {
     milestones: 0,
     documents: 0,
     feedbacks: 0,
+    marketResearch: false,
   })
 
   useEffect(() => {
@@ -28,13 +29,14 @@ export default function ReportsPage() {
         setStartup(startupData[0])
         
         // Fetch stats for all sections
-        const [weekly, monthly, kpis, milestones, documents, feedbacks] = await Promise.all([
+        const [weekly, monthly, kpis, milestones, documents, feedbacks, marketResearch] = await Promise.all([
           fetch(`/api/weekly?startupId=${startupData[0].id}`).then(r => r.json()),
           fetch(`/api/monthly?startupId=${startupData[0].id}`).then(r => r.json()),
           fetch(`/api/kpi?startupId=${startupData[0].id}`).then(r => r.json()),
           fetch(`/api/milestone?startupId=${startupData[0].id}`).then(r => r.json()),
           fetch(`/api/document?startupId=${startupData[0].id}`).then(r => r.json()),
           fetch(`/api/feedback?startupId=${startupData[0].id}`).then(r => r.json()),
+          fetch(`/api/market-research`).then(r => r.json()).catch(() => []),
         ])
 
         setStats({
@@ -44,6 +46,7 @@ export default function ReportsPage() {
           milestones: milestones.length || 0,
           documents: documents.length || 0,
           feedbacks: feedbacks.length || 0,
+          marketResearch: Array.isArray(marketResearch) && marketResearch.length > 0,
         })
       }
     } catch (error) {
@@ -57,13 +60,14 @@ export default function ReportsPage() {
     setGenerating(true)
     try {
       // Fetch all data
-      const [weeklyTrackers, monthlyTrackers, kpis, milestones, documents, feedbacks] = await Promise.all([
+      const [weeklyTrackers, monthlyTrackers, kpis, milestones, documents, feedbacks, marketResearch] = await Promise.all([
         fetch(`/api/weekly?startupId=${startup.id}`).then(r => r.json()),
         fetch(`/api/monthly?startupId=${startup.id}`).then(r => r.json()),
         fetch(`/api/kpi?startupId=${startup.id}`).then(r => r.json()),
         fetch(`/api/milestone?startupId=${startup.id}`).then(r => r.json()),
         fetch(`/api/document?startupId=${startup.id}`).then(r => r.json()),
         fetch(`/api/feedback?startupId=${startup.id}`).then(r => r.json()),
+        fetch(`/api/market-research`).then(r => r.json()).catch(() => []),
       ])
 
       const reportData: ReportData = {
@@ -74,6 +78,7 @@ export default function ReportsPage() {
         milestones,
         documents,
         feedbacks,
+        marketResearch: Array.isArray(marketResearch) && marketResearch.length > 0 ? marketResearch[0] : undefined,
       }
 
       const doc = await generatePDFReport(reportData)
@@ -169,6 +174,13 @@ export default function ReportsPage() {
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <span className="text-gray-900">Mentor Feedback</span>
             <span className="text-sm font-medium text-orange-600">{stats.feedbacks} meetings</span>
+          </div>
+          
+          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <span className="text-gray-900">Market Research & Analysis</span>
+            <span className="text-sm text-gray-600">
+              {stats.marketResearch ? "✓ Included" : "Not available"}
+            </span>
           </div>
         </div>
       </div>

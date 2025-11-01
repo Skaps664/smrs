@@ -2,6 +2,25 @@
 
 A comprehensive web application designed to help founders track their startup journey from ideation to scale. Built with Next.js 14, TypeScript, MongoDB, and Prisma.
 
+---
+
+## 📚 Documentation
+
+> **For Investors, Buyers, or Comprehensive Project Understanding:**  
+> See **[PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)** - A complete technical and business overview including:
+> - Full system architecture and data flow
+> - Complete API documentation
+> - Database schema with relationships
+> - Technology stack details
+> - Implementation roadmap
+> - Business model and monetization
+> - Scalability and deployment options
+
+> **For Quick Start:**  
+> Continue reading below for setup instructions.
+
+---
+
 ## ✨ Features
 
 ### ✅ Completed Features

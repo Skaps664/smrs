@@ -233,6 +233,129 @@ export interface BusinessModelCanvas {
   updatedAt: Date
 }
 
+export interface MarketResearchData {
+  id?: string
+  title: string
+  tam: { value: number; currency: string; description: string }
+  sam: { value: number; currency: string; description: string }
+  som: { value: number; currency: string; description: string }
+  swot: {
+    strengths: string[]
+    weaknesses: string[]
+    opportunities: string[]
+    threats: string[]
+  }
+  fourPs?: {
+    product: {
+      description: string
+      features: string[]
+      benefits: string[]
+      differentiation: string
+    }
+    price: {
+      strategy: string
+      pricePoint: string
+      costStructure: string
+      competitorPricing: string
+    }
+    place: {
+      channels: string[]
+      distribution: string
+      coverage: string
+      locations: string[]
+    }
+    promotion: {
+      strategies: string[]
+      budget: string
+      channels: string[]
+      messaging: string
+    }
+  }
+  portersForces?: {
+    competitiveRivalry: {
+      level: string
+      factors: string[]
+      description: string
+    }
+    supplierPower: {
+      level: string
+      factors: string[]
+      description: string
+    }
+    buyerPower: {
+      level: string
+      factors: string[]
+      description: string
+    }
+    threatOfSubstitutes: {
+      level: string
+      factors: string[]
+      description: string
+    }
+    threatOfNewEntrants: {
+      level: string
+      factors: string[]
+      description: string
+    }
+  }
+  customerJourney?: {
+    awareness: {
+      touchpoints: string[]
+      customerActions: string[]
+      painPoints: string[]
+      opportunities: string[]
+    }
+    consideration: {
+      touchpoints: string[]
+      customerActions: string[]
+      painPoints: string[]
+      opportunities: string[]
+    }
+    decision: {
+      touchpoints: string[]
+      customerActions: string[]
+      painPoints: string[]
+      opportunities: string[]
+    }
+    retention: {
+      touchpoints: string[]
+      customerActions: string[]
+      painPoints: string[]
+      opportunities: string[]
+    }
+    advocacy: {
+      touchpoints: string[]
+      customerActions: string[]
+      painPoints: string[]
+      opportunities: string[]
+    }
+  }
+  targetAudience: {
+    segments: string[]
+    ageRanges: string[]
+    genders: string[]
+    locations: string[]
+    industries: string[]
+    incomeLevels: string[]
+    behaviors: string[]
+    painPoints: string[]
+    personas?: Array<{
+      name: string
+      description: string
+      demographics: string
+      goals: string
+    }>
+  }
+  competitorAnalysis: {
+    directCompetitors: string[]
+    indirectCompetitors: string[]
+    marketGaps: string[]
+  }
+  marketTrends: string[]
+  dataSources: string[]
+  lastUpdated: string
+}
+
 export interface ReportData {
   startup: Startup
   weeklyTrackers: WeeklyTracker[]
@@ -241,4 +364,5 @@ export interface ReportData {
   milestones: Milestone[]
   documents: Document[]
   feedbacks: MentorFeedback[]
+  marketResearch?: MarketResearchData
 }

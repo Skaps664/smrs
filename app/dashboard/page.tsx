@@ -3,6 +3,8 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import fs from "fs/promises"
+import path from "path"
 import { 
   Building2, 
   Calendar, 
@@ -36,8 +38,24 @@ import {
   Instagram,
   Youtube,
   Github,
-  Info
+  Info,
+  PieChart,
+  Shield,
+  AlertTriangle
 } from "lucide-react"
+
+// Helper to load market research data
+async function loadMarketResearch(userEmail: string) {
+  try {
+    const sanitizedEmail = userEmail.replace(/[^a-zA-Z0-9]/g, "_")
+    const filePath = path.join(process.cwd(), "data", "market-research", `${sanitizedEmail}.json`)
+    const data = await fs.readFile(filePath, "utf-8")
+    const researches = JSON.parse(data)
+    return researches.length > 0 ? researches[0] : null // Return most recent
+  } catch {
+    return null
+  }
+}
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions)
@@ -81,6 +99,9 @@ export default async function DashboardPage() {
 
   const hasStartup = startups.length > 0
   const currentStartup = startups[0]
+
+  // Load market research data
+  const marketResearch = session.user.email ? await loadMarketResearch(session.user.email) : null
 
   if (!hasStartup) {
     return (
@@ -217,6 +238,172 @@ export default async function DashboardPage() {
           )
         })}
       </div>
+
+      {/* Market Research Insights */}
+      {marketResearch && (
+        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-sm border-2 border-orange-200 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-lg font-semibold flex items-center">
+              <PieChart className="w-5 h-5 mr-2 text-orange-600" />
+              Market Research Insights
+            </h3>
+            <Link
+              href="/dashboard/market-research"
+              className="text-sm text-orange-600 hover:text-orange-700 font-medium flex items-center"
+            >
+              View Full Research
+              <ArrowUpRight className="w-4 h-4 ml-1" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* TAM/SAM/SOM Summary */}
+            <div className="bg-white rounded-lg p-5 border border-orange-200">
+              <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+                <TrendingUp className="w-4 h-4 mr-2 text-orange-600" />
+                Market Size (TAM/SAM/SOM)
+              </h4>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
+                  <span className="text-sm font-medium text-gray-700">Total Addressable Market</span>
+                  <span className="text-sm font-bold text-orange-600">
+                    {marketResearch.tam?.currency || 'USD'} {(marketResearch.tam?.value || 0).toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-amber-50 rounded">
+                  <span className="text-sm font-medium text-gray-700">Serviceable Available Market</span>
+                  <span className="text-sm font-bold text-amber-600">
+                    {marketResearch.sam?.currency || 'USD'} {(marketResearch.sam?.value || 0).toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-yellow-50 rounded">
+                  <span className="text-sm font-medium text-gray-700">Serviceable Obtainable Market</span>
+                  <span className="text-sm font-bold text-yellow-700">
+                    {marketResearch.som?.currency || 'USD'} {(marketResearch.som?.value || 0).toLocaleString()}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* SWOT Summary */}
+            <div className="bg-white rounded-lg p-5 border border-orange-200">
+              <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+                <Target className="w-4 h-4 mr-2 text-orange-600" />
+                SWOT Analysis Highlights
+              </h4>
+              <div className="grid grid-cols-2 gap-3">
+                {marketResearch.swot?.strengths && marketResearch.swot.strengths.length > 0 && (
+                  <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+                    <div className="flex items-center mb-2">
+                      <CheckCircle className="w-3 h-3 text-green-600 mr-1" />
+                      <p className="text-xs font-bold text-green-900">Strengths</p>
+                    </div>
+                    <p className="text-xs text-green-700">{marketResearch.swot.strengths.length} identified</p>
+                  </div>
+                )}
+                {marketResearch.swot?.weaknesses && marketResearch.swot.weaknesses.length > 0 && (
+                  <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                    <div className="flex items-center mb-2">
+                      <AlertCircle className="w-3 h-3 text-red-600 mr-1" />
+                      <p className="text-xs font-bold text-red-900">Weaknesses</p>
+                    </div>
+                    <p className="text-xs text-red-700">{marketResearch.swot.weaknesses.length} identified</p>
+                  </div>
+                )}
+                {marketResearch.swot?.opportunities && marketResearch.swot.opportunities.length > 0 && (
+                  <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                    <div className="flex items-center mb-2">
+                      <Target className="w-3 h-3 text-blue-600 mr-1" />
+                      <p className="text-xs font-bold text-blue-900">Opportunities</p>
+                    </div>
+                    <p className="text-xs text-blue-700">{marketResearch.swot.opportunities.length} identified</p>
+                  </div>
+                )}
+                {marketResearch.swot?.threats && marketResearch.swot.threats.length > 0 && (
+                  <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                    <div className="flex items-center mb-2">
+                      <AlertTriangle className="w-3 h-3 text-yellow-600 mr-1" />
+                      <p className="text-xs font-bold text-yellow-900">Threats</p>
+                    </div>
+                    <p className="text-xs text-yellow-700">{marketResearch.swot.threats.length} identified</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Target Audience Summary */}
+            {marketResearch.targetAudience && (
+              <div className="bg-white rounded-lg p-5 border border-orange-200">
+                <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+                  <Users className="w-4 h-4 mr-2 text-orange-600" />
+                  Target Audience
+                </h4>
+                <div className="space-y-2">
+                  {marketResearch.targetAudience.segments && marketResearch.targetAudience.segments.length > 0 && (
+                    <div className="flex items-start">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mt-1.5 mr-2 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs font-medium text-gray-700">Customer Segments:</p>
+                        <p className="text-xs text-gray-600">{marketResearch.targetAudience.segments.slice(0, 2).join(", ")}</p>
+                      </div>
+                    </div>
+                  )}
+                  {marketResearch.targetAudience.locations && marketResearch.targetAudience.locations.length > 0 && (
+                    <div className="flex items-start">
+                      <div className="w-2 h-2 bg-amber-500 rounded-full mt-1.5 mr-2 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs font-medium text-gray-700">Geographic Focus:</p>
+                        <p className="text-xs text-gray-600">{marketResearch.targetAudience.locations.slice(0, 2).join(", ")}</p>
+                      </div>
+                    </div>
+                  )}
+                  {marketResearch.targetAudience.ageRanges && marketResearch.targetAudience.ageRanges.length > 0 && (
+                    <div className="flex items-start">
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs font-medium text-gray-700">Age Ranges:</p>
+                        <p className="text-xs text-gray-600">{marketResearch.targetAudience.ageRanges.join(", ")}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Competitor Analysis Summary */}
+            {marketResearch.competitorAnalysis && (
+              <div className="bg-white rounded-lg p-5 border border-orange-200">
+                <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+                  <Shield className="w-4 h-4 mr-2 text-orange-600" />
+                  Competitive Landscape
+                </h4>
+                <div className="space-y-3">
+                  {marketResearch.competitorAnalysis.directCompetitors && marketResearch.competitorAnalysis.directCompetitors.length > 0 && (
+                    <div>
+                      <p className="text-xs font-medium text-gray-700 mb-1">Direct Competitors:</p>
+                      <p className="text-xs text-gray-600">{marketResearch.competitorAnalysis.directCompetitors.slice(0, 3).join(", ")}</p>
+                    </div>
+                  )}
+                  {marketResearch.competitorAnalysis.marketGaps && marketResearch.competitorAnalysis.marketGaps.length > 0 && (
+                    <div className="bg-green-50 p-2 rounded border border-green-200">
+                      <p className="text-xs font-medium text-green-900 mb-1">Market Opportunities:</p>
+                      <p className="text-xs text-green-700">{marketResearch.competitorAnalysis.marketGaps[0]}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {marketResearch.lastUpdated && (
+            <div className="mt-4 pt-4 border-t border-orange-200">
+              <p className="text-xs text-gray-500 text-center">
+                Last updated: {new Date(marketResearch.lastUpdated).toLocaleDateString()}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Startup Details Card */}
       <div className="bg-white rounded-lg shadow-sm p-6">

@@ -16,7 +16,9 @@ import {
   Layers,
   LogOut,
   Menu,
-  X
+  X,
+  TrendingUp,
+  Rocket
 } from "lucide-react"
 import { useState } from "react"
 
@@ -27,6 +29,8 @@ const navigation = [
   { name: "Monthly Tracker", href: "/dashboard/monthly", icon: Calendar },
   { name: "KPI Dashboard", href: "/dashboard/kpis", icon: BarChart3 },
   { name: "Timeline", href: "/dashboard/timeline", icon: Target },
+  { name: "Market Research", href: "/dashboard/market-research", icon: TrendingUp },
+  { name: "MVP Planning", href: "/dashboard/mvp-planning", icon: Rocket },
   { name: "Value Proposition", href: "/dashboard/value-proposition", icon: Lightbulb },
   { name: "Business Model", href: "/dashboard/business-model", icon: Layers },
   { name: "Documents", href: "/dashboard/documents", icon: FileText },

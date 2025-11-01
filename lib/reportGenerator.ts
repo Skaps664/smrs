@@ -1,6 +1,6 @@
 import jsPDF from "jspdf"
 import html2canvas from "html2canvas"
-import type { ReportData, WeeklyTracker, MonthlyTracker, KPI, Milestone, Document, MentorFeedback } from "@/types"
+import type { ReportData, WeeklyTracker, MonthlyTracker, KPI, Milestone, Document, MentorFeedback, MarketResearchData } from "@/types"
 
 export type { ReportData }
 
@@ -42,6 +42,312 @@ export async function generatePDFReport(data: ReportData) {
     const splitText = doc.splitTextToSize(data.startup.description, pageWidth - 40)
     doc.text(splitText, 20, yPos)
     yPos += splitText.length * 5
+  }
+
+  // Market Research Section
+  if (data.marketResearch) {
+    const mr = data.marketResearch
+    
+    // Check if we need a new page
+    if (yPos > pageHeight - 60) {
+      doc.addPage()
+      yPos = 20
+    }
+
+    yPos += 15
+    doc.setFontSize(16)
+    doc.setTextColor(17, 24, 39)
+    doc.text("Market Research & Analysis", 20, yPos)
+    
+    // TAM/SAM/SOM
+    yPos += 12
+    doc.setFontSize(12)
+    doc.setTextColor(249, 115, 22) // Orange
+    doc.text("Market Size (TAM/SAM/SOM)", 20, yPos)
+    
+    yPos += 8
+    doc.setFontSize(10)
+    doc.setTextColor(17, 24, 39)
+    
+    const formatCurrency = (value: number, currency: string) => {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currency,
+        notation: value >= 1e9 ? 'compact' : 'standard',
+        maximumFractionDigits: 0
+      }).format(value)
+    }
+
+    doc.text(`TAM: ${formatCurrency(mr.tam.value, mr.tam.currency)}`, 25, yPos)
+    yPos += 5
+    if (mr.tam.description) {
+      doc.setFontSize(9)
+      doc.setTextColor(107, 114, 128)
+      const tamDesc = doc.splitTextToSize(mr.tam.description, pageWidth - 50)
+      doc.text(tamDesc, 30, yPos)
+      yPos += tamDesc.length * 4
+    }
+    
+    yPos += 3
+    doc.setFontSize(10)
+    doc.setTextColor(17, 24, 39)
+    doc.text(`SAM: ${formatCurrency(mr.sam.value, mr.sam.currency)}`, 25, yPos)
+    yPos += 5
+    if (mr.sam.description) {
+      doc.setFontSize(9)
+      doc.setTextColor(107, 114, 128)
+      const samDesc = doc.splitTextToSize(mr.sam.description, pageWidth - 50)
+      doc.text(samDesc, 30, yPos)
+      yPos += samDesc.length * 4
+    }
+    
+    yPos += 3
+    doc.setFontSize(10)
+    doc.setTextColor(17, 24, 39)
+    doc.text(`SOM: ${formatCurrency(mr.som.value, mr.som.currency)}`, 25, yPos)
+    yPos += 5
+    if (mr.som.description) {
+      doc.setFontSize(9)
+      doc.setTextColor(107, 114, 128)
+      const somDesc = doc.splitTextToSize(mr.som.description, pageWidth - 50)
+      doc.text(somDesc, 30, yPos)
+      yPos += somDesc.length * 4
+    }
+
+    // SWOT Analysis
+    if (yPos > pageHeight - 80) {
+      doc.addPage()
+      yPos = 20
+    }
+
+    yPos += 12
+    doc.setFontSize(12)
+    doc.setTextColor(249, 115, 22) // Orange
+    doc.text("SWOT Analysis", 20, yPos)
+    
+    yPos += 8
+    doc.setFontSize(10)
+    
+    // Strengths
+    if (mr.swot.strengths.length > 0) {
+      doc.setTextColor(34, 197, 94) // Green
+      doc.text(`Strengths (${mr.swot.strengths.length}):`, 25, yPos)
+      yPos += 6
+      doc.setFontSize(9)
+      doc.setTextColor(17, 24, 39)
+      mr.swot.strengths.slice(0, 3).forEach(item => {
+        if (yPos > pageHeight - 20) {
+          doc.addPage()
+          yPos = 20
+        }
+        const itemText = doc.splitTextToSize(`• ${item}`, pageWidth - 55)
+        doc.text(itemText, 30, yPos)
+        yPos += itemText.length * 4 + 1
+      })
+      if (mr.swot.strengths.length > 3) {
+        doc.setTextColor(107, 114, 128)
+        doc.text(`... and ${mr.swot.strengths.length - 3} more`, 30, yPos)
+        yPos += 5
+      }
+    }
+    
+    // Weaknesses
+    yPos += 3
+    if (mr.swot.weaknesses.length > 0) {
+      doc.setFontSize(10)
+      doc.setTextColor(239, 68, 68) // Red
+      doc.text(`Weaknesses (${mr.swot.weaknesses.length}):`, 25, yPos)
+      yPos += 6
+      doc.setFontSize(9)
+      doc.setTextColor(17, 24, 39)
+      mr.swot.weaknesses.slice(0, 3).forEach(item => {
+        if (yPos > pageHeight - 20) {
+          doc.addPage()
+          yPos = 20
+        }
+        const itemText = doc.splitTextToSize(`• ${item}`, pageWidth - 55)
+        doc.text(itemText, 30, yPos)
+        yPos += itemText.length * 4 + 1
+      })
+      if (mr.swot.weaknesses.length > 3) {
+        doc.setTextColor(107, 114, 128)
+        doc.text(`... and ${mr.swot.weaknesses.length - 3} more`, 30, yPos)
+        yPos += 5
+      }
+    }
+    
+    // Opportunities
+    yPos += 3
+    if (mr.swot.opportunities.length > 0) {
+      doc.setFontSize(10)
+      doc.setTextColor(59, 130, 246) // Blue
+      doc.text(`Opportunities (${mr.swot.opportunities.length}):`, 25, yPos)
+      yPos += 6
+      doc.setFontSize(9)
+      doc.setTextColor(17, 24, 39)
+      mr.swot.opportunities.slice(0, 3).forEach(item => {
+        if (yPos > pageHeight - 20) {
+          doc.addPage()
+          yPos = 20
+        }
+        const itemText = doc.splitTextToSize(`• ${item}`, pageWidth - 55)
+        doc.text(itemText, 30, yPos)
+        yPos += itemText.length * 4 + 1
+      })
+      if (mr.swot.opportunities.length > 3) {
+        doc.setTextColor(107, 114, 128)
+        doc.text(`... and ${mr.swot.opportunities.length - 3} more`, 30, yPos)
+        yPos += 5
+      }
+    }
+    
+    // Threats
+    yPos += 3
+    if (mr.swot.threats.length > 0) {
+      doc.setFontSize(10)
+      doc.setTextColor(234, 179, 8) // Yellow
+      doc.text(`Threats (${mr.swot.threats.length}):`, 25, yPos)
+      yPos += 6
+      doc.setFontSize(9)
+      doc.setTextColor(17, 24, 39)
+      mr.swot.threats.slice(0, 3).forEach(item => {
+        if (yPos > pageHeight - 20) {
+          doc.addPage()
+          yPos = 20
+        }
+        const itemText = doc.splitTextToSize(`• ${item}`, pageWidth - 55)
+        doc.text(itemText, 30, yPos)
+        yPos += itemText.length * 4 + 1
+      })
+      if (mr.swot.threats.length > 3) {
+        doc.setTextColor(107, 114, 128)
+        doc.text(`... and ${mr.swot.threats.length - 3} more`, 30, yPos)
+        yPos += 5
+      }
+    }
+
+    // Target Audience
+    if (yPos > pageHeight - 60) {
+      doc.addPage()
+      yPos = 20
+    }
+
+    yPos += 12
+    doc.setFontSize(12)
+    doc.setTextColor(249, 115, 22) // Orange
+    doc.text("Target Audience", 20, yPos)
+    
+    yPos += 8
+    doc.setFontSize(10)
+    doc.setTextColor(17, 24, 39)
+    
+    if (mr.targetAudience.segments.length > 0) {
+      doc.text("Segments:", 25, yPos)
+      yPos += 5
+      doc.setFontSize(9)
+      doc.text(mr.targetAudience.segments.join(", "), 30, yPos)
+      yPos += 6
+    }
+    
+    if (mr.targetAudience.locations.length > 0) {
+      doc.setFontSize(10)
+      doc.text("Geographic Focus:", 25, yPos)
+      yPos += 5
+      doc.setFontSize(9)
+      doc.text(mr.targetAudience.locations.join(", "), 30, yPos)
+      yPos += 6
+    }
+    
+    if (mr.targetAudience.ageRanges.length > 0) {
+      doc.setFontSize(10)
+      doc.text("Age Ranges:", 25, yPos)
+      yPos += 5
+      doc.setFontSize(9)
+      doc.text(mr.targetAudience.ageRanges.join(", "), 30, yPos)
+      yPos += 6
+    }
+    
+    if (mr.targetAudience.painPoints.length > 0) {
+      doc.setFontSize(10)
+      doc.text("Key Pain Points:", 25, yPos)
+      yPos += 6
+      doc.setFontSize(9)
+      mr.targetAudience.painPoints.slice(0, 3).forEach(item => {
+        if (yPos > pageHeight - 20) {
+          doc.addPage()
+          yPos = 20
+        }
+        const itemText = doc.splitTextToSize(`• ${item}`, pageWidth - 55)
+        doc.text(itemText, 30, yPos)
+        yPos += itemText.length * 4 + 1
+      })
+    }
+
+    // Competitive Analysis
+    if (yPos > pageHeight - 50) {
+      doc.addPage()
+      yPos = 20
+    }
+
+    yPos += 12
+    doc.setFontSize(12)
+    doc.setTextColor(249, 115, 22) // Orange
+    doc.text("Competitive Landscape", 20, yPos)
+    
+    yPos += 8
+    doc.setFontSize(10)
+    doc.setTextColor(17, 24, 39)
+    
+    if (mr.competitorAnalysis.directCompetitors.length > 0) {
+      doc.text(`Direct Competitors: ${mr.competitorAnalysis.directCompetitors.length}`, 25, yPos)
+      yPos += 5
+      doc.setFontSize(9)
+      doc.text(mr.competitorAnalysis.directCompetitors.slice(0, 5).join(", "), 30, yPos)
+      yPos += 6
+    }
+    
+    if (mr.competitorAnalysis.marketGaps.length > 0) {
+      yPos += 3
+      doc.setFontSize(10)
+      doc.text("Market Opportunities:", 25, yPos)
+      yPos += 6
+      doc.setFontSize(9)
+      mr.competitorAnalysis.marketGaps.slice(0, 3).forEach(item => {
+        if (yPos > pageHeight - 20) {
+          doc.addPage()
+          yPos = 20
+        }
+        const itemText = doc.splitTextToSize(`• ${item}`, pageWidth - 55)
+        doc.text(itemText, 30, yPos)
+        yPos += itemText.length * 4 + 1
+      })
+    }
+
+    // Market Trends
+    if (mr.marketTrends.length > 0) {
+      if (yPos > pageHeight - 40) {
+        doc.addPage()
+        yPos = 20
+      }
+
+      yPos += 12
+      doc.setFontSize(12)
+      doc.setTextColor(249, 115, 22) // Orange
+      doc.text("Market Trends", 20, yPos)
+      
+      yPos += 8
+      doc.setFontSize(9)
+      doc.setTextColor(17, 24, 39)
+      mr.marketTrends.slice(0, 5).forEach(item => {
+        if (yPos > pageHeight - 20) {
+          doc.addPage()
+          yPos = 20
+        }
+        const itemText = doc.splitTextToSize(`• ${item}`, pageWidth - 50)
+        doc.text(itemText, 25, yPos)
+        yPos += itemText.length * 4 + 1
+      })
+    }
   }
 
   // Check if we need a new page
