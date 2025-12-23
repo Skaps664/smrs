@@ -1,64 +1,287 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* Custom editorial design tokens - monochrome with orange accent for landing */
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
+  --background: oklch(0.08 0 0);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.12 0 0);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.1 0 0);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.95 0 0);
+  --primary-foreground: oklch(0.08 0 0);
+  --secondary: oklch(0.18 0 0);
+  --secondary-foreground: oklch(0.85 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.7 0.2 45);
+  --accent-foreground: oklch(0.08 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.2 0 0);
+  --ring: oklch(0.7 0.2 45);
+  --radius: 0rem;
+  --sidebar: oklch(0.1 0 0);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.7 0.2 45);
+  --sidebar-primary-foreground: oklch(0.08 0 0);
+  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-border: oklch(0.25 0 0);
+  --sidebar-ring: oklch(0.7 0.2 45);
 }
 
 @theme inline {
+  /* Updated font-sans and font-mono to use IBM Plex */
+  --font-sans: "IBM Plex Sans", "IBM Plex Sans Fallback", sans-serif;
+  --font-mono: "IBM Plex Mono", "IBM Plex Mono Fallback", monospace;
+  --font-display: "Bebas Neue", "Bebas Neue Fallback", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
+    /* Apply scrollbar styles to html element */
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0, 0%, 24%) hsl(0, 0%, 8%);
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    max-width: 100vw;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0, 0%, 24%) hsl(0, 0%, 8%);
+  }
+  /* Webkit scrollbar styling for html and body */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 10px;
+  }
+  html::-webkit-scrollbar-track,
+  body::-webkit-scrollbar-track {
+    background: hsl(0, 0%, 8%);
+  }
+  html::-webkit-scrollbar-thumb,
+  body::-webkit-scrollbar-thumb {
+    background: hsl(0, 0%, 24%);
+    border-radius: 0px;
+  }
+  html::-webkit-scrollbar-thumb:hover,
+  body::-webkit-scrollbar-thumb:hover {
+    background: hsl(0, 0%, 32%);
+  }
 }
 
-/* Force dark text on light backgrounds for all inputs and text elements */
-input,
-textarea,
-select,
-label,
-p,
-h1, h2, h3, h4, h5, h6,
-span,
-div {
+/* Dashboard-specific overrides for light background when needed */
+.dashboard-content input,
+.dashboard-content textarea,
+.dashboard-content select,
+.dashboard-content label,
+.dashboard-content p,
+.dashboard-content h1, 
+.dashboard-content h2, 
+.dashboard-content h3, 
+.dashboard-content h4, 
+.dashboard-content h5, 
+.dashboard-content h6,
+.dashboard-content span,
+.dashboard-content div {
   color: #111827;
 }
 
-/* Specific overrides for better contrast */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="tel"],
-input[type="url"],
-input[type="number"],
-textarea,
-select {
+.dashboard-content input[type="text"],
+.dashboard-content input[type="email"],
+.dashboard-content input[type="password"],
+.dashboard-content input[type="tel"],
+.dashboard-content input[type="url"],
+.dashboard-content input[type="number"],
+.dashboard-content textarea,
+.dashboard-content select {
   color: #111827 !important;
   background-color: #ffffff !important;
 }
 
-/* Ensure placeholder text is visible */
-input::placeholder,
-textarea::placeholder {
+.dashboard-content input::placeholder,
+.dashboard-content textarea::placeholder {
   color: #6b7280 !important;
   opacity: 1 !important;
 }
 
-/* Fix text color in forms */
-form {
-  color: #111827;
-}
-
-/* Ensure labels are dark */
-label {
+.dashboard-content label {
   color: #374151 !important;
 }
 
-/* Button text should be appropriate */
-button {
-  color: inherit;
+/* Custom noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image: linear-gradient(to right, oklch(0.2 0 0) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.2 0 0) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Custom selection color */
+::selection {
+  background: oklch(0.7 0.2 45);
+  color: oklch(0.08 0 0);
+}
+/* Dark Theme Dashboard Override - Apply globally to dashboard */
+.min-h-screen {
+  /* Override all white/light backgrounds in dashboard */
+  .bg-white {
+    @apply bg-[#1a1a1a] border-gray-800;
+  }
+  
+  .bg-gray-50 {
+    @apply bg-[#0a0a0a];
+  }
+  
+  .bg-gray-100 {
+    @apply bg-[#141414];
+  }
+  
+  .bg-orange-50 {
+    @apply bg-orange-500/10;
+  }
+  
+  .bg-green-50 {
+    @apply bg-green-500/10;
+  }
+  
+  .bg-blue-50 {
+    @apply bg-blue-500/10;
+  }
+  
+  .bg-red-50 {
+    @apply bg-red-500/10;
+  }
+  
+  .bg-purple-50 {
+    @apply bg-purple-500/10;
+  }
+  
+  /* Fix text contrast */
+  .text-gray-900 {
+    @apply text-gray-100;
+  }
+  
+  .text-gray-800 {
+    @apply text-gray-200;
+  }
+  
+  .text-gray-700 {
+    @apply text-gray-300;
+  }
+  
+  .text-gray-600 {
+    @apply text-gray-400;
+  }
+  
+  .text-gray-500 {
+    @apply text-gray-500;
+  }
+  
+  /* Fix borders */
+  .border-gray-200 {
+    @apply border-gray-800;
+  }
+  
+  .border-gray-300 {
+    @apply border-gray-700;
+  }
+  
+  /* Fix hover states */
+  .hover\:bg-gray-50:hover {
+    @apply bg-gray-800;
+  }
+  
+  .hover\:bg-gray-100:hover {
+    @apply bg-gray-800;
+  }
+  
+  .hover\:text-gray-700:hover {
+    @apply text-gray-200;
+  }
+  
+  .hover\:text-gray-900:hover {
+    @apply text-gray-100;
+  }
+  
+  /* Fix form inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  input[type="month"],
+  select,
+  textarea {
+    @apply bg-[#141414] text-gray-100 border-gray-700;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  input[type="month"]:focus,
+  select:focus,
+  textarea:focus {
+    @apply border-orange-500 ring-orange-500/50;
+  }
+  
+  /* Fix placeholders */
+  ::placeholder {
+    @apply text-gray-500;
+  }
 }

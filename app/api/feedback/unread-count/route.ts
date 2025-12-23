@@ -50,6 +50,14 @@ export async function GET(request: NextRequest) {
     }
 
     // Count unread feedback
+    console.log(`[Unread Count] Counting feedback for startupId: ${startupId}`)
+    
+    const allFeedback = await prisma.mentorFeedback.findMany({
+      where: { startupId },
+      select: { id: true, isRead: true, mentorName: true }
+    })
+    console.log(`[Unread Count] All feedback for startup:`, JSON.stringify(allFeedback))
+    
     const unreadCount = await prisma.mentorFeedback.count({
       where: {
         startupId,
@@ -57,7 +65,7 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    console.log(`[Unread Count] Found ${unreadCount} unread feedback items`)
+    console.log(`[Unread Count] Found ${unreadCount} unread feedback items out of ${allFeedback.length} total`)
     return NextResponse.json({ unreadCount })
   } catch (error) {
     console.error("Error fetching unread count:", error)

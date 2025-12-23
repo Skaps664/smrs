@@ -26,6 +26,7 @@ import { useState, useEffect } from "react"
 import { ReadOnlyProvider } from "@/contexts/ReadOnlyContext"
 import ReadOnlyBanner from "@/components/ReadOnlyBanner"
 import { useFeedbackUnreadCount } from "@/hooks/useFeedbackUnreadCount"
+import { DashboardWrapper } from "@/components/dashboard-wrapper"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -85,8 +86,9 @@ export default function DashboardLayout({
   ]
 
   return (
-    <ReadOnlyProvider>
-      <div className="min-h-screen bg-gray-50">
+    <DashboardWrapper>
+      <ReadOnlyProvider>
+        <div className="min-h-screen bg-[#0a0a0a]">
         {/* Mobile sidebar backdrop */}
         {sidebarOpen && (
           <div
@@ -99,10 +101,10 @@ export default function DashboardLayout({
           // Nested layout for mentor/investor viewing startup
           <>
             {/* Mentor's Sidebar (Left) */}
-            <aside className="fixed inset-y-0 left-0 z-30 w-56 bg-gradient-to-b from-green-600 to-emerald-700 text-white">
+            <aside className="fixed inset-y-0 left-0 z-30 w-56 bg-[#141414] border-r border-gray-800 text-gray-100">
               <div className="flex flex-col h-full">
                 {/* Logo */}
-                <div className="flex items-center h-16 px-6 border-b border-green-500">
+                <div className="flex items-center h-16 px-6 border-b border-gray-800">
                   <h1 className="text-xl font-bold">My Panel</h1>
                 </div>
 
@@ -114,7 +116,7 @@ export default function DashboardLayout({
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="flex items-center px-4 py-3 text-sm font-medium rounded-lg hover:bg-green-500/30 transition-colors"
+                        className="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-orange-500 transition-colors"
                       >
                         <Icon className="w-5 h-5 mr-3" />
                         {item.name}
@@ -124,14 +126,14 @@ export default function DashboardLayout({
                 </nav>
 
                 {/* User section */}
-                <div className="p-4 border-t border-green-500" suppressHydrationWarning>
+                <div className="p-4 border-t border-gray-800" suppressHydrationWarning>
                   <div className="mb-3" suppressHydrationWarning>
-                    <p className="text-sm font-medium">{session?.user?.name}</p>
-                    <p className="text-xs opacity-75">{session?.user?.email}</p>
+                    <p className="text-sm font-medium text-gray-100">{session?.user?.name}</p>
+                    <p className="text-xs text-gray-400">{session?.user?.email}</p>
                   </div>
                   <button
                     onClick={() => signOut({ callbackUrl: "/" })}
-                    className="flex items-center w-full px-4 py-2 text-sm font-medium bg-red-500 hover:bg-red-600 rounded-lg transition-colors"
+                    className="flex items-center w-full px-4 py-2 text-sm font-medium bg-gray-800 hover:bg-red-600 text-gray-100 rounded-lg transition-colors"
                   >
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out
@@ -141,13 +143,13 @@ export default function DashboardLayout({
             </aside>
 
             {/* Startup's Sidebar (Right of Mentor's) */}
-            <aside className="fixed inset-y-0 left-56 z-20 w-64 bg-white border-r border-gray-200">
+            <aside className="fixed inset-y-0 left-56 z-20 w-64 bg-[#1a1a1a] border-r border-gray-800">
               <div className="flex flex-col h-full">
                 {/* Startup Header */}
-                <div className="h-16 px-6 border-b border-gray-200 bg-orange-50 flex items-center justify-between">
+                <div className="h-16 px-6 border-b border-gray-800 bg-orange-500/10 flex items-center justify-between">
                   <div>
-                    <h2 className="text-sm font-bold text-orange-600">Viewing Startup</h2>
-                    <p className="text-xs text-gray-600">Read-Only Mode</p>
+                    <h2 className="text-sm font-bold text-orange-500">Viewing Startup</h2>
+                    <p className="text-xs text-gray-400">Read-Only Mode</p>
                   </div>
                 </div>
 
@@ -164,8 +166,8 @@ export default function DashboardLayout({
                         href={href}
                         className={`flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                           isActive
-                            ? "bg-orange-50 text-orange-600 border-l-4 border-orange-600"
-                            : "text-gray-700 hover:bg-orange-50/50"
+                            ? "bg-orange-500/20 text-orange-500 border-l-4 border-orange-500"
+                            : "text-gray-300 hover:bg-gray-800 hover:text-orange-500"
                         }`}
                       >
                         <div className="flex items-center">
@@ -190,8 +192,8 @@ export default function DashboardLayout({
               <ReadOnlyBanner />
               
               {/* Top bar */}
-              <header className="sticky top-0 z-10 flex items-center h-16 px-4 bg-white border-b border-gray-200 lg:px-8">
-                <h2 className="text-lg font-semibold text-gray-900">
+              <header className="sticky top-0 z-10 flex items-center h-16 px-4 bg-[#141414] border-b border-gray-800 lg:px-8">
+                <h2 className="text-lg font-semibold text-gray-100">
                   {navigation.find((item) => item.href === pathname)?.name || "Dashboard"}
                 </h2>
               </header>
@@ -205,14 +207,14 @@ export default function DashboardLayout({
           <>
             {/* Sidebar */}
             <aside
-              className={`fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+              className={`fixed inset-y-0 left-0 z-30 w-64 bg-[#141414] border-r border-gray-800 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
                 sidebarOpen ? "translate-x-0" : "-translate-x-full"
               }`}
             >
               <div className="flex flex-col h-full">
                 {/* Logo */}
-                <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-                  <h1 className="text-xl font-bold text-orange-600">SMRS</h1>
+                <div className="flex items-center justify-between h-16 px-6 border-b border-gray-800">
+                  <h1 className="text-xl font-bold text-orange-500">eazstart</h1>
                   <button
                     onClick={() => setSidebarOpen(false)}
                     className="lg:hidden"
@@ -234,8 +236,8 @@ export default function DashboardLayout({
                         onClick={() => setSidebarOpen(false)}
                         className={`flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                           isActive
-                            ? "bg-orange-50 text-orange-600 border-l-4 border-orange-600"
-                            : "text-gray-700 hover:bg-orange-50/50"
+                            ? "bg-orange-500/20 text-orange-500 border-l-4 border-orange-500"
+                            : "text-gray-300 hover:bg-gray-800 hover:text-orange-500"
                         }`}
                       >
                         <div className="flex items-center">
@@ -253,18 +255,18 @@ export default function DashboardLayout({
                 </nav>
 
                 {/* User section */}
-                <div className="p-4 border-t border-gray-200" suppressHydrationWarning>
+                <div className="p-4 border-t border-gray-800" suppressHydrationWarning>
                   <div className="flex items-center mb-3" suppressHydrationWarning>
                     <div className="flex-1" suppressHydrationWarning>
-                      <p className="text-sm font-medium text-gray-900">
+                      <p className="text-sm font-medium text-gray-100">
                         {session?.user?.name}
                       </p>
-                      <p className="text-xs text-gray-500">{session?.user?.email}</p>
+                      <p className="text-xs text-gray-400">{session?.user?.email}</p>
                     </div>
                   </div>
                   <button
                     onClick={() => signOut({ callbackUrl: "/" })}
-                    className="flex items-center w-full px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="flex items-center w-full px-4 py-2 text-sm font-medium text-gray-100 hover:bg-red-600 bg-gray-800 rounded-lg transition-colors"
                   >
                     <LogOut className="w-5 h-5 mr-3" />
                     Sign Out
@@ -279,14 +281,14 @@ export default function DashboardLayout({
               <ReadOnlyBanner />
               
               {/* Top bar */}
-              <header className="sticky top-0 z-10 flex items-center h-16 px-4 bg-white border-b border-gray-200 lg:px-8">
+              <header className="sticky top-0 z-10 flex items-center h-16 px-4 bg-[#141414] border-b border-gray-800 lg:px-8">
                 <button
                   onClick={() => setSidebarOpen(true)}
-                  className="lg:hidden mr-4"
+                  className="lg:hidden mr-4 text-gray-300"
                 >
                   <Menu className="w-6 h-6" />
                 </button>
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold text-gray-100">
                   {navigation.find((item) => item.href === pathname)?.name || "Dashboard"}
                 </h2>
               </header>
@@ -298,5 +300,6 @@ export default function DashboardLayout({
         )}
       </div>
     </ReadOnlyProvider>
+    </DashboardWrapper>
   )
 }
