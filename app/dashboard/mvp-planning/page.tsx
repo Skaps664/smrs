@@ -186,22 +186,22 @@ export default function MVPPlanningPage() {
   }
 
   const priorityColors = {
-    "Must Have": "bg-red-100 text-red-800 border-red-300",
-    "Should Have": "bg-orange-100 text-orange-800 border-orange-300",
-    "Could Have": "bg-yellow-100 text-yellow-800 border-yellow-300",
-    "Won't Have": "bg-gray-100 text-gray-800 border-gray-300"
+    "Must Have": "bg-red-500/15 text-red-300 border-red-300",
+    "Should Have": "bg-orange-500/15 text-orange-300 border-orange-300",
+    "Could Have": "bg-yellow-500/15 text-yellow-300 border-yellow-300",
+    "Won't Have": "bg-[#141414] text-gray-200 border-gray-600"
   }
 
   const effortColors = {
-    "Low": "bg-green-100 text-green-800",
-    "Medium": "bg-yellow-100 text-yellow-800",
-    "High": "bg-red-100 text-red-800"
+    "Low": "bg-green-500/15 text-green-300",
+    "Medium": "bg-yellow-500/15 text-yellow-300",
+    "High": "bg-red-500/15 text-red-300"
   }
 
   const impactColors = {
-    "Low": "bg-gray-100 text-gray-800",
-    "Medium": "bg-amber-100 text-amber-800",
-    "High": "bg-orange-100 text-orange-800"
+    "Low": "bg-[#141414] text-gray-200",
+    "Medium": "bg-amber-500/15 text-amber-300",
+    "High": "bg-orange-500/15 text-orange-300"
   }
 
   return (
@@ -209,11 +209,11 @@ export default function MVPPlanningPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold flex items-center text-gray-900">
+          <h1 className="text-3xl font-bold flex items-center text-gray-100">
             <Rocket className="w-8 h-8 mr-3 text-orange-600" />
             MVP Planning & Strategy
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-400 mt-2">
             Build your Minimum Viable Product with proven methodologies from Lean Startup, Y Combinator, and industry leaders
           </p>
         </div>
@@ -240,22 +240,22 @@ export default function MVPPlanningPage() {
       </div>
 
       {/* MVP Education Section */}
-      <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-sm border-2 border-orange-200 p-6">
-        <h2 className="text-xl font-bold text-orange-900 mb-4 flex items-center">
+      <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-xl shadow-sm border-2 border-orange-500/30 p-6">
+        <h2 className="text-xl font-bold text-orange-200 mb-4 flex items-center">
           <Lightbulb className="w-6 h-6 mr-2" />
           What is an MVP?
         </h2>
         <div className="grid md:grid-cols-2 gap-6 text-sm">
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <h3 className="font-semibold text-orange-900 mb-2">Definition (Eric Ries - Lean Startup)</h3>
-            <p className="text-gray-700">
+          <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
+            <h3 className="font-semibold text-orange-200 mb-2">Definition (Eric Ries - Lean Startup)</h3>
+            <p className="text-gray-300">
               "The Minimum Viable Product is that version of a new product which allows a team to collect the maximum amount 
               of validated learning about customers with the least effort."
             </p>
           </div>
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <h3 className="font-semibold text-orange-900 mb-2">Y Combinator Perspective</h3>
-            <p className="text-gray-700">
+          <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
+            <h3 className="font-semibold text-orange-200 mb-2">Y Combinator Perspective</h3>
+            <p className="text-gray-300">
               "Build something people want. Talk to users, iterate quickly, and focus on solving a real problem for a small 
               group of people rather than building everything for everyone."
             </p>
@@ -263,36 +263,36 @@ export default function MVPPlanningPage() {
         </div>
 
         <div className="mt-6 grid md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-lg p-4 shadow-sm">
+          <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
             <div className="flex items-center mb-2">
               <Target className="w-5 h-5 text-orange-600 mr-2" />
-              <h4 className="font-semibold text-gray-900">Core Purpose</h4>
+              <h4 className="font-semibold text-gray-100">Core Purpose</h4>
             </div>
-            <ul className="text-sm text-gray-700 space-y-1">
+            <ul className="text-sm text-gray-300 space-y-1">
               <li>• Test assumptions quickly</li>
               <li>• Minimize wasted resources</li>
               <li>• Learn from real users</li>
               <li>• Validate product-market fit</li>
             </ul>
           </div>
-          <div className="bg-white rounded-lg p-4 shadow-sm">
+          <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
             <div className="flex items-center mb-2">
               <Zap className="w-5 h-5 text-yellow-600 mr-2" />
-              <h4 className="font-semibold text-gray-900">Key Principles</h4>
+              <h4 className="font-semibold text-gray-100">Key Principles</h4>
             </div>
-            <ul className="text-sm text-gray-700 space-y-1">
+            <ul className="text-sm text-gray-300 space-y-1">
               <li>• Focus on core value proposition</li>
               <li>• Build-Measure-Learn loop</li>
               <li>• Fail fast, iterate faster</li>
               <li>• Data-driven decisions</li>
             </ul>
           </div>
-          <div className="bg-white rounded-lg p-4 shadow-sm">
+          <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
             <div className="flex items-center mb-2">
               <AlertCircle className="w-5 h-5 text-red-600 mr-2" />
-              <h4 className="font-semibold text-gray-900">Common Mistakes</h4>
+              <h4 className="font-semibold text-gray-100">Common Mistakes</h4>
             </div>
-            <ul className="text-sm text-gray-700 space-y-1">
+            <ul className="text-sm text-gray-300 space-y-1">
               <li>• Building too many features</li>
               <li>• Not talking to users</li>
               <li>• Perfectionism over shipping</li>
@@ -304,8 +304,8 @@ export default function MVPPlanningPage() {
 
       {/* Saved Plans */}
       {savedPlans.length > 0 && (
-        <div className="bg-white rounded-xl shadow-sm border p-4">
-          <h3 className="font-semibold text-gray-900 mb-3">Your MVP Plans</h3>
+        <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-4">
+          <h3 className="font-semibold text-gray-100 mb-3">Your MVP Plans</h3>
           <div className="grid md:grid-cols-3 gap-3">
             {savedPlans.map(plan => (
               <div
@@ -318,8 +318,8 @@ export default function MVPPlanningPage() {
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h4 className="font-medium text-gray-900">{plan.title}</h4>
-                    <p className="text-xs text-gray-500 mt-1">{plan.mvpType}</p>
+                    <h4 className="font-medium text-gray-100">{plan.title}</h4>
+                    <p className="text-xs text-gray-400 mt-1">{plan.mvpType}</p>
                     <p className="text-xs text-gray-400 mt-1">
                       {new Date(plan.lastUpdated).toLocaleDateString()}
                     </p>
@@ -329,7 +329,7 @@ export default function MVPPlanningPage() {
                       e.stopPropagation()
                       deletePlan(plan.id!)
                     }}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -343,11 +343,11 @@ export default function MVPPlanningPage() {
       {/* MVP Plan Details */}
       <div className="space-y-6">
         {/* Basic Information */}
-        <div className="bg-white rounded-xl shadow-sm border p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Basic Information</h2>
+        <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
+          <h2 className="text-xl font-bold text-gray-100 mb-4">Basic Information</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
                 MVP Plan Title *
               </label>
               <input
@@ -359,7 +359,7 @@ export default function MVPPlanningPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
                 MVP Type
               </label>
               <select
@@ -380,7 +380,7 @@ export default function MVPPlanningPage() {
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
               Core Value Proposition *
             </label>
             <textarea
@@ -394,7 +394,7 @@ export default function MVPPlanningPage() {
 
           <div className="grid md:grid-cols-2 gap-4 mt-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
                 Target Customer Segment
               </label>
               <input
@@ -406,7 +406,7 @@ export default function MVPPlanningPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
                 Problem Statement
               </label>
               <input
@@ -420,7 +420,7 @@ export default function MVPPlanningPage() {
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
               Proposed Solution
             </label>
             <textarea
@@ -434,11 +434,11 @@ export default function MVPPlanningPage() {
         </div>
 
         {/* Feature Prioritization (MoSCoW Method) */}
-        <div className="bg-white rounded-xl shadow-sm border p-6">
+        <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Feature Prioritization (MoSCoW Method)</h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <h2 className="text-xl font-bold text-gray-100">Feature Prioritization (MoSCoW Method)</h2>
+              <p className="text-sm text-gray-400 mt-1">
                 Prioritize features: Must Have (critical), Should Have (important), Could Have (nice to have), Won't Have (not now)
               </p>
             </div>
@@ -456,7 +456,7 @@ export default function MVPPlanningPage() {
               <div key={feature.id} className="border rounded-lg p-4 hover:border-orange-300 transition-colors">
                 <div className="grid md:grid-cols-12 gap-3">
                   <div className="md:col-span-3">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Feature Name</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Feature Name</label>
                     <input
                       type="text"
                       value={feature.name}
@@ -466,7 +466,7 @@ export default function MVPPlanningPage() {
                     />
                   </div>
                   <div className="md:col-span-4">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Description</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Description</label>
                     <input
                       type="text"
                       value={feature.description}
@@ -476,7 +476,7 @@ export default function MVPPlanningPage() {
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Priority</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Priority</label>
                     <select
                       value={feature.priority}
                       onChange={(e) => updateFeature(feature.id, "priority", e.target.value)}
@@ -489,7 +489,7 @@ export default function MVPPlanningPage() {
                     </select>
                   </div>
                   <div className="md:col-span-1">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Effort</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Effort</label>
                     <select
                       value={feature.effort}
                       onChange={(e) => updateFeature(feature.id, "effort", e.target.value)}
@@ -501,7 +501,7 @@ export default function MVPPlanningPage() {
                     </select>
                   </div>
                   <div className="md:col-span-1">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Impact</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Impact</label>
                     <select
                       value={feature.impact}
                       onChange={(e) => updateFeature(feature.id, "impact", e.target.value)}
@@ -515,7 +515,7 @@ export default function MVPPlanningPage() {
                   <div className="md:col-span-1 flex items-end">
                     <button
                       onClick={() => removeFeature(feature.id)}
-                      className="text-red-500 hover:text-red-700 p-2"
+                      className="text-red-500 hover:text-red-400 p-2"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -526,7 +526,7 @@ export default function MVPPlanningPage() {
           </div>
 
           {data.features.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-gray-400">
               <Rocket className="w-12 h-12 mx-auto mb-2 opacity-50" />
               <p>No features added yet. Click "Add Feature" to start.</p>
             </div>
@@ -534,11 +534,11 @@ export default function MVPPlanningPage() {
         </div>
 
         {/* Hypotheses & Validation (Build-Measure-Learn) */}
-        <div className="bg-white rounded-xl shadow-sm border p-6">
+        <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Hypotheses & Validation</h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <h2 className="text-xl font-bold text-gray-100">Hypotheses & Validation</h2>
+              <p className="text-sm text-gray-400 mt-1">
                 Build-Measure-Learn cycle: Define assumptions, test methods, and success criteria
               </p>
             </div>
@@ -556,7 +556,7 @@ export default function MVPPlanningPage() {
               <div key={hypothesis.id} className="border rounded-lg p-4 hover:border-orange-300 transition-colors">
                 <div className="grid md:grid-cols-2 gap-3">
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Assumption to Test</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Assumption to Test</label>
                     <input
                       type="text"
                       value={hypothesis.assumption}
@@ -566,7 +566,7 @@ export default function MVPPlanningPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Test Method</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Test Method</label>
                     <input
                       type="text"
                       value={hypothesis.testMethod}
@@ -576,7 +576,7 @@ export default function MVPPlanningPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Success Criteria</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Success Criteria</label>
                     <input
                       type="text"
                       value={hypothesis.successCriteria}
@@ -586,7 +586,7 @@ export default function MVPPlanningPage() {
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Test Result (Optional)</label>
+                    <label className="block text-xs font-medium text-gray-300 mb-1">Test Result (Optional)</label>
                     <div className="flex gap-2">
                       <input
                         type="text"
@@ -597,7 +597,7 @@ export default function MVPPlanningPage() {
                       />
                       <button
                         onClick={() => removeHypothesis(hypothesis.id)}
-                        className="text-red-500 hover:text-red-700 px-3"
+                        className="text-red-500 hover:text-red-400 px-3"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -609,7 +609,7 @@ export default function MVPPlanningPage() {
           </div>
 
           {data.hypotheses.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
+            <div className="text-center py-8 text-gray-400">
               <BarChart3 className="w-12 h-12 mx-auto mb-2 opacity-50" />
               <p>No hypotheses defined yet. Start with your riskiest assumptions.</p>
             </div>
@@ -617,9 +617,9 @@ export default function MVPPlanningPage() {
         </div>
 
         {/* Success Metrics */}
-        <div className="bg-white rounded-xl shadow-sm border p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Success Metrics (AARRR - Pirate Metrics)</h2>
-          <p className="text-sm text-gray-600 mb-4">
+        <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
+          <h2 className="text-xl font-bold text-gray-100 mb-4">Success Metrics (AARRR - Pirate Metrics)</h2>
+          <p className="text-sm text-gray-400 mb-4">
             Define metrics for Acquisition, Activation, Retention, Revenue, and Referral
           </p>
           
@@ -627,7 +627,7 @@ export default function MVPPlanningPage() {
             {data.successMetrics.map((metric, index) => (
               <div key={index} className="grid md:grid-cols-12 gap-3 items-end">
                 <div className="md:col-span-5">
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Metric</label>
+                  <label className="block text-xs font-medium text-gray-300 mb-1">Metric</label>
                   <input
                     type="text"
                     value={metric.metric}
@@ -641,7 +641,7 @@ export default function MVPPlanningPage() {
                   />
                 </div>
                 <div className="md:col-span-3">
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Target</label>
+                  <label className="block text-xs font-medium text-gray-300 mb-1">Target</label>
                   <input
                     type="text"
                     value={metric.target}
@@ -655,7 +655,7 @@ export default function MVPPlanningPage() {
                   />
                 </div>
                 <div className="md:col-span-3">
-                  <label className="block text-xs font-medium text-gray-700 mb-1">Timeframe</label>
+                  <label className="block text-xs font-medium text-gray-300 mb-1">Timeframe</label>
                   <input
                     type="text"
                     value={metric.timeframe}
@@ -674,7 +674,7 @@ export default function MVPPlanningPage() {
                       const updated = data.successMetrics.filter((_, i) => i !== index)
                       setData({ ...data, successMetrics: updated })
                     }}
-                    className="text-red-500 hover:text-red-700 p-2"
+                    className="text-red-500 hover:text-red-400 p-2"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -689,7 +689,7 @@ export default function MVPPlanningPage() {
                   successMetrics: [...data.successMetrics, { metric: "", target: "", timeframe: "" }]
                 })
               }}
-              className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-2 mt-2"
+              className="text-orange-600 hover:text-orange-400 text-sm font-medium flex items-center gap-2 mt-2"
             >
               <Plus className="w-4 h-4" />
               Add Metric
@@ -699,14 +699,14 @@ export default function MVPPlanningPage() {
 
         {/* Budget & Timeline */}
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl shadow-sm border p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
+            <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
               <DollarSign className="w-5 h-5 mr-2 text-green-600" />
               Budget Estimation
             </h2>
             
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
                 Total Estimated Budget
               </label>
               <input
@@ -719,7 +719,7 @@ export default function MVPPlanningPage() {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Budget Breakdown</label>
+              <label className="block text-sm font-medium text-gray-300">Budget Breakdown</label>
               {data.budget.breakdown.map((item, index) => (
                 <div key={index} className="grid grid-cols-12 gap-2">
                   <input
@@ -749,7 +749,7 @@ export default function MVPPlanningPage() {
                       const updated = data.budget.breakdown.filter((_, i) => i !== index)
                       setData({ ...data, budget: { ...data.budget, breakdown: updated } })
                     }}
-                    className="col-span-1 text-red-500 hover:text-red-700"
+                    className="col-span-1 text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -765,7 +765,7 @@ export default function MVPPlanningPage() {
                     }
                   })
                 }}
-                className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-2"
+                className="text-orange-600 hover:text-orange-400 text-sm font-medium flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
                 Add Item
@@ -773,8 +773,8 @@ export default function MVPPlanningPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
+            <h2 className="text-xl font-bold text-gray-100 mb-4 flex items-center">
               <Clock className="w-5 h-5 mr-2 text-orange-600" />
               Timeline & Phases
             </h2>
@@ -810,7 +810,7 @@ export default function MVPPlanningPage() {
                         const updated = data.timeline.filter((_, i) => i !== index)
                         setData({ ...data, timeline: updated })
                       }}
-                      className="col-span-1 text-red-500 hover:text-red-700"
+                      className="col-span-1 text-red-500 hover:text-red-400"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -835,7 +835,7 @@ export default function MVPPlanningPage() {
                     timeline: [...data.timeline, { phase: "", duration: "", deliverables: "" }]
                   })
                 }}
-                className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-2"
+                className="text-orange-600 hover:text-orange-400 text-sm font-medium flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
                 Add Phase
@@ -846,8 +846,8 @@ export default function MVPPlanningPage() {
 
         {/* Risks, Learning Goals, Next Steps */}
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl shadow-sm border p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+          <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
+            <h2 className="text-lg font-bold text-gray-100 mb-3 flex items-center">
               <AlertCircle className="w-5 h-5 mr-2 text-red-600" />
               Risks & Challenges
             </h2>
@@ -870,7 +870,7 @@ export default function MVPPlanningPage() {
                       const updated = data.risks.filter((_, i) => i !== index)
                       setData({ ...data, risks: updated })
                     }}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -878,7 +878,7 @@ export default function MVPPlanningPage() {
               ))}
               <button
                 onClick={() => setData({ ...data, risks: [...data.risks, ""] })}
-                className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-2"
+                className="text-orange-600 hover:text-orange-400 text-sm font-medium flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
                 Add Risk
@@ -886,8 +886,8 @@ export default function MVPPlanningPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+          <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
+            <h2 className="text-lg font-bold text-gray-100 mb-3 flex items-center">
               <Lightbulb className="w-5 h-5 mr-2 text-yellow-600" />
               Learning Goals
             </h2>
@@ -910,7 +910,7 @@ export default function MVPPlanningPage() {
                       const updated = data.learningGoals.filter((_, i) => i !== index)
                       setData({ ...data, learningGoals: updated })
                     }}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -918,7 +918,7 @@ export default function MVPPlanningPage() {
               ))}
               <button
                 onClick={() => setData({ ...data, learningGoals: [...data.learningGoals, ""] })}
-                className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-2"
+                className="text-orange-600 hover:text-orange-400 text-sm font-medium flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
                 Add Goal
@@ -926,8 +926,8 @@ export default function MVPPlanningPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+          <div className="bg-[#1a1a1a] rounded-xl shadow-sm border p-6">
+            <h2 className="text-lg font-bold text-gray-100 mb-3 flex items-center">
               <TrendingUp className="w-5 h-5 mr-2 text-green-600" />
               Next Steps
             </h2>
@@ -950,7 +950,7 @@ export default function MVPPlanningPage() {
                       const updated = data.nextSteps.filter((_, i) => i !== index)
                       setData({ ...data, nextSteps: updated })
                     }}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -958,7 +958,7 @@ export default function MVPPlanningPage() {
               ))}
               <button
                 onClick={() => setData({ ...data, nextSteps: [...data.nextSteps, ""] })}
-                className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-2"
+                className="text-orange-600 hover:text-orange-400 text-sm font-medium flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
                 Add Step
@@ -968,21 +968,21 @@ export default function MVPPlanningPage() {
         </div>
 
         {/* Resources & Best Practices */}
-        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-sm border-2 border-orange-200 p-6">
-          <h2 className="text-xl font-bold text-orange-900 mb-4">📚 Recommended Resources & Best Practices</h2>
+        <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-xl shadow-sm border-2 border-orange-500/30 p-6">
+          <h2 className="text-xl font-bold text-orange-200 mb-4">📚 Recommended Resources & Best Practices</h2>
           <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div className="bg-white rounded-lg p-4 shadow-sm">
-              <h3 className="font-semibold text-orange-900 mb-2">Essential Reading</h3>
-              <ul className="space-y-2 text-gray-700">
+            <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
+              <h3 className="font-semibold text-orange-200 mb-2">Essential Reading</h3>
+              <ul className="space-y-2 text-gray-300">
                 <li>• <strong>The Lean Startup</strong> - Eric Ries (Build-Measure-Learn)</li>
                 <li>• <strong>The Mom Test</strong> - Rob Fitzpatrick (Customer interviews)</li>
                 <li>• <strong>Sprint</strong> - Jake Knapp (Google Ventures 5-day process)</li>
                 <li>• <strong>Inspired</strong> - Marty Cagan (Product management)</li>
               </ul>
             </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm">
-              <h3 className="font-semibold text-orange-900 mb-2">Online Resources</h3>
-              <ul className="space-y-2 text-gray-700">
+            <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
+              <h3 className="font-semibold text-orange-200 mb-2">Online Resources</h3>
+              <ul className="space-y-2 text-gray-300">
                 <li>• <strong>Y Combinator</strong> - Startup School (free courses)</li>
                 <li>• <strong>Product Hunt</strong> - Launch platform & inspiration</li>
                 <li>• <strong>Indie Hackers</strong> - Community & case studies</li>
@@ -991,19 +991,19 @@ export default function MVPPlanningPage() {
             </div>
           </div>
 
-          <div className="mt-4 bg-white rounded-lg p-4 shadow-sm">
-            <h3 className="font-semibold text-orange-900 mb-2">Key Success Factors from Y Combinator</h3>
-            <div className="grid md:grid-cols-3 gap-3 text-xs text-gray-700">
+          <div className="mt-4 bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
+            <h3 className="font-semibold text-orange-200 mb-2">Key Success Factors from Y Combinator</h3>
+            <div className="grid md:grid-cols-3 gap-3 text-xs text-gray-300">
               <div>
-                <strong className="text-orange-700">1. Talk to Users</strong>
+                <strong className="text-orange-400">1. Talk to Users</strong>
                 <p>Do 50+ user interviews before building anything significant</p>
               </div>
               <div>
-                <strong className="text-orange-700">2. Build Fast, Launch Faster</strong>
+                <strong className="text-orange-400">2. Build Fast, Launch Faster</strong>
                 <p>Ship in weeks, not months. Iterate based on feedback</p>
               </div>
               <div>
-                <strong className="text-orange-700">3. Focus on One Thing</strong>
+                <strong className="text-orange-400">3. Focus on One Thing</strong>
                 <p>Do one thing exceptionally well rather than many things poorly</p>
               </div>
             </div>

@@ -110,16 +110,16 @@ export default function MentorFeedbackButton({ section, sectionData }: MentorFee
       {/* Feedback Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#1a1a1a] rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+            <div className="flex items-center justify-between p-6 border-b border-gray-700">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Give Feedback</h2>
-                <p className="text-sm text-gray-600 mt-1">Provide detailed feedback to help the startup grow</p>
+                <h2 className="text-2xl font-bold text-gray-100">Give Feedback</h2>
+                <p className="text-sm text-gray-400 mt-1">Provide detailed feedback to help the startup grow</p>
               </div>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 hover:text-gray-400 transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -128,24 +128,24 @@ export default function MentorFeedbackButton({ section, sectionData }: MentorFee
             {/* Content */}
             <div className="p-6 space-y-6">
               {success ? (
-                <div className="bg-green-50 border-2 border-green-200 rounded-lg p-8 text-center">
+                <div className="bg-green-500/10 border-2 border-green-500/30 rounded-lg p-8 text-center">
                   <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Send className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-green-900 mb-2">Feedback Submitted!</h3>
-                  <p className="text-green-700">Your feedback has been sent to the startup team.</p>
+                  <h3 className="text-xl font-bold text-green-200 mb-2">Feedback Submitted!</h3>
+                  <p className="text-green-400">Your feedback has been sent to the startup team.</p>
                 </div>
               ) : (
                 <>
                   {/* Section Selection */}
                   <div>
-                    <label className="block text-sm font-semibold mb-3 text-gray-700">
+                    <label className="block text-sm font-semibold mb-3 text-gray-300">
                       Section *
                     </label>
                     <select
                       value={selectedSection}
                       onChange={(e) => handleSectionChange(e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-[#1a1a1a]"
                     >
                       {Object.keys(SECTION_HEADINGS).map((sectionName) => (
                         <option key={sectionName} value={sectionName}>
@@ -157,13 +157,13 @@ export default function MentorFeedbackButton({ section, sectionData }: MentorFee
 
                   {/* Heading Selection */}
                   <div>
-                    <label className="block text-sm font-semibold mb-3 text-gray-700">
+                    <label className="block text-sm font-semibold mb-3 text-gray-300">
                       Specific Area/Heading *
                     </label>
                     <select
                       value={selectedHeading}
                       onChange={(e) => setSelectedHeading(e.target.value)}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white"
+                      className="w-full px-4 py-3 border-2 border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-[#1a1a1a]"
                     >
                       {availableHeadings.map((heading) => (
                         <option key={heading} value={heading}>
@@ -175,7 +175,7 @@ export default function MentorFeedbackButton({ section, sectionData }: MentorFee
 
                   {/* Rating */}
                   <div>
-                    <label className="block text-sm font-semibold mb-3 text-gray-700">
+                    <label className="block text-sm font-semibold mb-3 text-gray-300">
                       How would you rate this? (Optional)
                     </label>
                     <div className="flex gap-2">
@@ -187,7 +187,7 @@ export default function MentorFeedbackButton({ section, sectionData }: MentorFee
                           className={`w-12 h-12 rounded-lg border-2 transition-all ${
                             rating >= star
                               ? "bg-yellow-400 border-yellow-500 text-white"
-                              : "bg-gray-100 border-gray-300 text-gray-400 hover:bg-gray-200"
+                              : "bg-[#141414] border-gray-600 text-gray-400 hover:bg-[#1f1f1f]"
                           }`}
                         >
                           ★
@@ -198,23 +198,23 @@ export default function MentorFeedbackButton({ section, sectionData }: MentorFee
 
                   {/* Feedback Text */}
                   <div>
-                    <label className="block text-sm font-semibold mb-3 text-gray-700">
+                    <label className="block text-sm font-semibold mb-3 text-gray-300">
                       Your Feedback *
                     </label>
                     <textarea
                       value={feedback}
                       onChange={(e) => setFeedback(e.target.value)}
                       rows={8}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
+                      className="w-full px-4 py-3 border-2 border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
                       placeholder={`Share your thoughts about ${selectedHeading} in ${selectedSection}...`}
                     />
                   </div>
 
                   {/* Context Info */}
                   {sectionData && (
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="text-sm font-semibold text-blue-900 mb-2">Current Page Context:</p>
-                      <pre className="text-xs text-blue-700 whitespace-pre-wrap">
+                    <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-blue-200 mb-2">Current Page Context:</p>
+                      <pre className="text-xs text-blue-400 whitespace-pre-wrap">
                         {JSON.stringify(sectionData, null, 2)}
                       </pre>
                     </div>
@@ -225,7 +225,7 @@ export default function MentorFeedbackButton({ section, sectionData }: MentorFee
                     <button
                       type="button"
                       onClick={() => setShowModal(false)}
-                      className="flex-1 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                      className="flex-1 px-6 py-3 border-2 border-gray-600 text-gray-300 rounded-lg hover:bg-[#111] font-medium transition-colors"
                     >
                       Cancel
                     </button>

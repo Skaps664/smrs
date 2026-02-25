@@ -123,7 +123,7 @@ export function DashboardLayoutClient({
                   >
                     <item.icon
                       className={`mr-3 h-5 w-5 flex-shrink-0 ${
-                        isActive ? "text-orange-500" : "text-gray-500 group-hover:text-gray-400"
+                        isActive ? "text-orange-500" : "text-gray-400 group-hover:text-gray-400"
                       }`}
                     />
                     <span className="flex-1">{item.name}</span>
@@ -145,7 +145,7 @@ export function DashboardLayoutClient({
                     <p className="text-sm font-medium text-gray-100 truncate">
                       {session?.user?.name}
                     </p>
-                    <p className="text-xs text-gray-500 truncate">
+                    <p className="text-xs text-gray-400 truncate">
                       {session?.user?.email}
                     </p>
                   </div>
@@ -200,7 +200,7 @@ export function DashboardLayoutClient({
                   >
                     <item.icon
                       className={`mr-3 h-5 w-5 flex-shrink-0 ${
-                        isActive ? "text-orange-500" : "text-gray-500 group-hover:text-gray-400"
+                        isActive ? "text-orange-500" : "text-gray-400 group-hover:text-gray-400"
                       }`}
                     />
                     <span className="flex-1">{item.name}</span>
@@ -222,7 +222,7 @@ export function DashboardLayoutClient({
                     <p className="text-sm font-medium text-gray-100 truncate">
                       {session?.user?.name}
                     </p>
-                    <p className="text-xs text-gray-500 truncate">
+                    <p className="text-xs text-gray-400 truncate">
                       {session?.user?.email}
                     </p>
                   </div>

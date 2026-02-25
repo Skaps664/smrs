@@ -24,7 +24,7 @@ export default function TamSamSomChart({ tam, sam, som }: TamSamSomChartProps) {
   const somRadius = tam > 0 ? Math.sqrt(som / tam) * tamRadius : 60
 
   return (
-    <div className="flex items-center justify-center p-8 bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl border-2 border-orange-200">
+    <div className="flex items-center justify-center p-8 bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-xl border-2 border-orange-500/30">
       <svg width="400" height="400" viewBox="0 0 400 400" className="drop-shadow-lg">
         {/* TAM Circle (Outer) */}
         <circle

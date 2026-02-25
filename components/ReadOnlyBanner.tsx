@@ -33,14 +33,14 @@ export default function ReadOnlyBanner() {
             <span className="font-medium">
               {viewingStartup.name}
             </span>
-            <span className="text-xs bg-white/20 px-2 py-1 rounded">
+            <span className="text-xs bg-[#1a1a1a]/20 px-2 py-1 rounded">
               {viewingStartup.stage}
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-2 text-sm bg-white/10 px-3 py-1.5 rounded">
+          <div className="hidden md:flex items-center gap-2 text-sm bg-[#1a1a1a]/10 px-3 py-1.5 rounded">
             <Info className="w-4 h-4" />
             <span>Read-only access</span>
             {accessType === "MENTOR" && <span>• Can give feedback</span>}
@@ -48,7 +48,7 @@ export default function ReadOnlyBanner() {
           
           <button
             onClick={handleExitReadOnly}
-            className="flex items-center gap-2 px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded transition-colors text-sm font-medium"
+            className="flex items-center gap-2 px-3 py-1.5 bg-[#1a1a1a]/20 hover:bg-[#1a1a1a]/30 rounded transition-colors text-sm font-medium"
           >
             <X className="w-4 h-4" />
             Exit

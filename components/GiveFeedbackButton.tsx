@@ -79,7 +79,7 @@ export default function GiveFeedbackButton({ sectionId, sectionName }: GiveFeedb
       {/* Feedback Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#1a1a1a] rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             {/* Header */}
             <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-6 rounded-t-xl">
               <div className="flex items-center justify-between">
@@ -92,7 +92,7 @@ export default function GiveFeedbackButton({ sectionId, sectionName }: GiveFeedb
                 </div>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="text-white hover:bg-white/20 rounded-full p-2 transition-colors"
+                  className="text-white hover:bg-[#1a1a1a]/20 rounded-full p-2 transition-colors"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -102,13 +102,13 @@ export default function GiveFeedbackButton({ sectionId, sectionName }: GiveFeedb
             {/* Form */}
             <form onSubmit={handleSubmit} className="p-6 space-y-6">
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg">
                   {error}
                 </div>
               )}
 
               {success && (
-                <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg flex items-center">
+                <div className="bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-lg flex items-center">
                   <Star className="w-5 h-5 mr-2" />
                   Feedback submitted successfully!
                 </div>
@@ -116,7 +116,7 @@ export default function GiveFeedbackButton({ sectionId, sectionName }: GiveFeedb
 
               {/* Rating Slider */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                <label className="block text-sm font-semibold text-gray-300 mb-3">
                   Rate this section (1-10)
                 </label>
                 <div className="space-y-2">
@@ -126,12 +126,12 @@ export default function GiveFeedbackButton({ sectionId, sectionName }: GiveFeedb
                     max="10"
                     value={rating}
                     onChange={(e) => setRating(parseInt(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-500"
+                    className="w-full h-2 bg-[#1f1f1f] rounded-lg appearance-none cursor-pointer accent-green-500"
                   />
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-500">Poor</span>
+                    <span className="text-xs text-gray-400">Poor</span>
                     <span className="text-2xl font-bold text-green-600">{rating}/10</span>
-                    <span className="text-xs text-gray-500">Excellent</span>
+                    <span className="text-xs text-gray-400">Excellent</span>
                   </div>
                   <div className="flex gap-1 justify-center">
                     {[...Array(10)].map((_, i) => (
@@ -148,7 +148,7 @@ export default function GiveFeedbackButton({ sectionId, sectionName }: GiveFeedb
 
               {/* Feedback Text */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-300 mb-2">
                   Your Feedback *
                 </label>
                 <textarea
@@ -156,27 +156,27 @@ export default function GiveFeedbackButton({ sectionId, sectionName }: GiveFeedb
                   onChange={(e) => setFeedback(e.target.value)}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   placeholder="Share your thoughts on this section's content, progress, and effectiveness..."
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-400 mt-1">
                   Provide constructive feedback to help the startup improve
                 </p>
               </div>
 
               {/* Suggestions */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-gray-300 mb-2">
                   Suggestions for Improvement
                 </label>
                 <textarea
                   value={suggestions}
                   onChange={(e) => setSuggestions(e.target.value)}
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   placeholder="Specific recommendations, action items, or next steps..."
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-400 mt-1">
                   Optional: Suggest specific actions or improvements
                 </p>
               </div>
@@ -186,7 +186,7 @@ export default function GiveFeedbackButton({ sectionId, sectionName }: GiveFeedb
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-semibold transition-colors"
+                  className="flex-1 px-6 py-3 border-2 border-gray-600 text-gray-300 rounded-lg hover:bg-[#111] font-semibold transition-colors"
                 >
                   Cancel
                 </button>

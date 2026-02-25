@@ -298,27 +298,27 @@ export default function StartupProfilePage() {
   return (
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Hero Section - Professional Design */}
-      <div className="bg-white rounded-xl shadow-lg border-t-4 border-orange-400 p-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full -mr-32 -mt-32 opacity-30"></div>
+      <div className="bg-[#1a1a1a] rounded-xl shadow-lg border-t-4 border-orange-400 p-8 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full -mr-32 -mt-32 opacity-30"></div>
         
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
-              <div className="bg-orange-100 p-4 rounded-xl mr-4">
+              <div className="bg-orange-500/15 p-4 rounded-xl mr-4">
                 <Rocket className="w-10 h-10 text-orange-600" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold mb-2 text-gray-800">
+                <h1 className="text-4xl font-bold mb-2 text-gray-200">
                   {formData.name || "Your Startup Profile"}
                 </h1>
-                <p className="text-gray-600 flex items-center">
+                <p className="text-gray-400 flex items-center">
                   <Sparkles className="w-4 h-4 mr-2 text-orange-500" />
                   {formData.tagline || "Building the future, one step at a time"}
                 </p>
               </div>
             </div>
             <div className="text-right">
-              <div className="bg-orange-100 px-6 py-3 rounded-lg text-sm font-semibold text-orange-700 border border-orange-200 mb-3">
+              <div className="bg-orange-500/15 px-6 py-3 rounded-lg text-sm font-semibold text-orange-400 border border-orange-500/30 mb-3">
                 {formData.stage.replace("_", " ")} Stage
               </div>
               <button
@@ -333,41 +333,41 @@ export default function StartupProfilePage() {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
+            <div className="bg-[#111] border border-gray-700 rounded-xl p-4 hover:shadow-md transition-shadow">
               <Users className="w-6 h-6 mb-2 text-orange-600" />
-              <p className="text-2xl font-bold text-gray-800">{metrics.foundersCount}</p>
-              <p className="text-sm text-gray-600">Founders</p>
+              <p className="text-2xl font-bold text-gray-200">{metrics.foundersCount}</p>
+              <p className="text-sm text-gray-400">Founders</p>
             </div>
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
+            <div className="bg-[#111] border border-gray-700 rounded-xl p-4 hover:shadow-md transition-shadow">
               <Trophy className="w-6 h-6 mb-2 text-orange-600" />
-              <p className="text-2xl font-bold text-gray-800">{metrics.profileCompletion}%</p>
-              <p className="text-sm text-gray-600">Complete</p>
+              <p className="text-2xl font-bold text-gray-200">{metrics.profileCompletion}%</p>
+              <p className="text-sm text-gray-400">Complete</p>
             </div>
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
+            <div className="bg-[#111] border border-gray-700 rounded-xl p-4 hover:shadow-md transition-shadow">
               <Shield className="w-6 h-6 mb-2 text-orange-600" />
-              <p className="text-2xl font-bold text-gray-800">{metrics.registrationScore}/3</p>
-              <p className="text-sm text-gray-600">Registrations</p>
+              <p className="text-2xl font-bold text-gray-200">{metrics.registrationScore}/3</p>
+              <p className="text-sm text-gray-400">Registrations</p>
             </div>
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
+            <div className="bg-[#111] border border-gray-700 rounded-xl p-4 hover:shadow-md transition-shadow">
               <Calendar className="w-6 h-6 mb-2 text-orange-600" />
-              <p className="text-2xl font-bold text-gray-800">{metrics.daysActive}</p>
-              <p className="text-sm text-gray-600">Days Active</p>
+              <p className="text-2xl font-bold text-gray-200">{metrics.daysActive}</p>
+              <p className="text-sm text-gray-400">Days Active</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Fun Facts & Tips */}
-      <div className="bg-orange-50 border-2 border-orange-200 rounded-xl p-6">
+      <div className="bg-orange-500/10 border-2 border-orange-500/30 rounded-xl p-6">
         <div className="flex items-start">
           <Lightbulb className="w-8 h-8 text-orange-600 mr-4 flex-shrink-0 mt-1" />
           <div>
-            <h3 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
+            <h3 className="text-lg font-bold text-gray-200 mb-2 flex items-center">
               💡 Did You Know? <Star className="w-4 h-4 ml-2 text-orange-500" />
             </h3>
             <div className="space-y-2">
               {stageFunFacts[formData.stage as keyof typeof stageFunFacts]?.map((fact, idx) => (
-                <p key={idx} className="text-gray-700 text-sm leading-relaxed">
+                <p key={idx} className="text-gray-300 text-sm leading-relaxed">
                   {fact}
                 </p>
               ))}
@@ -380,22 +380,22 @@ export default function StartupProfilePage() {
       <MentorsInvestorsSection startupId={existing?.id || ''} />
 
       {/* Startup Journey Timeline */}
-      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-        <h2 className="text-xl font-bold mb-6 flex items-center text-gray-800">
+      <div className="bg-[#1a1a1a] rounded-xl shadow-lg p-6 border border-gray-700">
+        <h2 className="text-xl font-bold mb-6 flex items-center text-gray-200">
           <Flag className="w-6 h-6 mr-2 text-orange-600" />
           Your Startup Journey
         </h2>
         <div className="relative">
-          <div className="absolute left-8 top-0 bottom-0 w-1 bg-orange-200"></div>
+          <div className="absolute left-8 top-0 bottom-0 w-1 bg-orange-500/20"></div>
           {stages.map((stage, idx) => {
             const isCompleted = idx < metrics.stageIndex
             const isCurrent = idx === metrics.stageIndex
             return (
               <div key={stage} className="relative flex items-center mb-8 last:mb-0">
                 <div className={`w-16 h-16 rounded-full flex items-center justify-center z-10 transition-all ${
-                  isCurrent ? 'bg-orange-500 shadow-lg scale-110 border-4 border-orange-200' :
-                  isCompleted ? 'bg-green-500 border-4 border-green-200' :
-                  'bg-gray-200 border-4 border-gray-100'
+                  isCurrent ? 'bg-orange-500 shadow-lg scale-110 border-4 border-orange-500/30' :
+                  isCompleted ? 'bg-green-500 border-4 border-green-500/30' :
+                  'bg-[#1f1f1f] border-4 border-gray-800'
                 }`}>
                   {isCompleted ? (
                     <CheckCircle className="w-8 h-8 text-white" />
@@ -406,14 +406,14 @@ export default function StartupProfilePage() {
                   )}
                 </div>
                 <div className={`ml-6 flex-1 p-4 rounded-lg border-2 transition-all ${
-                  isCurrent ? 'bg-orange-50 border-orange-300' :
-                  isCompleted ? 'bg-green-50 border-green-300' :
-                  'bg-gray-50 border-gray-200'
+                  isCurrent ? 'bg-orange-500/10 border-orange-300' :
+                  isCompleted ? 'bg-green-500/10 border-green-300' :
+                  'bg-[#111] border-gray-700'
                 }`}>
-                  <h3 className={`font-bold ${isCurrent ? 'text-orange-700' : isCompleted ? 'text-green-700' : 'text-gray-500'}`}>
+                  <h3 className={`font-bold ${isCurrent ? 'text-orange-400' : isCompleted ? 'text-green-400' : 'text-gray-400'}`}>
                     {stage.replace("_", " ")}
                   </h3>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-gray-400 mt-1">
                     {isCurrent && "🎯 You are here! Keep pushing forward!"}
                     {isCompleted && "✅ Completed - Great job!"}
                     {!isCurrent && !isCompleted && "⏳ Coming soon..."}
@@ -426,14 +426,14 @@ export default function StartupProfilePage() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-        <div className="flex border-b border-gray-200">
+      <div className="bg-[#1a1a1a] rounded-xl shadow-lg overflow-hidden border border-gray-700">
+        <div className="flex border-b border-gray-700">
           <button
             onClick={() => setActiveTab('edit')}
             className={`flex-1 py-4 px-6 font-semibold transition-colors ${
               activeTab === 'edit'
                 ? 'bg-orange-500 text-white border-b-4 border-orange-600'
-                : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                : 'bg-[#111] text-gray-400 hover:bg-[#141414]'
             }`}
           >
             <Building2 className="w-5 h-5 inline-block mr-2" />
@@ -444,7 +444,7 @@ export default function StartupProfilePage() {
             className={`flex-1 py-4 px-6 font-semibold transition-colors ${
               activeTab === 'stats'
                 ? 'bg-orange-500 text-white border-b-4 border-orange-600'
-                : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                : 'bg-[#111] text-gray-400 hover:bg-[#141414]'
             }`}
           >
             <BarChart3 className="w-5 h-5 inline-block mr-2" />
@@ -456,25 +456,25 @@ export default function StartupProfilePage() {
           {activeTab === 'edit' ? (
             <form onSubmit={handleSubmit} className={`space-y-8 ${isReadOnly ? 'pointer-events-none opacity-75' : ''}`}>
               {isReadOnly && (
-                <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-6">
-                  <div className="flex items-center gap-2 text-blue-800">
+                <div className="bg-blue-500/10 border-2 border-blue-500/30 rounded-xl p-4 mb-6">
+                  <div className="flex items-center gap-2 text-blue-300">
                     <Info className="w-5 h-5" />
                     <p className="font-semibold">Read-Only Mode</p>
                   </div>
-                  <p className="text-sm text-blue-700 mt-2">
+                  <p className="text-sm text-blue-400 mt-2">
                     You are viewing this startup's profile. You cannot make changes.
                   </p>
                 </div>
               )}
               {/* Basic Information */}
-              <div className="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
-                <h2 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-orange-500/10 rounded-xl p-6 border-2 border-orange-500/30">
+                <h2 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <Building2 className="w-6 h-6 mr-2 text-orange-600" />
                   Basic Information
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Startup Name *
                     </label>
                     <input
@@ -482,13 +482,13 @@ export default function StartupProfilePage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                       placeholder="Enter your awesome startup name"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Founders (comma-separated) *
                     </label>
                     <input
@@ -497,12 +497,12 @@ export default function StartupProfilePage() {
                       value={formData.founders}
                       onChange={(e) => setFormData({ ...formData, founders: e.target.value })}
                       placeholder="e.g., John Doe, Jane Smith, Alex Johnson"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Industry *
                     </label>
                     <input
@@ -511,12 +511,12 @@ export default function StartupProfilePage() {
                       value={formData.industry}
                       onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
                       placeholder="e.g., Technology, Healthcare, FinTech"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Niche *
                     </label>
                     <input
@@ -525,18 +525,18 @@ export default function StartupProfilePage() {
                       value={formData.niche}
                       onChange={(e) => setFormData({ ...formData, niche: e.target.value })}
                       placeholder="e.g., AI-powered Mobile Apps"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Current Stage *
                     </label>
                     <select
                       value={formData.stage}
                       onChange={(e) => setFormData({ ...formData, stage: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     >
                       {stages.map((stage) => (
                         <option key={stage} value={stage}>
@@ -549,13 +549,13 @@ export default function StartupProfilePage() {
               </div>
 
               {/* Registration Details */}
-              <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
-                <h2 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-[#1a1a1a] rounded-xl p-6 border-2 border-gray-700">
+                <h2 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <Shield className="w-6 h-6 mr-2 text-orange-600" />
                   Legal Registrations
                 </h2>
                 <div className="space-y-4">
-                  <div className="flex items-start space-x-3 bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-orange-200 transition-all">
+                  <div className="flex items-start space-x-3 bg-[#111] rounded-lg p-4 border border-gray-700 hover:border-orange-500/30 transition-all">
                     <input
                       type="checkbox"
                       checked={formData.secpRegistered}
@@ -563,23 +563,23 @@ export default function StartupProfilePage() {
                       className="mt-1.5 w-5 h-5 text-orange-500 focus:ring-orange-400"
                     />
                     <div className="flex-1">
-                      <label className="block text-sm font-semibold text-gray-700">
+                      <label className="block text-sm font-semibold text-gray-300">
                         SECP Registered 🏢
                       </label>
-                      <p className="text-xs text-gray-500 mb-2">Securities and Exchange Commission of Pakistan</p>
+                      <p className="text-xs text-gray-400 mb-2">Securities and Exchange Commission of Pakistan</p>
                       {formData.secpRegistered && (
                         <input
                           type="text"
                           value={formData.secpNumber}
                           onChange={(e) => setFormData({ ...formData, secpNumber: e.target.value })}
                           placeholder="SECP Registration Number"
-                          className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg mt-2 focus:ring-2 focus:ring-orange-400 bg-white"
+                          className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg mt-2 focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                         />
                       )}
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3 bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-orange-200 transition-all">
+                  <div className="flex items-start space-x-3 bg-[#111] rounded-lg p-4 border border-gray-700 hover:border-orange-500/30 transition-all">
                     <input
                       type="checkbox"
                       checked={formData.fbrRegistered}
@@ -587,23 +587,23 @@ export default function StartupProfilePage() {
                       className="mt-1.5 w-5 h-5 text-orange-500 focus:ring-orange-400"
                     />
                     <div className="flex-1">
-                      <label className="block text-sm font-semibold text-gray-700">
+                      <label className="block text-sm font-semibold text-gray-300">
                         FBR Registered 💰
                       </label>
-                      <p className="text-xs text-gray-500 mb-2">Federal Board of Revenue</p>
+                      <p className="text-xs text-gray-400 mb-2">Federal Board of Revenue</p>
                       {formData.fbrRegistered && (
                         <input
                           type="text"
                           value={formData.ntnNumber}
                           onChange={(e) => setFormData({ ...formData, ntnNumber: e.target.value })}
                           placeholder="NTN Number"
-                          className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg mt-2 focus:ring-2 focus:ring-orange-400 bg-white"
+                          className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg mt-2 focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                         />
                       )}
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3 bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-orange-200 transition-all">
+                  <div className="flex items-start space-x-3 bg-[#111] rounded-lg p-4 border border-gray-700 hover:border-orange-500/30 transition-all">
                     <input
                       type="checkbox"
                       checked={formData.trademarkFiled}
@@ -611,17 +611,17 @@ export default function StartupProfilePage() {
                       className="mt-1.5 w-5 h-5 text-orange-500 focus:ring-orange-400"
                     />
                     <div className="flex-1">
-                      <label className="block text-sm font-semibold text-gray-700">
+                      <label className="block text-sm font-semibold text-gray-300">
                         Trademark Filed ®️
                       </label>
-                      <p className="text-xs text-gray-500 mb-2">Protect your brand identity</p>
+                      <p className="text-xs text-gray-400 mb-2">Protect your brand identity</p>
                       {formData.trademarkFiled && (
                         <input
                           type="text"
                           value={formData.trademarkNumber}
                           onChange={(e) => setFormData({ ...formData, trademarkNumber: e.target.value })}
                           placeholder="Trademark Number"
-                          className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg mt-2 focus:ring-2 focus:ring-orange-400 bg-white"
+                          className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg mt-2 focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                         />
                       )}
                     </div>
@@ -630,14 +630,14 @@ export default function StartupProfilePage() {
               </div>
 
               {/* Brand Details */}
-              <div className="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
-                <h2 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-orange-500/10 rounded-xl p-6 border-2 border-orange-500/30">
+                <h2 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <Heart className="w-6 h-6 mr-2 text-orange-600" />
                   Brand Story
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Vision 🔭
                     </label>
                     <textarea
@@ -645,12 +645,12 @@ export default function StartupProfilePage() {
                       onChange={(e) => setFormData({ ...formData, vision: e.target.value })}
                       rows={3}
                       placeholder="Where do you see your startup in 5-10 years? Paint the big picture..."
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Mission 🎯
                     </label>
                     <textarea
@@ -658,12 +658,12 @@ export default function StartupProfilePage() {
                       onChange={(e) => setFormData({ ...formData, mission: e.target.value })}
                       rows={3}
                       placeholder="What problem are you solving? Why does your startup exist?"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Tagline ✨
                     </label>
                     <input
@@ -671,21 +671,21 @@ export default function StartupProfilePage() {
                       value={formData.tagline}
                       onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
                       placeholder="Your catchy one-liner that captures your essence"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Contact Details */}
-              <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
-                <h2 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-[#1a1a1a] rounded-xl p-6 border-2 border-gray-700">
+                <h2 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <Globe className="w-6 h-6 mr-2 text-orange-600" />
                   Contact & Presence
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Mail className="w-4 h-4 mr-2 text-orange-600" />
                       Email
                     </label>
@@ -694,12 +694,12 @@ export default function StartupProfilePage() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="startup@example.com"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Phone className="w-4 h-4 mr-2 text-orange-600" />
                       Phone
                     </label>
@@ -708,12 +708,12 @@ export default function StartupProfilePage() {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+92 300 1234567"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <MapPin className="w-4 h-4 mr-2 text-orange-600" />
                       Address
                     </label>
@@ -722,12 +722,12 @@ export default function StartupProfilePage() {
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       placeholder="Your office or co-working space address"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Globe className="w-4 h-4 mr-2 text-orange-600" />
                       Website
                     </label>
@@ -736,7 +736,7 @@ export default function StartupProfilePage() {
                       value={formData.website}
                       onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                       placeholder="https://yourawesome startup.com"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
                 </div>
@@ -756,11 +756,11 @@ export default function StartupProfilePage() {
             // Stats & Insights Tab
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div className="bg-white border-2 border-orange-200 rounded-xl p-6 shadow-md">
+                                <div className="bg-[#1a1a1a] border-2 border-orange-500/30 rounded-xl p-6 shadow-md">
                   <TrendingUp className="w-10 h-10 mb-4 text-orange-600" />
-                  <h3 className="text-3xl font-bold mb-2 text-gray-800">{metrics.profileCompletion}%</h3>
-                  <p className="text-gray-600 font-medium">Profile Completion</p>
-                  <div className="mt-4 bg-gray-200 h-2 rounded-full overflow-hidden">
+                  <h3 className="text-3xl font-bold mb-2 text-gray-200">{metrics.profileCompletion}%</h3>
+                  <p className="text-gray-400 font-medium">Profile Completion</p>
+                  <div className="mt-4 bg-[#1f1f1f] h-2 rounded-full overflow-hidden">
                     <div 
                       className="bg-orange-500 h-2 rounded-full transition-all"
                       style={{ width: `${metrics.profileCompletion}%` }}
@@ -768,65 +768,65 @@ export default function StartupProfilePage() {
                   </div>
                 </div>
 
-                <div className="bg-white border-2 border-orange-200 rounded-xl p-6 shadow-md">
+                <div className="bg-[#1a1a1a] border-2 border-orange-500/30 rounded-xl p-6 shadow-md">
                   <Users className="w-10 h-10 mb-4 text-orange-600" />
-                  <h3 className="text-3xl font-bold mb-2 text-gray-800">{metrics.foundersCount}</h3>
-                  <p className="text-gray-600 font-medium">Team Members</p>
-                  <p className="text-sm text-gray-500 mt-2">Founders driving the vision</p>
+                  <h3 className="text-3xl font-bold mb-2 text-gray-200">{metrics.foundersCount}</h3>
+                  <p className="text-gray-400 font-medium">Team Members</p>
+                  <p className="text-sm text-gray-400 mt-2">Founders driving the vision</p>
                 </div>
 
-                <div className="bg-white border-2 border-orange-200 rounded-xl p-6 shadow-md">
+                <div className="bg-[#1a1a1a] border-2 border-orange-500/30 rounded-xl p-6 shadow-md">
                   <Award className="w-10 h-10 mb-4 text-orange-600" />
-                  <h3 className="text-3xl font-bold mb-2 text-gray-800">{metrics.registrationScore}/3</h3>
-                  <p className="text-gray-600 font-medium">Legal Compliance</p>
-                  <p className="text-sm text-gray-500 mt-2">Registrations completed</p>
+                  <h3 className="text-3xl font-bold mb-2 text-gray-200">{metrics.registrationScore}/3</h3>
+                  <p className="text-gray-400 font-medium">Legal Compliance</p>
+                  <p className="text-sm text-gray-400 mt-2">Registrations completed</p>
                 </div>
               </div>
 
               {/* Additional insights */}
-              <div className="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
-                <h3 className="text-lg font-bold mb-4 text-gray-800">📊 Profile Insights</h3>
+              <div className="bg-orange-500/10 rounded-xl p-6 border-2 border-orange-500/30">
+                <h3 className="text-lg font-bold mb-4 text-gray-200">📊 Profile Insights</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center p-4 bg-white rounded-lg border border-gray-200">
+                  <div className="flex items-center p-4 bg-[#1a1a1a] rounded-lg border border-gray-700">
                     <Briefcase className="w-8 h-8 text-orange-600 mr-3" />
                     <div>
-                      <p className="text-sm text-gray-600">Industry</p>
-                      <p className="font-semibold text-gray-800">{formData.industry || "Not set"}</p>
+                      <p className="text-sm text-gray-400">Industry</p>
+                      <p className="font-semibold text-gray-200">{formData.industry || "Not set"}</p>
                     </div>
                   </div>
-                  <div className="flex items-center p-4 bg-white rounded-lg border border-gray-200">
+                  <div className="flex items-center p-4 bg-[#1a1a1a] rounded-lg border border-gray-700">
                     <Target className="w-8 h-8 text-orange-600 mr-3" />
                     <div>
-                      <p className="text-sm text-gray-600">Niche</p>
-                      <p className="font-semibold text-gray-800">{formData.niche || "Not set"}</p>
+                      <p className="text-sm text-gray-400">Niche</p>
+                      <p className="font-semibold text-gray-200">{formData.niche || "Not set"}</p>
                     </div>
                   </div>
-                  <div className="flex items-center p-4 bg-white rounded-lg border border-gray-200">
+                  <div className="flex items-center p-4 bg-[#1a1a1a] rounded-lg border border-gray-700">
                     <Globe className="w-8 h-8 text-orange-600 mr-3" />
                     <div>
-                      <p className="text-sm text-gray-600">Website</p>
+                      <p className="text-sm text-gray-400">Website</p>
                       <p className="font-semibold truncate">
                         {formData.website ? (
-                          <a href={formData.website} target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 hover:underline flex items-center">
+                          <a href={formData.website} target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-400 hover:underline flex items-center">
                             Visit <ExternalLink className="w-3 h-3 ml-1" />
                           </a>
-                        ) : <span className="text-gray-800">Not set</span>}
+                        ) : <span className="text-gray-200">Not set</span>}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center p-4 bg-white rounded-lg border border-gray-200">
+                  <div className="flex items-center p-4 bg-[#1a1a1a] rounded-lg border border-gray-700">
                     <Calendar className="w-8 h-8 text-orange-600 mr-3" />
                     <div>
-                      <p className="text-sm text-gray-600">Journey Started</p>
-                      <p className="font-semibold text-gray-800">{metrics.daysActive} days ago</p>
+                      <p className="text-sm text-gray-400">Journey Started</p>
+                      <p className="font-semibold text-gray-200">{metrics.daysActive} days ago</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Recommendations */}
-              <div className="bg-orange-50 border-2 border-orange-300 rounded-xl p-6">
-                <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center">
+              <div className="bg-orange-500/10 border-2 border-orange-300 rounded-xl p-6">
+                <h3 className="text-lg font-bold mb-4 text-gray-200 flex items-center">
                   <Zap className="w-6 h-6 mr-2 text-orange-600" />
                   Quick Wins to Boost Your Profile
                 </h3>
@@ -834,25 +834,25 @@ export default function StartupProfilePage() {
                   {metrics.profileCompletion < 100 && (
                     <li className="flex items-start">
                       <span className="text-orange-600 mr-2">•</span>
-                      <span className="text-gray-700">Complete all profile fields to reach 100%</span>
+                      <span className="text-gray-300">Complete all profile fields to reach 100%</span>
                     </li>
                   )}
                   {metrics.registrationScore < 3 && (
                     <li className="flex items-start">
                       <span className="text-orange-600 mr-2">•</span>
-                      <span className="text-gray-700">Consider completing legal registrations for credibility</span>
+                      <span className="text-gray-300">Consider completing legal registrations for credibility</span>
                     </li>
                   )}
                   {!formData.website && (
                     <li className="flex items-start">
                       <span className="text-orange-600 mr-2">•</span>
-                      <span className="text-gray-700">Add a website to establish online presence</span>
+                      <span className="text-gray-300">Add a website to establish online presence</span>
                     </li>
                   )}
                   {!formData.tagline && (
                     <li className="flex items-start">
                       <span className="text-orange-600 mr-2">•</span>
-                      <span className="text-gray-700">Create a compelling tagline to capture your essence</span>
+                      <span className="text-gray-300">Create a compelling tagline to capture your essence</span>
                     </li>
                   )}
                 </ul>
@@ -875,7 +875,7 @@ export default function StartupProfilePage() {
             </div>
             <button
               onClick={() => setShowVideo(!showVideo)}
-              className="bg-white text-orange-600 hover:bg-orange-50 px-6 py-3 rounded-full font-semibold transition-all flex items-center shadow-lg"
+              className="bg-[#1a1a1a] text-orange-600 hover:bg-orange-500/10 px-6 py-3 rounded-full font-semibold transition-all flex items-center shadow-lg"
             >
               <Play className="w-5 h-5 mr-2" />
               {showVideo ? 'Hide Video' : 'Watch Now'}
@@ -899,17 +899,17 @@ export default function StartupProfilePage() {
 
           {!showVideo && (
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4">
+              <div className="bg-[#1a1a1a]/10 backdrop-blur-lg rounded-lg p-4">
                 <CheckCircle className="w-8 h-8 mb-2" />
                 <h4 className="font-semibold mb-1">Complete Profile</h4>
                 <p className="text-sm text-red-100">Fill all sections for maximum visibility</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4">
+              <div className="bg-[#1a1a1a]/10 backdrop-blur-lg rounded-lg p-4">
                 <Target className="w-8 h-8 mb-2" />
                 <h4 className="font-semibold mb-1">Clear Vision</h4>
                 <p className="text-sm text-red-100">Articulate your mission & vision clearly</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4">
+              <div className="bg-[#1a1a1a]/10 backdrop-blur-lg rounded-lg p-4">
                 <Trophy className="w-8 h-8 mb-2" />
                 <h4 className="font-semibold mb-1">Legal Compliance</h4>
                 <p className="text-sm text-red-100">Complete registrations for credibility</p>
@@ -922,7 +922,7 @@ export default function StartupProfilePage() {
       {/* Details Modal */}
       {showDetailsModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#1a1a1a] rounded-2xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-orange-500 text-white p-6 flex items-center justify-between border-b-4 border-orange-600">
               <div className="flex items-center gap-3">
                 <Info className="w-8 h-8" />
@@ -930,7 +930,7 @@ export default function StartupProfilePage() {
               </div>
               <button
                 onClick={() => setShowDetailsModal(false)}
-                className="bg-white/20 hover:bg-white/30 p-2 rounded-lg transition-all"
+                className="bg-[#1a1a1a]/20 hover:bg-[#1a1a1a]/30 p-2 rounded-lg transition-all"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -938,14 +938,14 @@ export default function StartupProfilePage() {
 
             <div className="p-6 space-y-6">
               {/* Location Information */}
-              <div className="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
-                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-orange-500/10 rounded-xl p-6 border-2 border-orange-500/30">
+                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <MapPin className="w-6 h-6 mr-2 text-orange-600" />
                   Location Information
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Headquarters
                     </label>
                     <input
@@ -953,12 +953,12 @@ export default function StartupProfilePage() {
                       value={formData.headquarters}
                       onChange={(e) => setFormData({ ...formData, headquarters: e.target.value })}
                       placeholder="Main office location (e.g., Lahore, Pakistan)"
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-white"
+                      className="w-full px-4 py-3 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all bg-[#1a1a1a]"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Operation Locations
                     </label>
                     {formData.operationLocations.map((location, index) => (
@@ -972,7 +972,7 @@ export default function StartupProfilePage() {
                             setFormData({ ...formData, operationLocations: newLocations })
                           }}
                           placeholder="Operation location"
-                          className="flex-1 px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                          className="flex-1 px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                         />
                         <button
                           onClick={() => {
@@ -999,43 +999,43 @@ export default function StartupProfilePage() {
               </div>
 
               {/* Team Members */}
-              <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
-                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-[#1a1a1a] rounded-xl p-6 border-2 border-gray-700">
+                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <Users className="w-6 h-6 mr-2 text-orange-600" />
                   Team Members
                 </h3>
                 
                 {/* Add New Member */}
-                <div className="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
-                  <p className="text-sm font-semibold text-gray-700 mb-3">Add New Member</p>
+                <div className="bg-[#111] rounded-lg p-4 mb-4 border border-gray-700">
+                  <p className="text-sm font-semibold text-gray-300 mb-3">Add New Member</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <input
                       type="text"
                       value={newMember.name}
                       onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
                       placeholder="Name *"
-                      className="px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                     <input
                       type="text"
                       value={newMember.role}
                       onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
                       placeholder="Role *"
-                      className="px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                     <input
                       type="email"
                       value={newMember.email}
                       onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
                       placeholder="Email"
-                      className="px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                     <input
                       type="tel"
                       value={newMember.phone}
                       onChange={(e) => setNewMember({ ...newMember, phone: e.target.value })}
                       placeholder="Phone"
-                      className="px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                   <button
@@ -1051,32 +1051,32 @@ export default function StartupProfilePage() {
                 {/* Team Members List */}
                 <div className="space-y-3">
                   {teamMembers.map((member) => (
-                    <div key={member.id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div key={member.id} className="bg-[#111] rounded-lg p-4 border border-gray-700">
                       {editingMember?.id === member.id ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                           <input
                             type="text"
                             value={editingMember.name}
                             onChange={(e) => setEditingMember({ ...editingMember, name: e.target.value })}
-                            className="px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                            className="px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                           />
                           <input
                             type="text"
                             value={editingMember.role}
                             onChange={(e) => setEditingMember({ ...editingMember, role: e.target.value })}
-                            className="px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                            className="px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                           />
                           <input
                             type="email"
                             value={editingMember.email || ''}
                             onChange={(e) => setEditingMember({ ...editingMember, email: e.target.value })}
-                            className="px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                            className="px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                           />
                           <input
                             type="tel"
                             value={editingMember.phone || ''}
                             onChange={(e) => setEditingMember({ ...editingMember, phone: e.target.value })}
-                            className="px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                            className="px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                           />
                           <div className="md:col-span-2 flex gap-2">
                             <button
@@ -1096,16 +1096,16 @@ export default function StartupProfilePage() {
                       ) : (
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
-                            <h4 className="font-bold text-gray-800">{member.name}</h4>
+                            <h4 className="font-bold text-gray-200">{member.name}</h4>
                             <p className="text-sm text-orange-600 font-medium">{member.role}</p>
                             {member.email && (
-                              <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
+                              <p className="text-sm text-gray-400 flex items-center gap-1 mt-1">
                                 <Mail className="w-3 h-3" />
                                 {member.email}
                               </p>
                             )}
                             {member.phone && (
-                              <p className="text-sm text-gray-600 flex items-center gap-1">
+                              <p className="text-sm text-gray-400 flex items-center gap-1">
                                 <Phone className="w-3 h-3" />
                                 {member.phone}
                               </p>
@@ -1130,20 +1130,20 @@ export default function StartupProfilePage() {
                     </div>
                   ))}
                   {teamMembers.length === 0 && (
-                    <p className="text-gray-500 text-center py-4">No team members added yet</p>
+                    <p className="text-gray-400 text-center py-4">No team members added yet</p>
                   )}
                 </div>
               </div>
 
               {/* Social Media Links */}
-              <div className="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
-                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-orange-500/10 rounded-xl p-6 border-2 border-orange-500/30">
+                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <Globe className="w-6 h-6 mr-2 text-orange-600" />
                   Social Media Links
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Linkedin className="w-4 h-4 mr-2 text-blue-600" />
                       LinkedIn
                     </label>
@@ -1155,11 +1155,11 @@ export default function StartupProfilePage() {
                         socialMediaLinks: { ...formData.socialMediaLinks, linkedin: e.target.value }
                       })}
                       placeholder="https://linkedin.com/company/..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Twitter className="w-4 h-4 mr-2 text-sky-500" />
                       Twitter / X
                     </label>
@@ -1171,11 +1171,11 @@ export default function StartupProfilePage() {
                         socialMediaLinks: { ...formData.socialMediaLinks, twitter: e.target.value }
                       })}
                       placeholder="https://twitter.com/..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Facebook className="w-4 h-4 mr-2 text-blue-600" />
                       Facebook
                     </label>
@@ -1187,11 +1187,11 @@ export default function StartupProfilePage() {
                         socialMediaLinks: { ...formData.socialMediaLinks, facebook: e.target.value }
                       })}
                       placeholder="https://facebook.com/..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Instagram className="w-4 h-4 mr-2 text-pink-600" />
                       Instagram
                     </label>
@@ -1203,11 +1203,11 @@ export default function StartupProfilePage() {
                         socialMediaLinks: { ...formData.socialMediaLinks, instagram: e.target.value }
                       })}
                       placeholder="https://instagram.com/..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Youtube className="w-4 h-4 mr-2 text-red-600" />
                       YouTube
                     </label>
@@ -1219,21 +1219,21 @@ export default function StartupProfilePage() {
                         socialMediaLinks: { ...formData.socialMediaLinks, youtube: e.target.value }
                       })}
                       placeholder="https://youtube.com/@..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Other Links */}
-              <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
-                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-[#1a1a1a] rounded-xl p-6 border-2 border-gray-700">
+                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <LinkIcon className="w-6 h-6 mr-2 text-orange-600" />
                   Other Links
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Crunchbase
                     </label>
                     <input
@@ -1244,11 +1244,11 @@ export default function StartupProfilePage() {
                         otherLinks: { ...formData.otherLinks, crunchbase: e.target.value }
                       })}
                       placeholder="https://crunchbase.com/organization/..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       AngelList
                     </label>
                     <input
@@ -1259,11 +1259,11 @@ export default function StartupProfilePage() {
                         otherLinks: { ...formData.otherLinks, angellist: e.target.value }
                       })}
                       placeholder="https://angel.co/company/..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700 flex items-center">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300 flex items-center">
                       <Github className="w-4 h-4 mr-2" />
                       GitHub
                     </label>
@@ -1275,11 +1275,11 @@ export default function StartupProfilePage() {
                         otherLinks: { ...formData.otherLinks, github: e.target.value }
                       })}
                       placeholder="https://github.com/..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-700">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
                       Portfolio/Other
                     </label>
                     <input
@@ -1290,15 +1290,15 @@ export default function StartupProfilePage() {
                         otherLinks: { ...formData.otherLinks, website2: e.target.value }
                       })}
                       placeholder="https://..."
-                      className="w-full px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="w-full px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Tips and Tricks */}
-              <div className="bg-orange-50 rounded-xl p-6 border-2 border-orange-200">
-                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-800">
+              <div className="bg-orange-500/10 rounded-xl p-6 border-2 border-orange-500/30">
+                <h3 className="text-xl font-bold mb-4 flex items-center text-gray-200">
                   <Lightbulb className="w-6 h-6 mr-2 text-orange-600" />
                   Tips & Tricks for Your Startup
                 </h3>
@@ -1313,7 +1313,7 @@ export default function StartupProfilePage() {
                         setFormData({ ...formData, tipsAndTricks: newTips })
                       }}
                       placeholder="Add a useful tip or trick"
-                      className="flex-1 px-4 py-2 border-2 border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 bg-white"
+                      className="flex-1 px-4 py-2 border-2 border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-400 bg-[#1a1a1a]"
                     />
                     <button
                       onClick={() => {

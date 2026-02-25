@@ -63,12 +63,12 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
 
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
         <div className="animate-pulse">
-          <div className="h-6 bg-gray-200 rounded w-1/3 mb-4"></div>
+          <div className="h-6 bg-[#1f1f1f] rounded w-1/3 mb-4"></div>
           <div className="space-y-3">
-            <div className="h-20 bg-gray-100 rounded"></div>
-            <div className="h-20 bg-gray-100 rounded"></div>
+            <div className="h-20 bg-[#141414] rounded"></div>
+            <div className="h-20 bg-[#141414] rounded"></div>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
 
   if (!mentor && investors.length === 0) {
     return (
-      <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg shadow-sm border-2 border-orange-200 p-6">
+      <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-lg shadow-sm border-2 border-orange-500/30 p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold flex items-center">
             <Users className="w-5 h-5 mr-2 text-orange-600" />
@@ -85,15 +85,15 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
           </h3>
           <Link
             href="/dashboard/mentors-investors"
-            className="text-sm text-orange-600 hover:text-orange-700 font-medium"
+            className="text-sm text-orange-600 hover:text-orange-400 font-medium"
           >
             Manage Access →
           </Link>
         </div>
         <div className="text-center py-8">
           <Users className="w-16 h-16 text-orange-300 mx-auto mb-3" />
-          <p className="text-gray-600 mb-2">No mentors or investors yet</p>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-gray-400 mb-2">No mentors or investors yet</p>
+          <p className="text-sm text-gray-400 mb-4">
             Generate invite links to add a mentor or investors to your startup
           </p>
           <Link
@@ -108,7 +108,7 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6">
+    <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold flex items-center">
           <Users className="w-5 h-5 mr-2 text-orange-600" />
@@ -116,7 +116,7 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
         </h3>
         <Link
           href="/dashboard/mentors-investors"
-          className="text-sm text-orange-600 hover:text-orange-700 font-medium flex items-center"
+          className="text-sm text-orange-600 hover:text-orange-400 font-medium flex items-center"
         >
           Manage
           <ExternalLink className="w-4 h-4 ml-1" />
@@ -126,7 +126,7 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
       <div className="space-y-4">
         {/* Mentor Card */}
         {mentor && (
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-5 border-2 border-green-200">
+          <div className="bg-gradient-to-br from-green-500/10 to-emerald-50 rounded-lg p-5 border-2 border-green-500/30">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center">
                 <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-lg mr-3">
@@ -134,25 +134,25 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h4 className="font-bold text-gray-900">{mentor.mentor.name}</h4>
+                    <h4 className="font-bold text-gray-100">{mentor.mentor.name}</h4>
                     <span className="px-2 py-0.5 bg-green-500 text-white text-xs rounded-full font-medium">
                       Mentor
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600">{mentor.mentor.email}</p>
+                  <p className="text-sm text-gray-400">{mentor.mentor.email}</p>
                 </div>
               </div>
             </div>
 
             <div className="space-y-2 pl-15">
               {mentor.mentor.mentorCompany && (
-                <div className="flex items-center text-sm text-gray-700">
+                <div className="flex items-center text-sm text-gray-300">
                   <Briefcase className="w-4 h-4 mr-2 text-green-600" />
                   <span>{mentor.mentor.mentorCompany}</span>
                 </div>
               )}
               {mentor.mentor.mentorLocation && (
-                <div className="flex items-center text-sm text-gray-700">
+                <div className="flex items-center text-sm text-gray-300">
                   <MapPin className="w-4 h-4 mr-2 text-green-600" />
                   <span>{mentor.mentor.mentorLocation}</span>
                 </div>
@@ -164,13 +164,13 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
                     href={mentor.mentor.mentorLinkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-green-600 hover:text-green-700 hover:underline"
+                    className="text-green-600 hover:text-green-400 hover:underline"
                   >
                     View LinkedIn Profile
                   </a>
                 </div>
               )}
-              <div className="flex items-center text-xs text-gray-500 pt-2 border-t border-green-200">
+              <div className="flex items-center text-xs text-gray-400 pt-2 border-t border-green-500/30">
                 <Calendar className="w-3 h-3 mr-1" />
                 <span>Joined {new Date(mentor.joinedAt).toLocaleDateString()}</span>
               </div>
@@ -181,7 +181,7 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
         {/* Investors Section */}
         {investors.length > 0 && (
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+            <h4 className="font-semibold text-gray-100 mb-3 flex items-center">
               <Briefcase className="w-4 h-4 mr-2 text-blue-600" />
               Investors ({investors.length})
             </h4>
@@ -189,7 +189,7 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
               {investors.slice(0, 4).map((investor) => (
                 <div
                   key={investor.id}
-                  className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200"
+                  className="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-lg p-4 border border-blue-500/30"
                 >
                   <div className="flex items-start mb-2">
                     <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3 flex-shrink-0">
@@ -197,31 +197,31 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h5 className="font-semibold text-gray-900 text-sm truncate">
+                        <h5 className="font-semibold text-gray-100 text-sm truncate">
                           {investor.investor.name}
                         </h5>
                         <span className="px-1.5 py-0.5 bg-blue-500 text-white text-xs rounded-full font-medium flex-shrink-0">
                           Investor
                         </span>
                       </div>
-                      <p className="text-xs text-gray-600 truncate">{investor.investor.email}</p>
+                      <p className="text-xs text-gray-400 truncate">{investor.investor.email}</p>
                     </div>
                   </div>
 
                   <div className="space-y-1.5 text-xs">
                     {investor.investor.investorPortfolio && (
-                      <div className="flex items-start text-gray-700">
+                      <div className="flex items-start text-gray-300">
                         <Briefcase className="w-3 h-3 mr-1.5 text-blue-600 mt-0.5 flex-shrink-0" />
                         <span className="line-clamp-2">{investor.investor.investorPortfolio}</span>
                       </div>
                     )}
                     {investor.investor.investorLocation && (
-                      <div className="flex items-center text-gray-700">
+                      <div className="flex items-center text-gray-300">
                         <MapPin className="w-3 h-3 mr-1.5 text-blue-600 flex-shrink-0" />
                         <span className="truncate">{investor.investor.investorLocation}</span>
                       </div>
                     )}
-                    <div className="flex items-center text-gray-500 pt-1 border-t border-blue-200">
+                    <div className="flex items-center text-gray-400 pt-1 border-t border-blue-500/30">
                       <Calendar className="w-3 h-3 mr-1" />
                       <span>Joined {new Date(investor.joinedAt).toLocaleDateString()}</span>
                     </div>
@@ -233,7 +233,7 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
             {investors.length > 4 && (
               <Link
                 href="/dashboard/mentors-investors"
-                className="block text-center mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                className="block text-center mt-3 text-sm text-blue-600 hover:text-blue-400 font-medium"
               >
                 View all {investors.length} investors →
               </Link>
@@ -243,9 +243,9 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
 
         {/* No mentor message */}
         {!mentor && investors.length > 0 && (
-          <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
-            <p className="text-sm text-yellow-800 mb-2 font-medium">No mentor assigned yet</p>
-            <p className="text-xs text-yellow-700 mb-3">
+          <div className="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/30">
+            <p className="text-sm text-yellow-300 mb-2 font-medium">No mentor assigned yet</p>
+            <p className="text-xs text-yellow-400 mb-3">
               Add a mentor to get expert guidance and feedback on your startup journey
             </p>
             <Link

@@ -332,21 +332,21 @@ export default function MarketResearchPage() {
   return (
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-orange-100 rounded-xl">
+            <div className="p-3 bg-orange-500/15 rounded-xl">
               <TrendingUp className="w-6 h-6 text-orange-600" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Market Research</h1>
-              <p className="text-sm text-gray-500">Comprehensive market analysis and target audience insights</p>
+              <h1 className="text-2xl font-bold text-gray-100">Market Research</h1>
+              <p className="text-sm text-gray-400">Comprehensive market analysis and target audience insights</p>
             </div>
           </div>
           <div className="flex gap-2">
             <button
               onClick={handleNew}
-              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2"
+              className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-[#111] transition-colors flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
               New Research
@@ -368,38 +368,38 @@ export default function MarketResearchPage() {
           value={data.title}
           onChange={(e) => setData({ ...data, title: e.target.value })}
           placeholder="Research Title (e.g., Q1 2025 Market Analysis)"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+          className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
         />
       </div>
 
       {/* Saved Researches */}
       {savedResearches.length > 0 && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">Saved Research</h2>
+        <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
+          <h2 className="text-lg font-bold text-gray-100 mb-4">Saved Research</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {savedResearches.map((research) => (
               <div
                 key={research.id}
                 className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                   selectedId === research.id
-                    ? "border-orange-500 bg-orange-50"
-                    : "border-gray-200 hover:border-orange-300"
+                    ? "border-orange-500 bg-orange-500/10"
+                    : "border-gray-700 hover:border-orange-300"
                 }`}
                 onClick={() => handleLoad(research)}
               >
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-bold text-gray-900">{research.title}</h3>
+                  <h3 className="font-bold text-gray-100">{research.title}</h3>
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       handleDelete(research.id!)
                     }}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   Updated: {new Date(research.lastUpdated).toLocaleDateString()}
                 </p>
               </div>
@@ -410,23 +410,23 @@ export default function MarketResearchPage() {
 
       {/* Tips & Resources */}
       {showTips && (
-        <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl border-2 border-orange-200 p-6">
+        <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-xl border-2 border-orange-500/30 p-6">
           <div className="flex justify-between items-start mb-4">
             <div className="flex items-center gap-2">
               <Lightbulb className="w-5 h-5 text-orange-600" />
-              <h2 className="text-lg font-bold text-gray-900">Market Research Tips & Resources</h2>
+              <h2 className="text-lg font-bold text-gray-100">Market Research Tips & Resources</h2>
             </div>
-            <button onClick={() => setShowTips(false)} className="text-gray-400 hover:text-gray-600">
+            <button onClick={() => setShowTips(false)} className="text-gray-400 hover:text-gray-400">
               ×
             </button>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
+              <h3 className="font-bold text-gray-100 mb-2 flex items-center gap-2">
                 <Info className="w-4 h-4 text-orange-600" />
                 Best Practices
               </h3>
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-sm text-gray-300">
                 <li>• Use multiple data sources to validate your findings</li>
                 <li>• Interview at least 20-50 potential customers</li>
                 <li>• Review competitor pricing and positioning</li>
@@ -436,11 +436,11 @@ export default function MarketResearchPage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
+              <h3 className="font-bold text-gray-100 mb-2 flex items-center gap-2">
                 <ExternalLink className="w-4 h-4 text-orange-600" />
                 Recommended Data Sources
               </h3>
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-sm text-gray-300">
                 <li>• <a href="https://www.statista.com" target="_blank" className="text-orange-600 hover:underline">Statista</a> - Market statistics & industry reports</li>
                 <li>• <a href="https://data.worldbank.org" target="_blank" className="text-orange-600 hover:underline">World Bank</a> - Global economic data</li>
                 <li>• <a href="https://www.cbinsights.com" target="_blank" className="text-orange-600 hover:underline">CB Insights</a> - Tech market intelligence</li>
@@ -454,10 +454,10 @@ export default function MarketResearchPage() {
       )}
 
       {/* TAM/SAM/SOM Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
         <div className="flex items-center gap-2 mb-6">
           <PieChart className="w-5 h-5 text-orange-600" />
-          <h2 className="text-xl font-bold text-gray-900">TAM / SAM / SOM Analysis</h2>
+          <h2 className="text-xl font-bold text-gray-100">TAM / SAM / SOM Analysis</h2>
           <div className="group relative">
             <Info className="w-4 h-4 text-gray-400 cursor-help" />
             <div className="absolute left-0 top-6 w-80 p-4 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
@@ -483,7 +483,7 @@ export default function MarketResearchPage() {
           <div className="space-y-6">
             {/* TAM */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-300 mb-2">
                 Total Addressable Market (TAM)
               </label>
               <div className="flex gap-2">
@@ -495,7 +495,7 @@ export default function MarketResearchPage() {
                     tam: { ...data.tam, value: parseFloat(e.target.value) || 0 } 
                   })}
                   placeholder="e.g., 50000000000"
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
                 <select
                   value={data.tam.currency}
@@ -503,7 +503,7 @@ export default function MarketResearchPage() {
                     ...data, 
                     tam: { ...data.tam, currency: e.target.value } 
                   })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 >
                   <option value="USD">USD</option>
                   <option value="EUR">EUR</option>
@@ -518,14 +518,14 @@ export default function MarketResearchPage() {
                   tam: { ...data.tam, description: e.target.value } 
                 })}
                 placeholder="Describe how you calculated TAM..."
-                className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="w-full mt-2 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 rows={2}
               />
             </div>
 
             {/* SAM */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-300 mb-2">
                 Serviceable Available Market (SAM)
               </label>
               <div className="flex gap-2">
@@ -537,7 +537,7 @@ export default function MarketResearchPage() {
                     sam: { ...data.sam, value: parseFloat(e.target.value) || 0 } 
                   })}
                   placeholder="e.g., 5000000000"
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
                 <select
                   value={data.sam.currency}
@@ -545,7 +545,7 @@ export default function MarketResearchPage() {
                     ...data, 
                     sam: { ...data.sam, currency: e.target.value } 
                   })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 >
                   <option value="USD">USD</option>
                   <option value="EUR">EUR</option>
@@ -560,14 +560,14 @@ export default function MarketResearchPage() {
                   sam: { ...data.sam, description: e.target.value } 
                 })}
                 placeholder="Describe your serviceable market..."
-                className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="w-full mt-2 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 rows={2}
               />
             </div>
 
             {/* SOM */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-300 mb-2">
                 Serviceable Obtainable Market (SOM)
               </label>
               <div className="flex gap-2">
@@ -579,7 +579,7 @@ export default function MarketResearchPage() {
                     som: { ...data.som, value: parseFloat(e.target.value) || 0 } 
                   })}
                   placeholder="e.g., 500000000"
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
                 <select
                   value={data.som.currency}
@@ -587,7 +587,7 @@ export default function MarketResearchPage() {
                     ...data, 
                     som: { ...data.som, currency: e.target.value } 
                   })}
-                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 >
                   <option value="USD">USD</option>
                   <option value="EUR">EUR</option>
@@ -602,7 +602,7 @@ export default function MarketResearchPage() {
                     som: { ...data.som, description: e.target.value } 
                 })}
                 placeholder="Describe your realistic market capture..."
-                className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="w-full mt-2 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 rows={2}
               />
             </div>
@@ -635,16 +635,16 @@ export default function MarketResearchPage() {
       />
 
       {/* Target Audience Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
         <div className="flex items-center gap-2 mb-6">
           <Users className="w-5 h-5 text-orange-600" />
-          <h2 className="text-xl font-bold text-gray-900">Target Audience & Demographics</h2>
+          <h2 className="text-xl font-bold text-gray-100">Target Audience & Demographics</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {/* Customer Segments */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2">
               Customer Segments
             </label>
             <div className="flex gap-2 mb-2">
@@ -652,7 +652,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="segment-input"
                 placeholder="e.g., Small business owners"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -674,11 +674,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.targetAudience.segments.map((segment, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{segment}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{segment}</span>
                   <button
                     onClick={() => removeArrayItem(["targetAudience", "segments"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -689,7 +689,7 @@ export default function MarketResearchPage() {
 
           {/* Age Ranges */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2">
               Age Ranges
             </label>
             <div className="flex gap-2 mb-2">
@@ -697,7 +697,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="age-input"
                 placeholder="e.g., 25-34"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -719,11 +719,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.targetAudience.ageRanges.map((range, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{range}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{range}</span>
                   <button
                     onClick={() => removeArrayItem(["targetAudience", "ageRanges"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -734,7 +734,7 @@ export default function MarketResearchPage() {
 
           {/* Genders */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2">
               Gender Distribution
             </label>
             <div className="flex gap-2 mb-2">
@@ -742,7 +742,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="gender-input"
                 placeholder="e.g., All genders, 60% Female, 40% Male"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -764,11 +764,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.targetAudience.genders.map((gender, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{gender}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{gender}</span>
                   <button
                     onClick={() => removeArrayItem(["targetAudience", "genders"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -779,7 +779,7 @@ export default function MarketResearchPage() {
 
           {/* Locations */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2 flex items-center gap-2">
               <MapPin className="w-4 h-4 text-orange-600" />
               Geographic Locations
             </label>
@@ -788,7 +788,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="location-input"
                 placeholder="e.g., United States, Urban areas"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -810,11 +810,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.targetAudience.locations.map((location, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{location}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{location}</span>
                   <button
                     onClick={() => removeArrayItem(["targetAudience", "locations"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -825,7 +825,7 @@ export default function MarketResearchPage() {
 
           {/* Industries */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2">
               Target Industries
             </label>
             <div className="flex gap-2 mb-2">
@@ -833,7 +833,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="industry-input"
                 placeholder="e.g., Technology, Healthcare"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -855,11 +855,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.targetAudience.industries.map((industry, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{industry}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{industry}</span>
                   <button
                     onClick={() => removeArrayItem(["targetAudience", "industries"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -870,7 +870,7 @@ export default function MarketResearchPage() {
 
           {/* Income Levels */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2 flex items-center gap-2">
               <DollarSign className="w-4 h-4 text-orange-600" />
               Income Levels
             </label>
@@ -879,7 +879,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="income-input"
                 placeholder="e.g., $50k-$100k, High net worth"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -901,11 +901,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.targetAudience.incomeLevels.map((level, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{level}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{level}</span>
                   <button
                     onClick={() => removeArrayItem(["targetAudience", "incomeLevels"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -916,7 +916,7 @@ export default function MarketResearchPage() {
 
           {/* Behaviors */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2">
               Customer Behaviors
             </label>
             <div className="flex gap-2 mb-2">
@@ -924,7 +924,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="behavior-input"
                 placeholder="e.g., Online shoppers, Early adopters"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -946,11 +946,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.targetAudience.behaviors.map((behavior, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{behavior}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{behavior}</span>
                   <button
                     onClick={() => removeArrayItem(["targetAudience", "behaviors"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -961,7 +961,7 @@ export default function MarketResearchPage() {
 
           {/* Pain Points */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2 flex items-center gap-2">
               <AlertCircle className="w-4 h-4 text-orange-600" />
               Pain Points
             </label>
@@ -970,7 +970,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="pain-input"
                 placeholder="e.g., Time-consuming processes"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -992,11 +992,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.targetAudience.painPoints.map((pain, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{pain}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{pain}</span>
                   <button
                     onClick={() => removeArrayItem(["targetAudience", "painPoints"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -1008,15 +1008,15 @@ export default function MarketResearchPage() {
       </div>
 
       {/* Competitor Analysis */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
         <div className="flex items-center gap-2 mb-6">
           <Target className="w-5 h-5 text-orange-600" />
-          <h2 className="text-xl font-bold text-gray-900">Competitor Analysis</h2>
+          <h2 className="text-xl font-bold text-gray-100">Competitor Analysis</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2">
               Direct Competitors
             </label>
             <div className="flex gap-2 mb-2">
@@ -1024,7 +1024,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="direct-comp-input"
                 placeholder="Company name"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -1046,11 +1046,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.competitorAnalysis.directCompetitors.map((comp, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{comp}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{comp}</span>
                   <button
                     onClick={() => removeArrayItem(["competitorAnalysis", "directCompetitors"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -1060,7 +1060,7 @@ export default function MarketResearchPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2">
               Indirect Competitors
             </label>
             <div className="flex gap-2 mb-2">
@@ -1068,7 +1068,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="indirect-comp-input"
                 placeholder="Company name"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -1090,11 +1090,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.competitorAnalysis.indirectCompetitors.map((comp, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{comp}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{comp}</span>
                   <button
                     onClick={() => removeArrayItem(["competitorAnalysis", "indirectCompetitors"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -1104,7 +1104,7 @@ export default function MarketResearchPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-300 mb-2">
               Market Gaps / Opportunities
             </label>
             <div className="flex gap-2 mb-2">
@@ -1112,7 +1112,7 @@ export default function MarketResearchPage() {
                 type="text"
                 id="gap-input"
                 placeholder="Unmet need"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
                     const input = e.target as HTMLInputElement
@@ -1134,11 +1134,11 @@ export default function MarketResearchPage() {
             </div>
             <div className="space-y-2">
               {data.competitorAnalysis.marketGaps.map((gap, idx) => (
-                <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{gap}</span>
+                <div key={idx} className="flex items-center justify-between p-2 bg-[#111] rounded-lg">
+                  <span className="text-sm text-gray-300">{gap}</span>
                   <button
                     onClick={() => removeArrayItem(["competitorAnalysis", "marketGaps"], idx)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-400"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -1150,17 +1150,17 @@ export default function MarketResearchPage() {
       </div>
 
       {/* Market Trends */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
         <div className="flex items-center gap-2 mb-4">
           <BarChart3 className="w-5 h-5 text-orange-600" />
-          <h2 className="text-xl font-bold text-gray-900">Market Trends</h2>
+          <h2 className="text-xl font-bold text-gray-100">Market Trends</h2>
         </div>
         <div className="flex gap-2 mb-4">
           <input
             type="text"
             id="trend-input"
             placeholder="e.g., Growing demand for AI-powered solutions"
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+            className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 const input = e.target as HTMLInputElement
@@ -1182,11 +1182,11 @@ export default function MarketResearchPage() {
         </div>
         <div className="space-y-2">
           {data.marketTrends.map((trend, idx) => (
-            <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <span className="text-sm text-gray-700">{trend}</span>
+            <div key={idx} className="flex items-center justify-between p-3 bg-[#111] rounded-lg">
+              <span className="text-sm text-gray-300">{trend}</span>
               <button
                 onClick={() => removeArrayItem(["marketTrends"], idx)}
-                className="text-red-500 hover:text-red-700"
+                className="text-red-500 hover:text-red-400"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -1196,17 +1196,17 @@ export default function MarketResearchPage() {
       </div>
 
       {/* Data Sources */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
         <div className="flex items-center gap-2 mb-4">
           <Globe className="w-5 h-5 text-orange-600" />
-          <h2 className="text-xl font-bold text-gray-900">Data Sources & References</h2>
+          <h2 className="text-xl font-bold text-gray-100">Data Sources & References</h2>
         </div>
         <div className="flex gap-2 mb-4">
           <input
             type="text"
             id="source-input"
             placeholder="e.g., Statista - SaaS Market Report 2025"
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+            className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 const input = e.target as HTMLInputElement
@@ -1228,11 +1228,11 @@ export default function MarketResearchPage() {
         </div>
         <div className="space-y-2">
           {data.dataSources.map((source, idx) => (
-            <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <span className="text-sm text-gray-700">{source}</span>
+            <div key={idx} className="flex items-center justify-between p-3 bg-[#111] rounded-lg">
+              <span className="text-sm text-gray-300">{source}</span>
               <button
                 onClick={() => removeArrayItem(["dataSources"], idx)}
-                className="text-red-500 hover:text-red-700"
+                className="text-red-500 hover:text-red-400"
               >
                 <Trash2 className="w-4 h-4" />
               </button>

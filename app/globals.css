@@ -111,44 +111,7 @@
   }
 }
 
-/* Dashboard-specific overrides for light background when needed */
-.dashboard-content input,
-.dashboard-content textarea,
-.dashboard-content select,
-.dashboard-content label,
-.dashboard-content p,
-.dashboard-content h1, 
-.dashboard-content h2, 
-.dashboard-content h3, 
-.dashboard-content h4, 
-.dashboard-content h5, 
-.dashboard-content h6,
-.dashboard-content span,
-.dashboard-content div {
-  color: #111827;
-}
-
-.dashboard-content input[type="text"],
-.dashboard-content input[type="email"],
-.dashboard-content input[type="password"],
-.dashboard-content input[type="tel"],
-.dashboard-content input[type="url"],
-.dashboard-content input[type="number"],
-.dashboard-content textarea,
-.dashboard-content select {
-  color: #111827 !important;
-  background-color: #ffffff !important;
-}
-
-.dashboard-content input::placeholder,
-.dashboard-content textarea::placeholder {
-  color: #6b7280 !important;
-  opacity: 1 !important;
-}
-
-.dashboard-content label {
-  color: #374151 !important;
-}
+/* Dark theme form input styling */
 
 /* Custom noise texture overlay */
 .noise-overlay {
@@ -175,113 +138,37 @@
   background: oklch(0.7 0.2 45);
   color: oklch(0.08 0 0);
 }
-/* Dark Theme Dashboard Override - Apply globally to dashboard */
-.min-h-screen {
-  /* Override all white/light backgrounds in dashboard */
-  .bg-white {
-    @apply bg-[#1a1a1a] border-gray-800;
-  }
-  
-  .bg-gray-50 {
-    @apply bg-[#0a0a0a];
-  }
-  
-  .bg-gray-100 {
-    @apply bg-[#141414];
-  }
-  
-  .bg-orange-50 {
-    @apply bg-orange-500/10;
-  }
-  
-  .bg-green-50 {
-    @apply bg-green-500/10;
-  }
-  
-  .bg-blue-50 {
-    @apply bg-blue-500/10;
-  }
-  
-  .bg-red-50 {
-    @apply bg-red-500/10;
-  }
-  
-  .bg-purple-50 {
-    @apply bg-purple-500/10;
-  }
-  
-  /* Fix text contrast */
-  .text-gray-900 {
-    @apply text-gray-100;
-  }
-  
-  .text-gray-800 {
-    @apply text-gray-200;
-  }
-  
-  .text-gray-700 {
-    @apply text-gray-300;
-  }
-  
-  .text-gray-600 {
-    @apply text-gray-400;
-  }
-  
-  .text-gray-500 {
-    @apply text-gray-500;
-  }
-  
-  /* Fix borders */
-  .border-gray-200 {
-    @apply border-gray-800;
-  }
-  
-  .border-gray-300 {
-    @apply border-gray-700;
-  }
-  
-  /* Fix hover states */
-  .hover\:bg-gray-50:hover {
-    @apply bg-gray-800;
-  }
-  
-  .hover\:bg-gray-100:hover {
-    @apply bg-gray-800;
-  }
-  
-  .hover\:text-gray-700:hover {
-    @apply text-gray-200;
-  }
-  
-  .hover\:text-gray-900:hover {
-    @apply text-gray-100;
-  }
-  
-  /* Fix form inputs */
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="number"],
-  input[type="date"],
-  input[type="month"],
-  select,
-  textarea {
-    @apply bg-[#141414] text-gray-100 border-gray-700;
-  }
-  
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus,
-  input[type="number"]:focus,
-  input[type="date"]:focus,
-  input[type="month"]:focus,
-  select:focus,
-  textarea:focus {
-    @apply border-orange-500 ring-orange-500/50;
-  }
-  
-  /* Fix placeholders */
-  ::placeholder {
-    @apply text-gray-500;
-  }
+/* Global dark theme form input styling */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="month"],
+input[type="tel"],
+input[type="url"],
+select,
+textarea {
+  color: #e5e7eb;
+  background-color: #141414;
+  border-color: #374151;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #f97316;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.25);
+}
+
+::placeholder {
+  color: #6b7280;
 }

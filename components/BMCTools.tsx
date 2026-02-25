@@ -74,14 +74,14 @@ export function MarketSizeCalculator() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-4">
+    <div className="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border-2 border-blue-500/30 rounded-xl p-4">
       <div className="flex items-center gap-2 mb-3">
         <Target className="w-5 h-5 text-blue-600" />
-        <h4 className="font-bold text-blue-900">Market Size Calculator</h4>
+        <h4 className="font-bold text-blue-200">Market Size Calculator</h4>
       </div>
       <div className="space-y-3">
         <div>
-          <label className="block text-xs font-medium text-blue-800 mb-1">
+          <label className="block text-xs font-medium text-blue-300 mb-1">
             TAM - Total Addressable Market ($M)
           </label>
           <input
@@ -93,7 +93,7 @@ export function MarketSizeCalculator() {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-blue-800 mb-1">
+          <label className="block text-xs font-medium text-blue-300 mb-1">
             SAM - Serviceable Available Market ($M)
           </label>
           <input
@@ -105,7 +105,7 @@ export function MarketSizeCalculator() {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-blue-800 mb-1">
+          <label className="block text-xs font-medium text-blue-300 mb-1">
             Target Market Penetration (%)
           </label>
           <input
@@ -116,15 +116,15 @@ export function MarketSizeCalculator() {
             max="20"
             className="w-full"
           />
-          <div className="flex justify-between text-xs text-blue-700">
+          <div className="flex justify-between text-xs text-blue-400">
             <span>1%</span>
             <span className="font-bold">{penetration}%</span>
             <span>20%</span>
           </div>
         </div>
-        <div className="bg-white p-3 rounded-lg border-2 border-blue-300">
-          <p className="text-xs text-blue-700 mb-1">SOM - Serviceable Obtainable Market</p>
-          <p className="text-2xl font-bold text-blue-900">${calculateSOM()}M</p>
+        <div className="bg-[#1a1a1a] p-3 rounded-lg border-2 border-blue-300">
+          <p className="text-xs text-blue-400 mb-1">SOM - Serviceable Obtainable Market</p>
+          <p className="text-2xl font-bold text-blue-200">${calculateSOM()}M</p>
           <p className="text-xs text-blue-600 mt-1">Your realistic market opportunity</p>
         </div>
       </div>
@@ -154,14 +154,14 @@ export function PricingCalculator() {
   const status = getHealthStatus()
 
   return (
-    <div className="bg-gradient-to-br from-emerald-50 to-green-50 border-2 border-emerald-200 rounded-xl p-4">
+    <div className="bg-gradient-to-br from-emerald-50 to-green-500/10 border-2 border-emerald-500/30 rounded-xl p-4">
       <div className="flex items-center gap-2 mb-3">
         <DollarSign className="w-5 h-5 text-emerald-600" />
-        <h4 className="font-bold text-emerald-900">Pricing Health Check</h4>
+        <h4 className="font-bold text-emerald-200">Pricing Health Check</h4>
       </div>
       <div className="space-y-3">
         <div>
-          <label className="block text-xs font-medium text-emerald-800 mb-1">
+          <label className="block text-xs font-medium text-emerald-300 mb-1">
             Customer Acquisition Cost (CAC) $
           </label>
           <input
@@ -173,7 +173,7 @@ export function PricingCalculator() {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-emerald-800 mb-1">
+          <label className="block text-xs font-medium text-emerald-300 mb-1">
             Customer Lifetime Value (LTV) $
           </label>
           <input
@@ -185,7 +185,7 @@ export function PricingCalculator() {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-emerald-800 mb-1">
+          <label className="block text-xs font-medium text-emerald-300 mb-1">
             Gross Margin (%)
           </label>
           <input
@@ -196,7 +196,7 @@ export function PricingCalculator() {
             max="95"
             className="w-full"
           />
-          <div className="flex justify-between text-xs text-emerald-700">
+          <div className="flex justify-between text-xs text-emerald-400">
             <span>20%</span>
             <span className="font-bold">{margin}%</span>
             <span>95%</span>
@@ -204,15 +204,15 @@ export function PricingCalculator() {
         </div>
         <div className={`bg-${status.color}-100 border-2 border-${status.color}-300 p-3 rounded-lg`}>
           <div className="flex items-center justify-between mb-2">
-            <p className="text-xs text-gray-700">LTV:CAC Ratio</p>
+            <p className="text-xs text-gray-300">LTV:CAC Ratio</p>
             <span className="text-2xl">{status.emoji}</span>
           </div>
-          <p className="text-3xl font-bold text-gray-900">{getLTVtoCAC()}:1</p>
+          <p className="text-3xl font-bold text-gray-100">{getLTVtoCAC()}:1</p>
           <p className={`text-xs text-${status.color}-700 mt-1 font-medium`}>
             {status.text} • Target: 3:1 or higher
           </p>
         </div>
-        <div className="text-xs text-emerald-700 space-y-1">
+        <div className="text-xs text-emerald-400 space-y-1">
           <p>💡 <strong>Rule of thumb:</strong></p>
           <p>• LTV should be 3x+ your CAC</p>
           <p>• Payback period: CAC / (MRR × margin) months</p>
@@ -244,14 +244,14 @@ export function BreakEvenCalculator() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 rounded-xl p-4">
+    <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 border-2 border-orange-500/30 rounded-xl p-4">
       <div className="flex items-center gap-2 mb-3">
         <Calculator className="w-5 h-5 text-orange-600" />
-        <h4 className="font-bold text-orange-900">Break-Even Analysis</h4>
+        <h4 className="font-bold text-orange-200">Break-Even Analysis</h4>
       </div>
       <div className="space-y-3">
         <div>
-          <label className="block text-xs font-medium text-orange-800 mb-1">
+          <label className="block text-xs font-medium text-orange-300 mb-1">
             Monthly Fixed Costs ($)
           </label>
           <input
@@ -263,7 +263,7 @@ export function BreakEvenCalculator() {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-orange-800 mb-1">
+          <label className="block text-xs font-medium text-orange-300 mb-1">
             Variable Cost per Unit ($)
           </label>
           <input
@@ -275,7 +275,7 @@ export function BreakEvenCalculator() {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-orange-800 mb-1">
+          <label className="block text-xs font-medium text-orange-300 mb-1">
             Selling Price per Unit ($)
           </label>
           <input
@@ -287,13 +287,13 @@ export function BreakEvenCalculator() {
           />
         </div>
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white p-3 rounded-lg border-2 border-orange-300">
-            <p className="text-xs text-orange-700 mb-1">Break-Even Units</p>
-            <p className="text-xl font-bold text-orange-900">{calculateBreakEven()}</p>
+          <div className="bg-[#1a1a1a] p-3 rounded-lg border-2 border-orange-300">
+            <p className="text-xs text-orange-400 mb-1">Break-Even Units</p>
+            <p className="text-xl font-bold text-orange-200">{calculateBreakEven()}</p>
           </div>
-          <div className="bg-white p-3 rounded-lg border-2 border-orange-300">
-            <p className="text-xs text-orange-700 mb-1">Break-Even Revenue</p>
-            <p className="text-xl font-bold text-orange-900">${calculateRevenue()}</p>
+          <div className="bg-[#1a1a1a] p-3 rounded-lg border-2 border-orange-300">
+            <p className="text-xs text-orange-400 mb-1">Break-Even Revenue</p>
+            <p className="text-xl font-bold text-orange-200">${calculateRevenue()}</p>
           </div>
         </div>
       </div>
@@ -343,19 +343,19 @@ export function ExampleTemplates({ blockType, onSelect }: { blockType: string; o
   if (blockExamples.length === 0) return null
 
   return (
-    <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
+    <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
       <div className="flex items-center gap-2 mb-2">
         <Lightbulb className="w-4 h-4 text-purple-600" />
-        <h5 className="text-sm font-bold text-purple-900">Learn from Successful Companies</h5>
+        <h5 className="text-sm font-bold text-purple-200">Learn from Successful Companies</h5>
       </div>
       <div className="space-y-2">
         {blockExamples.map((example, idx) => (
           <button
             key={idx}
             onClick={() => onSelect(example.data)}
-            className="w-full text-left px-3 py-2 bg-white border border-purple-200 rounded-lg hover:bg-purple-50 transition-colors"
+            className="w-full text-left px-3 py-2 bg-[#1a1a1a] border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-colors"
           >
-            <p className="text-sm font-semibold text-purple-900">{example.name}</p>
+            <p className="text-sm font-semibold text-purple-200">{example.name}</p>
             <p className="text-xs text-purple-600">Click to use as template</p>
           </button>
         ))}

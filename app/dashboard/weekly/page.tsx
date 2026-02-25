@@ -123,7 +123,7 @@ export default function WeeklyTrackerPage() {
   if (!startup) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">Please create a startup profile first</p>
+        <p className="text-gray-400">Please create a startup profile first</p>
       </div>
     )
   }
@@ -139,7 +139,7 @@ export default function WeeklyTrackerPage() {
         <button
           type="button"
           onClick={() => addField(field)}
-          className="text-orange-600 text-sm hover:text-orange-700"
+          className="text-orange-600 text-sm hover:text-orange-400"
         >
           + Add More
         </button>
@@ -158,7 +158,7 @@ export default function WeeklyTrackerPage() {
               <button
                 type="button"
                 onClick={() => removeField(field, index)}
-                className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                className="p-2 text-red-600 hover:bg-red-500/10 rounded-lg"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -174,11 +174,11 @@ export default function WeeklyTrackerPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold flex items-center text-gray-900">
+          <h1 className="text-2xl font-bold flex items-center text-gray-100">
             <Calendar className="w-7 h-7 mr-3 text-orange-600" />
             Weekly Progress Tracker
           </h1>
-          <p className="text-gray-600 mt-1">Log your weekly activities and milestones</p>
+          <p className="text-gray-400 mt-1">Log your weekly activities and milestones</p>
         </div>
         {!showForm && !isReadOnly && (
           <button
@@ -193,12 +193,12 @@ export default function WeeklyTrackerPage() {
 
       {/* Form */}
       {showForm && (
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold">New Weekly Entry</h2>
             <button
               onClick={() => setShowForm(false)}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-400 hover:text-gray-300"
             >
               <X className="w-6 h-6" />
             </button>
@@ -259,7 +259,7 @@ export default function WeeklyTrackerPage() {
       {/* List */}
       <div className="space-y-4">
         {trackers.map((tracker) => (
-          <div key={tracker.id} className="bg-white rounded-lg shadow-sm p-6">
+          <div key={tracker.id} className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
             <h3 className="font-semibold text-lg mb-4">
               Week {tracker.weekNumber} - {tracker.month} {tracker.year}
             </h3>
@@ -267,8 +267,8 @@ export default function WeeklyTrackerPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {tracker.milestonesAchieved.length > 0 && (
                 <div>
-                  <p className="font-medium text-sm text-gray-700 mb-2">Milestones Achieved:</p>
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                  <p className="font-medium text-sm text-gray-300 mb-2">Milestones Achieved:</p>
+                  <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
                     {tracker.milestonesAchieved.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
                     ))}
@@ -278,8 +278,8 @@ export default function WeeklyTrackerPage() {
 
               {tracker.challenges.length > 0 && (
                 <div>
-                  <p className="font-medium text-sm text-gray-700 mb-2">Challenges:</p>
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                  <p className="font-medium text-sm text-gray-300 mb-2">Challenges:</p>
+                  <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
                     {tracker.challenges.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
                     ))}
@@ -289,8 +289,8 @@ export default function WeeklyTrackerPage() {
 
               {tracker.nextGoals.length > 0 && (
                 <div>
-                  <p className="font-medium text-sm text-gray-700 mb-2">Next Goals:</p>
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                  <p className="font-medium text-sm text-gray-300 mb-2">Next Goals:</p>
+                  <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
                     {tracker.nextGoals.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
                     ))}
@@ -300,8 +300,8 @@ export default function WeeklyTrackerPage() {
 
               {tracker.supportNeeded.length > 0 && (
                 <div>
-                  <p className="font-medium text-sm text-gray-700 mb-2">Support Needed:</p>
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                  <p className="font-medium text-sm text-gray-300 mb-2">Support Needed:</p>
+                  <ul className="list-disc list-inside text-sm text-gray-400 space-y-1">
                     {tracker.supportNeeded.map((item: string, i: number) => (
                       <li key={i}>{item}</li>
                     ))}

@@ -83,14 +83,14 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
   ]
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
       <div className="flex items-center gap-2 mb-4">
-        <div className="p-2 bg-teal-100 rounded-lg">
+        <div className="p-2 bg-teal-500/15 rounded-lg">
           <Eye className="w-5 h-5 text-teal-600" />
         </div>
-        <h2 className="text-xl font-bold text-gray-900">Customer Journey Map</h2>
+        <h2 className="text-xl font-bold text-gray-100">Customer Journey Map</h2>
       </div>
-      <p className="text-sm text-gray-600 mb-6">
+      <p className="text-sm text-gray-400 mb-6">
         Map the customer experience from first awareness to brand advocacy
       </p>
 
@@ -100,7 +100,7 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
             {/* Stage Header */}
             <div className={`bg-gradient-to-r from-${stage.color}-500 to-${stage.color}-600 rounded-t-xl p-4 text-white`}>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-[#1a1a1a]/20 rounded-full flex items-center justify-center">
                   <stage.icon className="w-6 h-6" />
                 </div>
                 <div>
@@ -114,11 +114,11 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
             </div>
 
             {/* Stage Content */}
-            <div className="border-2 border-gray-200 rounded-b-xl p-5 bg-gray-50">
+            <div className="border-2 border-gray-700 rounded-b-xl p-5 bg-[#111]">
               <div className="grid md:grid-cols-2 gap-4">
                 {/* Touchpoints */}
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-gray-300 mb-2">
                     📍 Touchpoints
                   </label>
                   <div className="flex gap-2 mb-2">
@@ -126,7 +126,7 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
                       type="text"
                       id={`${stage.key}-touchpoints`}
                       placeholder="e.g., Google search, social media"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 bg-white text-sm"
+                      className="flex-1 px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 bg-[#1a1a1a] text-sm"
                       onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                           const input = e.target as HTMLInputElement
@@ -148,11 +148,11 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
                   </div>
                   <div className="space-y-1">
                     {data[stage.key].touchpoints.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border border-gray-200 text-sm">
-                        <span className="text-gray-700">{item}</span>
+                      <div key={idx} className="flex items-center justify-between p-2 bg-[#1a1a1a] rounded border border-gray-700 text-sm">
+                        <span className="text-gray-300">{item}</span>
                         <button
                           onClick={() => removeItem(stage.key, 'touchpoints', idx)}
-                          className="text-red-500 hover:text-red-700 text-xs"
+                          className="text-red-500 hover:text-red-400 text-xs"
                         >
                           ×
                         </button>
@@ -163,7 +163,7 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
 
                 {/* Customer Actions */}
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-gray-300 mb-2">
                     🎯 Customer Actions
                   </label>
                   <div className="flex gap-2 mb-2">
@@ -171,7 +171,7 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
                       type="text"
                       id={`${stage.key}-actions`}
                       placeholder="e.g., Reads reviews, compares prices"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 bg-white text-sm"
+                      className="flex-1 px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 bg-[#1a1a1a] text-sm"
                       onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                           const input = e.target as HTMLInputElement
@@ -193,11 +193,11 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
                   </div>
                   <div className="space-y-1">
                     {data[stage.key].customerActions.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border border-gray-200 text-sm">
-                        <span className="text-gray-700">{item}</span>
+                      <div key={idx} className="flex items-center justify-between p-2 bg-[#1a1a1a] rounded border border-gray-700 text-sm">
+                        <span className="text-gray-300">{item}</span>
                         <button
                           onClick={() => removeItem(stage.key, 'customerActions', idx)}
-                          className="text-red-500 hover:text-red-700 text-xs"
+                          className="text-red-500 hover:text-red-400 text-xs"
                         >
                           ×
                         </button>
@@ -208,7 +208,7 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
 
                 {/* Pain Points */}
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-gray-300 mb-2">
                     ⚠️ Pain Points
                   </label>
                   <div className="flex gap-2 mb-2">
@@ -216,7 +216,7 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
                       type="text"
                       id={`${stage.key}-pains`}
                       placeholder="e.g., Too many options, confusing"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 bg-white text-sm"
+                      className="flex-1 px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 bg-[#1a1a1a] text-sm"
                       onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                           const input = e.target as HTMLInputElement
@@ -238,11 +238,11 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
                   </div>
                   <div className="space-y-1">
                     {data[stage.key].painPoints.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border border-gray-200 text-sm">
-                        <span className="text-gray-700">{item}</span>
+                      <div key={idx} className="flex items-center justify-between p-2 bg-[#1a1a1a] rounded border border-gray-700 text-sm">
+                        <span className="text-gray-300">{item}</span>
                         <button
                           onClick={() => removeItem(stage.key, 'painPoints', idx)}
-                          className="text-red-500 hover:text-red-700 text-xs"
+                          className="text-red-500 hover:text-red-400 text-xs"
                         >
                           ×
                         </button>
@@ -253,7 +253,7 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
 
                 {/* Opportunities */}
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-gray-300 mb-2">
                     💡 Opportunities
                   </label>
                   <div className="flex gap-2 mb-2">
@@ -261,7 +261,7 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
                       type="text"
                       id={`${stage.key}-opps`}
                       placeholder="e.g., Simplify onboarding, add chat"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 bg-white text-sm"
+                      className="flex-1 px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 bg-[#1a1a1a] text-sm"
                       onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                           const input = e.target as HTMLInputElement
@@ -283,11 +283,11 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
                   </div>
                   <div className="space-y-1">
                     {data[stage.key].opportunities.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border border-gray-200 text-sm">
-                        <span className="text-gray-700">{item}</span>
+                      <div key={idx} className="flex items-center justify-between p-2 bg-[#1a1a1a] rounded border border-gray-700 text-sm">
+                        <span className="text-gray-300">{item}</span>
                         <button
                           onClick={() => removeItem(stage.key, 'opportunities', idx)}
-                          className="text-red-500 hover:text-red-700 text-xs"
+                          className="text-red-500 hover:text-red-400 text-xs"
                         >
                           ×
                         </button>
@@ -309,8 +309,8 @@ export default function CustomerJourneyMap({ data, onChange }: CustomerJourneyPr
       </div>
 
       {/* Customer Journey Tips */}
-      <div className="mt-6 p-4 bg-teal-50 border border-teal-200 rounded-lg">
-        <p className="text-sm text-teal-900">
+      <div className="mt-6 p-4 bg-teal-500/10 border border-teal-500/30 rounded-lg">
+        <p className="text-sm text-teal-200">
           <strong>💡 Pro Tip:</strong> Identify pain points at each stage and design solutions to remove friction. 
           Great customer experiences drive retention and turn customers into advocates who bring in new business.
         </p>

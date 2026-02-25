@@ -1,20 +1,21 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Target, CheckCircle2, Circle, Plus, X } from "lucide-react"
+import { Target, CheckCircle2, Circle, Plus, X, Loader2 } from "lucide-react"
+import { useStartupData } from "@/hooks/useStartupData"
 
 const stages = [
-  { value: "IDEATION", label: "Ideation", color: "bg-gray-100 text-gray-700" },
-  { value: "PROTOTYPE", label: "Prototype", color: "bg-orange-100 text-orange-700" },
-  { value: "VALIDATION", label: "Validation", color: "bg-amber-100 text-amber-700" },
-  { value: "INCUBATION", label: "Incubation", color: "bg-yellow-100 text-yellow-700" },
-  { value: "ACCELERATION", label: "Acceleration", color: "bg-yellow-100 text-yellow-700" },
-  { value: "GROWTH", label: "Growth", color: "bg-orange-100 text-orange-700" },
-  { value: "SCALE", label: "Scale", color: "bg-red-100 text-red-700" },
+  { value: "IDEATION", label: "Ideation", color: "bg-[#141414] text-gray-300" },
+  { value: "PROTOTYPE", label: "Prototype", color: "bg-orange-500/15 text-orange-400" },
+  { value: "VALIDATION", label: "Validation", color: "bg-amber-500/15 text-amber-400" },
+  { value: "INCUBATION", label: "Incubation", color: "bg-yellow-500/15 text-yellow-400" },
+  { value: "ACCELERATION", label: "Acceleration", color: "bg-yellow-500/15 text-yellow-400" },
+  { value: "GROWTH", label: "Growth", color: "bg-orange-500/15 text-orange-400" },
+  { value: "SCALE", label: "Scale", color: "bg-red-500/15 text-red-400" },
 ]
 
 export default function TimelinePage() {
-  const [startup, setStartup] = useState<any>(null)
+  const { startup, loading: startupLoading, isReadOnly } = useStartupData()
   const [milestones, setMilestones] = useState<any[]>([])
   const [showForm, setShowForm] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -26,24 +27,28 @@ export default function TimelinePage() {
   })
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    if (startup?.id) {
+      fetchMilestones()
+    }
+  }, [startup])
 
-  const fetchData = async () => {
+  const fetchMilestones = async () => {
+    if (!startup?.id) return
     try {
-      const startupRes = await fetch("/api/startup")
-      const startupData = await startupRes.json()
-      if (startupData.length > 0) {
-        setStartup(startupData[0])
-        
-        const milestonesRes = await fetch(`/api/milestone?startupId=${startupData[0].id}`)
-        const milestonesData = await milestonesRes.json()
+      const milestonesRes = await fetch(`/api/milestone?startupId=${startup.id}`)
+      const milestonesData = await milestonesRes.json()
+      if (Array.isArray(milestonesData)) {
         setMilestones(milestonesData)
+      } else {
+        setMilestones([])
       }
     } catch (error) {
-      console.error("Error fetching data:", error)
+      console.error("Error fetching milestones:", error)
+      setMilestones([])
     }
   }
+
+  const fetchData = () => fetchMilestones()
 
   const toggleMilestone = async (milestone: any) => {
     try {
@@ -124,10 +129,18 @@ export default function TimelinePage() {
     setFormData({ ...formData, criteria: newCriteria })
   }
 
+  if (startupLoading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
+      </div>
+    )
+  }
+
   if (!startup) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">Please create a startup profile first</p>
+        <p className="text-gray-400">Please create a startup profile first</p>
       </div>
     )
   }
@@ -145,11 +158,11 @@ export default function TimelinePage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold flex items-center text-gray-900">
+          <h1 className="text-2xl font-bold flex items-center text-gray-100">
             <Target className="w-7 h-7 mr-3 text-orange-600" />
             Startup Timeline
           </h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-400 mt-1">
             Track your progress through each stage - Current: <strong>{startup.stage}</strong>
           </p>
         </div>
@@ -165,30 +178,30 @@ export default function TimelinePage() {
       </div>
 
       {/* Progress Bar */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-gray-700">Overall Progress</span>
-          <span className="text-sm font-semibold text-gray-900">{progressPercent}%</span>
+          <span className="text-sm font-medium text-gray-300">Overall Progress</span>
+          <span className="text-sm font-semibold text-gray-100">{progressPercent}%</span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-3">
+        <div className="w-full bg-[#1f1f1f] rounded-full h-3">
           <div
             className="bg-orange-500 h-3 rounded-full transition-all duration-300"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
-        <p className="text-xs text-gray-500 mt-2">
+        <p className="text-xs text-gray-400 mt-2">
           {completedCount} of {totalCount} milestones completed
         </p>
       </div>
 
       {/* Add Milestone Form */}
       {showForm && (
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">Add New Milestone</h2>
+            <h2 className="text-xl font-semibold text-gray-100">Add New Milestone</h2>
             <button
               onClick={() => setShowForm(false)}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-400 hover:text-gray-300"
             >
               <X className="w-6 h-6" />
             </button>
@@ -196,11 +209,11 @@ export default function TimelinePage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-900">Stage</label>
+              <label className="block text-sm font-medium mb-2 text-gray-100">Stage</label>
               <select
                 value={formData.stage}
                 onChange={(e) => setFormData({ ...formData, stage: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
               >
                 {stages.map(stage => (
                   <option key={stage.value} value={stage.value}>{stage.label}</option>
@@ -209,35 +222,35 @@ export default function TimelinePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-900">Milestone Title</label>
+              <label className="block text-sm font-medium mb-2 text-gray-100">Milestone Title</label>
               <input
                 type="text"
                 required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 placeholder="e.g., Complete market research"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-900">Description</label>
+              <label className="block text-sm font-medium mb-2 text-gray-100">Description</label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={3}
                 placeholder="Optional details..."
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
               />
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-900">Success Criteria</label>
+                <label className="block text-sm font-medium text-gray-100">Success Criteria</label>
                 <button
                   type="button"
                   onClick={addCriteria}
-                  className="text-orange-600 text-sm hover:text-orange-700"
+                  className="text-orange-600 text-sm hover:text-orange-400"
                 >
                   + Add Criteria
                 </button>
@@ -250,13 +263,13 @@ export default function TimelinePage() {
                       value={criteria}
                       onChange={(e) => updateCriteria(index, e.target.value)}
                       placeholder="e.g., Survey 50+ potential customers"
-                      className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                      className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
                     />
                     {formData.criteria.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removeCriteria(index)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                        className="p-2 text-red-600 hover:bg-red-500/10 rounded-lg"
                       >
                         <X className="w-5 h-5" />
                       </button>
@@ -284,7 +297,7 @@ export default function TimelinePage() {
           const isCurrentStage = startup.stage === stage.value
           
           return (
-            <div key={stage.value} className="bg-white rounded-lg shadow-sm p-6">
+            <div key={stage.value} className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
                   <div className={`px-4 py-2 rounded-full font-semibold ${stage.color}`}>
@@ -296,20 +309,20 @@ export default function TimelinePage() {
                     </span>
                   )}
                 </div>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-400">
                   {stageMilestones.filter(m => m.completed).length} / {stageMilestones.length} completed
                 </span>
               </div>
 
               {stageMilestones.length === 0 ? (
-                <p className="text-gray-500 text-sm italic">No milestones added for this stage</p>
+                <p className="text-gray-400 text-sm italic">No milestones added for this stage</p>
               ) : (
                 <div className="space-y-3">
                   {stageMilestones.map((milestone) => (
                     <div
                       key={milestone.id}
                       className={`border rounded-lg p-4 transition-all ${
-                        milestone.completed ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'
+                        milestone.completed ? 'bg-green-500/10 border-green-500/30' : 'bg-[#111] border-gray-700'
                       }`}
                     >
                       <div className="flex items-start gap-3">
@@ -324,16 +337,16 @@ export default function TimelinePage() {
                           )}
                         </button>
                         <div className="flex-1">
-                          <h4 className={`font-medium ${milestone.completed ? 'text-green-900 line-through' : 'text-gray-900'}`}>
+                          <h4 className={`font-medium ${milestone.completed ? 'text-green-200 line-through' : 'text-gray-100'}`}>
                             {milestone.title}
                           </h4>
                           {milestone.description && (
-                            <p className="text-sm text-gray-600 mt-1">{milestone.description}</p>
+                            <p className="text-sm text-gray-400 mt-1">{milestone.description}</p>
                           )}
                           {milestone.criteria.length > 0 && (
                             <ul className="mt-2 space-y-1">
                               {milestone.criteria.map((criteria: string, i: number) => (
-                                <li key={i} className="text-xs text-gray-500 flex items-center">
+                                <li key={i} className="text-xs text-gray-400 flex items-center">
                                   <span className="mr-2">•</span>
                                   {criteria}
                                 </li>

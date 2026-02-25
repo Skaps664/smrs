@@ -471,15 +471,15 @@ export default function BusinessModelCanvasPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "ACTIVE":
-        return "bg-green-100 text-green-800"
+        return "bg-green-500/15 text-green-300"
       case "DRAFT":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-yellow-500/15 text-yellow-300"
       case "TESTING":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-500/15 text-blue-300"
       case "ARCHIVED":
-        return "bg-gray-100 text-gray-800"
+        return "bg-[#141414] text-gray-200"
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-[#141414] text-gray-200"
     }
   }
 
@@ -503,7 +503,7 @@ export default function BusinessModelCanvasPage() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading Business Model Canvas...</p>
+          <p className="text-gray-400">Loading Business Model Canvas...</p>
         </div>
       </div>
     )
@@ -514,8 +514,8 @@ export default function BusinessModelCanvasPage() {
       {/* Header */}
       <div className="mb-6 flex flex-col md:flex-row md:justify-between md:items-start gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Business Model Canvas</h1>
-          <p className="text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-100 mb-2">Business Model Canvas</h1>
+          <p className="text-gray-400">
             Strategic management tool to visualize, design, and innovate your business model
           </p>
         </div>
@@ -532,7 +532,7 @@ export default function BusinessModelCanvasPage() {
             className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
               showHistory
                 ? "bg-orange-600 text-white"
-                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                : "bg-[#1a1a1a] text-gray-300 border border-gray-600 hover:bg-[#111]"
             }`}
           >
             {showHistory ? <EyeOff className="w-4 h-4" /> : <History className="w-4 h-4" />}
@@ -556,11 +556,11 @@ export default function BusinessModelCanvasPage() {
       {/* Tutorial Video Modal - Full Screen Popup */}
       {showTutorial && (
         <div 
-          className="fixed inset-0 bg-white/40 backdrop-blur-md z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-[#1a1a1a]/40 backdrop-blur-md z-50 flex items-center justify-center p-4"
           onClick={() => setShowTutorial(false)}
         >
           <div 
-            className="bg-white rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-[#1a1a1a] rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-t-2xl flex justify-between items-center z-10">
@@ -573,7 +573,7 @@ export default function BusinessModelCanvasPage() {
               </div>
               <button
                 onClick={() => setShowTutorial(false)}
-                className="text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition-colors"
+                className="text-white hover:bg-[#1a1a1a] hover:bg-opacity-20 p-2 rounded-lg transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
@@ -581,28 +581,28 @@ export default function BusinessModelCanvasPage() {
 
             <div className="p-8">
               {/* Introduction Section */}
-              <div className="mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-orange-200 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <div className="mb-8 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border-2 border-orange-500/30 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-blue-200 mb-3 flex items-center gap-2">
                   <Lightbulb className="w-6 h-6" />
                   What is Business Model Canvas?
                 </h3>
-                <p className="text-blue-800 leading-relaxed mb-4">
+                <p className="text-blue-300 leading-relaxed mb-4">
                   The Business Model Canvas is a strategic management tool that helps you visualize, design, and reinvent your business model. 
                   It consists of 9 building blocks that cover the four main areas of a business: customers, offer, infrastructure, and financial viability.
                 </p>
                 <div className="grid md:grid-cols-2 gap-4 mt-4">
-                  <div className="bg-white bg-opacity-60 p-4 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">✅ Perfect For:</h4>
-                    <ul className="text-sm text-blue-800 space-y-1">
+                  <div className="bg-[#1a1a1a] bg-opacity-60 p-4 rounded-lg">
+                    <h4 className="font-semibold text-blue-200 mb-2">✅ Perfect For:</h4>
+                    <ul className="text-sm text-blue-300 space-y-1">
                       <li>• Startups validating business ideas</li>
                       <li>• Existing businesses pivoting</li>
                       <li>• Teams aligning on strategy</li>
                       <li>• Investors evaluating opportunities</li>
                     </ul>
                   </div>
-                  <div className="bg-white bg-opacity-60 p-4 rounded-lg">
-                    <h4 className="font-semibold text-blue-900 mb-2">🎯 Key Benefits:</h4>
-                    <ul className="text-sm text-blue-800 space-y-1">
+                  <div className="bg-[#1a1a1a] bg-opacity-60 p-4 rounded-lg">
+                    <h4 className="font-semibold text-blue-200 mb-2">🎯 Key Benefits:</h4>
+                    <ul className="text-sm text-blue-300 space-y-1">
                       <li>• Visualize entire business on one page</li>
                       <li>• Test assumptions quickly</li>
                       <li>• Communicate clearly with stakeholders</li>
@@ -615,7 +615,7 @@ export default function BusinessModelCanvasPage() {
               {/* Video Tutorials Grid */}
               <div className="space-y-8">
                 {/* Video 1 - Complete Overview */}
-                <div className="border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="border-2 border-gray-700 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="bg-gradient-to-r from-orange-500 to-amber-600 text-white p-4">
                     <h3 className="text-lg font-bold flex items-center gap-2">
                       <Play className="w-5 h-5" />
@@ -632,15 +632,15 @@ export default function BusinessModelCanvasPage() {
                       allowFullScreen
                     />
                   </div>
-                  <div className="p-4 bg-gray-50">
-                    <p className="text-sm text-gray-700">
+                  <div className="p-4 bg-[#111]">
+                    <p className="text-sm text-gray-300">
                       <strong>What you'll learn:</strong> Introduction to all 9 blocks, how they interconnect, and real-world examples from successful companies.
                     </p>
                   </div>
                 </div>
 
                 {/* Video 2 - Practical Tutorial */}
-                <div className="border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="border-2 border-gray-700 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4">
                     <h3 className="text-lg font-bold flex items-center gap-2">
                       <Play className="w-5 h-5" />
@@ -657,15 +657,15 @@ export default function BusinessModelCanvasPage() {
                       allowFullScreen
                     />
                   </div>
-                  <div className="p-4 bg-gray-50">
-                    <p className="text-sm text-gray-700">
+                  <div className="p-4 bg-[#111]">
+                    <p className="text-sm text-gray-300">
                       <strong>What you'll learn:</strong> Practical workshop-style tutorial showing exactly how to brainstorm and fill each block with your business ideas.
                     </p>
                   </div>
                 </div>
 
                 {/* Video 3 - Real Examples */}
-                <div className="border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="border-2 border-gray-700 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="bg-gradient-to-r from-purple-500 to-pink-600 text-white p-4">
                     <h3 className="text-lg font-bold flex items-center gap-2">
                       <Play className="w-5 h-5" />
@@ -682,15 +682,15 @@ export default function BusinessModelCanvasPage() {
                       allowFullScreen
                     />
                   </div>
-                  <div className="p-4 bg-gray-50">
-                    <p className="text-sm text-gray-700">
+                  <div className="p-4 bg-[#111]">
+                    <p className="text-sm text-gray-300">
                       <strong>What you'll learn:</strong> Deep dive into how tech giants structured their business models, key patterns to replicate, and lessons learned.
                     </p>
                   </div>
                 </div>
 
                 {/* Video 4 - Advanced Strategies */}
-                <div className="border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="border-2 border-gray-700 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white p-4">
                     <h3 className="text-lg font-bold flex items-center gap-2">
                       <Play className="w-5 h-5" />
@@ -707,8 +707,8 @@ export default function BusinessModelCanvasPage() {
                       allowFullScreen
                     />
                   </div>
-                  <div className="p-4 bg-gray-50">
-                    <p className="text-sm text-gray-700">
+                  <div className="p-4 bg-[#111]">
+                    <p className="text-sm text-gray-300">
                       <strong>What you'll learn:</strong> How to test your business model hypotheses, get customer feedback, and iterate based on real data.
                     </p>
                   </div>
@@ -717,12 +717,12 @@ export default function BusinessModelCanvasPage() {
 
               {/* Quick Reference Guide */}
               <div className="mt-8 grid md:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-orange-200 rounded-lg p-5">
-                  <h4 className="font-bold text-blue-900 mb-3 flex items-center gap-2">
+                <div className="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border-2 border-orange-500/30 rounded-lg p-5">
+                  <h4 className="font-bold text-blue-200 mb-3 flex items-center gap-2">
                     <Users className="w-5 h-5" />
                     Customer Side
                   </h4>
-                  <ul className="space-y-2 text-sm text-blue-800">
+                  <ul className="space-y-2 text-sm text-blue-300">
                     <li><strong>Customer Segments:</strong> Who are you serving?</li>
                     <li><strong>Value Propositions:</strong> What problems do you solve?</li>
                     <li><strong>Channels:</strong> How do you reach customers?</li>
@@ -731,24 +731,24 @@ export default function BusinessModelCanvasPage() {
                   </ul>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg p-5">
-                  <h4 className="font-bold text-purple-900 mb-3 flex items-center gap-2">
+                <div className="bg-gradient-to-br from-purple-500/10 to-pink-50 border-2 border-purple-500/30 rounded-lg p-5">
+                  <h4 className="font-bold text-purple-200 mb-3 flex items-center gap-2">
                     <Boxes className="w-5 h-5" />
                     Infrastructure
                   </h4>
-                  <ul className="space-y-2 text-sm text-purple-800">
+                  <ul className="space-y-2 text-sm text-purple-300">
                     <li><strong>Key Resources:</strong> What assets do you need?</li>
                     <li><strong>Key Activities:</strong> What must you do?</li>
                     <li><strong>Key Partnerships:</strong> Who helps you?</li>
                   </ul>
                 </div>
 
-                <div className="bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200 rounded-lg p-5">
-                  <h4 className="font-bold text-red-900 mb-3 flex items-center gap-2">
+                <div className="bg-gradient-to-br from-red-500/10 to-orange-500/10 border-2 border-red-500/30 rounded-lg p-5">
+                  <h4 className="font-bold text-red-200 mb-3 flex items-center gap-2">
                     <DollarSign className="w-5 h-5" />
                     Financial Viability
                   </h4>
-                  <ul className="space-y-2 text-sm text-red-800">
+                  <ul className="space-y-2 text-sm text-red-300">
                     <li><strong>Cost Structure:</strong> What are your expenses?</li>
                     <li><strong>Revenue Model:</strong> How much do you charge?</li>
                     <li><strong>Profitability:</strong> Revenue &gt; Costs?</li>
@@ -757,15 +757,15 @@ export default function BusinessModelCanvasPage() {
               </div>
 
               {/* Pro Tips Section */}
-              <div className="mt-8 bg-gradient-to-br from-yellow-50 to-amber-50 border-2 border-yellow-300 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-yellow-900 mb-4 flex items-center gap-2">
+              <div className="mt-8 bg-gradient-to-br from-yellow-500/10 to-amber-500/10 border-2 border-yellow-300 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-yellow-200 mb-4 flex items-center gap-2">
                   <Lightbulb className="w-6 h-6" />
                   Pro Tips for Success
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <h4 className="font-semibold text-yellow-900 mb-2">✍️ When Creating:</h4>
-                    <ul className="space-y-2 text-sm text-yellow-800">
+                    <h4 className="font-semibold text-yellow-200 mb-2">✍️ When Creating:</h4>
+                    <ul className="space-y-2 text-sm text-yellow-300">
                       <li>• Start with Customer Segments - everything flows from understanding your customers</li>
                       <li>• Use sticky notes initially - embrace messy brainstorming</li>
                       <li>• Work with your team - diverse perspectives = better model</li>
@@ -774,8 +774,8 @@ export default function BusinessModelCanvasPage() {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-yellow-900 mb-2">🔄 When Iterating:</h4>
-                    <ul className="space-y-2 text-sm text-yellow-800">
+                    <h4 className="font-semibold text-yellow-200 mb-2">🔄 When Iterating:</h4>
+                    <ul className="space-y-2 text-sm text-yellow-300">
                       <li>• Test ONE assumption at a time - don't change everything at once</li>
                       <li>• Talk to real customers weekly - they'll tell you what's wrong</li>
                       <li>• Create new versions regularly - track your evolution</li>
@@ -787,15 +787,15 @@ export default function BusinessModelCanvasPage() {
               </div>
 
               {/* Common Mistakes to Avoid */}
-              <div className="mt-8 bg-gradient-to-br from-red-50 to-pink-50 border-2 border-red-200 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-red-900 mb-4 flex items-center gap-2">
+              <div className="mt-8 bg-gradient-to-br from-red-500/10 to-pink-50 border-2 border-red-500/30 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-red-200 mb-4 flex items-center gap-2">
                   <HelpCircle className="w-6 h-6" />
                   Common Mistakes to Avoid
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white bg-opacity-60 p-4 rounded-lg">
-                    <h4 className="font-semibold text-red-900 mb-2">❌ Don't Do This:</h4>
-                    <ul className="space-y-2 text-sm text-red-800">
+                  <div className="bg-[#1a1a1a] bg-opacity-60 p-4 rounded-lg">
+                    <h4 className="font-semibold text-red-200 mb-2">❌ Don't Do This:</h4>
+                    <ul className="space-y-2 text-sm text-red-300">
                       <li>• Making it perfect before testing with customers</li>
                       <li>• Targeting "everyone" as your customer segment</li>
                       <li>• Ignoring the cost structure (most critical!)</li>
@@ -804,9 +804,9 @@ export default function BusinessModelCanvasPage() {
                       <li>• Being vague - "good quality" tells you nothing</li>
                     </ul>
                   </div>
-                  <div className="bg-white bg-opacity-60 p-4 rounded-lg">
-                    <h4 className="font-semibold text-green-900 mb-2">✅ Do This Instead:</h4>
-                    <ul className="space-y-2 text-sm text-green-800">
+                  <div className="bg-[#1a1a1a] bg-opacity-60 p-4 rounded-lg">
+                    <h4 className="font-semibold text-green-200 mb-2">✅ Do This Instead:</h4>
+                    <ul className="space-y-2 text-sm text-green-300">
                       <li>• Create quickly, test with 5-10 customers, iterate</li>
                       <li>• Define specific niches: "Remote SaaS teams 10-50 people"</li>
                       <li>• Calculate break-even point in first draft</li>
@@ -869,13 +869,13 @@ export default function BusinessModelCanvasPage() {
       <div className="flex gap-6">
         {/* History Sidebar */}
         {showHistory && (
-          <div className="w-80 flex-shrink-0 bg-white rounded-xl shadow-lg p-6 max-h-[900px] overflow-y-auto">
+          <div className="w-80 flex-shrink-0 bg-[#1a1a1a] rounded-xl shadow-lg p-6 max-h-[900px] overflow-y-auto">
             <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
               <History className="w-5 h-5 text-orange-600" />
               Versions
             </h2>
             {businessModels.length === 0 ? (
-              <p className="text-gray-500 text-sm">No canvases created yet</p>
+              <p className="text-gray-400 text-sm">No canvases created yet</p>
             ) : (
               <div className="space-y-3">
                 {businessModels.map((bm) => (
@@ -888,8 +888,8 @@ export default function BusinessModelCanvasPage() {
                     }}
                     className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                       selectedVersion?.id === bm.id
-                        ? "border-orange-500 bg-orange-50"
-                        : "border-gray-200 hover:border-orange-300 hover:bg-gray-50"
+                        ? "border-orange-500 bg-orange-500/10"
+                        : "border-gray-700 hover:border-orange-300 hover:bg-[#111]"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
@@ -899,17 +899,17 @@ export default function BusinessModelCanvasPage() {
                         {bm.status}
                       </div>
                     </div>
-                    <p className="font-medium text-gray-900 mb-1">{bm.versionName}</p>
-                    <p className="text-xs text-gray-500 mb-2">
+                    <p className="font-medium text-gray-100 mb-1">{bm.versionName}</p>
+                    <p className="text-xs text-gray-400 mb-2">
                       {new Date(bm.createdAt).toLocaleDateString()}
                     </p>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-[#1f1f1f] rounded-full h-2">
                       <div
                         className="bg-orange-600 h-2 rounded-full transition-all"
                         style={{ width: `${bm.completionPercentage || 0}%` }}
                       />
                     </div>
-                    <p className="text-xs text-gray-600 mt-1">{bm.completionPercentage || 0}% complete</p>
+                    <p className="text-xs text-gray-400 mt-1">{bm.completionPercentage || 0}% complete</p>
                     {selectedVersion?.id === bm.id && !isCreating && (
                       <div className="flex gap-2 mt-3">
                         <button
@@ -918,7 +918,7 @@ export default function BusinessModelCanvasPage() {
                             loadVersionToForm(bm)
                             setIsEditing(true)
                           }}
-                          className="text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded hover:bg-orange-200 transition-colors"
+                          className="text-xs bg-orange-500/15 text-orange-400 px-3 py-1 rounded hover:bg-orange-500/20 transition-colors"
                         >
                           Edit
                         </button>
@@ -927,7 +927,7 @@ export default function BusinessModelCanvasPage() {
                             e.stopPropagation()
                             handleDelete(bm.id)
                           }}
-                          className="text-xs bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 transition-colors"
+                          className="text-xs bg-red-500/15 text-red-400 px-3 py-1 rounded hover:bg-red-500/20 transition-colors"
                         >
                           Delete
                         </button>
@@ -944,14 +944,14 @@ export default function BusinessModelCanvasPage() {
         <div className="flex-1 min-w-0">
           {isCreating || isEditing ? (
             // Edit/Create Mode - Will add detailed forms in next part
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-[#1a1a1a] rounded-xl shadow-lg p-6">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold mb-4">
                   {isCreating ? "Create New Canvas" : "Edit Canvas"}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Version Name *
                     </label>
                     <input
@@ -959,11 +959,11 @@ export default function BusinessModelCanvasPage() {
                       value={formData.versionName}
                       onChange={(e) => setFormData({ ...formData, versionName: e.target.value })}
                       placeholder="e.g., Initial Model, Post-Pivot, Q3 2025"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Status</label>
                     <select
                       value={formData.status}
                       onChange={(e) =>
@@ -972,7 +972,7 @@ export default function BusinessModelCanvasPage() {
                           status: e.target.value as "DRAFT" | "ACTIVE" | "ARCHIVED" | "TESTING",
                         })
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     >
                       <option value="DRAFT">Draft</option>
                       <option value="TESTING">Testing</option>
@@ -982,7 +982,7 @@ export default function BusinessModelCanvasPage() {
                   </div>
                 </div>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Target Market
                   </label>
                   <input
@@ -990,17 +990,17 @@ export default function BusinessModelCanvasPage() {
                     value={formData.targetMarket}
                     onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
                     placeholder="Who is this business model targeting?"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
                 </div>
 
                 {/* Completion Progress */}
-                <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                <div className="mb-6 p-4 bg-[#111] rounded-lg">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-700">Canvas Completion</span>
+                    <span className="text-sm font-medium text-gray-300">Canvas Completion</span>
                     <span className="text-sm font-bold text-orange-600">{calculateCompletion()}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className="w-full bg-[#1f1f1f] rounded-full h-3">
                     <div
                       className="bg-gradient-to-r from-orange-500 to-amber-500 h-3 rounded-full transition-all"
                       style={{ width: `${calculateCompletion()}%` }}
@@ -1012,12 +1012,12 @@ export default function BusinessModelCanvasPage() {
               {/* 9 Building Blocks - Simplified Editors */}
               <div className="space-y-6 max-w-4xl">
                 {/* 1. Customer Segments */}
-                <div className="bg-blue-50 border-2 border-orange-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-blue-500/10 border-2 border-orange-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <Users className="w-6 h-6 text-blue-900" />
-                    <h3 className="text-lg font-bold text-blue-900">1. Customer Segments</h3>
+                    <Users className="w-6 h-6 text-blue-200" />
+                    <h3 className="text-lg font-bold text-blue-200">1. Customer Segments</h3>
                   </div>
-                  <p className="text-sm text-blue-800 mb-4">Who are your most important customers?</p>
+                  <p className="text-sm text-blue-300 mb-4">Who are your most important customers?</p>
                   
                   <textarea
                     value={simpleFields.customerSegmentsText}
@@ -1026,9 +1026,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;Small businesses with 10-50 employees who need accounting software&#10;&#10;Tech-savvy millennials aged 25-35 who prefer mobile apps&#10;&#10;Enterprise companies with 500+ employees needing custom solutions"
                     className="w-full px-4 py-3 border-2 border-blue-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-blue-100 border border-blue-300 rounded-lg">
-                    <p className="text-sm text-blue-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-blue-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-blue-500/15 border border-blue-300 rounded-lg">
+                    <p className="text-sm text-blue-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-blue-300 leading-relaxed">
                       Think of your customers like groups of friends at school. Each group has different interests! 
                       For example: "Tech-savvy small business owners aged 30-45 who hate doing paperwork" or 
                       "Busy parents who need to save time on grocery shopping". Be specific about WHO they are, 
@@ -1038,12 +1038,12 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* 2. Value Propositions */}
-                <div className="bg-orange-50 border-2 border-orange-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-orange-500/10 border-2 border-orange-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <Gift className="w-6 h-6 text-orange-900" />
-                    <h3 className="text-lg font-bold text-orange-900">2. Value Propositions</h3>
+                    <Gift className="w-6 h-6 text-orange-200" />
+                    <h3 className="text-lg font-bold text-orange-200">2. Value Propositions</h3>
                   </div>
-                  <p className="text-sm text-orange-800 mb-4">What value do you deliver to customers?</p>
+                  <p className="text-sm text-orange-300 mb-4">What value do you deliver to customers?</p>
                   
                   <textarea
                     value={simpleFields.valuePropositionsText}
@@ -1052,9 +1052,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;Save 10 hours per week on manual data entry through AI automation&#10;&#10;Reduce operational costs by 40% with smart workflow optimization&#10;&#10;Get 99.9% uptime guarantee with 24/7 support"
                     className="w-full px-4 py-3 border-2 border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-orange-100 border border-orange-300 rounded-lg">
-                    <p className="text-sm text-orange-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-orange-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-orange-500/15 border border-orange-300 rounded-lg">
+                    <p className="text-sm text-orange-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-orange-300 leading-relaxed">
                       What's the SUPERPOWER you give to customers? Like a magic wand! For example: "Our app turns 
                       8 hours of boring work into just 30 minutes" or "We make sure you never forget your mom's 
                       birthday again!" Answer these: What PAIN do they have? What's your SOLUTION? Why are you 
@@ -1064,12 +1064,12 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* 3. Channels */}
-                <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-green-500/10 border-2 border-green-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <TrendingUp className="w-6 h-6 text-green-900" />
-                    <h3 className="text-lg font-bold text-green-900">3. Channels</h3>
+                    <TrendingUp className="w-6 h-6 text-green-200" />
+                    <h3 className="text-lg font-bold text-green-200">3. Channels</h3>
                   </div>
-                  <p className="text-sm text-green-800 mb-4">How do you reach and serve customers?</p>
+                  <p className="text-sm text-green-300 mb-4">How do you reach and serve customers?</p>
                   <textarea
                     value={simpleFields.channelsText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, channelsText: e.target.value })}
@@ -1077,9 +1077,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;Instagram & Facebook ads to create awareness&#10;&#10;Company website for product information and purchases&#10;&#10;Email marketing for customer retention&#10;&#10;Mobile app for direct sales"
                     className="w-full px-4 py-3 border-2 border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-green-100 border border-green-300 rounded-lg">
-                    <p className="text-sm text-green-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-green-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-green-500/15 border border-green-300 rounded-lg">
+                    <p className="text-sm text-green-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-green-300 leading-relaxed">
                       This is HOW customers find you and buy from you - like the path to a treasure! Examples: 
                       "They find us on Instagram ads" → "They visit our website" → "They buy through our app" → 
                       "We deliver via email". Think of it as: How do they DISCOVER you? How do they BUY? 
@@ -1089,12 +1089,12 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* 4. Customer Relationships */}
-                <div className="bg-purple-50 border-2 border-purple-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <MessageSquare className="w-6 h-6 text-purple-900" />
-                    <h3 className="text-lg font-bold text-purple-900">4. Customer Relationships</h3>
+                    <MessageSquare className="w-6 h-6 text-purple-200" />
+                    <h3 className="text-lg font-bold text-purple-200">4. Customer Relationships</h3>
                   </div>
-                  <p className="text-sm text-purple-800 mb-4">How do you interact with each customer segment?</p>
+                  <p className="text-sm text-purple-300 mb-4">How do you interact with each customer segment?</p>
                   <textarea
                     value={simpleFields.customerRelationshipsText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, customerRelationshipsText: e.target.value })}
@@ -1102,9 +1102,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;24/7 live chat support for premium customers&#10;&#10;Self-service knowledge base and tutorials&#10;&#10;Monthly webinars and training sessions&#10;&#10;Dedicated account manager for enterprise clients"
                     className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-purple-100 border border-purple-300 rounded-lg">
-                    <p className="text-sm text-purple-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-purple-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-purple-500/15 border border-purple-300 rounded-lg">
+                    <p className="text-sm text-purple-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-purple-300 leading-relaxed">
                       How do you treat your customers? Like friends at a party! Are you: The helpful host who 
                       personally helps everyone (Personal assistance)? Or do you set up a buffet where people 
                       help themselves (Self-service)? Examples: "24/7 live chat support", "Automated email tips", 
@@ -1114,12 +1114,12 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* 5. Revenue Streams */}
-                <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <DollarSign className="w-6 h-6 text-emerald-900" />
-                    <h3 className="text-lg font-bold text-emerald-900">5. Revenue Streams</h3>
+                    <DollarSign className="w-6 h-6 text-emerald-200" />
+                    <h3 className="text-lg font-bold text-emerald-200">5. Revenue Streams</h3>
                   </div>
-                  <p className="text-sm text-emerald-800 mb-4">How do you generate revenue from each customer segment?</p>
+                  <p className="text-sm text-emerald-300 mb-4">How do you generate revenue from each customer segment?</p>
                   
                   <textarea
                     value={simpleFields.revenueStreamsText}
@@ -1128,9 +1128,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;Monthly SaaS subscription - $49/month per user&#10;&#10;One-time software license - $299&#10;&#10;Commission-based - 10% of each transaction&#10;&#10;Freemium model - Free basic + Premium $99/year"
                     className="w-full px-4 py-3 border-2 border-emerald-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-emerald-100 border border-emerald-300 rounded-lg">
-                    <p className="text-sm text-emerald-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-emerald-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-emerald-500/15 border border-emerald-300 rounded-lg">
+                    <p className="text-sm text-emerald-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-emerald-300 leading-relaxed">
                       This is your MONEY MACHINE! How do people pay you? Like a lemonade stand: Do they pay 
                       $1 each time (One-time sale)? Or $5 every month to get lemonade whenever they want 
                       (Subscription)? Examples: "Monthly subscription $49/month", "One-time purchase $299", 
@@ -1140,12 +1140,12 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* 6. Key Resources */}
-                <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-indigo-500/10 border-2 border-indigo-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <Boxes className="w-6 h-6 text-indigo-900" />
-                    <h3 className="text-lg font-bold text-indigo-900">6. Key Resources</h3>
+                    <Boxes className="w-6 h-6 text-indigo-200" />
+                    <h3 className="text-lg font-bold text-indigo-200">6. Key Resources</h3>
                   </div>
-                  <p className="text-sm text-indigo-800 mb-4">What key assets are essential to your business model?</p>
+                  <p className="text-sm text-indigo-300 mb-4">What key assets are essential to your business model?</p>
                   <textarea
                     value={simpleFields.keyResourcesText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, keyResourcesText: e.target.value })}
@@ -1153,9 +1153,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;Team of 10 experienced software developers&#10;&#10;Proprietary AI algorithm with patents&#10;&#10;$500K in funding for operations&#10;&#10;Modern office space and computers&#10;&#10;Strong brand reputation in the market"
                     className="w-full px-4 py-3 border-2 border-indigo-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-indigo-100 border border-indigo-300 rounded-lg">
-                    <p className="text-sm text-indigo-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-indigo-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-indigo-500/15 border border-indigo-300 rounded-lg">
+                    <p className="text-sm text-indigo-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-indigo-300 leading-relaxed">
                       What STUFF do you absolutely NEED to run your business? Like ingredients for baking cookies! 
                       This could be: THINGS you can touch (computers, office, factory), SMART STUFF (your app code, 
                       patents, brand name), PEOPLE (developers, salespeople), or MONEY (cash in the bank). 
@@ -1165,12 +1165,12 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* 7. Key Activities */}
-                <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-yellow-500/10 border-2 border-yellow-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <Zap className="w-6 h-6 text-yellow-900" />
-                    <h3 className="text-lg font-bold text-yellow-900">7. Key Activities</h3>
+                    <Zap className="w-6 h-6 text-yellow-200" />
+                    <h3 className="text-lg font-bold text-yellow-200">7. Key Activities</h3>
                   </div>
-                  <p className="text-sm text-yellow-800 mb-4">What key actions must you perform to operate successfully?</p>
+                  <p className="text-sm text-yellow-300 mb-4">What key actions must you perform to operate successfully?</p>
                   <textarea
                     value={simpleFields.keyActivitiesText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, keyActivitiesText: e.target.value })}
@@ -1178,9 +1178,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;Daily software development and coding&#10;&#10;Customer support and problem solving&#10;&#10;Marketing and social media campaigns&#10;&#10;Product testing and quality assurance&#10;&#10;Sales calls and customer acquisition"
                     className="w-full px-4 py-3 border-2 border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-yellow-100 border border-yellow-300 rounded-lg">
-                    <p className="text-sm text-yellow-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-yellow-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-yellow-500/15 border border-yellow-300 rounded-lg">
+                    <p className="text-sm text-yellow-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-yellow-300 leading-relaxed">
                       What do you DO every day to keep your business running? Like daily chores! If you're 
                       making an app: "Write code every day", "Fix bugs", "Talk to customers". If you're selling 
                       cookies: "Bake cookies", "Deliver to stores", "Create new recipes". What are the MOST 
@@ -1190,12 +1190,12 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* 8. Key Partnerships */}
-                <div className="bg-pink-50 border-2 border-pink-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-pink-500/10 border-2 border-pink-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <Handshake className="w-6 h-6 text-pink-900" />
-                    <h3 className="text-lg font-bold text-pink-900">8. Key Partnerships</h3>
+                    <Handshake className="w-6 h-6 text-pink-200" />
+                    <h3 className="text-lg font-bold text-pink-200">8. Key Partnerships</h3>
                   </div>
-                  <p className="text-sm text-pink-800 mb-4">Who are your key partners and suppliers?</p>
+                  <p className="text-sm text-pink-300 mb-4">Who are your key partners and suppliers?</p>
                   <textarea
                     value={simpleFields.keyPartnershipsText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, keyPartnershipsText: e.target.value })}
@@ -1203,9 +1203,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;Amazon Web Services for cloud hosting&#10;&#10;FedEx for product delivery and logistics&#10;&#10;Payment processor like Stripe or PayPal&#10;&#10;Marketing agency for advertising campaigns&#10;&#10;Legal firm for contracts and compliance"
                     className="w-full px-4 py-3 border-2 border-pink-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-pink-100 border border-pink-300 rounded-lg">
-                    <p className="text-sm text-pink-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-pink-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-pink-500/15 border border-pink-300 rounded-lg">
+                    <p className="text-sm text-pink-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-pink-300 leading-relaxed">
                       Who are your HELPERS and FRIENDS in business? You can't do everything alone! Like having 
                       teammates. Examples: "Amazon Web Services hosts our website", "FedEx delivers our packages", 
                       "Local bakery supplies our ingredients", "Marketing agency creates our ads". Who do you 
@@ -1215,12 +1215,12 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* 9. Cost Structure */}
-                <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-red-500/10 border-2 border-red-500/30 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <Receipt className="w-6 h-6 text-red-900" />
-                    <h3 className="text-lg font-bold text-red-900">9. Cost Structure</h3>
+                    <Receipt className="w-6 h-6 text-red-200" />
+                    <h3 className="text-lg font-bold text-red-200">9. Cost Structure</h3>
                   </div>
-                  <p className="text-sm text-red-800 mb-4">What are the most important costs in your business model?</p>
+                  <p className="text-sm text-red-300 mb-4">What are the most important costs in your business model?</p>
                   <textarea
                     value={simpleFields.costStructureText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, costStructureText: e.target.value })}
@@ -1228,9 +1228,9 @@ export default function BusinessModelCanvasPage() {
                     placeholder="Example:&#10;&#10;Employee salaries - $25,000/month (5 employees)&#10;&#10;Office rent and utilities - $3,000/month&#10;&#10;Cloud hosting (AWS) - $500/month&#10;&#10;Marketing and advertising - $2,000/month&#10;&#10;Software licenses and tools - $300/month"
                     className="w-full px-4 py-3 border-2 border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm resize-none"
                   />
-                  <div className="mt-3 p-3 bg-red-100 border border-red-300 rounded-lg">
-                    <p className="text-sm text-red-900 font-semibold mb-2">🎯 Super Simple Tip:</p>
-                    <p className="text-xs text-red-800 leading-relaxed">
+                  <div className="mt-3 p-3 bg-red-500/15 border border-red-300 rounded-lg">
+                    <p className="text-sm text-red-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
+                    <p className="text-xs text-red-300 leading-relaxed">
                       What do you SPEND money on? Your piggy bank going OUT! Think about: Money you pay EVERY 
                       month no matter what (rent, salaries, website hosting) = FIXED costs. Money that changes 
                       based on sales (shipping, materials) = VARIABLE costs. Examples: "Office rent $2000/month", 
@@ -1240,14 +1240,14 @@ export default function BusinessModelCanvasPage() {
                 </div>
 
                 {/* Additional Notes */}
-                <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-6">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Additional Notes</h3>
+                <div className="bg-[#111] border-2 border-gray-700 rounded-xl p-6">
+                  <h3 className="text-lg font-bold text-gray-100 mb-4">Additional Notes</h3>
                   <textarea
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                     rows={3}
                     placeholder="Any additional context, assumptions, or insights about your business model..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    className="w-full px-3 py-2 border border-gray-600 rounded-lg"
                   />
                 </div>
               </div>
@@ -1267,7 +1267,7 @@ export default function BusinessModelCanvasPage() {
                     setIsEditing(false)
                     resetForm()
                   }}
-                  className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+                  className="bg-[#1f1f1f] text-gray-300 px-6 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors"
                 >
                   Cancel
                 </button>
@@ -1275,7 +1275,7 @@ export default function BusinessModelCanvasPage() {
             </div>
           ) : selectedVersion ? (
             // View Mode - Will add detailed view in next part
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-[#1a1a1a] rounded-xl shadow-lg p-6">
               <div className="mb-6 flex justify-between items-start">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
@@ -1289,7 +1289,7 @@ export default function BusinessModelCanvasPage() {
                       {selectedVersion.status}
                     </div>
                   </div>
-                  <p className="text-gray-600">
+                  <p className="text-gray-400">
                     Version {selectedVersion.versionNumber} •{" "}
                     {new Date(selectedVersion.createdAt).toLocaleDateString()} •{" "}
                     {selectedVersion.completionPercentage || 0}% complete
@@ -1311,19 +1311,19 @@ export default function BusinessModelCanvasPage() {
                 {/* Left Column - Key Partners & Activities & Resources */}
                 <div className="space-y-4">
                   {/* Key Partnerships */}
-                  <div className="bg-pink-50 border-2 border-pink-200 rounded-xl p-5 min-h-[200px]">
+                  <div className="bg-pink-500/10 border-2 border-pink-500/30 rounded-xl p-5 min-h-[200px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <Handshake className="w-5 h-5 text-pink-900" />
-                      <h3 className="font-bold text-pink-900">Key Partnerships</h3>
+                      <Handshake className="w-5 h-5 text-pink-200" />
+                      <h3 className="font-bold text-pink-200">Key Partnerships</h3>
                     </div>
                     {selectedVersion.keyPartnerships.length === 0 ? (
-                      <p className="text-sm text-pink-700 italic">No partnerships added</p>
+                      <p className="text-sm text-pink-400 italic">No partnerships added</p>
                     ) : (
                       <div className="space-y-2">
                         {selectedVersion.keyPartnerships.map((p: any, idx: number) => (
-                          <div key={idx} className="bg-white p-2 rounded text-sm">
-                            <p className="font-semibold text-pink-900">{p.partner}</p>
-                            <p className="text-xs text-pink-700">{p.type} • {p.value}</p>
+                          <div key={idx} className="bg-[#1a1a1a] p-2 rounded text-sm">
+                            <p className="font-semibold text-pink-200">{p.partner}</p>
+                            <p className="text-xs text-pink-400">{p.type} • {p.value}</p>
                           </div>
                         ))}
                       </div>
@@ -1331,19 +1331,19 @@ export default function BusinessModelCanvasPage() {
                   </div>
 
                   {/* Key Activities */}
-                  <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-5 min-h-[200px]">
+                  <div className="bg-yellow-500/10 border-2 border-yellow-500/30 rounded-xl p-5 min-h-[200px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <Zap className="w-5 h-5 text-yellow-900" />
-                      <h3 className="font-bold text-yellow-900">Key Activities</h3>
+                      <Zap className="w-5 h-5 text-yellow-200" />
+                      <h3 className="font-bold text-yellow-200">Key Activities</h3>
                     </div>
                     {selectedVersion.keyActivities.length === 0 ? (
-                      <p className="text-sm text-yellow-700 italic">No activities added</p>
+                      <p className="text-sm text-yellow-400 italic">No activities added</p>
                     ) : (
                       <div className="space-y-2">
                         {selectedVersion.keyActivities.map((a: any, idx: number) => (
-                          <div key={idx} className="bg-white p-2 rounded text-sm">
-                            <p className="font-semibold text-yellow-900">{a.activity}</p>
-                            <p className="text-xs text-yellow-700">{a.category} • {a.frequency}</p>
+                          <div key={idx} className="bg-[#1a1a1a] p-2 rounded text-sm">
+                            <p className="font-semibold text-yellow-200">{a.activity}</p>
+                            <p className="text-xs text-yellow-400">{a.category} • {a.frequency}</p>
                           </div>
                         ))}
                       </div>
@@ -1351,19 +1351,19 @@ export default function BusinessModelCanvasPage() {
                   </div>
 
                   {/* Key Resources */}
-                  <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-5 min-h-[200px]">
+                  <div className="bg-indigo-500/10 border-2 border-indigo-500/30 rounded-xl p-5 min-h-[200px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <Boxes className="w-5 h-5 text-indigo-900" />
-                      <h3 className="font-bold text-indigo-900">Key Resources</h3>
+                      <Boxes className="w-5 h-5 text-indigo-200" />
+                      <h3 className="font-bold text-indigo-200">Key Resources</h3>
                     </div>
                     {selectedVersion.keyResources.length === 0 ? (
-                      <p className="text-sm text-indigo-700 italic">No resources added</p>
+                      <p className="text-sm text-indigo-400 italic">No resources added</p>
                     ) : (
                       <div className="space-y-2">
                         {selectedVersion.keyResources.map((r: any, idx: number) => (
-                          <div key={idx} className="bg-white p-2 rounded text-sm">
-                            <p className="font-semibold text-indigo-900">{r.resource}</p>
-                            <p className="text-xs text-indigo-700">{r.type} • {r.ownership}</p>
+                          <div key={idx} className="bg-[#1a1a1a] p-2 rounded text-sm">
+                            <p className="font-semibold text-indigo-200">{r.resource}</p>
+                            <p className="text-xs text-indigo-400">{r.type} • {r.ownership}</p>
                           </div>
                         ))}
                       </div>
@@ -1374,20 +1374,20 @@ export default function BusinessModelCanvasPage() {
                 {/* Middle Column - Value Props, Customer Relationships, Channels, Customer Segments */}
                 <div className="space-y-4">
                   {/* Value Propositions */}
-                  <div className="bg-orange-50 border-2 border-orange-200 rounded-xl p-5 min-h-[250px]">
+                  <div className="bg-orange-500/10 border-2 border-orange-500/30 rounded-xl p-5 min-h-[250px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <Gift className="w-5 h-5 text-orange-900" />
-                      <h3 className="font-bold text-orange-900">Value Propositions</h3>
+                      <Gift className="w-5 h-5 text-orange-200" />
+                      <h3 className="font-bold text-orange-200">Value Propositions</h3>
                     </div>
                     {selectedVersion.valuePropositions.length === 0 ? (
-                      <p className="text-sm text-orange-700 italic">No value propositions added</p>
+                      <p className="text-sm text-orange-400 italic">No value propositions added</p>
                     ) : (
                       <div className="space-y-2">
                         {selectedVersion.valuePropositions.map((v: any, idx: number) => (
-                          <div key={idx} className="bg-white p-3 rounded text-sm">
-                            <p className="font-semibold text-orange-900 mb-1">{v.proposition}</p>
-                            <p className="text-xs text-orange-700 mb-1"><strong>Problem:</strong> {v.problem}</p>
-                            <p className="text-xs text-orange-700"><strong>Solution:</strong> {v.solution}</p>
+                          <div key={idx} className="bg-[#1a1a1a] p-3 rounded text-sm">
+                            <p className="font-semibold text-orange-200 mb-1">{v.proposition}</p>
+                            <p className="text-xs text-orange-400 mb-1"><strong>Problem:</strong> {v.problem}</p>
+                            <p className="text-xs text-orange-400"><strong>Solution:</strong> {v.solution}</p>
                           </div>
                         ))}
                       </div>
@@ -1395,19 +1395,19 @@ export default function BusinessModelCanvasPage() {
                   </div>
 
                   {/* Customer Relationships */}
-                  <div className="bg-purple-50 border-2 border-purple-200 rounded-xl p-5 min-h-[150px]">
+                  <div className="bg-purple-500/10 border-2 border-purple-500/30 rounded-xl p-5 min-h-[150px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <MessageSquare className="w-5 h-5 text-purple-900" />
-                      <h3 className="font-bold text-purple-900">Customer Relationships</h3>
+                      <MessageSquare className="w-5 h-5 text-purple-200" />
+                      <h3 className="font-bold text-purple-200">Customer Relationships</h3>
                     </div>
                     {selectedVersion.customerRelationships.length === 0 ? (
-                      <p className="text-sm text-purple-700 italic">No relationships defined</p>
+                      <p className="text-sm text-purple-400 italic">No relationships defined</p>
                     ) : (
                       <div className="space-y-2">
                         {selectedVersion.customerRelationships.map((cr: any, idx: number) => (
-                          <div key={idx} className="bg-white p-2 rounded text-sm">
-                            <p className="font-semibold text-purple-900">{cr.type}</p>
-                            <p className="text-xs text-purple-700">{cr.description}</p>
+                          <div key={idx} className="bg-[#1a1a1a] p-2 rounded text-sm">
+                            <p className="font-semibold text-purple-200">{cr.type}</p>
+                            <p className="text-xs text-purple-400">{cr.description}</p>
                           </div>
                         ))}
                       </div>
@@ -1415,19 +1415,19 @@ export default function BusinessModelCanvasPage() {
                   </div>
 
                   {/* Channels */}
-                  <div className="bg-green-50 border-2 border-green-200 rounded-xl p-5 min-h-[200px]">
+                  <div className="bg-green-500/10 border-2 border-green-500/30 rounded-xl p-5 min-h-[200px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <TrendingUp className="w-5 h-5 text-green-900" />
-                      <h3 className="font-bold text-green-900">Channels</h3>
+                      <TrendingUp className="w-5 h-5 text-green-200" />
+                      <h3 className="font-bold text-green-200">Channels</h3>
                     </div>
                     {selectedVersion.channels.length === 0 ? (
-                      <p className="text-sm text-green-700 italic">No channels added</p>
+                      <p className="text-sm text-green-400 italic">No channels added</p>
                     ) : (
                       <div className="space-y-2">
                         {selectedVersion.channels.map((c: any, idx: number) => (
-                          <div key={idx} className="bg-white p-2 rounded text-sm">
-                            <p className="font-semibold text-green-900">{c.channel}</p>
-                            <p className="text-xs text-green-700">{c.phase} • {c.type} • {c.direct ? 'Direct' : 'Partner'}</p>
+                          <div key={idx} className="bg-[#1a1a1a] p-2 rounded text-sm">
+                            <p className="font-semibold text-green-200">{c.channel}</p>
+                            <p className="text-xs text-green-400">{c.phase} • {c.type} • {c.direct ? 'Direct' : 'Partner'}</p>
                           </div>
                         ))}
                       </div>
@@ -1438,19 +1438,19 @@ export default function BusinessModelCanvasPage() {
                 {/* Right Column - Customer Segments, Revenue, Costs */}
                 <div className="space-y-4">
                   {/* Customer Segments */}
-                  <div className="bg-blue-50 border-2 border-orange-200 rounded-xl p-5 min-h-[250px]">
+                  <div className="bg-blue-500/10 border-2 border-orange-500/30 rounded-xl p-5 min-h-[250px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <Users className="w-5 h-5 text-blue-900" />
-                      <h3 className="font-bold text-blue-900">Customer Segments</h3>
+                      <Users className="w-5 h-5 text-blue-200" />
+                      <h3 className="font-bold text-blue-200">Customer Segments</h3>
                     </div>
                     {selectedVersion.customerSegments.length === 0 ? (
-                      <p className="text-sm text-blue-700 italic">No segments defined</p>
+                      <p className="text-sm text-blue-400 italic">No segments defined</p>
                     ) : (
                       <div className="space-y-2">
                         {selectedVersion.customerSegments.map((cs: any, idx: number) => (
-                          <div key={idx} className="bg-white p-3 rounded text-sm">
-                            <p className="font-semibold text-blue-900 mb-1">{cs.segment}</p>
-                            <p className="text-xs text-blue-700 mb-1">{cs.description}</p>
+                          <div key={idx} className="bg-[#1a1a1a] p-3 rounded text-sm">
+                            <p className="font-semibold text-blue-200 mb-1">{cs.segment}</p>
+                            <p className="text-xs text-blue-400 mb-1">{cs.description}</p>
                             {cs.size && <p className="text-xs text-blue-600">Size: {cs.size}</p>}
                           </div>
                         ))}
@@ -1459,19 +1459,19 @@ export default function BusinessModelCanvasPage() {
                   </div>
 
                   {/* Revenue Streams */}
-                  <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-5 min-h-[200px]">
+                  <div className="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-xl p-5 min-h-[200px]">
                     <div className="flex items-center gap-2 mb-3">
-                      <DollarSign className="w-5 h-5 text-emerald-900" />
-                      <h3 className="font-bold text-emerald-900">Revenue Streams</h3>
+                      <DollarSign className="w-5 h-5 text-emerald-200" />
+                      <h3 className="font-bold text-emerald-200">Revenue Streams</h3>
                     </div>
                     {selectedVersion.revenueStreams.length === 0 ? (
-                      <p className="text-sm text-emerald-700 italic">No revenue streams added</p>
+                      <p className="text-sm text-emerald-400 italic">No revenue streams added</p>
                     ) : (
                       <div className="space-y-2">
                         {selectedVersion.revenueStreams.map((rs: any, idx: number) => (
-                          <div key={idx} className="bg-white p-2 rounded text-sm">
-                            <p className="font-semibold text-emerald-900">{rs.stream}</p>
-                            <p className="text-xs text-emerald-700">{rs.type} • {rs.pricingModel} • {rs.frequency}</p>
+                          <div key={idx} className="bg-[#1a1a1a] p-2 rounded text-sm">
+                            <p className="font-semibold text-emerald-200">{rs.stream}</p>
+                            <p className="text-xs text-emerald-400">{rs.type} • {rs.pricingModel} • {rs.frequency}</p>
                           </div>
                         ))}
                       </div>
@@ -1481,19 +1481,19 @@ export default function BusinessModelCanvasPage() {
               </div>
 
               {/* Cost Structure - Full Width at Bottom */}
-              <div className="mt-4 bg-red-50 border-2 border-red-200 rounded-xl p-5">
+              <div className="mt-4 bg-red-500/10 border-2 border-red-500/30 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <Receipt className="w-5 h-5 text-red-900" />
-                  <h3 className="font-bold text-red-900">Cost Structure</h3>
+                  <Receipt className="w-5 h-5 text-red-200" />
+                  <h3 className="font-bold text-red-200">Cost Structure</h3>
                 </div>
                 {selectedVersion.costStructure.length === 0 ? (
-                  <p className="text-sm text-red-700 italic">No costs defined</p>
+                  <p className="text-sm text-red-400 italic">No costs defined</p>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {selectedVersion.costStructure.map((cost: any, idx: number) => (
-                      <div key={idx} className="bg-white p-3 rounded text-sm">
-                        <p className="font-semibold text-red-900">{cost.cost}</p>
-                        <p className="text-xs text-red-700">{cost.type} • {cost.fixed ? 'Fixed' : 'Variable'} • {cost.frequency}</p>
+                      <div key={idx} className="bg-[#1a1a1a] p-3 rounded text-sm">
+                        <p className="font-semibold text-red-200">{cost.cost}</p>
+                        <p className="text-xs text-red-400">{cost.type} • {cost.fixed ? 'Fixed' : 'Variable'} • {cost.frequency}</p>
                       </div>
                     ))}
                   </div>
@@ -1501,23 +1501,23 @@ export default function BusinessModelCanvasPage() {
               </div>
 
               {selectedVersion.notes && (
-                <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                  <h4 className="font-semibold text-gray-800 mb-2">Additional Notes</h4>
-                  <p className="text-gray-700 text-sm whitespace-pre-wrap">{selectedVersion.notes}</p>
+                <div className="mt-4 p-4 bg-[#111] rounded-lg border border-gray-700">
+                  <h4 className="font-semibold text-gray-200 mb-2">Additional Notes</h4>
+                  <p className="text-gray-300 text-sm whitespace-pre-wrap">{selectedVersion.notes}</p>
                 </div>
               )}
             </div>
           ) : (
             // Empty State
-            <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+            <div className="bg-[#1a1a1a] rounded-xl shadow-lg p-12 text-center">
               <div className="max-w-md mx-auto">
-                <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-20 h-20 bg-orange-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Plus className="w-10 h-10 text-orange-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <h3 className="text-2xl font-bold text-gray-100 mb-2">
                   No Business Model Canvas Created Yet
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-400 mb-6">
                   Start designing your business model to understand how you create, deliver, and capture value
                 </p>
                 <button

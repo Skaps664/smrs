@@ -115,7 +115,7 @@ export default function KPIDashboardPage() {
   if (!startup) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">Please create a startup profile first</p>
+        <p className="text-gray-400">Please create a startup profile first</p>
       </div>
     )
   }
@@ -141,11 +141,11 @@ export default function KPIDashboardPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold flex items-center text-gray-900">
+          <h1 className="text-2xl font-bold flex items-center text-gray-100">
             <BarChart3 className="w-7 h-7 mr-3 text-orange-600" />
             KPI Dashboard
           </h1>
-          <p className="text-gray-600 mt-1">Track key metrics and visualize trends</p>
+          <p className="text-gray-400 mt-1">Track key metrics and visualize trends</p>
         </div>
         {!showForm && !isReadOnly && (
           <button
@@ -159,7 +159,7 @@ export default function KPIDashboardPage() {
       </div>
 
       {/* Category Tabs */}
-      <div className="bg-white rounded-lg shadow-sm p-4">
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-4">
         <div className="flex flex-wrap gap-2">
           {categories.map(cat => (
             <button
@@ -168,7 +168,7 @@ export default function KPIDashboardPage() {
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 activeCategory === cat.value
                   ? "text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : "bg-[#141414] text-gray-300 hover:bg-[#1f1f1f]"
               }`}
               style={{
                 backgroundColor: activeCategory === cat.value ? cat.color : undefined,
@@ -182,12 +182,12 @@ export default function KPIDashboardPage() {
 
       {/* Add KPI Form */}
       {showForm && (
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">Add KPI Entry</h2>
+            <h2 className="text-xl font-semibold text-gray-100">Add KPI Entry</h2>
             <button
               onClick={() => setShowForm(false)}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-400 hover:text-gray-300"
             >
               <X className="w-6 h-6" />
             </button>
@@ -196,22 +196,22 @@ export default function KPIDashboardPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900">Date</label>
+                <label className="block text-sm font-medium mb-2 text-gray-100">Date</label>
                 <input
                   type="date"
                   required
                   value={formData.date}
                   onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900">Category</label>
+                <label className="block text-sm font-medium mb-2 text-gray-100">Category</label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
                 >
                   {categories.map(cat => (
                     <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -223,7 +223,7 @@ export default function KPIDashboardPage() {
             <div className="grid grid-cols-2 gap-4">
               {categoryFields[formData.category as keyof typeof categoryFields].map((field: any) => (
                 <div key={field.name}>
-                  <label className="block text-sm font-medium mb-2 text-gray-900">
+                  <label className="block text-sm font-medium mb-2 text-gray-100">
                     {field.label}
                   </label>
                   {field.type === "text" ? (
@@ -231,7 +231,7 @@ export default function KPIDashboardPage() {
                       type="text"
                       value={formData[field.name] || ""}
                       onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
                     />
                   ) : (
                     <input
@@ -239,7 +239,7 @@ export default function KPIDashboardPage() {
                       step={field.step || "1"}
                       value={formData[field.name] || ""}
                       onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
                     />
                   )}
                 </div>
@@ -247,13 +247,13 @@ export default function KPIDashboardPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-900">Notes</label>
+              <label className="block text-sm font-medium mb-2 text-gray-100">Notes</label>
               <textarea
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 rows={3}
                 placeholder="Additional context or observations..."
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-100"
               />
             </div>
 
@@ -270,8 +270,8 @@ export default function KPIDashboardPage() {
 
       {/* Charts */}
       {chartData.length > 0 ? (
-        <div className="bg-white rounded-lg shadow-sm p-6 space-y-6">
-          <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6 space-y-6">
+          <h3 className="text-lg font-semibold text-gray-100 flex items-center">
             <TrendingUp className="w-5 h-5 mr-2 text-orange-600" />
             {categories.find(c => c.value === activeCategory)?.label} Trends
           </h3>
@@ -324,24 +324,24 @@ export default function KPIDashboardPage() {
           )}
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-12 text-center">
           <BarChart3 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-600">No KPI data for {categories.find(c => c.value === activeCategory)?.label}</p>
-          <p className="text-sm text-gray-500 mt-2">Add your first entry to see trends</p>
+          <p className="text-gray-400">No KPI data for {categories.find(c => c.value === activeCategory)?.label}</p>
+          <p className="text-sm text-gray-400 mt-2">Add your first entry to see trends</p>
         </div>
       )}
 
       {/* Data Table */}
       {filteredKpis.length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold mb-4 text-gray-900">Recent Entries</h3>
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-100">Recent Entries</h3>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-3 px-4 text-gray-900">Date</th>
+                  <th className="text-left py-3 px-4 text-gray-100">Date</th>
                   {currentCategoryFields.slice(0, 4).map(field => (
-                    <th key={field.name} className="text-left py-3 px-4 text-gray-900">
+                    <th key={field.name} className="text-left py-3 px-4 text-gray-100">
                       {field.label}
                     </th>
                   ))}
@@ -349,12 +349,12 @@ export default function KPIDashboardPage() {
               </thead>
               <tbody>
                 {filteredKpis.slice(0, 10).map(kpi => (
-                  <tr key={kpi.id} className="border-b hover:bg-gray-50">
-                    <td className="py-3 px-4 text-gray-700">
+                  <tr key={kpi.id} className="border-b hover:bg-[#111]">
+                    <td className="py-3 px-4 text-gray-300">
                       {format(new Date(kpi.date), "MMM dd, yyyy")}
                     </td>
                     {currentCategoryFields.slice(0, 4).map(field => (
-                      <td key={field.name} className="py-3 px-4 text-gray-700">
+                      <td key={field.name} className="py-3 px-4 text-gray-300">
                         {kpi[field.name] !== null && kpi[field.name] !== undefined
                           ? kpi[field.name]
                           : "-"}

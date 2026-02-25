@@ -182,7 +182,7 @@ export default function MentorFeedbackPage() {
   if (!startup) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">Please create a startup profile first</p>
+        <p className="text-gray-400">Please create a startup profile first</p>
       </div>
     )
   }
@@ -198,7 +198,7 @@ export default function MentorFeedbackPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold flex items-center text-gray-900">
+          <h1 className="text-2xl font-bold flex items-center text-gray-100">
             <MessageSquare className="w-7 h-7 mr-3 text-teal-600" />
             Mentor Feedback
             {unreadCount > 0 && (
@@ -207,7 +207,7 @@ export default function MentorFeedbackPage() {
               </span>
             )}
           </h1>
-          <p className="text-gray-600 mt-1">Log mentor meetings and track progress</p>
+          <p className="text-gray-400 mt-1">Log mentor meetings and track progress</p>
         </div>
         <div className="flex gap-2">
           {unreadCount > 0 && !isReadOnly && (
@@ -233,33 +233,33 @@ export default function MentorFeedbackPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg shadow-sm p-4">
-          <p className="text-sm text-gray-600">Total Meetings</p>
-          <p className="text-2xl font-bold text-gray-900">{feedbacks.length}</p>
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-4">
+          <p className="text-sm text-gray-400">Total Meetings</p>
+          <p className="text-2xl font-bold text-gray-100">{feedbacks.length}</p>
         </div>
-        <div className="bg-teal-50 rounded-lg shadow-sm p-4 border border-teal-200">
-          <p className="text-sm text-gray-600">Average Progress Score</p>
-          <p className="text-2xl font-bold text-teal-700">
+        <div className="bg-teal-500/10 rounded-lg shadow-sm p-4 border border-teal-500/30">
+          <p className="text-sm text-gray-400">Average Progress Score</p>
+          <p className="text-2xl font-bold text-teal-400">
             {avgScore > 0 ? avgScore.toFixed(1) : "N/A"} / 10
           </p>
         </div>
-        <div className="bg-blue-50 rounded-lg shadow-sm p-4 border border-orange-200">
-          <p className="text-sm text-gray-600">Total Tasks Assigned</p>
-          <p className="text-2xl font-bold text-blue-700">
+        <div className="bg-blue-500/10 rounded-lg shadow-sm p-4 border border-orange-500/30">
+          <p className="text-sm text-gray-400">Total Tasks Assigned</p>
+          <p className="text-2xl font-bold text-blue-400">
             {feedbacks.reduce((acc, f) => acc + f.assignedTasks.length, 0)}
           </p>
         </div>
       </div>
 
       {/* Section Filter */}
-      <div className="bg-white rounded-lg shadow-sm p-4">
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-4">
         <div className="flex items-center gap-4">
-          <Filter className="w-5 h-5 text-gray-600" />
-          <label className="text-sm font-medium text-gray-700">Filter by Section:</label>
+          <Filter className="w-5 h-5 text-gray-400" />
+          <label className="text-sm font-medium text-gray-300">Filter by Section:</label>
           <select
             value={selectedSection}
             onChange={(e) => setSelectedSection(e.target.value)}
-            className="flex-1 max-w-xs px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-gray-900"
+            className="flex-1 max-w-xs px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-gray-100"
           >
             {SECTION_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -267,7 +267,7 @@ export default function MentorFeedbackPage() {
               </option>
             ))}
           </select>
-          <span className="text-sm text-gray-600">
+          <span className="text-sm text-gray-400">
             Showing {filteredFeedbacks.length} of {feedbacks.length} feedback(s)
           </span>
         </div>
@@ -275,12 +275,12 @@ export default function MentorFeedbackPage() {
 
       {/* Add Feedback Form */}
       {showForm && (
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">Log Mentor Meeting</h2>
+            <h2 className="text-xl font-semibold text-gray-100">Log Mentor Meeting</h2>
             <button
               onClick={() => setShowForm(false)}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-400 hover:text-gray-300"
             >
               <X className="w-6 h-6" />
             </button>
@@ -289,7 +289,7 @@ export default function MentorFeedbackPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900">
+                <label className="block text-sm font-medium mb-2 text-gray-100">
                   Mentor Name
                 </label>
                 <input
@@ -298,12 +298,12 @@ export default function MentorFeedbackPage() {
                   value={formData.mentorName}
                   onChange={(e) => setFormData({ ...formData, mentorName: e.target.value })}
                   placeholder="e.g., John Smith"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-100"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900">
+                <label className="block text-sm font-medium mb-2 text-gray-100">
                   Mentor Email (Optional)
                 </label>
                 <input
@@ -311,14 +311,14 @@ export default function MentorFeedbackPage() {
                   value={formData.mentorEmail}
                   onChange={(e) => setFormData({ ...formData, mentorEmail: e.target.value })}
                   placeholder="mentor@example.com"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-100"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900">
+                <label className="block text-sm font-medium mb-2 text-gray-100">
                   Meeting Date
                 </label>
                 <input
@@ -326,12 +326,12 @@ export default function MentorFeedbackPage() {
                   required
                   value={formData.meetingDate}
                   onChange={(e) => setFormData({ ...formData, meetingDate: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-100"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-900">
+                <label className="block text-sm font-medium mb-2 text-gray-100">
                   Progress Score (1-10)
                 </label>
                 <input
@@ -341,13 +341,13 @@ export default function MentorFeedbackPage() {
                   value={formData.progressScore}
                   onChange={(e) => setFormData({ ...formData, progressScore: e.target.value })}
                   placeholder="Rate your progress"
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-900"
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-100"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-900">
+              <label className="block text-sm font-medium mb-2 text-gray-100">
                 Meeting Notes
               </label>
               <textarea
@@ -356,12 +356,12 @@ export default function MentorFeedbackPage() {
                 onChange={(e) => setFormData({ ...formData, meetingNotes: e.target.value })}
                 rows={4}
                 placeholder="What was discussed in the meeting?"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-100"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-900">
+              <label className="block text-sm font-medium mb-2 text-gray-100">
                 Mentor Feedback
               </label>
               <textarea
@@ -370,19 +370,19 @@ export default function MentorFeedbackPage() {
                 onChange={(e) => setFormData({ ...formData, feedback: e.target.value })}
                 rows={4}
                 placeholder="What feedback did the mentor provide?"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-900"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-100"
               />
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-900">
+                <label className="block text-sm font-medium text-gray-100">
                   Assigned Tasks
                 </label>
                 <button
                   type="button"
                   onClick={addTask}
-                  className="text-teal-600 text-sm hover:text-teal-700"
+                  className="text-teal-600 text-sm hover:text-teal-400"
                 >
                   + Add Task
                 </button>
@@ -395,13 +395,13 @@ export default function MentorFeedbackPage() {
                       value={task}
                       onChange={(e) => updateTask(index, e.target.value)}
                       placeholder="e.g., Finalize pitch deck"
-                      className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-900"
+                      className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-500 text-gray-100"
                     />
                     {formData.assignedTasks.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removeTask(index)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                        className="p-2 text-red-600 hover:bg-red-500/10 rounded-lg"
                       >
                         <X className="w-5 h-5" />
                       </button>
@@ -425,14 +425,14 @@ export default function MentorFeedbackPage() {
       {/* Feedback History */}
       <div className="space-y-4">
         {filteredFeedbacks.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+          <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-12 text-center">
             <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-600">
+            <p className="text-gray-400">
               {selectedSection === "all" 
                 ? "No mentor feedback logged yet" 
                 : `No feedback for ${SECTION_OPTIONS.find(o => o.value === selectedSection)?.label}`}
             </p>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm text-gray-400 mt-2">
               {selectedSection === "all" 
                 ? "Add your first meeting to start tracking progress" 
                 : "Try selecting a different section"}
@@ -442,7 +442,7 @@ export default function MentorFeedbackPage() {
           filteredFeedbacks.map((feedback) => (
             <div 
               key={feedback.id} 
-              className={`bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow ${
+              className={`bg-[#1a1a1a] rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow ${
                 !feedback.isRead && !isReadOnly ? 'border-l-4 border-l-green-600' : ''
               }`}
             >
@@ -454,36 +454,36 @@ export default function MentorFeedbackPage() {
                         <span className="sr-only">Unread</span>
                       </span>
                     )}
-                    <h3 className="text-lg font-semibold text-gray-900">
+                    <h3 className="text-lg font-semibold text-gray-100">
                       {feedback.mentorName}
                     </h3>
                     {feedback.sectionName && (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800 border border-orange-200">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-500/15 text-orange-300 border border-orange-500/30">
                         <Tag className="w-3 h-3 mr-1" />
                         {feedback.sectionName}
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-400">
                     {format(new Date(feedback.meetingDate), "MMMM dd, yyyy")}
                   </p>
                   {feedback.mentorEmail && (
-                    <p className="text-sm text-gray-600 mt-1">{feedback.mentorEmail}</p>
+                    <p className="text-sm text-gray-400 mt-1">{feedback.mentorEmail}</p>
                   )}
                 </div>
                 <div className="flex flex-col gap-2 items-end">
                   {feedback.progressScore && (
-                    <div className="flex items-center gap-1 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+                    <div className="flex items-center gap-1 bg-teal-500/10 px-3 py-1 rounded-full border border-teal-500/30">
                       <Star className="w-4 h-4 text-teal-600 fill-teal-600" />
-                      <span className="font-semibold text-teal-700">
+                      <span className="font-semibold text-teal-400">
                         {feedback.progressScore}/10
                       </span>
                     </div>
                   )}
                   {feedback.rating && feedback.rating !== feedback.progressScore && (
-                    <div className="flex items-center gap-1 bg-orange-50 px-3 py-1 rounded-full border border-orange-200">
+                    <div className="flex items-center gap-1 bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/30">
                       <Star className="w-4 h-4 text-orange-600 fill-orange-600" />
-                      <span className="font-semibold text-orange-700 text-sm">
+                      <span className="font-semibold text-orange-400 text-sm">
                         Section: {feedback.rating}/10
                       </span>
                     </div>
@@ -494,27 +494,27 @@ export default function MentorFeedbackPage() {
               <div className="space-y-4">
                 {feedback.meetingNotes && (
                   <div>
-                    <h4 className="text-sm font-medium text-gray-700 mb-2">Meeting Notes</h4>
-                    <p className="text-gray-900 whitespace-pre-wrap bg-gray-50 p-3 rounded-lg">
+                    <h4 className="text-sm font-medium text-gray-300 mb-2">Meeting Notes</h4>
+                    <p className="text-gray-100 whitespace-pre-wrap bg-[#111] p-3 rounded-lg">
                       {feedback.meetingNotes}
                     </p>
                   </div>
                 )}
 
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">Feedback</h4>
-                  <p className="text-gray-900 whitespace-pre-wrap bg-gray-50 p-3 rounded-lg">
+                  <h4 className="text-sm font-medium text-gray-300 mb-2">Feedback</h4>
+                  <p className="text-gray-100 whitespace-pre-wrap bg-[#111] p-3 rounded-lg">
                     {feedback.feedback}
                   </p>
                 </div>
 
                 {feedback.suggestions && (
                   <div>
-                    <h4 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                    <h4 className="text-sm font-medium text-gray-300 mb-2 flex items-center">
                       <MessageSquare className="w-4 h-4 mr-1 text-orange-600" />
                       Suggestions for Improvement
                     </h4>
-                    <p className="text-gray-900 whitespace-pre-wrap bg-orange-50 p-3 rounded-lg border border-orange-200">
+                    <p className="text-gray-100 whitespace-pre-wrap bg-orange-500/10 p-3 rounded-lg border border-orange-500/30">
                       {feedback.suggestions}
                     </p>
                   </div>
@@ -522,10 +522,10 @@ export default function MentorFeedbackPage() {
 
                 {feedback.assignedTasks.length > 0 && (
                   <div>
-                    <h4 className="text-sm font-medium text-gray-700 mb-2">Assigned Tasks</h4>
-                    <ul className="space-y-2 bg-blue-50 p-3 rounded-lg border border-blue-200">
+                    <h4 className="text-sm font-medium text-gray-300 mb-2">Assigned Tasks</h4>
+                    <ul className="space-y-2 bg-blue-500/10 p-3 rounded-lg border border-blue-500/30">
                       {feedback.assignedTasks.map((task: string, i: number) => (
-                        <li key={i} className="flex items-start text-gray-900">
+                        <li key={i} className="flex items-start text-gray-100">
                           <span className="mr-2 mt-1 text-blue-600">•</span>
                           <span>{task}</span>
                         </li>

@@ -40,12 +40,12 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
       <div className="flex items-center gap-2 mb-6">
         <Target className="w-5 h-5 text-orange-600" />
-        <h2 className="text-xl font-bold text-gray-900">SWOT Analysis</h2>
+        <h2 className="text-xl font-bold text-gray-100">SWOT Analysis</h2>
         <div className="group relative">
-          <div className="w-4 h-4 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs text-gray-600 cursor-help">
+          <div className="w-4 h-4 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs text-gray-400 cursor-help">
             ?
           </div>
           <div className="absolute left-0 top-6 w-64 p-3 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
@@ -59,14 +59,14 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Strengths */}
-        <div className="border-2 border-green-200 rounded-xl p-5 bg-green-50">
+        <div className="border-2 border-green-500/30 rounded-xl p-5 bg-green-500/10">
           <div className="flex items-center gap-2 mb-4">
             <div className="p-2 bg-green-500 rounded-lg">
               <TrendingUp className="w-5 h-5 text-white" />
             </div>
-            <h3 className="text-lg font-bold text-green-900">Strengths</h3>
+            <h3 className="text-lg font-bold text-green-200">Strengths</h3>
           </div>
-          <p className="text-xs text-green-700 mb-3">Internal advantages & core competencies</p>
+          <p className="text-xs text-green-400 mb-3">Internal advantages & core competencies</p>
           
           <div className="flex gap-2 mb-3">
             <input
@@ -79,7 +79,7 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
                 }
               }}
               placeholder="e.g., Strong technical team"
-              className="flex-1 px-3 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 bg-white"
+              className="flex-1 px-3 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 bg-[#1a1a1a]"
             />
             <button
               onClick={() => addItem("strengths", inputs.strength)}
@@ -91,11 +91,11 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
           
           <div className="space-y-2">
             {swot.strengths.map((item, idx) => (
-              <div key={idx} className="flex items-start justify-between p-2 bg-white rounded-lg border border-green-200">
-                <span className="text-sm text-gray-700 flex-1">• {item}</span>
+              <div key={idx} className="flex items-start justify-between p-2 bg-[#1a1a1a] rounded-lg border border-green-500/30">
+                <span className="text-sm text-gray-300 flex-1">• {item}</span>
                 <button
                   onClick={() => removeItem("strengths", idx)}
-                  className="text-red-500 hover:text-red-700 ml-2"
+                  className="text-red-500 hover:text-red-400 ml-2"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -105,14 +105,14 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
         </div>
 
         {/* Weaknesses */}
-        <div className="border-2 border-red-200 rounded-xl p-5 bg-red-50">
+        <div className="border-2 border-red-500/30 rounded-xl p-5 bg-red-500/10">
           <div className="flex items-center gap-2 mb-4">
             <div className="p-2 bg-red-500 rounded-lg">
               <TrendingDown className="w-5 h-5 text-white" />
             </div>
-            <h3 className="text-lg font-bold text-red-900">Weaknesses</h3>
+            <h3 className="text-lg font-bold text-red-200">Weaknesses</h3>
           </div>
-          <p className="text-xs text-red-700 mb-3">Internal limitations & areas for improvement</p>
+          <p className="text-xs text-red-400 mb-3">Internal limitations & areas for improvement</p>
           
           <div className="flex gap-2 mb-3">
             <input
@@ -125,7 +125,7 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
                 }
               }}
               placeholder="e.g., Limited marketing budget"
-              className="flex-1 px-3 py-2 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 bg-white"
+              className="flex-1 px-3 py-2 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 bg-[#1a1a1a]"
             />
             <button
               onClick={() => addItem("weaknesses", inputs.weakness)}
@@ -137,11 +137,11 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
           
           <div className="space-y-2">
             {swot.weaknesses.map((item, idx) => (
-              <div key={idx} className="flex items-start justify-between p-2 bg-white rounded-lg border border-red-200">
-                <span className="text-sm text-gray-700 flex-1">• {item}</span>
+              <div key={idx} className="flex items-start justify-between p-2 bg-[#1a1a1a] rounded-lg border border-red-500/30">
+                <span className="text-sm text-gray-300 flex-1">• {item}</span>
                 <button
                   onClick={() => removeItem("weaknesses", idx)}
-                  className="text-red-500 hover:text-red-700 ml-2"
+                  className="text-red-500 hover:text-red-400 ml-2"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -151,14 +151,14 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
         </div>
 
         {/* Opportunities */}
-        <div className="border-2 border-blue-200 rounded-xl p-5 bg-blue-50">
+        <div className="border-2 border-blue-500/30 rounded-xl p-5 bg-blue-500/10">
           <div className="flex items-center gap-2 mb-4">
             <div className="p-2 bg-blue-500 rounded-lg">
               <Target className="w-5 h-5 text-white" />
             </div>
-            <h3 className="text-lg font-bold text-blue-900">Opportunities</h3>
+            <h3 className="text-lg font-bold text-blue-200">Opportunities</h3>
           </div>
-          <p className="text-xs text-blue-700 mb-3">External factors to leverage for growth</p>
+          <p className="text-xs text-blue-400 mb-3">External factors to leverage for growth</p>
           
           <div className="flex gap-2 mb-3">
             <input
@@ -171,7 +171,7 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
                 }
               }}
               placeholder="e.g., Growing market demand"
-              className="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
+              className="flex-1 px-3 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-[#1a1a1a]"
             />
             <button
               onClick={() => addItem("opportunities", inputs.opportunity)}
@@ -183,11 +183,11 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
           
           <div className="space-y-2">
             {swot.opportunities.map((item, idx) => (
-              <div key={idx} className="flex items-start justify-between p-2 bg-white rounded-lg border border-blue-200">
-                <span className="text-sm text-gray-700 flex-1">• {item}</span>
+              <div key={idx} className="flex items-start justify-between p-2 bg-[#1a1a1a] rounded-lg border border-blue-500/30">
+                <span className="text-sm text-gray-300 flex-1">• {item}</span>
                 <button
                   onClick={() => removeItem("opportunities", idx)}
-                  className="text-red-500 hover:text-red-700 ml-2"
+                  className="text-red-500 hover:text-red-400 ml-2"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -197,14 +197,14 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
         </div>
 
         {/* Threats */}
-        <div className="border-2 border-yellow-200 rounded-xl p-5 bg-yellow-50">
+        <div className="border-2 border-yellow-500/30 rounded-xl p-5 bg-yellow-500/10">
           <div className="flex items-center gap-2 mb-4">
             <div className="p-2 bg-yellow-500 rounded-lg">
               <AlertTriangle className="w-5 h-5 text-white" />
             </div>
-            <h3 className="text-lg font-bold text-yellow-900">Threats</h3>
+            <h3 className="text-lg font-bold text-yellow-200">Threats</h3>
           </div>
-          <p className="text-xs text-yellow-700 mb-3">External challenges & potential risks</p>
+          <p className="text-xs text-yellow-400 mb-3">External challenges & potential risks</p>
           
           <div className="flex gap-2 mb-3">
             <input
@@ -217,7 +217,7 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
                 }
               }}
               placeholder="e.g., New competitors entering"
-              className="flex-1 px-3 py-2 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 bg-white"
+              className="flex-1 px-3 py-2 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 bg-[#1a1a1a]"
             />
             <button
               onClick={() => addItem("threats", inputs.threat)}
@@ -229,11 +229,11 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
           
           <div className="space-y-2">
             {swot.threats.map((item, idx) => (
-              <div key={idx} className="flex items-start justify-between p-2 bg-white rounded-lg border border-yellow-200">
-                <span className="text-sm text-gray-700 flex-1">• {item}</span>
+              <div key={idx} className="flex items-start justify-between p-2 bg-[#1a1a1a] rounded-lg border border-yellow-500/30">
+                <span className="text-sm text-gray-300 flex-1">• {item}</span>
                 <button
                   onClick={() => removeItem("threats", idx)}
-                  className="text-red-500 hover:text-red-700 ml-2"
+                  className="text-red-500 hover:text-red-400 ml-2"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -244,8 +244,8 @@ export default function SwotAnalysis({ swot, onChange }: SwotAnalysisProps) {
       </div>
 
       {/* Tips */}
-      <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-        <p className="text-sm text-amber-900">
+      <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+        <p className="text-sm text-amber-200">
           <strong>💡 Tip:</strong> Use SWOT to develop strategies: leverage strengths to capitalize on opportunities, 
           use strengths to mitigate threats, improve weaknesses to seize opportunities, and minimize weaknesses to avoid threats.
         </p>

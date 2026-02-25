@@ -175,10 +175,10 @@ export default async function DashboardPage({
   if (!hasStartup) {
     return (
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-8 text-center">
           <Building2 className="w-16 h-16 mx-auto mb-4 text-blue-600" />
           <h2 className="text-2xl font-bold mb-2">Welcome to Your Dashboard!</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-400 mb-6">
             Let's get started by creating your startup profile.
           </p>
           <Link
@@ -225,7 +225,7 @@ export default async function DashboardPage({
       value: currentStartup.stage.replace("_", " "),
       icon: Target,
       color: "text-blue-600",
-      bg: "bg-blue-50",
+      bg: "bg-blue-500/10",
       description: "Startup lifecycle stage",
     },
     {
@@ -233,7 +233,7 @@ export default async function DashboardPage({
       value: weeklyUpdateCount,
       icon: Calendar,
       color: "text-green-600",
-      bg: "bg-green-50",
+      bg: "bg-green-500/10",
       description: `${weeklyUpdateCount} updates logged`,
     },
     {
@@ -241,7 +241,7 @@ export default async function DashboardPage({
       value: documentCount,
       icon: FileText,
       color: "text-amber-600",
-      bg: "bg-amber-50",
+      bg: "bg-amber-500/10",
       description: `${documentCount} files uploaded`,
     },
     {
@@ -249,7 +249,7 @@ export default async function DashboardPage({
       value: kpiCount,
       icon: TrendingUp,
       color: "text-orange-600",
-      bg: "bg-orange-50",
+      bg: "bg-orange-500/10",
       description: kpiTrend === 'up' ? '↑ Trending up' : kpiTrend === 'down' ? '↓ Needs attention' : '→ Stable',
       trend: kpiTrend,
     },
@@ -258,7 +258,7 @@ export default async function DashboardPage({
       value: hasValueProp ? "Created" : "Pending",
       icon: Lightbulb,
       color: hasValueProp ? "text-orange-600" : "text-gray-400",
-      bg: hasValueProp ? "bg-orange-50" : "bg-gray-50",
+      bg: hasValueProp ? "bg-orange-500/10" : "bg-[#111]",
       description: hasValueProp ? "Defined and ready" : "Not created yet",
     },
     {
@@ -266,7 +266,7 @@ export default async function DashboardPage({
       value: `${overallCompletion}%`,
       icon: Rocket,
       color: overallCompletion > 60 ? "text-orange-600" : "text-yellow-600",
-      bg: overallCompletion > 60 ? "bg-orange-50" : "bg-yellow-50",
+      bg: overallCompletion > 60 ? "bg-orange-500/10" : "bg-yellow-500/10",
       description: overallCompletion > 60 ? "Great progress!" : "Keep going!",
     },
   ]
@@ -293,10 +293,10 @@ export default async function DashboardPage({
         {stats.map((stat) => {
           const Icon = stat.icon
           return (
-            <div key={stat.name} className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+            <div key={stat.name} className="bg-[#1a1a1a] rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <p className="text-sm text-gray-600 mb-1">{stat.name}</p>
+                  <p className="text-sm text-gray-400 mb-1">{stat.name}</p>
                   <p className="text-2xl font-bold mt-1 mb-2">{stat.value}</p>
                   <div className="flex items-center">
                     {stat.trend === 'up' && (
@@ -305,7 +305,7 @@ export default async function DashboardPage({
                     {stat.trend === 'down' && (
                       <TrendingDown className="w-4 h-4 text-red-500 mr-1" />
                     )}
-                    <p className="text-xs text-gray-500">{stat.description}</p>
+                    <p className="text-xs text-gray-400">{stat.description}</p>
                   </div>
                 </div>
                 <div className={`${stat.bg} p-3 rounded-lg`}>
@@ -319,7 +319,7 @@ export default async function DashboardPage({
 
       {/* Market Research Insights */}
       {marketResearch && (
-        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-sm border-2 border-orange-200 p-6">
+        <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-xl shadow-sm border-2 border-orange-500/30 p-6">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-semibold flex items-center">
               <PieChart className="w-5 h-5 mr-2 text-orange-600" />
@@ -327,7 +327,7 @@ export default async function DashboardPage({
             </h3>
             <Link
               href="/dashboard/market-research"
-              className="text-sm text-orange-600 hover:text-orange-700 font-medium flex items-center"
+              className="text-sm text-orange-600 hover:text-orange-400 font-medium flex items-center"
             >
               View Full Research
               <ArrowUpRight className="w-4 h-4 ml-1" />
@@ -336,27 +336,27 @@ export default async function DashboardPage({
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* TAM/SAM/SOM Summary */}
-            <div className="bg-white rounded-lg p-5 border border-orange-200">
-              <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+            <div className="bg-[#1a1a1a] rounded-lg p-5 border border-orange-500/30">
+              <h4 className="font-bold text-gray-100 mb-4 flex items-center">
                 <TrendingUp className="w-4 h-4 mr-2 text-orange-600" />
                 Market Size (TAM/SAM/SOM)
               </h4>
               <div className="space-y-3">
-                <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
-                  <span className="text-sm font-medium text-gray-700">Total Addressable Market</span>
+                <div className="flex justify-between items-center p-2 bg-orange-500/10 rounded">
+                  <span className="text-sm font-medium text-gray-300">Total Addressable Market</span>
                   <span className="text-sm font-bold text-orange-600">
                     {marketResearch.tam?.currency || 'USD'} {(marketResearch.tam?.value || 0).toLocaleString()}
                   </span>
                 </div>
-                <div className="flex justify-between items-center p-2 bg-amber-50 rounded">
-                  <span className="text-sm font-medium text-gray-700">Serviceable Available Market</span>
+                <div className="flex justify-between items-center p-2 bg-amber-500/10 rounded">
+                  <span className="text-sm font-medium text-gray-300">Serviceable Available Market</span>
                   <span className="text-sm font-bold text-amber-600">
                     {marketResearch.sam?.currency || 'USD'} {(marketResearch.sam?.value || 0).toLocaleString()}
                   </span>
                 </div>
-                <div className="flex justify-between items-center p-2 bg-yellow-50 rounded">
-                  <span className="text-sm font-medium text-gray-700">Serviceable Obtainable Market</span>
-                  <span className="text-sm font-bold text-yellow-700">
+                <div className="flex justify-between items-center p-2 bg-yellow-500/10 rounded">
+                  <span className="text-sm font-medium text-gray-300">Serviceable Obtainable Market</span>
+                  <span className="text-sm font-bold text-yellow-400">
                     {marketResearch.som?.currency || 'USD'} {(marketResearch.som?.value || 0).toLocaleString()}
                   </span>
                 </div>
@@ -364,46 +364,46 @@ export default async function DashboardPage({
             </div>
 
             {/* SWOT Summary */}
-            <div className="bg-white rounded-lg p-5 border border-orange-200">
-              <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+            <div className="bg-[#1a1a1a] rounded-lg p-5 border border-orange-500/30">
+              <h4 className="font-bold text-gray-100 mb-4 flex items-center">
                 <Target className="w-4 h-4 mr-2 text-orange-600" />
                 SWOT Analysis Highlights
               </h4>
               <div className="grid grid-cols-2 gap-3">
                 {marketResearch.swot?.strengths && marketResearch.swot.strengths.length > 0 && (
-                  <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+                  <div className="bg-green-500/10 p-3 rounded-lg border border-green-500/30">
                     <div className="flex items-center mb-2">
                       <CheckCircle className="w-3 h-3 text-green-600 mr-1" />
-                      <p className="text-xs font-bold text-green-900">Strengths</p>
+                      <p className="text-xs font-bold text-green-200">Strengths</p>
                     </div>
-                    <p className="text-xs text-green-700">{marketResearch.swot.strengths.length} identified</p>
+                    <p className="text-xs text-green-400">{marketResearch.swot.strengths.length} identified</p>
                   </div>
                 )}
                 {marketResearch.swot?.weaknesses && marketResearch.swot.weaknesses.length > 0 && (
-                  <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <div className="bg-red-500/10 p-3 rounded-lg border border-red-500/30">
                     <div className="flex items-center mb-2">
                       <AlertCircle className="w-3 h-3 text-red-600 mr-1" />
-                      <p className="text-xs font-bold text-red-900">Weaknesses</p>
+                      <p className="text-xs font-bold text-red-200">Weaknesses</p>
                     </div>
-                    <p className="text-xs text-red-700">{marketResearch.swot.weaknesses.length} identified</p>
+                    <p className="text-xs text-red-400">{marketResearch.swot.weaknesses.length} identified</p>
                   </div>
                 )}
                 {marketResearch.swot?.opportunities && marketResearch.swot.opportunities.length > 0 && (
-                  <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                  <div className="bg-blue-500/10 p-3 rounded-lg border border-blue-500/30">
                     <div className="flex items-center mb-2">
                       <Target className="w-3 h-3 text-blue-600 mr-1" />
-                      <p className="text-xs font-bold text-blue-900">Opportunities</p>
+                      <p className="text-xs font-bold text-blue-200">Opportunities</p>
                     </div>
-                    <p className="text-xs text-blue-700">{marketResearch.swot.opportunities.length} identified</p>
+                    <p className="text-xs text-blue-400">{marketResearch.swot.opportunities.length} identified</p>
                   </div>
                 )}
                 {marketResearch.swot?.threats && marketResearch.swot.threats.length > 0 && (
-                  <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                  <div className="bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/30">
                     <div className="flex items-center mb-2">
                       <AlertTriangle className="w-3 h-3 text-yellow-600 mr-1" />
-                      <p className="text-xs font-bold text-yellow-900">Threats</p>
+                      <p className="text-xs font-bold text-yellow-200">Threats</p>
                     </div>
-                    <p className="text-xs text-yellow-700">{marketResearch.swot.threats.length} identified</p>
+                    <p className="text-xs text-yellow-400">{marketResearch.swot.threats.length} identified</p>
                   </div>
                 )}
               </div>
@@ -411,8 +411,8 @@ export default async function DashboardPage({
 
             {/* Target Audience Summary */}
             {marketResearch.targetAudience && (
-              <div className="bg-white rounded-lg p-5 border border-orange-200">
-                <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+              <div className="bg-[#1a1a1a] rounded-lg p-5 border border-orange-500/30">
+                <h4 className="font-bold text-gray-100 mb-4 flex items-center">
                   <Users className="w-4 h-4 mr-2 text-orange-600" />
                   Target Audience
                 </h4>
@@ -421,8 +421,8 @@ export default async function DashboardPage({
                     <div className="flex items-start">
                       <div className="w-2 h-2 bg-orange-500 rounded-full mt-1.5 mr-2 flex-shrink-0" />
                       <div>
-                        <p className="text-xs font-medium text-gray-700">Customer Segments:</p>
-                        <p className="text-xs text-gray-600">{marketResearch.targetAudience.segments.slice(0, 2).join(", ")}</p>
+                        <p className="text-xs font-medium text-gray-300">Customer Segments:</p>
+                        <p className="text-xs text-gray-400">{marketResearch.targetAudience.segments.slice(0, 2).join(", ")}</p>
                       </div>
                     </div>
                   )}
@@ -430,8 +430,8 @@ export default async function DashboardPage({
                     <div className="flex items-start">
                       <div className="w-2 h-2 bg-amber-500 rounded-full mt-1.5 mr-2 flex-shrink-0" />
                       <div>
-                        <p className="text-xs font-medium text-gray-700">Geographic Focus:</p>
-                        <p className="text-xs text-gray-600">{marketResearch.targetAudience.locations.slice(0, 2).join(", ")}</p>
+                        <p className="text-xs font-medium text-gray-300">Geographic Focus:</p>
+                        <p className="text-xs text-gray-400">{marketResearch.targetAudience.locations.slice(0, 2).join(", ")}</p>
                       </div>
                     </div>
                   )}
@@ -439,8 +439,8 @@ export default async function DashboardPage({
                     <div className="flex items-start">
                       <div className="w-2 h-2 bg-yellow-500 rounded-full mt-1.5 mr-2 flex-shrink-0" />
                       <div>
-                        <p className="text-xs font-medium text-gray-700">Age Ranges:</p>
-                        <p className="text-xs text-gray-600">{marketResearch.targetAudience.ageRanges.join(", ")}</p>
+                        <p className="text-xs font-medium text-gray-300">Age Ranges:</p>
+                        <p className="text-xs text-gray-400">{marketResearch.targetAudience.ageRanges.join(", ")}</p>
                       </div>
                     </div>
                   )}
@@ -450,22 +450,22 @@ export default async function DashboardPage({
 
             {/* Competitor Analysis Summary */}
             {marketResearch.competitorAnalysis && (
-              <div className="bg-white rounded-lg p-5 border border-orange-200">
-                <h4 className="font-bold text-gray-900 mb-4 flex items-center">
+              <div className="bg-[#1a1a1a] rounded-lg p-5 border border-orange-500/30">
+                <h4 className="font-bold text-gray-100 mb-4 flex items-center">
                   <Shield className="w-4 h-4 mr-2 text-orange-600" />
                   Competitive Landscape
                 </h4>
                 <div className="space-y-3">
                   {marketResearch.competitorAnalysis.directCompetitors && marketResearch.competitorAnalysis.directCompetitors.length > 0 && (
                     <div>
-                      <p className="text-xs font-medium text-gray-700 mb-1">Direct Competitors:</p>
-                      <p className="text-xs text-gray-600">{marketResearch.competitorAnalysis.directCompetitors.slice(0, 3).join(", ")}</p>
+                      <p className="text-xs font-medium text-gray-300 mb-1">Direct Competitors:</p>
+                      <p className="text-xs text-gray-400">{marketResearch.competitorAnalysis.directCompetitors.slice(0, 3).join(", ")}</p>
                     </div>
                   )}
                   {marketResearch.competitorAnalysis.marketGaps && marketResearch.competitorAnalysis.marketGaps.length > 0 && (
-                    <div className="bg-green-50 p-2 rounded border border-green-200">
-                      <p className="text-xs font-medium text-green-900 mb-1">Market Opportunities:</p>
-                      <p className="text-xs text-green-700">{marketResearch.competitorAnalysis.marketGaps[0]}</p>
+                    <div className="bg-green-500/10 p-2 rounded border border-green-500/30">
+                      <p className="text-xs font-medium text-green-200 mb-1">Market Opportunities:</p>
+                      <p className="text-xs text-green-400">{marketResearch.competitorAnalysis.marketGaps[0]}</p>
                     </div>
                   )}
                 </div>
@@ -474,8 +474,8 @@ export default async function DashboardPage({
           </div>
 
           {marketResearch.lastUpdated && (
-            <div className="mt-4 pt-4 border-t border-orange-200">
-              <p className="text-xs text-gray-500 text-center">
+            <div className="mt-4 pt-4 border-t border-orange-500/30">
+              <p className="text-xs text-gray-400 text-center">
                 Last updated: {new Date(marketResearch.lastUpdated).toLocaleDateString()}
               </p>
             </div>
@@ -487,7 +487,7 @@ export default async function DashboardPage({
       <MentorsInvestorsSection startupId={currentStartup.id} />
 
       {/* Startup Details Card */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold flex items-center">
             <Info className="w-5 h-5 mr-2 text-orange-600" />
@@ -495,7 +495,7 @@ export default async function DashboardPage({
           </h3>
           <Link
             href="/dashboard/profile"
-            className="text-sm text-orange-600 hover:text-orange-700 font-medium flex items-center"
+            className="text-sm text-orange-600 hover:text-orange-400 font-medium flex items-center"
           >
             Edit Details
             <ArrowUpRight className="w-4 h-4 ml-1" />
@@ -505,23 +505,23 @@ export default async function DashboardPage({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Location Info */}
           {currentStartup.headquarters && (
-            <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
+            <div className="bg-orange-500/10 rounded-lg p-4 border border-orange-500/30">
               <div className="flex items-center mb-2">
                 <MapPin className="w-5 h-5 text-orange-600 mr-2" />
-                <h4 className="font-semibold text-gray-800">Headquarters</h4>
+                <h4 className="font-semibold text-gray-200">Headquarters</h4>
               </div>
-              <p className="text-sm text-gray-600">{currentStartup.headquarters}</p>
+              <p className="text-sm text-gray-400">{currentStartup.headquarters}</p>
             </div>
           )}
 
           {/* Operation Locations */}
           {currentStartup.operationLocations && currentStartup.operationLocations.length > 0 && (
-            <div className="bg-amber-50 rounded-lg p-4 border border-amber-200">
+            <div className="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
               <div className="flex items-center mb-2">
                 <Globe className="w-5 h-5 text-amber-600 mr-2" />
-                <h4 className="font-semibold text-gray-800">Operations</h4>
+                <h4 className="font-semibold text-gray-200">Operations</h4>
               </div>
-              <div className="text-sm text-gray-600 space-y-1">
+              <div className="text-sm text-gray-400 space-y-1">
                 {currentStartup.operationLocations.slice(0, 3).map((location: string, i: number) => (
                   <p key={i}>• {location}</p>
                 ))}
@@ -536,24 +536,24 @@ export default async function DashboardPage({
 
           {/* Team Count */}
           {currentStartup.teamMembers && currentStartup.teamMembers.length > 0 && (
-            <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+            <div className="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/30">
               <div className="flex items-center mb-2">
                 <Users className="w-5 h-5 text-yellow-600 mr-2" />
-                <h4 className="font-semibold text-gray-800">Team Members</h4>
+                <h4 className="font-semibold text-gray-200">Team Members</h4>
               </div>
               <p className="text-2xl font-bold text-yellow-600 mb-1">
                 {currentStartup.teamMembers.length}
               </p>
-              <p className="text-xs text-gray-600">Active members</p>
+              <p className="text-xs text-gray-400">Active members</p>
             </div>
           )}
 
           {/* Social Media Links */}
           {currentStartup.socialMediaLinks && Object.values(currentStartup.socialMediaLinks as any).some((link: any) => link) && (
-            <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
+            <div className="bg-orange-500/10 rounded-lg p-4 border border-orange-500/30">
               <div className="flex items-center mb-3">
                 <Globe className="w-5 h-5 text-orange-600 mr-2" />
-                <h4 className="font-semibold text-gray-800">Social Media</h4>
+                <h4 className="font-semibold text-gray-200">Social Media</h4>
               </div>
               <div className="flex gap-2 flex-wrap">
                 {(currentStartup.socialMediaLinks as any).linkedin && (
@@ -561,7 +561,7 @@ export default async function DashboardPage({
                     href={(currentStartup.socialMediaLinks as any).linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
+                    className="p-2 bg-[#1a1a1a] rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
                   >
                     <Linkedin className="w-4 h-4" />
                   </a>
@@ -571,7 +571,7 @@ export default async function DashboardPage({
                     href={(currentStartup.socialMediaLinks as any).twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
+                    className="p-2 bg-[#1a1a1a] rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
                   >
                     <Twitter className="w-4 h-4" />
                   </a>
@@ -581,7 +581,7 @@ export default async function DashboardPage({
                     href={(currentStartup.socialMediaLinks as any).facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
+                    className="p-2 bg-[#1a1a1a] rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
                   >
                     <Facebook className="w-4 h-4" />
                   </a>
@@ -591,7 +591,7 @@ export default async function DashboardPage({
                     href={(currentStartup.socialMediaLinks as any).instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
+                    className="p-2 bg-[#1a1a1a] rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
                   >
                     <Instagram className="w-4 h-4" />
                   </a>
@@ -601,7 +601,7 @@ export default async function DashboardPage({
                     href={(currentStartup.socialMediaLinks as any).youtube}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
+                    className="p-2 bg-[#1a1a1a] rounded-lg hover:bg-orange-500 hover:text-white transition-colors"
                   >
                     <Youtube className="w-4 h-4" />
                   </a>
@@ -612,26 +612,26 @@ export default async function DashboardPage({
 
           {/* Tips & Tricks Count */}
           {currentStartup.tipsAndTricks && currentStartup.tipsAndTricks.length > 0 && (
-            <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+            <div className="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/30">
               <div className="flex items-center mb-2">
                 <Lightbulb className="w-5 h-5 text-yellow-600 mr-2" />
-                <h4 className="font-semibold text-gray-800">Tips & Tricks</h4>
+                <h4 className="font-semibold text-gray-200">Tips & Tricks</h4>
               </div>
               <p className="text-2xl font-bold text-yellow-600 mb-1">
                 {currentStartup.tipsAndTricks.length}
               </p>
-              <p className="text-xs text-gray-600">Saved insights</p>
+              <p className="text-xs text-gray-400">Saved insights</p>
             </div>
           )}
 
           {/* Contact Info */}
           {(currentStartup.email || currentStartup.phone) && (
-            <div className="bg-amber-50 rounded-lg p-4 border border-amber-200">
+            <div className="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
               <div className="flex items-center mb-3">
                 <Mail className="w-5 h-5 text-amber-600 mr-2" />
-                <h4 className="font-semibold text-gray-800">Contact</h4>
+                <h4 className="font-semibold text-gray-200">Contact</h4>
               </div>
-              <div className="space-y-2 text-sm text-gray-600">
+              <div className="space-y-2 text-sm text-gray-400">
                 {currentStartup.email && (
                   <p className="flex items-center">
                     <Mail className="w-3 h-3 mr-2" />
@@ -651,7 +651,7 @@ export default async function DashboardPage({
       </div>
 
       {/* Overall Progress Card */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
         <h3 className="text-lg font-semibold mb-4 flex items-center">
           <Rocket className="w-5 h-5 mr-2 text-orange-600" />
           Startup Progress Overview
@@ -662,7 +662,7 @@ export default async function DashboardPage({
               <span className="text-sm font-medium">Overall Completion</span>
               <span className="text-sm font-bold text-orange-600">{overallCompletion}%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="w-full bg-[#1f1f1f] rounded-full h-3">
               <div
                 className="bg-gradient-to-r from-orange-500 to-amber-500 h-3 rounded-full transition-all duration-500"
                 style={{ width: `${overallCompletion}%` }}
@@ -716,7 +716,7 @@ export default async function DashboardPage({
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
         <h3 className="text-lg font-semibold mb-4 flex items-center">
           <Zap className="w-5 h-5 mr-2 text-yellow-600" />
           Quick Actions
@@ -724,67 +724,67 @@ export default async function DashboardPage({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Link
             href="/dashboard/value-proposition"
-            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-orange-500 hover:bg-orange-50 transition-all group"
+            className="flex items-center p-4 border-2 border-gray-700 rounded-lg hover:border-orange-500 hover:bg-orange-500/10 transition-all group"
           >
             <Lightbulb className="w-8 h-8 text-orange-600 mr-4 group-hover:scale-110 transition-transform" />
             <div>
               <p className="font-semibold">Value Proposition</p>
-              <p className="text-sm text-gray-600">Define your unique value</p>
+              <p className="text-sm text-gray-400">Define your unique value</p>
             </div>
           </Link>
 
           <Link
             href="/dashboard/business-model"
-            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-amber-500 hover:bg-amber-50 transition-all group"
+            className="flex items-center p-4 border-2 border-gray-700 rounded-lg hover:border-amber-500 hover:bg-amber-500/10 transition-all group"
           >
             <Layers className="w-8 h-8 text-amber-600 mr-4 group-hover:scale-110 transition-transform" />
             <div>
               <p className="font-semibold">Business Model</p>
-              <p className="text-sm text-gray-600">Build your canvas</p>
+              <p className="text-sm text-gray-400">Build your canvas</p>
             </div>
           </Link>
 
           <Link
             href="/dashboard/weekly"
-            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all group"
+            className="flex items-center p-4 border-2 border-gray-700 rounded-lg hover:border-blue-500 hover:bg-blue-500/10 transition-all group"
           >
             <Calendar className="w-8 h-8 text-blue-600 mr-4 group-hover:scale-110 transition-transform" />
             <div>
               <p className="font-semibold">Log Weekly Update</p>
-              <p className="text-sm text-gray-600">Track this week's progress</p>
+              <p className="text-sm text-gray-400">Track this week's progress</p>
             </div>
           </Link>
 
           <Link
             href="/dashboard/kpis"
-            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-green-500 hover:bg-green-50 transition-all group"
+            className="flex items-center p-4 border-2 border-gray-700 rounded-lg hover:border-green-500 hover:bg-green-500/10 transition-all group"
           >
             <BarChart3 className="w-8 h-8 text-green-600 mr-4 group-hover:scale-110 transition-transform" />
             <div>
               <p className="font-semibold">Update KPIs</p>
-              <p className="text-sm text-gray-600">Record key metrics</p>
+              <p className="text-sm text-gray-400">Record key metrics</p>
             </div>
           </Link>
 
           <Link
             href="/dashboard/documents"
-            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all group"
+            className="flex items-center p-4 border-2 border-gray-700 rounded-lg hover:border-purple-500 hover:bg-purple-500/10 transition-all group"
           >
             <FileText className="w-8 h-8 text-purple-600 mr-4 group-hover:scale-110 transition-transform" />
             <div>
               <p className="font-semibold">Upload Document</p>
-              <p className="text-sm text-gray-600">Add certificates or files</p>
+              <p className="text-sm text-gray-400">Add certificates or files</p>
             </div>
           </Link>
 
           <Link
             href="/dashboard/mentor"
-            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-orange-500 hover:bg-orange-50 transition-all group"
+            className="flex items-center p-4 border-2 border-gray-700 rounded-lg hover:border-orange-500 hover:bg-orange-500/10 transition-all group"
           >
             <Users className="w-8 h-8 text-orange-600 mr-4 group-hover:scale-110 transition-transform" />
             <div>
               <p className="font-semibold">Mentor Feedback</p>
-              <p className="text-sm text-gray-600">Get expert guidance</p>
+              <p className="text-sm text-gray-400">Get expert guidance</p>
             </div>
           </Link>
         </div>
@@ -793,7 +793,7 @@ export default async function DashboardPage({
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Latest Weekly Update */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-semibold mb-4 flex items-center">
             <Activity className="w-5 h-5 mr-2 text-blue-600" />
             Latest Weekly Update
@@ -801,10 +801,10 @@ export default async function DashboardPage({
           {currentStartup.weeklyTrackers?.length > 0 ? (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-400">
                   Week {currentStartup.weeklyTrackers[0].weekNumber}
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   {currentStartup.weeklyTrackers[0].month} {currentStartup.weeklyTrackers[0].year}
                 </p>
               </div>
@@ -816,14 +816,14 @@ export default async function DashboardPage({
                   </p>
                   <ul className="space-y-1">
                     {currentStartup.weeklyTrackers[0].milestonesAchieved.slice(0, 3).map((milestone: string, i: number) => (
-                      <li key={i} className="text-sm text-gray-600 pl-5 relative">
+                      <li key={i} className="text-sm text-gray-400 pl-5 relative">
                         <span className="absolute left-0">•</span>
                         {milestone}
                       </li>
                     ))}
                   </ul>
                   {currentStartup.weeklyTrackers[0].milestonesAchieved.length > 3 && (
-                    <p className="text-xs text-gray-500 mt-2">
+                    <p className="text-xs text-gray-400 mt-2">
                       +{currentStartup.weeklyTrackers[0].milestonesAchieved.length - 3} more
                     </p>
                   )}
@@ -835,17 +835,17 @@ export default async function DashboardPage({
                     <AlertCircle className="w-4 h-4 mr-1 text-orange-500" />
                     Challenges:
                   </p>
-                  <p className="text-sm text-gray-600">{currentStartup.weeklyTrackers[0].challenges[0]}</p>
+                  <p className="text-sm text-gray-400">{currentStartup.weeklyTrackers[0].challenges[0]}</p>
                 </div>
               )}
             </div>
           ) : (
             <div className="text-center py-8">
               <Clock className="w-12 h-12 text-gray-300 mx-auto mb-2" />
-              <p className="text-gray-500 text-sm">No weekly updates yet</p>
+              <p className="text-gray-400 text-sm">No weekly updates yet</p>
               <Link 
                 href="/dashboard/weekly"
-                className="text-blue-600 hover:text-blue-700 text-sm font-medium mt-2 inline-block"
+                className="text-blue-600 hover:text-blue-400 text-sm font-medium mt-2 inline-block"
               >
                 Create your first update →
               </Link>
@@ -854,7 +854,7 @@ export default async function DashboardPage({
         </div>
 
         {/* Latest Mentor Feedback */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-semibold mb-4 flex items-center">
             <MessageSquare className="w-5 h-5 mr-2 text-purple-600" />
             Latest Mentor Feedback
@@ -867,7 +867,7 @@ export default async function DashboardPage({
                   <p className="text-sm font-medium">{currentStartup.mentorFeedback[0].mentorName}</p>
                 </div>
                 {currentStartup.mentorFeedback[0].progressScore && (
-                  <div className="flex items-center bg-indigo-50 px-2 py-1 rounded">
+                  <div className="flex items-center bg-indigo-500/10 px-2 py-1 rounded">
                     <BarChart3 className="w-3 h-3 mr-1 text-indigo-600" />
                     <span className="text-sm font-bold text-indigo-600">
                       {currentStartup.mentorFeedback[0].progressScore}/10
@@ -875,7 +875,7 @@ export default async function DashboardPage({
                   </div>
                 )}
               </div>
-              <p className="text-sm text-gray-700 bg-gray-50 p-3 rounded-lg">
+              <p className="text-sm text-gray-300 bg-[#111] p-3 rounded-lg">
                 "{currentStartup.mentorFeedback[0].feedback}"
               </p>
               {currentStartup.mentorFeedback[0].assignedTasks?.length > 0 && (
@@ -886,7 +886,7 @@ export default async function DashboardPage({
                   </p>
                   <ul className="space-y-1">
                     {currentStartup.mentorFeedback[0].assignedTasks.slice(0, 2).map((item: string, i: number) => (
-                      <li key={i} className="text-sm text-gray-600 pl-5 relative">
+                      <li key={i} className="text-sm text-gray-400 pl-5 relative">
                         <span className="absolute left-0">→</span>
                         {item}
                       </li>
@@ -898,10 +898,10 @@ export default async function DashboardPage({
           ) : (
             <div className="text-center py-8">
               <MessageSquare className="w-12 h-12 text-gray-300 mx-auto mb-2" />
-              <p className="text-gray-500 text-sm">No mentor feedback yet</p>
+              <p className="text-gray-400 text-sm">No mentor feedback yet</p>
               <Link 
                 href="/dashboard/mentor"
-                className="text-purple-600 hover:text-purple-700 text-sm font-medium mt-2 inline-block"
+                className="text-purple-600 hover:text-purple-400 text-sm font-medium mt-2 inline-block"
               >
                 Request feedback →
               </Link>
@@ -913,7 +913,7 @@ export default async function DashboardPage({
       {/* Recent KPIs & Documents */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent KPIs */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-semibold mb-4 flex items-center">
             <BarChart3 className="w-5 h-5 mr-2 text-green-600" />
             Recent KPIs
@@ -926,7 +926,7 @@ export default async function DashboardPage({
                 const metricName = kpi.category.replace('_', ' ');
                 
                 return (
-                  <div key={kpi.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div key={kpi.id} className="flex items-center justify-between p-3 bg-[#111] rounded-lg hover:bg-[#141414] transition-colors">
                     <div className="flex items-center flex-1">
                       <div className={`w-2 h-2 rounded-full mr-3 ${
                         index === 0 ? 'bg-green-500' : 
@@ -935,13 +935,13 @@ export default async function DashboardPage({
                       }`} />
                       <div>
                         <p className="text-sm font-medium">{metricName}</p>
-                        <p className="text-xs text-gray-500">{new Date(kpi.date).toLocaleDateString()}</p>
+                        <p className="text-xs text-gray-400">{new Date(kpi.date).toLocaleDateString()}</p>
                       </div>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-bold">{metricValue}</p>
                       {kpi.notes && (
-                        <p className="text-xs text-gray-500 truncate max-w-[100px]">{kpi.notes}</p>
+                        <p className="text-xs text-gray-400 truncate max-w-[100px]">{kpi.notes}</p>
                       )}
                     </div>
                   </div>
@@ -950,7 +950,7 @@ export default async function DashboardPage({
               {currentStartup.kpis.length > 5 && (
                 <Link 
                   href="/dashboard/kpis"
-                  className="block text-center text-sm text-blue-600 hover:text-blue-700 font-medium pt-2"
+                  className="block text-center text-sm text-blue-600 hover:text-blue-400 font-medium pt-2"
                 >
                   View all {currentStartup.kpis.length} KPIs →
                 </Link>
@@ -959,10 +959,10 @@ export default async function DashboardPage({
           ) : (
             <div className="text-center py-8">
               <TrendingUp className="w-12 h-12 text-gray-300 mx-auto mb-2" />
-              <p className="text-gray-500 text-sm">No KPIs tracked yet</p>
+              <p className="text-gray-400 text-sm">No KPIs tracked yet</p>
               <Link 
                 href="/dashboard/kpis"
-                className="text-green-600 hover:text-green-700 text-sm font-medium mt-2 inline-block"
+                className="text-green-600 hover:text-green-400 text-sm font-medium mt-2 inline-block"
               >
                 Add your first KPI →
               </Link>
@@ -971,7 +971,7 @@ export default async function DashboardPage({
         </div>
 
         {/* Recent Documents */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-semibold mb-4 flex items-center">
             <FileText className="w-5 h-5 mr-2 text-purple-600" />
             Recent Documents
@@ -979,15 +979,15 @@ export default async function DashboardPage({
           {currentStartup.documents?.length > 0 ? (
             <div className="space-y-3">
               {currentStartup.documents.slice(0, 5).map((doc) => (
-                <div key={doc.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <div key={doc.id} className="flex items-center justify-between p-3 bg-[#111] rounded-lg hover:bg-[#141414] transition-colors">
                   <div className="flex items-center flex-1">
                     <FileText className="w-4 h-4 text-purple-500 mr-3" />
                     <div>
                       <p className="text-sm font-medium truncate max-w-[200px]">{doc.name}</p>
-                      <p className="text-xs text-gray-500">{doc.category.replace('_', ' ')}</p>
+                      <p className="text-xs text-gray-400">{doc.category.replace('_', ' ')}</p>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-400">
                     {new Date(doc.createdAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -995,7 +995,7 @@ export default async function DashboardPage({
               {currentStartup.documents.length > 5 && (
                 <Link 
                   href="/dashboard/documents"
-                  className="block text-center text-sm text-blue-600 hover:text-blue-700 font-medium pt-2"
+                  className="block text-center text-sm text-blue-600 hover:text-blue-400 font-medium pt-2"
                 >
                   View all {currentStartup.documents.length} documents →
                 </Link>
@@ -1004,10 +1004,10 @@ export default async function DashboardPage({
           ) : (
             <div className="text-center py-8">
               <FileText className="w-12 h-12 text-gray-300 mx-auto mb-2" />
-              <p className="text-gray-500 text-sm">No documents uploaded yet</p>
+              <p className="text-gray-400 text-sm">No documents uploaded yet</p>
               <Link 
                 href="/dashboard/documents"
-                className="text-purple-600 hover:text-purple-700 text-sm font-medium mt-2 inline-block"
+                className="text-purple-600 hover:text-purple-400 text-sm font-medium mt-2 inline-block"
               >
                 Upload your first document →
               </Link>
@@ -1017,13 +1017,13 @@ export default async function DashboardPage({
       </div>
 
       {/* Business Planning Status */}
-      <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg shadow-sm p-6 border border-indigo-100">
+      <div className="bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-lg shadow-sm p-6 border border-indigo-100">
         <h3 className="text-lg font-semibold mb-4 flex items-center">
           <BookOpen className="w-5 h-5 mr-2 text-indigo-600" />
           Business Planning Status
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white rounded-lg p-4 shadow-sm">
+          <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center">
                 <Lightbulb className="w-5 h-5 text-pink-500 mr-2" />
@@ -1035,7 +1035,7 @@ export default async function DashboardPage({
                 <AlertCircle className="w-5 h-5 text-orange-500" />
               )}
             </div>
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-sm text-gray-400 mb-3">
               {hasValueProp 
                 ? "Your value proposition has been defined. Keep it updated as you iterate."
                 : "Define what makes your startup unique and valuable to customers."
@@ -1045,7 +1045,7 @@ export default async function DashboardPage({
               href="/dashboard/value-proposition"
               className={`block text-center py-2 px-4 rounded-lg text-sm font-medium transition-colors ${
                 hasValueProp 
-                  ? 'bg-orange-100 text-orange-700 hover:bg-orange-200'
+                  ? 'bg-orange-500/15 text-orange-400 hover:bg-orange-500/20'
                   : 'bg-orange-500 text-white hover:bg-orange-600'
               }`}
             >
@@ -1053,7 +1053,7 @@ export default async function DashboardPage({
             </Link>
           </div>
 
-          <div className="bg-white rounded-lg p-4 shadow-sm">
+          <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center">
                 <Layers className="w-5 h-5 text-indigo-500 mr-2" />
@@ -1061,7 +1061,7 @@ export default async function DashboardPage({
               </div>
               <AlertCircle className="w-5 h-5 text-gray-400" />
             </div>
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-sm text-gray-400 mb-3">
               Map out your complete business model with all 9 building blocks.
             </p>
             <Link

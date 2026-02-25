@@ -345,7 +345,7 @@ export default function SettingsPage() {
 
       {/* Read-only notice for mentor/investor */}
       {isReadOnly && (
-        <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg flex items-center">
+        <div className="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-4 py-3 rounded-lg flex items-center">
           <AlertCircle className="w-5 h-5 mr-2" />
           You are viewing this startup's settings in read-only mode. You cannot make changes.
         </div>
@@ -353,22 +353,22 @@ export default function SettingsPage() {
 
       {/* Success/Error Messages */}
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg flex items-center">
+        <div className="bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-lg flex items-center">
           <CheckCircle className="w-5 h-5 mr-2" />
           {success}
         </div>
       )}
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center">
+        <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg flex items-center">
           <AlertCircle className="w-5 h-5 mr-2" />
           {error}
         </div>
       )}
 
       {/* Tabs */}
-      <div className="bg-white rounded-lg shadow-sm">
-        <div className="border-b border-gray-200">
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm">
+        <div className="border-b border-gray-700">
           <nav className="flex -mb-px">
             <button
               onClick={() => setActiveTab("profile")}
@@ -376,7 +376,7 @@ export default function SettingsPage() {
               className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === "profile"
                   ? "border-orange-500 text-orange-600"
-                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                  : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
               } ${isReadOnly ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               <User className="w-4 h-4 inline mr-2" />
@@ -389,7 +389,7 @@ export default function SettingsPage() {
                   className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
                     activeTab === "security"
                       ? "border-orange-500 text-orange-600"
-                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
                   }`}
                 >
                   <Lock className="w-4 h-4 inline mr-2" />
@@ -400,7 +400,7 @@ export default function SettingsPage() {
                   className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
                     activeTab === "role-specific"
                       ? "border-orange-500 text-orange-600"
-                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
                   }`}
                 >
                   {userRole === "STARTUP" && <Building2 className="w-4 h-4 inline mr-2" />}
@@ -416,7 +416,7 @@ export default function SettingsPage() {
                 className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
                   activeTab === "startup-management"
                     ? "border-orange-500 text-orange-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
                 }`}
               >
                 <Building2 className="w-4 h-4 inline mr-2" />
@@ -432,14 +432,14 @@ export default function SettingsPage() {
           {activeTab === "profile" && (
             <form onSubmit={handleProfileUpdate} className={`space-y-6 ${isReadOnly ? 'pointer-events-none opacity-60' : ''}`}>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Profile Information</h3>
-                <p className="text-sm text-gray-600 mb-6">
+                <h3 className="text-lg font-semibold text-gray-100 mb-4">Profile Information</h3>
+                <p className="text-sm text-gray-400 mb-6">
                   {isReadOnly ? "Viewing startup owner's profile information" : "Update your personal information and contact details"}
                 </p>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       <User className="w-4 h-4 inline mr-1" />
                       Full Name
                     </label>
@@ -447,13 +447,13 @@ export default function SettingsPage() {
                       type="text"
                       value={profileData.name}
                       onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                       placeholder="Your full name"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       <Mail className="w-4 h-4 inline mr-1" />
                       Email Address
                     </label>
@@ -461,15 +461,15 @@ export default function SettingsPage() {
                       type="email"
                       value={profileData.email}
                       onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-[#111]"
                       placeholder="your@email.com"
                       disabled
                     />
-                    <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+                    <p className="text-xs text-gray-400 mt-1">Email cannot be changed</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       <Phone className="w-4 h-4 inline mr-1" />
                       Phone Number
                     </label>
@@ -477,7 +477,7 @@ export default function SettingsPage() {
                       type="tel"
                       value={profileData.phone}
                       onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                       placeholder="+923001234567"
                     />
                   </div>
@@ -499,14 +499,14 @@ export default function SettingsPage() {
           {activeTab === "security" && (
             <form onSubmit={handlePasswordChange} className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Change Password</h3>
-                <p className="text-sm text-gray-600 mb-6">
+                <h3 className="text-lg font-semibold text-gray-100 mb-4">Change Password</h3>
+                <p className="text-sm text-gray-400 mb-6">
                   Update your password to keep your account secure
                 </p>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Current Password
                     </label>
                     <div className="relative">
@@ -514,14 +514,14 @@ export default function SettingsPage() {
                         type={showCurrentPassword ? "text" : "password"}
                         value={securityData.currentPassword}
                         onChange={(e) => setSecurityData({ ...securityData, currentPassword: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent pr-10"
+                        className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent pr-10"
                         placeholder="Enter current password"
                         required
                       />
                       <button
                         type="button"
                         onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
                       >
                         {showCurrentPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </button>
@@ -529,7 +529,7 @@ export default function SettingsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       New Password
                     </label>
                     <div className="relative">
@@ -537,30 +537,30 @@ export default function SettingsPage() {
                         type={showNewPassword ? "text" : "password"}
                         value={securityData.newPassword}
                         onChange={(e) => setSecurityData({ ...securityData, newPassword: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent pr-10"
+                        className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent pr-10"
                         placeholder="Enter new password"
                         required
                       />
                       <button
                         type="button"
                         onClick={() => setShowNewPassword(!showNewPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
                       >
                         {showNewPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </button>
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">Must be at least 6 characters</p>
+                    <p className="text-xs text-gray-400 mt-1">Must be at least 6 characters</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Confirm New Password
                     </label>
                     <input
                       type="password"
                       value={securityData.confirmPassword}
                       onChange={(e) => setSecurityData({ ...securityData, confirmPassword: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                       placeholder="Confirm new password"
                       required
                     />
@@ -585,20 +585,20 @@ export default function SettingsPage() {
               {/* Startup Settings */}
               {userRole === "STARTUP" && (
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Startup Settings</h3>
-                  <p className="text-sm text-gray-600 mb-6">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-4">Startup Settings</h3>
+                  <p className="text-sm text-gray-400 mb-6">
                     Update your startup-specific information
                   </p>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       <TrendingUp className="w-4 h-4 inline mr-1" />
                       Current Stage
                     </label>
                     <select
                       value={roleData.currentStage}
                       onChange={(e) => setRoleData({ ...roleData, currentStage: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     >
                       <option value="">Select stage...</option>
                       <option value="IDEATION">Ideation</option>
@@ -609,7 +609,7 @@ export default function SettingsPage() {
                       <option value="GROWTH">Growth</option>
                       <option value="SCALE">Scale</option>
                     </select>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-gray-400 mt-1">
                       Update as your startup progresses through different stages
                     </p>
                   </div>
@@ -619,14 +619,14 @@ export default function SettingsPage() {
               {/* Mentor Settings */}
               {userRole === "MENTOR" && (
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Mentor Settings</h3>
-                  <p className="text-sm text-gray-600 mb-6">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-4">Mentor Settings</h3>
+                  <p className="text-sm text-gray-400 mb-6">
                     Update your mentor profile information
                   </p>
 
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         <Building2 className="w-4 h-4 inline mr-1" />
                         Company / Organization
                       </label>
@@ -634,13 +634,13 @@ export default function SettingsPage() {
                         type="text"
                         value={roleData.mentorCompany}
                         onChange={(e) => setRoleData({ ...roleData, mentorCompany: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                         placeholder="Your company name"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         <Linkedin className="w-4 h-4 inline mr-1" />
                         LinkedIn Profile
                       </label>
@@ -648,13 +648,13 @@ export default function SettingsPage() {
                         type="url"
                         value={roleData.mentorLinkedin}
                         onChange={(e) => setRoleData({ ...roleData, mentorLinkedin: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                         placeholder="https://linkedin.com/in/yourprofile"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         <MapPin className="w-4 h-4 inline mr-1" />
                         Location
                       </label>
@@ -662,7 +662,7 @@ export default function SettingsPage() {
                         type="text"
                         value={roleData.mentorLocation}
                         onChange={(e) => setRoleData({ ...roleData, mentorLocation: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                         placeholder="City, Country"
                       />
                     </div>
@@ -673,14 +673,14 @@ export default function SettingsPage() {
               {/* Investor Settings */}
               {userRole === "INVESTOR" && (
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Investor Settings</h3>
-                  <p className="text-sm text-gray-600 mb-6">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-4">Investor Settings</h3>
+                  <p className="text-sm text-gray-400 mb-6">
                     Update your investor profile information
                   </p>
 
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         <Briefcase className="w-4 h-4 inline mr-1" />
                         Portfolio / Investment Firm
                       </label>
@@ -688,13 +688,13 @@ export default function SettingsPage() {
                         type="text"
                         value={roleData.investorPortfolio}
                         onChange={(e) => setRoleData({ ...roleData, investorPortfolio: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                         placeholder="Your portfolio or firm name"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
                         <MapPin className="w-4 h-4 inline mr-1" />
                         Location
                       </label>
@@ -702,7 +702,7 @@ export default function SettingsPage() {
                         type="text"
                         value={roleData.investorLocation}
                         onChange={(e) => setRoleData({ ...roleData, investorLocation: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                         placeholder="City, Country"
                       />
                     </div>
@@ -727,15 +727,15 @@ export default function SettingsPage() {
               {/* Stage Update Section */}
               <form onSubmit={handleStartupStageUpdate} className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Update Startup Stage</h3>
-                  <p className="text-sm text-gray-600 mb-6">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-4">Update Startup Stage</h3>
+                  <p className="text-sm text-gray-400 mb-6">
                     Keep your startup stage up-to-date as you progress. This will be reflected across all pages.
                   </p>
 
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                  <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-6">
                     <div className="flex items-start gap-2">
                       <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
-                      <div className="text-sm text-blue-900">
+                      <div className="text-sm text-blue-200">
                         <p className="font-semibold mb-1">Current Startup:</p>
                         <p><strong>{startupData.name}</strong></p>
                         <p className="mt-2">Current Stage: <strong>{startupData.stage}</strong></p>
@@ -744,14 +744,14 @@ export default function SettingsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       <TrendingUp className="w-4 h-4 inline mr-1" />
                       Select New Stage
                     </label>
                     <select
                       value={roleData.currentStage}
                       onChange={(e) => setRoleData({ ...roleData, currentStage: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     >
                       <option value="">Select stage...</option>
                       <option value="IDEATION">Ideation</option>
@@ -762,7 +762,7 @@ export default function SettingsPage() {
                       <option value="GROWTH">Growth</option>
                       <option value="SCALE">Scale</option>
                     </select>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-gray-400 mt-1">
                       This will be updated across your entire profile
                     </p>
                   </div>
@@ -779,23 +779,23 @@ export default function SettingsPage() {
               </form>
 
               {/* Delete Startup Section */}
-              <div className="border-t-2 border-gray-200 pt-6">
-                <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6">
+              <div className="border-t-2 border-gray-700 pt-6">
+                <div className="bg-red-500/10 border-2 border-red-500/30 rounded-lg p-6">
                   <div className="flex items-start gap-3 mb-4">
                     <AlertTriangle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
                     <div>
-                      <h3 className="text-lg font-semibold text-red-900 mb-2">Danger Zone</h3>
-                      <p className="text-sm text-red-800 mb-4">
+                      <h3 className="text-lg font-semibold text-red-200 mb-2">Danger Zone</h3>
+                      <p className="text-sm text-red-300 mb-4">
                         Permanently delete your startup profile. This action cannot be undone.
                       </p>
                     </div>
                   </div>
 
                   {(startupData.hasMentor || startupData.hasInvestors) ? (
-                    <div className="bg-red-100 border border-red-300 rounded-lg p-4">
+                    <div className="bg-red-500/15 border border-red-300 rounded-lg p-4">
                       <div className="flex items-start gap-2">
-                        <AlertCircle className="w-5 h-5 text-red-700 mt-0.5" />
-                        <div className="text-sm text-red-900">
+                        <AlertCircle className="w-5 h-5 text-red-400 mt-0.5" />
+                        <div className="text-sm text-red-200">
                           <p className="font-semibold mb-2">Cannot Delete Startup</p>
                           <p className="mb-2">You cannot delete your startup because:</p>
                           <ul className="list-disc list-inside space-y-1">
@@ -820,18 +820,18 @@ export default function SettingsPage() {
                         </button>
                       ) : (
                         <div className="space-y-4">
-                          <div className="bg-white border-2 border-red-300 rounded-lg p-4">
-                            <p className="text-sm font-semibold text-gray-900 mb-3">
+                          <div className="bg-[#1a1a1a] border-2 border-red-300 rounded-lg p-4">
+                            <p className="text-sm font-semibold text-gray-100 mb-3">
                               Are you absolutely sure? This will:
                             </p>
-                            <ul className="text-sm text-gray-700 space-y-2 mb-4 list-disc list-inside">
+                            <ul className="text-sm text-gray-300 space-y-2 mb-4 list-disc list-inside">
                               <li>Permanently delete all your startup data</li>
                               <li>Remove all weekly and monthly tracker entries</li>
                               <li>Delete all KPI records and documents</li>
                               <li>Remove all feedback and timeline entries</li>
                               <li>This action is <strong>irreversible</strong></li>
                             </ul>
-                            <p className="text-sm font-semibold text-gray-900 mb-2">
+                            <p className="text-sm font-semibold text-gray-100 mb-2">
                               Type <span className="text-red-600">{startupData.name}</span> to confirm:
                             </p>
                             <input
@@ -849,7 +849,7 @@ export default function SettingsPage() {
                                 setShowDeleteConfirm(false)
                                 setDeleteConfirmText("")
                               }}
-                              className="flex-1 bg-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-400 font-semibold"
+                              className="flex-1 bg-gray-300 text-gray-300 px-6 py-3 rounded-lg hover:bg-gray-400 font-semibold"
                             >
                               Cancel
                             </button>
@@ -874,22 +874,22 @@ export default function SettingsPage() {
       </div>
 
       {/* Account Info */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Account Information</h3>
+      <div className="bg-[#1a1a1a] rounded-lg shadow-sm p-6">
+        <h3 className="text-lg font-semibold text-gray-100 mb-4">Account Information</h3>
         <div className="space-y-2 text-sm">
           <div className="flex justify-between py-2 border-b">
-            <span className="text-gray-600">Account Type</span>
-            <span className="font-medium text-gray-900">
+            <span className="text-gray-400">Account Type</span>
+            <span className="font-medium text-gray-100">
               {userRole === "STARTUP" ? "Startup Founder" : userRole === "MENTOR" ? "Mentor" : "Investor"}
             </span>
           </div>
           <div className="flex justify-between py-2 border-b">
-            <span className="text-gray-600">Email</span>
-            <span className="font-medium text-gray-900">{session?.user?.email}</span>
+            <span className="text-gray-400">Email</span>
+            <span className="font-medium text-gray-100">{session?.user?.email}</span>
           </div>
           <div className="flex justify-between py-2">
-            <span className="text-gray-600">Member Since</span>
-            <span className="font-medium text-gray-900">
+            <span className="text-gray-400">Member Since</span>
+            <span className="font-medium text-gray-100">
               {new Date().toLocaleDateString()}
             </span>
           </div>

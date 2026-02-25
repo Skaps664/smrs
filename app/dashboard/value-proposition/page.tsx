@@ -155,13 +155,13 @@ export default function ValuePropositionPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "ACTIVE":
-        return "bg-green-100 text-green-800"
+        return "bg-green-500/15 text-green-300"
       case "DRAFT":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-yellow-500/15 text-yellow-300"
       case "ARCHIVED":
-        return "bg-gray-100 text-gray-800"
+        return "bg-[#141414] text-gray-200"
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-[#141414] text-gray-200"
     }
   }
 
@@ -183,7 +183,7 @@ export default function ValuePropositionPage() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading Value Proposition Canvas...</p>
+          <p className="text-gray-400">Loading Value Proposition Canvas...</p>
         </div>
       </div>
     )
@@ -194,8 +194,8 @@ export default function ValuePropositionPage() {
       {/* Header */}
       <div className="mb-6 flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Value Proposition Canvas</h1>
-          <p className="text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-100 mb-2">Value Proposition Canvas</h1>
+          <p className="text-gray-400">
             Design and iterate your value proposition with versioning
           </p>
         </div>
@@ -205,7 +205,7 @@ export default function ValuePropositionPage() {
             className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
               showHistory
                 ? "bg-orange-600 text-white"
-                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                : "bg-[#1a1a1a] text-gray-300 border border-gray-600 hover:bg-[#111]"
             }`}
           >
             {showHistory ? <EyeOff className="w-4 h-4" /> : <History className="w-4 h-4" />}
@@ -229,13 +229,13 @@ export default function ValuePropositionPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* History Sidebar */}
         {showHistory && (
-          <div className="lg:col-span-1 bg-white rounded-xl shadow-lg p-6 max-h-[800px] overflow-y-auto">
+          <div className="lg:col-span-1 bg-[#1a1a1a] rounded-xl shadow-lg p-6 max-h-[800px] overflow-y-auto">
             <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
               <History className="w-5 h-5 text-orange-600" />
               Version History
             </h2>
             {valuePropositions.length === 0 ? (
-              <p className="text-gray-500 text-sm">No versions created yet</p>
+              <p className="text-gray-400 text-sm">No versions created yet</p>
             ) : (
               <div className="space-y-3">
                 {valuePropositions.map((vp) => (
@@ -248,8 +248,8 @@ export default function ValuePropositionPage() {
                     }}
                     className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                       selectedVersion?.id === vp.id
-                        ? "border-orange-500 bg-orange-50"
-                        : "border-gray-200 hover:border-orange-300 hover:bg-gray-50"
+                        ? "border-orange-500 bg-orange-500/10"
+                        : "border-gray-700 hover:border-orange-300 hover:bg-[#111]"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-2">
@@ -259,8 +259,8 @@ export default function ValuePropositionPage() {
                         {vp.status}
                       </div>
                     </div>
-                    <p className="font-medium text-gray-900 mb-1">{vp.versionName}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="font-medium text-gray-100 mb-1">{vp.versionName}</p>
+                    <p className="text-xs text-gray-400">
                       {new Date(vp.createdAt).toLocaleDateString()}
                     </p>
                     {selectedVersion?.id === vp.id && !isCreating && (
@@ -271,7 +271,7 @@ export default function ValuePropositionPage() {
                             loadVersionToForm(vp)
                             setIsEditing(true)
                           }}
-                          className="text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded hover:bg-orange-200 transition-colors"
+                          className="text-xs bg-orange-500/15 text-orange-400 px-3 py-1 rounded hover:bg-orange-500/20 transition-colors"
                         >
                           Edit
                         </button>
@@ -280,7 +280,7 @@ export default function ValuePropositionPage() {
                             e.stopPropagation()
                             handleDelete(vp.id)
                           }}
-                          className="text-xs bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 transition-colors"
+                          className="text-xs bg-red-500/15 text-red-400 px-3 py-1 rounded hover:bg-red-500/20 transition-colors"
                         >
                           Delete
                         </button>
@@ -297,14 +297,14 @@ export default function ValuePropositionPage() {
         <div className={showHistory ? "lg:col-span-3" : "lg:col-span-4"}>
           {isCreating || isEditing ? (
             // Edit/Create Form
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-[#1a1a1a] rounded-xl shadow-lg p-6">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold mb-4">
                   {isCreating ? "Create New Version" : "Edit Version"}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Version Name *
                     </label>
                     <input
@@ -312,11 +312,11 @@ export default function ValuePropositionPage() {
                       value={formData.versionName}
                       onChange={(e) => setFormData({ ...formData, versionName: e.target.value })}
                       placeholder="e.g., Initial Canvas, Q2 2025 Pivot"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Status</label>
                     <select
                       value={formData.status}
                       onChange={(e) =>
@@ -325,7 +325,7 @@ export default function ValuePropositionPage() {
                           status: e.target.value as "DRAFT" | "ACTIVE" | "ARCHIVED",
                         })
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     >
                       <option value="DRAFT">Draft</option>
                       <option value="ACTIVE">Active</option>
@@ -333,7 +333,7 @@ export default function ValuePropositionPage() {
                     </select>
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Target Audience
                     </label>
                     <input
@@ -341,7 +341,7 @@ export default function ValuePropositionPage() {
                       value={formData.targetAudience}
                       onChange={(e) => setFormData({ ...formData, targetAudience: e.target.value })}
                       placeholder="Who is this canvas for?"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -350,15 +350,15 @@ export default function ValuePropositionPage() {
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Value Proposition Side */}
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-xl border-2 border-orange-200">
-                    <h3 className="text-xl font-bold text-orange-900 mb-4">Value Proposition</h3>
+                  <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 p-6 rounded-xl border-2 border-orange-500/30">
+                    <h3 className="text-xl font-bold text-orange-200 mb-4">Value Proposition</h3>
 
                     {/* Gain Creators */}
                     <div className="mb-6">
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-200 mb-2">
                         Gain Creators
                       </label>
-                      <p className="text-xs text-gray-600 mb-2">
+                      <p className="text-xs text-gray-400 mb-2">
                         How your products/services create customer gains
                       </p>
                       {formData.gainCreators.map((item, index) => (
@@ -370,12 +370,12 @@ export default function ValuePropositionPage() {
                               updateArrayItem("gainCreators", index, e.target.value)
                             }
                             placeholder="Describe a gain creator..."
-                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.gainCreators.length > 1 && (
                             <button
                               onClick={() => removeArrayItem("gainCreators", index)}
-                              className="text-red-600 hover:text-red-800"
+                              className="text-red-600 hover:text-red-300"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -384,7 +384,7 @@ export default function ValuePropositionPage() {
                       ))}
                       <button
                         onClick={() => addArrayItem("gainCreators")}
-                        className="text-sm text-orange-600 hover:text-orange-800 font-medium mt-2"
+                        className="text-sm text-orange-600 hover:text-orange-300 font-medium mt-2"
                       >
                         + Add Gain Creator
                       </button>
@@ -392,10 +392,10 @@ export default function ValuePropositionPage() {
 
                     {/* Products & Services */}
                     <div className="mb-6">
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-200 mb-2">
                         Products & Services
                       </label>
-                      <p className="text-xs text-gray-600 mb-2">
+                      <p className="text-xs text-gray-400 mb-2">
                         Your core offerings
                       </p>
                       {formData.productsServices.map((item, index) => (
@@ -407,12 +407,12 @@ export default function ValuePropositionPage() {
                               updateArrayItem("productsServices", index, e.target.value)
                             }
                             placeholder="Product or service..."
-                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.productsServices.length > 1 && (
                             <button
                               onClick={() => removeArrayItem("productsServices", index)}
-                              className="text-red-600 hover:text-red-800"
+                              className="text-red-600 hover:text-red-300"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -421,7 +421,7 @@ export default function ValuePropositionPage() {
                       ))}
                       <button
                         onClick={() => addArrayItem("productsServices")}
-                        className="text-sm text-orange-600 hover:text-orange-800 font-medium mt-2"
+                        className="text-sm text-orange-600 hover:text-orange-300 font-medium mt-2"
                       >
                         + Add Product/Service
                       </button>
@@ -429,10 +429,10 @@ export default function ValuePropositionPage() {
 
                     {/* Pain Relievers */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-200 mb-2">
                         Pain Relievers
                       </label>
-                      <p className="text-xs text-gray-600 mb-2">
+                      <p className="text-xs text-gray-400 mb-2">
                         How you eliminate or reduce customer pains
                       </p>
                       {formData.painRelievers.map((item, index) => (
@@ -444,12 +444,12 @@ export default function ValuePropositionPage() {
                               updateArrayItem("painRelievers", index, e.target.value)
                             }
                             placeholder="Describe a pain reliever..."
-                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.painRelievers.length > 1 && (
                             <button
                               onClick={() => removeArrayItem("painRelievers", index)}
-                              className="text-red-600 hover:text-red-800"
+                              className="text-red-600 hover:text-red-300"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -458,7 +458,7 @@ export default function ValuePropositionPage() {
                       ))}
                       <button
                         onClick={() => addArrayItem("painRelievers")}
-                        className="text-sm text-orange-600 hover:text-orange-800 font-medium mt-2"
+                        className="text-sm text-orange-600 hover:text-orange-300 font-medium mt-2"
                       >
                         + Add Pain Reliever
                       </button>
@@ -468,15 +468,15 @@ export default function ValuePropositionPage() {
 
                 {/* Customer Segment Side */}
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-orange-200">
-                    <h3 className="text-xl font-bold text-blue-900 mb-4">Customer Segment</h3>
+                  <div className="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 p-6 rounded-xl border-2 border-orange-500/30">
+                    <h3 className="text-xl font-bold text-blue-200 mb-4">Customer Segment</h3>
 
                     {/* Customer Gains */}
                     <div className="mb-6">
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-200 mb-2">
                         Customer Gains
                       </label>
-                      <p className="text-xs text-gray-600 mb-2">
+                      <p className="text-xs text-gray-400 mb-2">
                         Outcomes and benefits customers want
                       </p>
                       {formData.customerGains.map((item, index) => (
@@ -488,12 +488,12 @@ export default function ValuePropositionPage() {
                               updateArrayItem("customerGains", index, e.target.value)
                             }
                             placeholder="What gains do customers expect?"
-                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.customerGains.length > 1 && (
                             <button
                               onClick={() => removeArrayItem("customerGains", index)}
-                              className="text-red-600 hover:text-red-800"
+                              className="text-red-600 hover:text-red-300"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -502,7 +502,7 @@ export default function ValuePropositionPage() {
                       ))}
                       <button
                         onClick={() => addArrayItem("customerGains")}
-                        className="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2"
+                        className="text-sm text-blue-600 hover:text-blue-300 font-medium mt-2"
                       >
                         + Add Customer Gain
                       </button>
@@ -510,10 +510,10 @@ export default function ValuePropositionPage() {
 
                     {/* Customer Pains */}
                     <div className="mb-6">
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-200 mb-2">
                         Customer Pains
                       </label>
-                      <p className="text-xs text-gray-600 mb-2">
+                      <p className="text-xs text-gray-400 mb-2">
                         Problems and frustrations customers face
                       </p>
                       {formData.customerPains.map((item, index) => (
@@ -525,12 +525,12 @@ export default function ValuePropositionPage() {
                               updateArrayItem("customerPains", index, e.target.value)
                             }
                             placeholder="What frustrates customers?"
-                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.customerPains.length > 1 && (
                             <button
                               onClick={() => removeArrayItem("customerPains", index)}
-                              className="text-red-600 hover:text-red-800"
+                              className="text-red-600 hover:text-red-300"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -539,7 +539,7 @@ export default function ValuePropositionPage() {
                       ))}
                       <button
                         onClick={() => addArrayItem("customerPains")}
-                        className="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2"
+                        className="text-sm text-blue-600 hover:text-blue-300 font-medium mt-2"
                       >
                         + Add Customer Pain
                       </button>
@@ -547,10 +547,10 @@ export default function ValuePropositionPage() {
 
                     {/* Customer Jobs */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-200 mb-2">
                         Customer Jobs
                       </label>
-                      <p className="text-xs text-gray-600 mb-2">
+                      <p className="text-xs text-gray-400 mb-2">
                         Functional, social, and emotional jobs customers need done
                       </p>
                       {formData.customerJobs.map((item, index) => (
@@ -562,12 +562,12 @@ export default function ValuePropositionPage() {
                               updateArrayItem("customerJobs", index, e.target.value)
                             }
                             placeholder="What job needs to be done?"
-                            className="flex-1 px-3 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
+                            className="flex-1 px-3 py-2 border border-orange-500/30 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm"
                           />
                           {formData.customerJobs.length > 1 && (
                             <button
                               onClick={() => removeArrayItem("customerJobs", index)}
-                              className="text-red-600 hover:text-red-800"
+                              className="text-red-600 hover:text-red-300"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -576,7 +576,7 @@ export default function ValuePropositionPage() {
                       ))}
                       <button
                         onClick={() => addArrayItem("customerJobs")}
-                        className="text-sm text-blue-600 hover:text-blue-800 font-medium mt-2"
+                        className="text-sm text-blue-600 hover:text-blue-300 font-medium mt-2"
                       >
                         + Add Customer Job
                       </button>
@@ -587,7 +587,7 @@ export default function ValuePropositionPage() {
 
               {/* Notes */}
               <div className="mt-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Additional Notes
                 </label>
                 <textarea
@@ -595,7 +595,7 @@ export default function ValuePropositionPage() {
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   rows={3}
                   placeholder="Any additional context or insights..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 />
               </div>
 
@@ -614,7 +614,7 @@ export default function ValuePropositionPage() {
                     setIsEditing(false)
                     resetForm()
                   }}
-                  className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+                  className="bg-[#1f1f1f] text-gray-300 px-6 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors"
                 >
                   Cancel
                 </button>
@@ -622,7 +622,7 @@ export default function ValuePropositionPage() {
             </div>
           ) : selectedVersion ? (
             // View Mode
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-[#1a1a1a] rounded-xl shadow-lg p-6">
               <div className="mb-6 flex justify-between items-start">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
@@ -636,7 +636,7 @@ export default function ValuePropositionPage() {
                       {selectedVersion.status}
                     </div>
                   </div>
-                  <p className="text-gray-600">
+                  <p className="text-gray-400">
                     Version {selectedVersion.versionNumber} •{" "}
                     {new Date(selectedVersion.createdAt).toLocaleDateString()} •{" "}
                     {selectedVersion.targetAudience || "No target audience specified"}
@@ -655,11 +655,11 @@ export default function ValuePropositionPage() {
 
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Value Proposition View */}
-                <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-xl border-2 border-orange-200">
-                  <h3 className="text-xl font-bold text-orange-900 mb-4">Value Proposition</h3>
+                <div className="bg-gradient-to-br from-orange-500/10 to-amber-500/10 p-6 rounded-xl border-2 border-orange-500/30">
+                  <h3 className="text-xl font-bold text-orange-200 mb-4">Value Proposition</h3>
 
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-800 mb-2">Gain Creators</h4>
+                    <h4 className="font-semibold text-gray-200 mb-2">Gain Creators</h4>
                     <ul className="space-y-2">
                       {selectedVersion.gainCreators.length > 0 &&
                       selectedVersion.gainCreators[0] ? (
@@ -670,13 +670,13 @@ export default function ValuePropositionPage() {
                           </li>
                         ))
                       ) : (
-                        <p className="text-gray-500 text-sm italic">No gain creators added</p>
+                        <p className="text-gray-400 text-sm italic">No gain creators added</p>
                       )}
                     </ul>
                   </div>
 
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-800 mb-2">Products & Services</h4>
+                    <h4 className="font-semibold text-gray-200 mb-2">Products & Services</h4>
                     <ul className="space-y-2">
                       {selectedVersion.productsServices.length > 0 &&
                       selectedVersion.productsServices[0] ? (
@@ -687,13 +687,13 @@ export default function ValuePropositionPage() {
                           </li>
                         ))
                       ) : (
-                        <p className="text-gray-500 text-sm italic">No products/services added</p>
+                        <p className="text-gray-400 text-sm italic">No products/services added</p>
                       )}
                     </ul>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Pain Relievers</h4>
+                    <h4 className="font-semibold text-gray-200 mb-2">Pain Relievers</h4>
                     <ul className="space-y-2">
                       {selectedVersion.painRelievers.length > 0 &&
                       selectedVersion.painRelievers[0] ? (
@@ -704,18 +704,18 @@ export default function ValuePropositionPage() {
                           </li>
                         ))
                       ) : (
-                        <p className="text-gray-500 text-sm italic">No pain relievers added</p>
+                        <p className="text-gray-400 text-sm italic">No pain relievers added</p>
                       )}
                     </ul>
                   </div>
                 </div>
 
                 {/* Customer Segment View */}
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-orange-200">
-                  <h3 className="text-xl font-bold text-blue-900 mb-4">Customer Segment</h3>
+                <div className="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 p-6 rounded-xl border-2 border-orange-500/30">
+                  <h3 className="text-xl font-bold text-blue-200 mb-4">Customer Segment</h3>
 
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-800 mb-2">Customer Gains</h4>
+                    <h4 className="font-semibold text-gray-200 mb-2">Customer Gains</h4>
                     <ul className="space-y-2">
                       {selectedVersion.customerGains.length > 0 &&
                       selectedVersion.customerGains[0] ? (
@@ -726,13 +726,13 @@ export default function ValuePropositionPage() {
                           </li>
                         ))
                       ) : (
-                        <p className="text-gray-500 text-sm italic">No customer gains added</p>
+                        <p className="text-gray-400 text-sm italic">No customer gains added</p>
                       )}
                     </ul>
                   </div>
 
                   <div className="mb-6">
-                    <h4 className="font-semibold text-gray-800 mb-2">Customer Pains</h4>
+                    <h4 className="font-semibold text-gray-200 mb-2">Customer Pains</h4>
                     <ul className="space-y-2">
                       {selectedVersion.customerPains.length > 0 &&
                       selectedVersion.customerPains[0] ? (
@@ -743,13 +743,13 @@ export default function ValuePropositionPage() {
                           </li>
                         ))
                       ) : (
-                        <p className="text-gray-500 text-sm italic">No customer pains added</p>
+                        <p className="text-gray-400 text-sm italic">No customer pains added</p>
                       )}
                     </ul>
                   </div>
 
                   <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Customer Jobs</h4>
+                    <h4 className="font-semibold text-gray-200 mb-2">Customer Jobs</h4>
                     <ul className="space-y-2">
                       {selectedVersion.customerJobs.length > 0 &&
                       selectedVersion.customerJobs[0] ? (
@@ -760,7 +760,7 @@ export default function ValuePropositionPage() {
                           </li>
                         ))
                       ) : (
-                        <p className="text-gray-500 text-sm italic">No customer jobs added</p>
+                        <p className="text-gray-400 text-sm italic">No customer jobs added</p>
                       )}
                     </ul>
                   </div>
@@ -768,9 +768,9 @@ export default function ValuePropositionPage() {
               </div>
 
               {selectedVersion.notes && (
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                  <h4 className="font-semibold text-gray-800 mb-2">Additional Notes</h4>
-                  <p className="text-gray-700 text-sm whitespace-pre-wrap">
+                <div className="mt-6 p-4 bg-[#111] rounded-lg border border-gray-700">
+                  <h4 className="font-semibold text-gray-200 mb-2">Additional Notes</h4>
+                  <p className="text-gray-300 text-sm whitespace-pre-wrap">
                     {selectedVersion.notes}
                   </p>
                 </div>
@@ -778,15 +778,15 @@ export default function ValuePropositionPage() {
             </div>
           ) : (
             // Empty State
-            <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+            <div className="bg-[#1a1a1a] rounded-xl shadow-lg p-12 text-center">
               <div className="max-w-md mx-auto">
-                <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-20 h-20 bg-orange-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Plus className="w-10 h-10 text-orange-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <h3 className="text-2xl font-bold text-gray-100 mb-2">
                   No Value Proposition Created Yet
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-400 mb-6">
                   Start designing your value proposition canvas to align your products with customer
                   needs
                 </p>

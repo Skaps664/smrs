@@ -64,7 +64,7 @@ export function ReadOnlyButton({
   
   const variantClasses = {
     primary: "bg-orange-500 text-white hover:bg-orange-600 disabled:bg-gray-300",
-    secondary: "bg-gray-200 text-gray-700 hover:bg-gray-300 disabled:bg-gray-100",
+    secondary: "bg-[#1f1f1f] text-gray-300 hover:bg-gray-300 disabled:bg-[#141414]",
     danger: "bg-red-500 text-white hover:bg-red-600 disabled:bg-gray-300"
   }
 

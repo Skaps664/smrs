@@ -106,14 +106,14 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
   ]
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-6">
       <div className="flex items-center gap-2 mb-4">
-        <div className="p-2 bg-indigo-100 rounded-lg">
+        <div className="p-2 bg-indigo-500/15 rounded-lg">
           <Shield className="w-5 h-5 text-indigo-600" />
         </div>
-        <h2 className="text-xl font-bold text-gray-900">Porter's Five Forces Analysis</h2>
+        <h2 className="text-xl font-bold text-gray-100">Porter's Five Forces Analysis</h2>
       </div>
-      <p className="text-sm text-gray-600 mb-6">
+      <p className="text-sm text-gray-400 mb-6">
         Analyze competitive forces that shape your industry and determine profitability potential
       </p>
 
@@ -133,7 +133,7 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
               <select
                 value={data[force.key].level}
                 onChange={(e) => updateField(force.key, 'level', e.target.value)}
-                className={`px-3 py-1 border border-${force.color}-300 rounded-lg focus:ring-2 focus:ring-${force.color}-500 bg-white text-sm font-bold`}
+                className={`px-3 py-1 border border-${force.color}-300 rounded-lg focus:ring-2 focus:ring-${force.color}-500 bg-[#1a1a1a] text-sm font-bold`}
               >
                 <option value="">Level...</option>
                 <option value="low">Low</option>
@@ -144,7 +144,7 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
 
             <div className="space-y-3">
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">
+                <label className="block text-sm font-bold text-gray-300 mb-1">
                   Key Factors
                 </label>
                 <div className="flex gap-2 mb-2">
@@ -152,7 +152,7 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
                     type="text"
                     id={`${force.key}-factor`}
                     placeholder="Add a factor influencing this force..."
-                    className={`flex-1 px-3 py-2 border border-${force.color}-300 rounded-lg focus:ring-2 focus:ring-${force.color}-500 bg-white text-sm`}
+                    className={`flex-1 px-3 py-2 border border-${force.color}-300 rounded-lg focus:ring-2 focus:ring-${force.color}-500 bg-[#1a1a1a] text-sm`}
                     onKeyPress={(e) => {
                       if (e.key === 'Enter') {
                         const input = e.target as HTMLInputElement
@@ -174,11 +174,11 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
                 </div>
                 <div className="space-y-1">
                   {data[force.key].factors.map((factor, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border border-gray-200 text-sm">
-                      <span className="text-gray-700">• {factor}</span>
+                    <div key={idx} className="flex items-center justify-between p-2 bg-[#1a1a1a] rounded border border-gray-700 text-sm">
+                      <span className="text-gray-300">• {factor}</span>
                       <button
                         onClick={() => removeFactor(force.key, idx)}
-                        className="text-red-500 hover:text-red-700 text-xs"
+                        className="text-red-500 hover:text-red-400 text-xs"
                       >
                         ×
                       </button>
@@ -188,14 +188,14 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">
+                <label className="block text-sm font-bold text-gray-300 mb-1">
                   Analysis & Impact
                 </label>
                 <textarea
                   value={data[force.key].description}
                   onChange={(e) => updateField(force.key, 'description', e.target.value)}
                   placeholder="Describe how this force affects your business..."
-                  className={`w-full px-3 py-2 border border-${force.color}-300 rounded-lg focus:ring-2 focus:ring-${force.color}-500 bg-white text-sm`}
+                  className={`w-full px-3 py-2 border border-${force.color}-300 rounded-lg focus:ring-2 focus:ring-${force.color}-500 bg-[#1a1a1a] text-sm`}
                   rows={2}
                 />
               </div>
@@ -205,12 +205,12 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
       </div>
 
       {/* Porter's Five Forces Tips */}
-      <div className="mt-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
-        <p className="text-sm text-indigo-900 mb-2">
+      <div className="mt-6 p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-lg">
+        <p className="text-sm text-indigo-200 mb-2">
           <strong>💡 Strategic Insight:</strong> Industries with high competitive rivalry, buyer power, supplier power, 
           threat of substitutes, and low barriers to entry tend to have lower profit margins.
         </p>
-        <p className="text-xs text-indigo-800">
+        <p className="text-xs text-indigo-300">
           Use this analysis to identify your industry's attractiveness and develop strategies to improve your competitive position.
         </p>
       </div>
