@@ -340,59 +340,96 @@ export default function DocumentsPage() {
               {categoryDocs.length === 0 ? (
                 <p className="text-gray-400 text-sm italic">No documents in this category</p>
               ) : (
-                <div className="space-y-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   {categoryDocs.map((doc) => (
                     <div
                       key={doc.id}
-                      className={`border rounded-lg p-4 flex items-center justify-between ${
+                      className={`border rounded-xl flex flex-col overflow-hidden transition-all hover:border-gray-500/50 ${
                         isExpired(doc)
-                          ? "bg-red-500/10 border-red-500/30"
+                          ? "bg-red-500/5 border-red-500/30"
                           : isExpiring(doc)
-                          ? "bg-yellow-500/10 border-yellow-500/30"
-                          : "bg-[#111] border-gray-700"
+                          ? "bg-yellow-500/5 border-yellow-500/30"
+                          : "bg-[#111] border-gray-800"
                       }`}
                     >
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <h4 className="font-medium text-gray-100">{doc.name}</h4>
+                      {/* Thumbnail Header */}
+                      <div className="h-32 bg-black/40 relative flex items-center justify-center border-b border-gray-800 overflow-hidden group">
+                        {doc.fileType?.startsWith('image/') ? (
+                          <img 
+                            src={doc.fileUrl} 
+                            alt={doc.name} 
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
+                          />
+                        ) : doc.fileType?.includes('pdf') ? (
+                          <div className="flex flex-col items-center text-red-500/80">
+                            <FileText className="w-10 h-10 mb-2" />
+                            <span className="text-xs font-semibold tracking-wider">PDF</span>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-center text-gray-500/80">
+                            <FileText className="w-10 h-10 mb-2" />
+                            <span className="text-xs font-semibold tracking-wider">DOC</span>
+                          </div>
+                        )}
+                        
+                        {/* Hover Overlay for Download */}
+                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                          <button
+                            onClick={() => handleDownload(doc)}
+                            className="bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600 transform hover:scale-110 transition-all shadow-lg"
+                            title="Download"
+                          >
+                            <Download className="w-5 h-5" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Body */}
+                      <div className="p-4 flex-1 flex flex-col">
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="font-medium text-gray-100 line-clamp-2 flex-1 pr-2" title={doc.name}>
+                            {doc.name}
+                          </h4>
                           {(isExpired(doc) || isExpiring(doc)) && (
                             <AlertCircle
-                              className={`w-4 h-4 ${
+                              className={`w-4 h-4 mt-1 flex-shrink-0 ${
                                 isExpired(doc) ? "text-red-600" : "text-yellow-600"
                               }`}
                             />
                           )}
                         </div>
-                        <div className="text-xs text-gray-400 mt-1 space-x-3">
-                          <span>Uploaded: {format(new Date(doc.createdAt), "MMM dd, yyyy")}</span>
-                          {doc.fileSize && (
-                            <span>Size: {(Number(doc.fileSize) / 1024).toFixed(1)} KB</span>
-                          )}
+                        
+                        <div className="text-xs text-gray-400 mb-3 space-y-1">
+                          <div className="flex items-center justify-between">
+                            <span>{format(new Date(doc.createdAt), "MMM dd, yyyy")}</span>
+                            {doc.fileSize && (
+                              <span className="text-gray-500">{(Number(doc.fileSize) / 1024).toFixed(1)} KB</span>
+                            )}
+                          </div>
                           {doc.expiryDate && (
-                            <span className={isExpired(doc) ? "text-red-600 font-medium" : ""}>
+                            <div className={`mt-1 ${isExpired(doc) ? "text-red-500 font-medium" : isExpiring(doc) ? "text-yellow-500 font-medium" : ""}`}>
                               Expires: {format(new Date(doc.expiryDate), "MMM dd, yyyy")}
-                            </span>
+                            </div>
                           )}
                         </div>
+                        
                         {doc.notes && (
-                          <p className="text-sm text-gray-400 mt-2">{doc.notes}</p>
+                          <div className="mt-auto pt-2 mb-2 pb-2 border-t border-gray-800/50">
+                            <p className="text-xs text-gray-400 line-clamp-2" title={doc.notes}>
+                              {doc.notes}
+                            </p>
+                          </div>
                         )}
-                      </div>
-                      <div className="flex gap-2 ml-4">
-                        <button
-                          onClick={() => handleDownload(doc)}
-                          className="p-2 text-orange-600 hover:bg-orange-500/10 rounded-lg"
-                          title="Download"
-                        >
-                          <Download className="w-5 h-5" />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(doc.id)}
-                          className="p-2 text-red-600 hover:bg-red-500/10 rounded-lg"
-                          title="Delete"
-                        >
-                          <Trash2 className="w-5 h-5" />
-                        </button>
+                        
+                        <div className="flex justify-end mt-auto pt-2">
+                          <button
+                            onClick={() => handleDelete(doc.id)}
+                            className="text-gray-500 hover:text-red-500 transition-colors p-1"
+                            title="Delete Document"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ))}

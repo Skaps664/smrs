@@ -20,7 +20,8 @@ import {
   TrendingUp,
   Rocket,
   Users,
-  Settings
+  Settings,
+  Kanban
 } from "lucide-react"
 import { useState, useEffect } from "react"
 import ReadOnlyBanner from "@/components/ReadOnlyBanner"
@@ -39,6 +40,7 @@ const navigation = [
   { name: "Business Model", href: "/dashboard/business-model", icon: Layers },
   { name: "Mentors & Investors", href: "/dashboard/mentors-investors", icon: Users },
   { name: "Documents", href: "/dashboard/documents", icon: FileText },
+  { name: "Kanban Board", href: "/dashboard/kanban", icon: Kanban },
   { name: "Mentor Feedback", href: "/dashboard/feedback", icon: MessageSquare },
   { name: "Reports", href: "/dashboard/reports", icon: FileDown },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },

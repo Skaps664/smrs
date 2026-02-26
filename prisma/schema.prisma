@@ -103,6 +103,7 @@ model Startup {
   inviteLinks           InviteLink[]
   marketResearches      MarketResearch[]
   mvps                  MVP[]
+  kanbanColumns         KanbanColumn[]
 }
 
 model TeamMember {
@@ -499,4 +500,35 @@ model MVP {
   createdAt             DateTime    @default(now())
   
   @@index([startupId])
+}
+
+model KanbanColumn {
+  id                    String        @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String        @db.ObjectId
+  startup               Startup       @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  title                 String
+  order                 Int           @default(0)
+  
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  
+  tasks                 KanbanTask[]
+  
+  @@index([startupId])
+}
+
+model KanbanTask {
+  id                    String        @id @default(auto()) @map("_id") @db.ObjectId
+  columnId              String        @db.ObjectId
+  column                KanbanColumn  @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  
+  content               String
+  order                 Int           @default(0)
+  isCompleted           Boolean       @default(false)
+  
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  
+  @@index([columnId])
 }
