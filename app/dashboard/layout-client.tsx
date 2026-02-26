@@ -29,13 +29,13 @@ import { useFeedbackUnreadCount } from "@/hooks/useFeedbackUnreadCount"
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Startup Profile", href: "/dashboard/profile", icon: Building2 },
+  { name: "Timeline", href: "/dashboard/timeline", icon: Target },
+  { name: "KPI Dashboard", href: "/dashboard/kpis", icon: BarChart3 },
   { name: "Weekly Tracker", href: "/dashboard/weekly", icon: Calendar },
   { name: "Monthly Tracker", href: "/dashboard/monthly", icon: Calendar },
-  { name: "KPI Dashboard", href: "/dashboard/kpis", icon: BarChart3 },
-  { name: "Timeline", href: "/dashboard/timeline", icon: Target },
   { name: "Market Research", href: "/dashboard/market-research", icon: TrendingUp },
-  { name: "MVP Planning", href: "/dashboard/mvp-planning", icon: Rocket },
   { name: "Value Proposition", href: "/dashboard/value-proposition", icon: Lightbulb },
+  { name: "MVP Planning", href: "/dashboard/mvp-planning", icon: Rocket },
   { name: "Business Model", href: "/dashboard/business-model", icon: Layers },
   { name: "Mentors & Investors", href: "/dashboard/mentors-investors", icon: Users },
   { name: "Documents", href: "/dashboard/documents", icon: FileText },
@@ -111,7 +111,7 @@ export function DashboardLayoutClient({
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         <div className="flex min-h-0 flex-1 flex-col bg-[#141414] border-r border-gray-800">
           <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-            <div className="flex flex-shrink-0 items-center px-4 mb-8">
+            <div className="flex flex-shrink-0 items-center px-4 mb-2">
               <h1 className="font-[var(--font-bebas)] text-3xl tracking-tight text-orange-500">
                 EAZSTART
               </h1>
