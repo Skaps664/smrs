@@ -119,7 +119,7 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
 
       <div className="space-y-6">
         {forces.map((force) => (
-          <div key={force.key} className={`border-2 border-${force.color}-200 rounded-xl p-5 bg-${force.color}-50`}>
+          <div key={force.key} className={`border-2 border-${force.color}-200 rounded-xl p-5 bg-${force.color}`}>
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-2">
                 <div className={`p-2 bg-${force.color}-500 rounded-lg`}>
@@ -207,7 +207,7 @@ export default function PortersFiveForces({ data, onChange }: PortersFiveForcesP
       {/* Porter's Five Forces Tips */}
       <div className="mt-6 p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-lg">
         <p className="text-sm text-indigo-200 mb-2">
-          <strong>💡 Strategic Insight:</strong> Industries with high competitive rivalry, buyer power, supplier power, 
+          <strong>💡 Strategic Insight:</strong> Industries with high competitive rivalry, buyer power, supplier power,
           threat of substitutes, and low barriers to entry tend to have lower profit margins.
         </p>
         <p className="text-xs text-indigo-300">

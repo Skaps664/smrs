@@ -3,24 +3,44 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
+// Helper function to verify user has access to the startup
+async function verifyStartupAccess(startupId: string, userId: string): Promise<boolean> {
+  const startup = await prisma.startup.findUnique({
+    where: { id: startupId },
+    include: {
+      mentorAccess: true,
+      investorAccess: true,
+    }
+  });
+
+  if (!startup) return false;
+
+  const isOwner = startup.userId === userId;
+  const isMentor = startup.mentorAccess?.mentorId === userId;
+  const isInvestor = startup.investorAccess?.some(inv => inv.investorId === userId);
+
+  return isOwner || isMentor || isInvestor;
+}
+
 // GET all value propositions for a startup
 export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
-      include: { startups: true },
-    })
+    const { searchParams } = new URL(req.url)
+    let startupId = searchParams.get("startupId")
 
-    if (!user || user.startups.length === 0) {
-      return NextResponse.json({ error: "No startup found" }, { status: 404 })
+    if (!startupId) {
+      const startup = await prisma.startup.findFirst({ where: { userId: session.user.id } })
+      if (!startup) return NextResponse.json({ error: "No startup found" }, { status: 400 })
+      startupId = startup.id
+    } else {
+      const hasAccess = await verifyStartupAccess(startupId, session.user.id)
+      if (!hasAccess) return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
-
-    const startupId = user.startups[0].id
 
     const valuePropositions = await prisma.valueProposition.findMany({
       where: { startupId },
@@ -44,21 +64,21 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
-      include: { startups: true },
-    })
-
-    if (!user || user.startups.length === 0) {
-      return NextResponse.json({ error: "No startup found" }, { status: 404 })
-    }
-
-    const startupId = user.startups[0].id
     const body = await req.json()
+    let { startupId, ...valPropData } = body
+
+    if (!startupId) {
+      const startup = await prisma.startup.findFirst({ where: { userId: session.user.id } })
+      if (!startup) return NextResponse.json({ error: "No startup found" }, { status: 400 })
+      startupId = startup.id
+    } else {
+      const hasAccess = await verifyStartupAccess(startupId, session.user.id)
+      if (!hasAccess) return NextResponse.json({ error: "Access denied" }, { status: 403 })
+    }
 
     // Get the latest version number
     const latestVersion = await prisma.valueProposition.findFirst({
@@ -71,17 +91,17 @@ export async function POST(req: NextRequest) {
     const valueProposition = await prisma.valueProposition.create({
       data: {
         startupId,
-        versionName: body.versionName,
+        versionName: valPropData.versionName,
         versionNumber: nextVersionNumber,
-        status: body.status || 'DRAFT',
-        gainCreators: body.gainCreators || [],
-        productsServices: body.productsServices || [],
-        painRelievers: body.painRelievers || [],
-        customerGains: body.customerGains || [],
-        customerPains: body.customerPains || [],
-        customerJobs: body.customerJobs || [],
-        notes: body.notes,
-        targetAudience: body.targetAudience,
+        status: valPropData.status || 'DRAFT',
+        gainCreators: valPropData.gainCreators || [],
+        productsServices: valPropData.productsServices || [],
+        painRelievers: valPropData.painRelievers || [],
+        customerGains: valPropData.customerGains || [],
+        customerPains: valPropData.customerPains || [],
+        customerJobs: valPropData.customerJobs || [],
+        notes: valPropData.notes,
+        targetAudience: valPropData.targetAudience,
       },
     })
 
@@ -99,15 +119,30 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
     const body = await req.json()
-    const { id, ...updateData } = body
+    let { id, startupId, ...updateData } = body
 
     if (!id) {
       return NextResponse.json({ error: "ID is required" }, { status: 400 })
+    }
+
+    const item = await prisma.valueProposition.findUnique({
+      where: { id },
+      select: { startupId: true }
+    })
+
+    if (!item) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+    // Default to the item's startupId if not provided in the request
+    startupId = startupId || item.startupId
+
+    const hasAccess = await verifyStartupAccess(startupId, session.user.id)
+    if (!hasAccess || item.startupId !== startupId) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
 
     const valueProposition = await prisma.valueProposition.update({
@@ -129,7 +164,7 @@ export async function PUT(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
@@ -138,6 +173,18 @@ export async function DELETE(req: NextRequest) {
 
     if (!id) {
       return NextResponse.json({ error: "ID is required" }, { status: 400 })
+    }
+
+    const item = await prisma.valueProposition.findUnique({
+      where: { id },
+      select: { startupId: true }
+    })
+
+    if (!item) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+    const hasAccess = await verifyStartupAccess(item.startupId, session.user.id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
 
     await prisma.valueProposition.delete({

@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { 
-  TrendingUp, Save, Plus, Trash2, Info, ExternalLink, 
+import {
+  TrendingUp, Save, Plus, Trash2, Info, ExternalLink,
   Users, MapPin, DollarSign, Target, AlertCircle, Lightbulb,
   BarChart3, PieChart, Globe
 } from "lucide-react"
@@ -11,6 +11,7 @@ import SwotAnalysis from "./components/SwotAnalysis"
 import FourPsMarketing from "./components/FourPsMarketing"
 import PortersFiveForces from "./components/PortersFiveForces"
 import CustomerJourneyMap from "./components/CustomerJourneyMap"
+import { useReadOnly } from "@/contexts/ReadOnlyContext"
 
 interface SwotData {
   strengths: string[]
@@ -215,6 +216,7 @@ const defaultData: MarketResearchData = {
 }
 
 export default function MarketResearchPage() {
+  const { viewingStartupId, isReadOnly } = useReadOnly()
   const [data, setData] = useState<MarketResearchData>(defaultData)
   const [savedResearches, setSavedResearches] = useState<MarketResearchData[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -224,11 +226,14 @@ export default function MarketResearchPage() {
   // Load saved researches
   useEffect(() => {
     loadSavedResearches()
-  }, [])
+  }, [viewingStartupId])
 
   const loadSavedResearches = async () => {
     try {
-      const response = await fetch("/api/market-research")
+      const url = viewingStartupId
+        ? `/api/market-research?startupId=${viewingStartupId}`
+        : `/api/market-research`
+      const response = await fetch(url)
       if (response.ok) {
         const researches = await response.json()
         setSavedResearches(researches)
@@ -242,14 +247,18 @@ export default function MarketResearchPage() {
     setIsLoading(true)
     try {
       const method = selectedId ? "PUT" : "POST"
-      const url = selectedId 
-        ? `/api/market-research?id=${selectedId}` 
+      const url = selectedId
+        ? `/api/market-research?id=${selectedId}`
         : "/api/market-research"
-      
+
+      const payload = viewingStartupId
+        ? { ...data, startupId: viewingStartupId, lastUpdated: new Date().toISOString() }
+        : { ...data, lastUpdated: new Date().toISOString() }
+
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, lastUpdated: new Date().toISOString() })
+        body: JSON.stringify(payload)
       })
 
       if (response.ok) {
@@ -268,7 +277,7 @@ export default function MarketResearchPage() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this research?")) return
-    
+
     try {
       await fetch(`/api/market-research?id=${id}`, { method: "DELETE" })
       await loadSavedResearches()
@@ -293,20 +302,20 @@ export default function MarketResearchPage() {
 
   const addArrayItem = (path: string[], value: string) => {
     if (!value.trim()) return
-    
+
     setData(prev => {
       const newData = { ...prev }
       let current: any = newData
-      
+
       for (let i = 0; i < path.length - 1; i++) {
         current = current[path[i]]
       }
-      
+
       const key = path[path.length - 1]
       if (Array.isArray(current[key])) {
         current[key] = [...current[key], value.trim()]
       }
-      
+
       return newData
     })
   }
@@ -315,16 +324,16 @@ export default function MarketResearchPage() {
     setData(prev => {
       const newData = { ...prev }
       let current: any = newData
-      
+
       for (let i = 0; i < path.length - 1; i++) {
         current = current[path[i]]
       }
-      
+
       const key = path[path.length - 1]
       if (Array.isArray(current[key])) {
         current[key] = current[key].filter((_: any, i: number) => i !== index)
       }
-      
+
       return newData
     })
   }
@@ -380,11 +389,10 @@ export default function MarketResearchPage() {
             {savedResearches.map((research) => (
               <div
                 key={research.id}
-                className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                  selectedId === research.id
-                    ? "border-orange-500 bg-orange-500/10"
-                    : "border-gray-700 hover:border-orange-300"
-                }`}
+                className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${selectedId === research.id
+                  ? "border-orange-500 bg-orange-500/10"
+                  : "border-gray-700 hover:border-orange-300"
+                  }`}
                 onClick={() => handleLoad(research)}
               >
                 <div className="flex justify-between items-start mb-2">
@@ -490,18 +498,18 @@ export default function MarketResearchPage() {
                 <input
                   type="number"
                   value={data.tam.value || ""}
-                  onChange={(e) => setData({ 
-                    ...data, 
-                    tam: { ...data.tam, value: parseFloat(e.target.value) || 0 } 
+                  onChange={(e) => setData({
+                    ...data,
+                    tam: { ...data.tam, value: parseFloat(e.target.value) || 0 }
                   })}
                   placeholder="e.g., 50000000000"
                   className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
                 <select
                   value={data.tam.currency}
-                  onChange={(e) => setData({ 
-                    ...data, 
-                    tam: { ...data.tam, currency: e.target.value } 
+                  onChange={(e) => setData({
+                    ...data,
+                    tam: { ...data.tam, currency: e.target.value }
                   })}
                   className="px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 >
@@ -513,9 +521,9 @@ export default function MarketResearchPage() {
               </div>
               <textarea
                 value={data.tam.description}
-                onChange={(e) => setData({ 
-                  ...data, 
-                  tam: { ...data.tam, description: e.target.value } 
+                onChange={(e) => setData({
+                  ...data,
+                  tam: { ...data.tam, description: e.target.value }
                 })}
                 placeholder="Describe how you calculated TAM..."
                 className="w-full mt-2 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
@@ -532,18 +540,18 @@ export default function MarketResearchPage() {
                 <input
                   type="number"
                   value={data.sam.value || ""}
-                  onChange={(e) => setData({ 
-                    ...data, 
-                    sam: { ...data.sam, value: parseFloat(e.target.value) || 0 } 
+                  onChange={(e) => setData({
+                    ...data,
+                    sam: { ...data.sam, value: parseFloat(e.target.value) || 0 }
                   })}
                   placeholder="e.g., 5000000000"
                   className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
                 <select
                   value={data.sam.currency}
-                  onChange={(e) => setData({ 
-                    ...data, 
-                    sam: { ...data.sam, currency: e.target.value } 
+                  onChange={(e) => setData({
+                    ...data,
+                    sam: { ...data.sam, currency: e.target.value }
                   })}
                   className="px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 >
@@ -555,9 +563,9 @@ export default function MarketResearchPage() {
               </div>
               <textarea
                 value={data.sam.description}
-                onChange={(e) => setData({ 
-                  ...data, 
-                  sam: { ...data.sam, description: e.target.value } 
+                onChange={(e) => setData({
+                  ...data,
+                  sam: { ...data.sam, description: e.target.value }
                 })}
                 placeholder="Describe your serviceable market..."
                 className="w-full mt-2 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
@@ -574,18 +582,18 @@ export default function MarketResearchPage() {
                 <input
                   type="number"
                   value={data.som.value || ""}
-                  onChange={(e) => setData({ 
-                    ...data, 
-                    som: { ...data.som, value: parseFloat(e.target.value) || 0 } 
+                  onChange={(e) => setData({
+                    ...data,
+                    som: { ...data.som, value: parseFloat(e.target.value) || 0 }
                   })}
                   placeholder="e.g., 500000000"
                   className="flex-1 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 />
                 <select
                   value={data.som.currency}
-                  onChange={(e) => setData({ 
-                    ...data, 
-                    som: { ...data.som, currency: e.target.value } 
+                  onChange={(e) => setData({
+                    ...data,
+                    som: { ...data.som, currency: e.target.value }
                   })}
                   className="px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"
                 >
@@ -597,9 +605,9 @@ export default function MarketResearchPage() {
               </div>
               <textarea
                 value={data.som.description}
-                onChange={(e) => setData({ 
-                    ...data, 
-                    som: { ...data.som, description: e.target.value } 
+                onChange={(e) => setData({
+                  ...data,
+                  som: { ...data.som, description: e.target.value }
                 })}
                 placeholder="Describe your realistic market capture..."
                 className="w-full mt-2 px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500"

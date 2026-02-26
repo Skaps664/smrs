@@ -4,16 +4,16 @@ import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useReadOnly } from "@/contexts/ReadOnlyContext"
-import { 
-  Settings as SettingsIcon, 
-  User, 
-  Lock, 
-  Building2, 
-  Linkedin, 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Briefcase, 
+import {
+  Settings as SettingsIcon,
+  User,
+  Lock,
+  Building2,
+  Linkedin,
+  MapPin,
+  Phone,
+  Mail,
+  Briefcase,
   TrendingUp,
   Save,
   Eye,
@@ -90,7 +90,7 @@ export default function SettingsPage() {
 
   const fetchStartupDataForViewing = async () => {
     if (!viewingStartupId) return
-    
+
     try {
       // Fetch the startup being viewed
       const response = await fetch(`/api/startup/${viewingStartupId}`)
@@ -103,7 +103,7 @@ export default function SettingsPage() {
           hasMentor: startup.mentorCount > 0,
           hasInvestors: startup.investorCount > 0,
         })
-        
+
         // For read-only viewing, we show startup info but don't need profile data
         // since mentor/investor can't edit anything
       }
@@ -254,6 +254,15 @@ export default function SettingsPage() {
       }
 
       setSuccess("Settings updated successfully!")
+
+      // Update the startup data state to reflect the new stage visually
+      if (userRole === "STARTUP" && roleData.currentStage) {
+        setStartupData(prev => ({
+          ...prev,
+          stage: roleData.currentStage
+        }))
+      }
+
       await update() // Update session
       setTimeout(() => setSuccess(""), 3000)
     } catch (err: any) {
@@ -373,11 +382,10 @@ export default function SettingsPage() {
             <button
               onClick={() => setActiveTab("profile")}
               disabled={isReadOnly}
-              className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === "profile"
+              className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === "profile"
                   ? "border-orange-500 text-orange-600"
                   : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
-              } ${isReadOnly ? "opacity-50 cursor-not-allowed" : ""}`}
+                } ${isReadOnly ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               <User className="w-4 h-4 inline mr-2" />
               Profile
@@ -386,22 +394,20 @@ export default function SettingsPage() {
               <>
                 <button
                   onClick={() => setActiveTab("security")}
-                  className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
-                    activeTab === "security"
+                  className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === "security"
                       ? "border-orange-500 text-orange-600"
                       : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
-                  }`}
+                    }`}
                 >
                   <Lock className="w-4 h-4 inline mr-2" />
                   Security
                 </button>
                 <button
                   onClick={() => setActiveTab("role-specific")}
-                  className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
-                    activeTab === "role-specific"
+                  className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === "role-specific"
                       ? "border-orange-500 text-orange-600"
                       : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
-                  }`}
+                    }`}
                 >
                   {userRole === "STARTUP" && <Building2 className="w-4 h-4 inline mr-2" />}
                   {userRole === "MENTOR" && <User className="w-4 h-4 inline mr-2" />}
@@ -413,11 +419,10 @@ export default function SettingsPage() {
             {((userRole === "STARTUP" && startupData.id && !isReadOnly) || (isReadOnly && startupData.id)) && (
               <button
                 onClick={() => setActiveTab("startup-management")}
-                className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
-                  activeTab === "startup-management"
+                className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === "startup-management"
                     ? "border-orange-500 text-orange-600"
                     : "border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600"
-                }`}
+                  }`}
               >
                 <Building2 className="w-4 h-4 inline mr-2" />
                 Startup {isReadOnly ? "Info" : "Management"}

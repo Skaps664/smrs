@@ -126,7 +126,7 @@ export default function MentorsInvestorsSection({ startupId }: { startupId: stri
       <div className="space-y-4">
         {/* Mentor Card */}
         {mentor && (
-          <div className="bg-gradient-to-br from-green-500/10 to-emerald-50 rounded-lg p-5 border-2 border-green-500/30">
+          <div className="bg-orange rounded-lg p-5 border-2 border-green-500/30">
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center">
                 <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-lg mr-3">

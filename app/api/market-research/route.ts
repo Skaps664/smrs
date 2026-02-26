@@ -1,44 +1,51 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import fs from "fs/promises"
-import path from "path"
+import { prisma } from "@/lib/prisma"
 
-const DATA_DIR = path.join(process.cwd(), "data", "market-research")
-
-// Ensure data directory exists
-async function ensureDataDir() {
-  try {
-    await fs.access(DATA_DIR)
-  } catch {
-    await fs.mkdir(DATA_DIR, { recursive: true })
-  }
-}
-
-// Get user-specific file path
-async function getUserFilePath() {
-  const session = await getServerSession(authOptions)
-  if (!session?.user?.email) {
-    throw new Error("Unauthorized")
-  }
-  const sanitizedEmail = session.user.email.replace(/[^a-zA-Z0-9]/g, "_")
-  return path.join(DATA_DIR, `${sanitizedEmail}.json`)
-}
-
-// GET - Load all market researches for user
-export async function GET() {
-  try {
-    await ensureDataDir()
-    const filePath = await getUserFilePath()
-    
-    try {
-      const data = await fs.readFile(filePath, "utf-8")
-      const researches = JSON.parse(data)
-      return NextResponse.json(researches)
-    } catch {
-      // File doesn't exist yet
-      return NextResponse.json([])
+// Helper function to verify user has access to the startup
+async function verifyStartupAccess(startupId: string, userId: string): Promise<boolean> {
+  const startup = await prisma.startup.findUnique({
+    where: { id: startupId },
+    include: {
+      mentorAccess: true,
+      investorAccess: true,
     }
+  });
+
+  if (!startup) return false;
+
+  const isOwner = startup.userId === userId;
+  const isMentor = startup.mentorAccess?.mentorId === userId;
+  const isInvestor = startup.investorAccess?.some(inv => inv.investorId === userId);
+
+  return isOwner || isMentor || isInvestor;
+}
+
+// GET - Load all market researches for a startup
+export async function GET(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+
+    const { searchParams } = new URL(request.url)
+    let startupId = searchParams.get("startupId")
+
+    if (!startupId) {
+      const startup = await prisma.startup.findFirst({ where: { userId: session.user.id } })
+      if (!startup) return NextResponse.json({ error: "No startup found" }, { status: 400 })
+      startupId = startup.id
+    } else {
+      const hasAccess = await verifyStartupAccess(startupId, session.user.id);
+      if (!hasAccess) return NextResponse.json({ error: "Access denied" }, { status: 403 })
+    }
+
+    const researches = await prisma.marketResearch.findMany({
+      where: { startupId },
+      orderBy: { createdAt: "desc" }
+    })
+
+    return NextResponse.json(researches)
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
@@ -47,28 +54,37 @@ export async function GET() {
 // POST - Create new market research
 export async function POST(request: NextRequest) {
   try {
-    await ensureDataDir()
-    const filePath = await getUserFilePath()
-    const newResearch = await request.json()
-    
-    // Generate ID
-    newResearch.id = Date.now().toString()
-    
-    // Load existing researches
-    let researches = []
-    try {
-      const data = await fs.readFile(filePath, "utf-8")
-      researches = JSON.parse(data)
-    } catch {
-      // File doesn't exist yet
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+
+    const data = await request.json()
+    let { startupId, ...researchData } = data
+
+    if (!startupId) {
+      const startup = await prisma.startup.findFirst({ where: { userId: session.user.id } })
+      if (!startup) return NextResponse.json({ error: "No startup found" }, { status: 400 })
+      startupId = startup.id
+    } else {
+      const hasAccess = await verifyStartupAccess(startupId, session.user.id)
+      if (!hasAccess) return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
-    
-    // Add new research
-    researches.push(newResearch)
-    
-    // Save
-    await fs.writeFile(filePath, JSON.stringify(researches, null, 2))
-    
+
+    const newResearch = await prisma.marketResearch.create({
+      data: {
+        startupId,
+        title: researchData.title,
+        tam: researchData.tam || {},
+        sam: researchData.sam || {},
+        som: researchData.som || {},
+        swot: researchData.swot || {},
+        fourPs: researchData.fourPs || {},
+        portersForces: researchData.portersForces || {},
+        customerJourney: researchData.customerJourney || {},
+        competitors: researchData.competitors || [],
+        trends: researchData.trends || [],
+      }
+    })
+
     return NextResponse.json(newResearch)
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
@@ -78,32 +94,47 @@ export async function POST(request: NextRequest) {
 // PUT - Update existing market research
 export async function PUT(request: NextRequest) {
   try {
-    await ensureDataDir()
-    const filePath = await getUserFilePath()
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+
     const { searchParams } = new URL(request.url)
     const id = searchParams.get("id")
-    const updatedResearch = await request.json()
-    
-    if (!id) {
-      return NextResponse.json({ error: "ID required" }, { status: 400 })
+    const updatedData = await request.json()
+    let { startupId } = updatedData
+
+    if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 })
+
+    const researchInfo = await prisma.marketResearch.findUnique({
+      where: { id },
+      select: { startupId: true }
+    })
+
+    if (!researchInfo) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+    startupId = startupId || researchInfo.startupId
+
+    const hasAccess = await verifyStartupAccess(startupId, session.user.id)
+    if (!hasAccess || researchInfo.startupId !== startupId) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
-    
-    // Load existing researches
-    const data = await fs.readFile(filePath, "utf-8")
-    let researches = JSON.parse(data)
-    
-    // Update research
-    const index = researches.findIndex((r: any) => r.id === id)
-    if (index === -1) {
-      return NextResponse.json({ error: "Research not found" }, { status: 404 })
-    }
-    
-    researches[index] = { ...updatedResearch, id }
-    
-    // Save
-    await fs.writeFile(filePath, JSON.stringify(researches, null, 2))
-    
-    return NextResponse.json(researches[index])
+
+    const updatedResearch = await prisma.marketResearch.update({
+      where: { id },
+      data: {
+        title: updatedData.title,
+        tam: updatedData.tam,
+        sam: updatedData.sam,
+        som: updatedData.som,
+        swot: updatedData.swot,
+        fourPs: updatedData.fourPs,
+        portersForces: updatedData.portersForces,
+        customerJourney: updatedData.customerJourney,
+        competitors: updatedData.competitors,
+        trends: updatedData.trends,
+      }
+    })
+
+    return NextResponse.json(updatedResearch)
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
@@ -112,25 +143,28 @@ export async function PUT(request: NextRequest) {
 // DELETE - Delete market research
 export async function DELETE(request: NextRequest) {
   try {
-    await ensureDataDir()
-    const filePath = await getUserFilePath()
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+
     const { searchParams } = new URL(request.url)
     const id = searchParams.get("id")
-    
-    if (!id) {
-      return NextResponse.json({ error: "ID required" }, { status: 400 })
+
+    if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 })
+
+    const researchInfo = await prisma.marketResearch.findUnique({
+      where: { id },
+      select: { startupId: true }
+    })
+
+    if (!researchInfo) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+    const hasAccess = await verifyStartupAccess(researchInfo.startupId, session.user.id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
-    
-    // Load existing researches
-    const data = await fs.readFile(filePath, "utf-8")
-    let researches = JSON.parse(data)
-    
-    // Remove research
-    researches = researches.filter((r: any) => r.id !== id)
-    
-    // Save
-    await fs.writeFile(filePath, JSON.stringify(researches, null, 2))
-    
+
+    await prisma.marketResearch.delete({ where: { id } })
+
     return NextResponse.json({ success: true })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })

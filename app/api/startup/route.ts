@@ -79,6 +79,15 @@ export async function POST(request: Request) {
       },
     })
 
+    // Sync back stage and phone to User profile
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: {
+        currentStage: body.stage || "IDEATION",
+        ...(body.phone ? { phone: body.phone } : {})
+      }
+    })
+
     return NextResponse.json(startup, { status: 201 })
   } catch (error) {
     console.error("Error creating startup:", error)
@@ -113,6 +122,17 @@ export async function PUT(request: Request) {
       where: { id },
       data,
     })
+
+    // Sync back stage and phone to User profile
+    if (data.stage || data.phone) {
+      await prisma.user.update({
+        where: { id: session.user.id },
+        data: {
+          ...(data.stage ? { currentStage: data.stage } : {}),
+          ...(data.phone ? { phone: data.phone } : {})
+        }
+      })
+    }
 
     return NextResponse.json(startup)
   } catch (error) {

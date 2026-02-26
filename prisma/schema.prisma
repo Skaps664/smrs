@@ -101,6 +101,8 @@ model Startup {
   mentorAccess          StartupMentorAccess?
   investorAccess        StartupInvestorAccess[]
   inviteLinks           InviteLink[]
+  marketResearches      MarketResearch[]
+  mvps                  MVP[]
 }
 
 model TeamMember {
@@ -449,4 +451,52 @@ model InviteLink {
 enum InviteType {
   MENTOR
   INVESTOR
+}
+
+model MarketResearch {
+  id                    String      @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String      @db.ObjectId
+  startup               Startup     @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  title                 String
+  tam                   Json        // { value, currency, description } //
+  sam                   Json        // { value, currency, description } //
+  som                   Json        // { value, currency, description } //
+  swot                  Json        // { strengths, weaknesses, opportunities, threats } //
+  fourPs                Json        // { product, price, place, promotion } //
+  portersForces         Json        // { competitiveRivalry, supplierPower, ... } //
+  customerJourney       Json        // { awareness, consideration, decision, retention, advocacy } //
+  competitors           Json[]      // [{ name, strengths, weaknesses, ... }] //
+  trends                Json[]      // [{ trend, impact, action }] //
+  
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+  
+  @@index([startupId])
+}
+
+model MVP {
+  id                    String      @id @default(auto()) @map("_id") @db.ObjectId
+  startupId             String      @db.ObjectId
+  startup               Startup     @relation(fields: [startupId], references: [id], onDelete: Cascade)
+  
+  title                 String
+  mvpType               String
+  coreValue             String
+  targetCustomer        String
+  problemStatement      String
+  proposedSolution      String
+  features              Json[]      // [{ id, name, description, priority, effort, impact, status }] //
+  hypotheses            Json[]      // [{ id, assumption, testMethod, successCriteria, result }] //
+  successMetrics        Json[]      // [{ metric, target, timeframe }] //
+  budget                Json        // { estimated, breakdown: [{ category, amount }] } //
+  timeline              Json[]      // [{ phase, duration, deliverables }] //
+  risks                 String[]
+  learningGoals         String[]
+  nextSteps             String[]
+  
+  lastUpdated           DateTime    @updatedAt // Maintained for existing API compatibility
+  createdAt             DateTime    @default(now())
+  
+  @@index([startupId])
 }

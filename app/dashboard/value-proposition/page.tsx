@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react"
 import { Plus, History, Save, Trash2, Archive, CheckCircle, Clock, Eye, EyeOff } from "lucide-react"
 import type { ValueProposition } from "@/types"
+import { useReadOnly } from "@/contexts/ReadOnlyContext"
 
 export default function ValuePropositionPage() {
+  const { viewingStartupId, isReadOnly } = useReadOnly()
   const [valuePropositions, setValuePropositions] = useState<ValueProposition[]>([])
   const [loading, setLoading] = useState(true)
   const [showHistory, setShowHistory] = useState(false)
@@ -28,11 +30,14 @@ export default function ValuePropositionPage() {
 
   useEffect(() => {
     fetchValuePropositions()
-  }, [])
+  }, [viewingStartupId])
 
   const fetchValuePropositions = async () => {
     try {
-      const response = await fetch("/api/value-proposition")
+      const url = viewingStartupId
+        ? `/api/value-proposition?startupId=${viewingStartupId}`
+        : '/api/value-proposition'
+      const response = await fetch(url)
       if (response.ok) {
         const data = await response.json()
         setValuePropositions(data)
@@ -49,10 +54,14 @@ export default function ValuePropositionPage() {
 
   const handleCreate = async () => {
     try {
+      const payload = viewingStartupId
+        ? { ...formData, startupId: viewingStartupId }
+        : formData
+
       const response = await fetch("/api/value-proposition", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
 
       if (response.ok) {
@@ -71,10 +80,14 @@ export default function ValuePropositionPage() {
     if (!selectedVersion) return
 
     try {
+      const payload = viewingStartupId
+        ? { id: selectedVersion.id, startupId: viewingStartupId, ...formData }
+        : { id: selectedVersion.id, ...formData }
+
       const response = await fetch("/api/value-proposition", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: selectedVersion.id, ...formData }),
+        body: JSON.stringify(payload),
       })
 
       if (response.ok) {
@@ -90,7 +103,11 @@ export default function ValuePropositionPage() {
     if (!confirm("Are you sure you want to delete this version?")) return
 
     try {
-      const response = await fetch(`/api/value-proposition?id=${id}`, {
+      const url = viewingStartupId
+        ? `/api/value-proposition?id=${id}&startupId=${viewingStartupId}`
+        : `/api/value-proposition?id=${id}`
+
+      const response = await fetch(url, {
         method: "DELETE",
       })
 
@@ -202,11 +219,10 @@ export default function ValuePropositionPage() {
         <div className="flex gap-3">
           <button
             onClick={() => setShowHistory(!showHistory)}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
-              showHistory
-                ? "bg-orange-600 text-white"
-                : "bg-[#1a1a1a] text-gray-300 border border-gray-600 hover:bg-[#111]"
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${showHistory
+              ? "bg-orange-600 text-white"
+              : "bg-[#1a1a1a] text-gray-300 border border-gray-600 hover:bg-[#111]"
+              }`}
           >
             {showHistory ? <EyeOff className="w-4 h-4" /> : <History className="w-4 h-4" />}
             {showHistory ? "Hide History" : "Show History"}
@@ -246,11 +262,10 @@ export default function ValuePropositionPage() {
                       setIsCreating(false)
                       setIsEditing(false)
                     }}
-                    className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                      selectedVersion?.id === vp.id
-                        ? "border-orange-500 bg-orange-500/10"
-                        : "border-gray-700 hover:border-orange-300 hover:bg-[#111]"
-                    }`}
+                    className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${selectedVersion?.id === vp.id
+                      ? "border-orange-500 bg-orange-500/10"
+                      : "border-gray-700 hover:border-orange-300 hover:bg-[#111]"
+                      }`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-semibold text-sm">v{vp.versionNumber}</span>
@@ -662,7 +677,7 @@ export default function ValuePropositionPage() {
                     <h4 className="font-semibold text-gray-200 mb-2">Gain Creators</h4>
                     <ul className="space-y-2">
                       {selectedVersion.gainCreators.length > 0 &&
-                      selectedVersion.gainCreators[0] ? (
+                        selectedVersion.gainCreators[0] ? (
                         selectedVersion.gainCreators.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
                             <span className="text-orange-600 mt-1">•</span>
@@ -679,7 +694,7 @@ export default function ValuePropositionPage() {
                     <h4 className="font-semibold text-gray-200 mb-2">Products & Services</h4>
                     <ul className="space-y-2">
                       {selectedVersion.productsServices.length > 0 &&
-                      selectedVersion.productsServices[0] ? (
+                        selectedVersion.productsServices[0] ? (
                         selectedVersion.productsServices.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
                             <span className="text-orange-600 mt-1">•</span>
@@ -696,7 +711,7 @@ export default function ValuePropositionPage() {
                     <h4 className="font-semibold text-gray-200 mb-2">Pain Relievers</h4>
                     <ul className="space-y-2">
                       {selectedVersion.painRelievers.length > 0 &&
-                      selectedVersion.painRelievers[0] ? (
+                        selectedVersion.painRelievers[0] ? (
                         selectedVersion.painRelievers.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
                             <span className="text-orange-600 mt-1">•</span>
@@ -718,7 +733,7 @@ export default function ValuePropositionPage() {
                     <h4 className="font-semibold text-gray-200 mb-2">Customer Gains</h4>
                     <ul className="space-y-2">
                       {selectedVersion.customerGains.length > 0 &&
-                      selectedVersion.customerGains[0] ? (
+                        selectedVersion.customerGains[0] ? (
                         selectedVersion.customerGains.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
                             <span className="text-blue-600 mt-1">•</span>
@@ -735,7 +750,7 @@ export default function ValuePropositionPage() {
                     <h4 className="font-semibold text-gray-200 mb-2">Customer Pains</h4>
                     <ul className="space-y-2">
                       {selectedVersion.customerPains.length > 0 &&
-                      selectedVersion.customerPains[0] ? (
+                        selectedVersion.customerPains[0] ? (
                         selectedVersion.customerPains.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
                             <span className="text-blue-600 mt-1">•</span>
@@ -752,7 +767,7 @@ export default function ValuePropositionPage() {
                     <h4 className="font-semibold text-gray-200 mb-2">Customer Jobs</h4>
                     <ul className="space-y-2">
                       {selectedVersion.customerJobs.length > 0 &&
-                      selectedVersion.customerJobs[0] ? (
+                        selectedVersion.customerJobs[0] ? (
                         selectedVersion.customerJobs.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-sm">
                             <span className="text-blue-600 mt-1">•</span>

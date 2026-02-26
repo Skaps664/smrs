@@ -18,8 +18,8 @@ const ibmPlexMono = IBM_Plex_Mono({
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-bebas" });
 
 export const metadata: Metadata = {
-  title: "eazstart — just easy startup",
-  description: "Track your startup journey from ideation to scale with ease",
+  title: "eazstart — Pakistan's Best Starting Point for Startups",
+  description: "The ultimate platform for startups in Pakistan. Track your journey from ideation to scale with the best tools, mentorship, and investor connections.",
 };
 
 export default function RootLayout({

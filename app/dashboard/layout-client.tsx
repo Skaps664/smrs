@@ -3,14 +3,14 @@
 import { useSession, signOut } from "next-auth/react"
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
-import { 
-  LayoutDashboard, 
-  Building2, 
-  Calendar, 
-  BarChart3, 
-  Target, 
-  FileText, 
-  MessageSquare, 
+import {
+  LayoutDashboard,
+  Building2,
+  Calendar,
+  BarChart3,
+  Target,
+  FileText,
+  MessageSquare,
   FileDown,
   Lightbulb,
   Layers,
@@ -64,6 +64,16 @@ export function DashboardLayoutClient({
   const shouldFetchUnread = !!(userRole === "STARTUP" || isViewingStartup)
   const { unreadCount } = useFeedbackUnreadCount(currentStartupId, shouldFetchUnread)
 
+  // Prevent background scrolling when mobile sidebar is open
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.style.setProperty("overflow", "hidden");
+    } else {
+      document.body.style.removeProperty("overflow");
+    }
+    return () => document.body.style.removeProperty("overflow");
+  }, [sidebarOpen]);
+
   // Fetch own startup ID if user is STARTUP role
   useEffect(() => {
     if (userRole === "STARTUP" && !ownStartupId) {
@@ -115,16 +125,15 @@ export function DashboardLayoutClient({
                     href={isViewingStartup ? `${item.href}?startupId=${startupId}` : item.href}
                     className={`
                       group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors
-                      ${isActive 
-                        ? "bg-orange-500/20 text-orange-500" 
+                      ${isActive
+                        ? "bg-orange-500/20 text-orange-500"
                         : "text-gray-400 hover:bg-gray-800 hover:text-gray-100"
                       }
                     `}
                   >
                     <item.icon
-                      className={`mr-3 h-5 w-5 flex-shrink-0 ${
-                        isActive ? "text-orange-500" : "text-gray-400 group-hover:text-gray-400"
-                      }`}
+                      className={`mr-3 h-5 w-5 flex-shrink-0 ${isActive ? "text-orange-500" : "text-gray-400 group-hover:text-gray-400"
+                        }`}
                     />
                     <span className="flex-1">{item.name}</span>
                     {item.name === "Mentor Feedback" && unreadCount > 0 && (
@@ -165,9 +174,8 @@ export function DashboardLayoutClient({
 
       {/* Mobile sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-[#141414] border-r border-gray-800 transition-transform duration-300 ease-in-out lg:hidden ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-[#141414] border-r border-gray-800 transition-transform duration-300 ease-in-out lg:hidden ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="flex min-h-0 flex-1 flex-col">
           <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
@@ -192,16 +200,15 @@ export function DashboardLayoutClient({
                     onClick={() => setSidebarOpen(false)}
                     className={`
                       group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors
-                      ${isActive 
-                        ? "bg-orange-500/20 text-orange-500" 
+                      ${isActive
+                        ? "bg-orange-500/20 text-orange-500"
                         : "text-gray-400 hover:bg-gray-800 hover:text-gray-100"
                       }
                     `}
                   >
                     <item.icon
-                      className={`mr-3 h-5 w-5 flex-shrink-0 ${
-                        isActive ? "text-orange-500" : "text-gray-400 group-hover:text-gray-400"
-                      }`}
+                      className={`mr-3 h-5 w-5 flex-shrink-0 ${isActive ? "text-orange-500" : "text-gray-400 group-hover:text-gray-400"
+                        }`}
                     />
                     <span className="flex-1">{item.name}</span>
                     {item.name === "Mentor Feedback" && unreadCount > 0 && (
@@ -259,7 +266,7 @@ export function DashboardLayoutClient({
 
       {/* Main content */}
       <div className="flex flex-1 flex-col lg:pl-64">
-        <main className="flex-1">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden">
           {children}
         </main>
       </div>

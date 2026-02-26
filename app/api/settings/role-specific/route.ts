@@ -30,6 +30,12 @@ export async function PUT(request: NextRequest) {
     if (user.role === "STARTUP") {
       if (roleData.currentStage) {
         updateData.currentStage = roleData.currentStage
+
+        // Also update any associated startups to keep stage in sync
+        await prisma.startup.updateMany({
+          where: { userId: user.id },
+          data: { stage: roleData.currentStage }
+        })
       }
     } else if (user.role === "MENTOR") {
       if (roleData.mentorCompany !== undefined) {

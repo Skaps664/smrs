@@ -1,13 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { 
-  Plus, History, Save, Trash2, Archive, CheckCircle, Clock, Eye, EyeOff, 
-  HelpCircle, Lightbulb, Users, Gift, MessageSquare, DollarSign, 
+import {
+  Plus, History, Save, Trash2, Archive, CheckCircle, Clock, Eye, EyeOff,
+  HelpCircle, Lightbulb, Users, Gift, MessageSquare, DollarSign,
   Boxes, Zap, Handshake, Receipt, TrendingUp, Info, Play, BookOpen, X
 } from "lucide-react"
-import type { 
-  BusinessModelCanvas, 
+import { useReadOnly } from "@/contexts/ReadOnlyContext"
+import type {
+  BusinessModelCanvas,
   CustomerSegment,
   ValuePropositionBMC,
   Channel,
@@ -190,6 +191,7 @@ const BMC_BLOCKS = {
 }
 
 export default function BusinessModelCanvasPage() {
+  const { viewingStartupId, isReadOnly } = useReadOnly()
   const [businessModels, setBusinessModels] = useState<BusinessModelCanvas[]>([])
   const [loading, setLoading] = useState(true)
   const [showHistory, setShowHistory] = useState(false)
@@ -231,11 +233,14 @@ export default function BusinessModelCanvasPage() {
 
   useEffect(() => {
     fetchBusinessModels()
-  }, [])
+  }, [viewingStartupId])
 
   const fetchBusinessModels = async () => {
     try {
-      const response = await fetch("/api/business-model")
+      const url = viewingStartupId
+        ? `/api/business-model?startupId=${viewingStartupId}`
+        : '/api/business-model'
+      const response = await fetch(url)
       if (response.ok) {
         const data = await response.json()
         setBusinessModels(data)
@@ -271,49 +276,54 @@ export default function BusinessModelCanvasPage() {
       // Convert simple text fields to structured data
       const structuredData = {
         ...formData,
-        customerSegments: simpleFields.customerSegmentsText ? [{ 
-          segment: "Customer Segments", 
-          description: simpleFields.customerSegmentsText 
+        customerSegments: simpleFields.customerSegmentsText ? [{
+          segment: "Customer Segments",
+          description: simpleFields.customerSegmentsText
         }] : [],
-        valuePropositions: simpleFields.valuePropositionsText ? [{ 
-          proposition: "Value Propositions", 
-          description: simpleFields.valuePropositionsText 
+        valuePropositions: simpleFields.valuePropositionsText ? [{
+          proposition: "Value Propositions",
+          description: simpleFields.valuePropositionsText
         }] : [],
-        channels: simpleFields.channelsText ? [{ 
-          channel: "Channels", 
-          description: simpleFields.channelsText 
+        channels: simpleFields.channelsText ? [{
+          channel: "Channels",
+          description: simpleFields.channelsText
         }] : [],
-        customerRelationships: simpleFields.customerRelationshipsText ? [{ 
-          type: "Customer Relationships", 
-          description: simpleFields.customerRelationshipsText 
+        customerRelationships: simpleFields.customerRelationshipsText ? [{
+          type: "Customer Relationships",
+          description: simpleFields.customerRelationshipsText
         }] : [],
-        revenueStreams: simpleFields.revenueStreamsText ? [{ 
-          stream: "Revenue Streams", 
-          description: simpleFields.revenueStreamsText 
+        revenueStreams: simpleFields.revenueStreamsText ? [{
+          stream: "Revenue Streams",
+          description: simpleFields.revenueStreamsText
         }] : [],
-        keyResources: simpleFields.keyResourcesText ? [{ 
-          resource: "Key Resources", 
-          description: simpleFields.keyResourcesText 
+        keyResources: simpleFields.keyResourcesText ? [{
+          resource: "Key Resources",
+          description: simpleFields.keyResourcesText
         }] : [],
-        keyActivities: simpleFields.keyActivitiesText ? [{ 
-          activity: "Key Activities", 
-          description: simpleFields.keyActivitiesText 
+        keyActivities: simpleFields.keyActivitiesText ? [{
+          activity: "Key Activities",
+          description: simpleFields.keyActivitiesText
         }] : [],
-        keyPartnerships: simpleFields.keyPartnershipsText ? [{ 
-          partner: "Key Partnerships", 
-          description: simpleFields.keyPartnershipsText 
+        keyPartnerships: simpleFields.keyPartnershipsText ? [{
+          partner: "Key Partnerships",
+          description: simpleFields.keyPartnershipsText
         }] : [],
-        costStructure: simpleFields.costStructureText ? [{ 
-          cost: "Cost Structure", 
-          description: simpleFields.costStructureText 
+        costStructure: simpleFields.costStructureText ? [{
+          cost: "Cost Structure",
+          description: simpleFields.costStructureText
         }] : [],
       }
 
       const completionPercentage = calculateCompletion()
+
+      const payload = viewingStartupId
+        ? { ...structuredData, completionPercentage, startupId: viewingStartupId }
+        : { ...structuredData, completionPercentage }
+
       const response = await fetch("/api/business-model", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...structuredData, completionPercentage }),
+        body: JSON.stringify(payload),
       })
 
       if (response.ok) {
@@ -335,49 +345,54 @@ export default function BusinessModelCanvasPage() {
       // Convert simple text fields to structured data
       const structuredData = {
         ...formData,
-        customerSegments: simpleFields.customerSegmentsText ? [{ 
-          segment: "Customer Segments", 
-          description: simpleFields.customerSegmentsText 
+        customerSegments: simpleFields.customerSegmentsText ? [{
+          segment: "Customer Segments",
+          description: simpleFields.customerSegmentsText
         }] : [],
-        valuePropositions: simpleFields.valuePropositionsText ? [{ 
-          proposition: "Value Propositions", 
-          description: simpleFields.valuePropositionsText 
+        valuePropositions: simpleFields.valuePropositionsText ? [{
+          proposition: "Value Propositions",
+          description: simpleFields.valuePropositionsText
         }] : [],
-        channels: simpleFields.channelsText ? [{ 
-          channel: "Channels", 
-          description: simpleFields.channelsText 
+        channels: simpleFields.channelsText ? [{
+          channel: "Channels",
+          description: simpleFields.channelsText
         }] : [],
-        customerRelationships: simpleFields.customerRelationshipsText ? [{ 
-          type: "Customer Relationships", 
-          description: simpleFields.customerRelationshipsText 
+        customerRelationships: simpleFields.customerRelationshipsText ? [{
+          type: "Customer Relationships",
+          description: simpleFields.customerRelationshipsText
         }] : [],
-        revenueStreams: simpleFields.revenueStreamsText ? [{ 
-          stream: "Revenue Streams", 
-          description: simpleFields.revenueStreamsText 
+        revenueStreams: simpleFields.revenueStreamsText ? [{
+          stream: "Revenue Streams",
+          description: simpleFields.revenueStreamsText
         }] : [],
-        keyResources: simpleFields.keyResourcesText ? [{ 
-          resource: "Key Resources", 
-          description: simpleFields.keyResourcesText 
+        keyResources: simpleFields.keyResourcesText ? [{
+          resource: "Key Resources",
+          description: simpleFields.keyResourcesText
         }] : [],
-        keyActivities: simpleFields.keyActivitiesText ? [{ 
-          activity: "Key Activities", 
-          description: simpleFields.keyActivitiesText 
+        keyActivities: simpleFields.keyActivitiesText ? [{
+          activity: "Key Activities",
+          description: simpleFields.keyActivitiesText
         }] : [],
-        keyPartnerships: simpleFields.keyPartnershipsText ? [{ 
-          partner: "Key Partnerships", 
-          description: simpleFields.keyPartnershipsText 
+        keyPartnerships: simpleFields.keyPartnershipsText ? [{
+          partner: "Key Partnerships",
+          description: simpleFields.keyPartnershipsText
         }] : [],
-        costStructure: simpleFields.costStructureText ? [{ 
-          cost: "Cost Structure", 
-          description: simpleFields.costStructureText 
+        costStructure: simpleFields.costStructureText ? [{
+          cost: "Cost Structure",
+          description: simpleFields.costStructureText
         }] : [],
       }
 
       const completionPercentage = calculateCompletion()
+
+      const payload = viewingStartupId
+        ? { id: selectedVersion.id, ...structuredData, completionPercentage, startupId: viewingStartupId }
+        : { id: selectedVersion.id, ...structuredData, completionPercentage }
+
       const response = await fetch("/api/business-model", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: selectedVersion.id, ...structuredData, completionPercentage }),
+        body: JSON.stringify(payload),
       })
 
       if (response.ok) {
@@ -393,7 +408,11 @@ export default function BusinessModelCanvasPage() {
     if (!confirm("Are you sure you want to delete this business model canvas?")) return
 
     try {
-      const response = await fetch(`/api/business-model?id=${id}`, {
+      const url = viewingStartupId
+        ? `/api/business-model?id=${id}&startupId=${viewingStartupId}`
+        : `/api/business-model?id=${id}`
+
+      const response = await fetch(url, {
         method: "DELETE",
       })
 
@@ -453,7 +472,7 @@ export default function BusinessModelCanvasPage() {
       notes: version.notes || "",
       targetMarket: version.targetMarket || "",
     })
-    
+
     // Load simple text fields from structured data
     setSimpleFields({
       customerSegmentsText: version.customerSegments?.map(s => `${s.segment}: ${s.description || ''}`).join('\n\n') || "",
@@ -510,7 +529,7 @@ export default function BusinessModelCanvasPage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
       <div className="mb-6 flex flex-col md:flex-row md:justify-between md:items-start gap-4">
         <div>
@@ -529,11 +548,10 @@ export default function BusinessModelCanvasPage() {
           </button>
           <button
             onClick={() => setShowHistory(!showHistory)}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
-              showHistory
-                ? "bg-orange-600 text-white"
-                : "bg-[#1a1a1a] text-gray-300 border border-gray-600 hover:bg-[#111]"
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${showHistory
+              ? "bg-orange-600 text-white"
+              : "bg-[#1a1a1a] text-gray-300 border border-gray-600 hover:bg-[#111]"
+              }`}
           >
             {showHistory ? <EyeOff className="w-4 h-4" /> : <History className="w-4 h-4" />}
             History
@@ -555,11 +573,11 @@ export default function BusinessModelCanvasPage() {
 
       {/* Tutorial Video Modal - Full Screen Popup */}
       {showTutorial && (
-        <div 
+        <div
           className="fixed inset-0 bg-[#1a1a1a]/40 backdrop-blur-md z-50 flex items-center justify-center p-4"
           onClick={() => setShowTutorial(false)}
         >
-          <div 
+          <div
             className="bg-[#1a1a1a] rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
@@ -587,7 +605,7 @@ export default function BusinessModelCanvasPage() {
                   What is Business Model Canvas?
                 </h3>
                 <p className="text-blue-300 leading-relaxed mb-4">
-                  The Business Model Canvas is a strategic management tool that helps you visualize, design, and reinvent your business model. 
+                  The Business Model Canvas is a strategic management tool that helps you visualize, design, and reinvent your business model.
                   It consists of 9 building blocks that cover the four main areas of a business: customers, offer, infrastructure, and financial viability.
                 </p>
                 <div className="grid md:grid-cols-2 gap-4 mt-4">
@@ -886,11 +904,10 @@ export default function BusinessModelCanvasPage() {
                       setIsCreating(false)
                       setIsEditing(false)
                     }}
-                    className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                      selectedVersion?.id === bm.id
-                        ? "border-orange-500 bg-orange-500/10"
-                        : "border-gray-700 hover:border-orange-300 hover:bg-[#111]"
-                    }`}
+                    className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${selectedVersion?.id === bm.id
+                      ? "border-orange-500 bg-orange-500/10"
+                      : "border-gray-700 hover:border-orange-300 hover:bg-[#111]"
+                      }`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-semibold text-sm">v{bm.versionNumber}</span>
@@ -1018,7 +1035,7 @@ export default function BusinessModelCanvasPage() {
                     <h3 className="text-lg font-bold text-blue-200">1. Customer Segments</h3>
                   </div>
                   <p className="text-sm text-blue-300 mb-4">Who are your most important customers?</p>
-                  
+
                   <textarea
                     value={simpleFields.customerSegmentsText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, customerSegmentsText: e.target.value })}
@@ -1029,9 +1046,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-blue-500/15 border border-blue-300 rounded-lg">
                     <p className="text-sm text-blue-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-blue-300 leading-relaxed">
-                      Think of your customers like groups of friends at school. Each group has different interests! 
-                      For example: "Tech-savvy small business owners aged 30-45 who hate doing paperwork" or 
-                      "Busy parents who need to save time on grocery shopping". Be specific about WHO they are, 
+                      Think of your customers like groups of friends at school. Each group has different interests!
+                      For example: "Tech-savvy small business owners aged 30-45 who hate doing paperwork" or
+                      "Busy parents who need to save time on grocery shopping". Be specific about WHO they are,
                       WHAT problems they have, and HOW MANY of them exist.
                     </p>
                   </div>
@@ -1044,7 +1061,7 @@ export default function BusinessModelCanvasPage() {
                     <h3 className="text-lg font-bold text-orange-200">2. Value Propositions</h3>
                   </div>
                   <p className="text-sm text-orange-300 mb-4">What value do you deliver to customers?</p>
-                  
+
                   <textarea
                     value={simpleFields.valuePropositionsText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, valuePropositionsText: e.target.value })}
@@ -1055,9 +1072,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-orange-500/15 border border-orange-300 rounded-lg">
                     <p className="text-sm text-orange-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-orange-300 leading-relaxed">
-                      What's the SUPERPOWER you give to customers? Like a magic wand! For example: "Our app turns 
-                      8 hours of boring work into just 30 minutes" or "We make sure you never forget your mom's 
-                      birthday again!" Answer these: What PAIN do they have? What's your SOLUTION? Why are you 
+                      What's the SUPERPOWER you give to customers? Like a magic wand! For example: "Our app turns
+                      8 hours of boring work into just 30 minutes" or "We make sure you never forget your mom's
+                      birthday again!" Answer these: What PAIN do they have? What's your SOLUTION? Why are you
                       BETTER than others doing the same thing?
                     </p>
                   </div>
@@ -1080,9 +1097,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-green-500/15 border border-green-300 rounded-lg">
                     <p className="text-sm text-green-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-green-300 leading-relaxed">
-                      This is HOW customers find you and buy from you - like the path to a treasure! Examples: 
-                      "They find us on Instagram ads" → "They visit our website" → "They buy through our app" → 
-                      "We deliver via email". Think of it as: How do they DISCOVER you? How do they BUY? 
+                      This is HOW customers find you and buy from you - like the path to a treasure! Examples:
+                      "They find us on Instagram ads" → "They visit our website" → "They buy through our app" →
+                      "We deliver via email". Think of it as: How do they DISCOVER you? How do they BUY?
                       How do they GET your product/service?
                     </p>
                   </div>
@@ -1105,9 +1122,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-purple-500/15 border border-purple-300 rounded-lg">
                     <p className="text-sm text-purple-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-purple-300 leading-relaxed">
-                      How do you treat your customers? Like friends at a party! Are you: The helpful host who 
-                      personally helps everyone (Personal assistance)? Or do you set up a buffet where people 
-                      help themselves (Self-service)? Examples: "24/7 live chat support", "Automated email tips", 
+                      How do you treat your customers? Like friends at a party! Are you: The helpful host who
+                      personally helps everyone (Personal assistance)? Or do you set up a buffet where people
+                      help themselves (Self-service)? Examples: "24/7 live chat support", "Automated email tips",
                       "Private Facebook community where customers help each other"
                     </p>
                   </div>
@@ -1120,7 +1137,7 @@ export default function BusinessModelCanvasPage() {
                     <h3 className="text-lg font-bold text-emerald-200">5. Revenue Streams</h3>
                   </div>
                   <p className="text-sm text-emerald-300 mb-4">How do you generate revenue from each customer segment?</p>
-                  
+
                   <textarea
                     value={simpleFields.revenueStreamsText}
                     onChange={(e) => setSimpleFields({ ...simpleFields, revenueStreamsText: e.target.value })}
@@ -1131,9 +1148,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-emerald-500/15 border border-emerald-300 rounded-lg">
                     <p className="text-sm text-emerald-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-emerald-300 leading-relaxed">
-                      This is your MONEY MACHINE! How do people pay you? Like a lemonade stand: Do they pay 
-                      $1 each time (One-time sale)? Or $5 every month to get lemonade whenever they want 
-                      (Subscription)? Examples: "Monthly subscription $49/month", "One-time purchase $299", 
+                      This is your MONEY MACHINE! How do people pay you? Like a lemonade stand: Do they pay
+                      $1 each time (One-time sale)? Or $5 every month to get lemonade whenever they want
+                      (Subscription)? Examples: "Monthly subscription $49/month", "One-time purchase $299",
                       "Pay per use - $0.10 per minute", "Free basic + Premium $99/year"
                     </p>
                   </div>
@@ -1156,9 +1173,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-indigo-500/15 border border-indigo-300 rounded-lg">
                     <p className="text-sm text-indigo-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-indigo-300 leading-relaxed">
-                      What STUFF do you absolutely NEED to run your business? Like ingredients for baking cookies! 
-                      This could be: THINGS you can touch (computers, office, factory), SMART STUFF (your app code, 
-                      patents, brand name), PEOPLE (developers, salespeople), or MONEY (cash in the bank). 
+                      What STUFF do you absolutely NEED to run your business? Like ingredients for baking cookies!
+                      This could be: THINGS you can touch (computers, office, factory), SMART STUFF (your app code,
+                      patents, brand name), PEOPLE (developers, salespeople), or MONEY (cash in the bank).
                       Example: "10 software developers", "Our secret recipe", "$100K in bank"
                     </p>
                   </div>
@@ -1181,9 +1198,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-yellow-500/15 border border-yellow-300 rounded-lg">
                     <p className="text-sm text-yellow-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-yellow-300 leading-relaxed">
-                      What do you DO every day to keep your business running? Like daily chores! If you're 
-                      making an app: "Write code every day", "Fix bugs", "Talk to customers". If you're selling 
-                      cookies: "Bake cookies", "Deliver to stores", "Create new recipes". What are the MOST 
+                      What do you DO every day to keep your business running? Like daily chores! If you're
+                      making an app: "Write code every day", "Fix bugs", "Talk to customers". If you're selling
+                      cookies: "Bake cookies", "Deliver to stores", "Create new recipes". What are the MOST
                       IMPORTANT tasks you must do to make money?
                     </p>
                   </div>
@@ -1206,9 +1223,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-pink-500/15 border border-pink-300 rounded-lg">
                     <p className="text-sm text-pink-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-pink-300 leading-relaxed">
-                      Who are your HELPERS and FRIENDS in business? You can't do everything alone! Like having 
-                      teammates. Examples: "Amazon Web Services hosts our website", "FedEx delivers our packages", 
-                      "Local bakery supplies our ingredients", "Marketing agency creates our ads". Who do you 
+                      Who are your HELPERS and FRIENDS in business? You can't do everything alone! Like having
+                      teammates. Examples: "Amazon Web Services hosts our website", "FedEx delivers our packages",
+                      "Local bakery supplies our ingredients", "Marketing agency creates our ads". Who do you
                       DEPEND ON? Who helps make your business work?
                     </p>
                   </div>
@@ -1231,9 +1248,9 @@ export default function BusinessModelCanvasPage() {
                   <div className="mt-3 p-3 bg-red-500/15 border border-red-300 rounded-lg">
                     <p className="text-sm text-red-200 font-semibold mb-2">🎯 Super Simple Tip:</p>
                     <p className="text-xs text-red-300 leading-relaxed">
-                      What do you SPEND money on? Your piggy bank going OUT! Think about: Money you pay EVERY 
-                      month no matter what (rent, salaries, website hosting) = FIXED costs. Money that changes 
-                      based on sales (shipping, materials) = VARIABLE costs. Examples: "Office rent $2000/month", 
+                      What do you SPEND money on? Your piggy bank going OUT! Think about: Money you pay EVERY
+                      month no matter what (rent, salaries, website hosting) = FIXED costs. Money that changes
+                      based on sales (shipping, materials) = VARIABLE costs. Examples: "Office rent $2000/month",
                       "5 employees × $5000/month = $25000", "Facebook ads $500/month"
                     </p>
                   </div>

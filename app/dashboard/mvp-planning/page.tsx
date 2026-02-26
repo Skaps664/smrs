@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Rocket, Save, Plus, Trash2, CheckCircle2, Circle, AlertCircle, Lightbulb, Target, TrendingUp, Users, Zap, Clock, DollarSign, BarChart3 } from "lucide-react"
+import { useReadOnly } from "@/contexts/ReadOnlyContext"
 
 interface MVPFeature {
   id: string
@@ -73,6 +74,7 @@ const defaultData: MVPData = {
 }
 
 export default function MVPPlanningPage() {
+  const { viewingStartupId, isReadOnly } = useReadOnly()
   const [data, setData] = useState<MVPData>(defaultData)
   const [savedPlans, setSavedPlans] = useState<MVPData[]>([])
   const [isEditing, setIsEditing] = useState(false)
@@ -80,11 +82,14 @@ export default function MVPPlanningPage() {
 
   useEffect(() => {
     loadPlans()
-  }, [])
+  }, [viewingStartupId])
 
   const loadPlans = async () => {
     try {
-      const response = await fetch("/api/mvp-planning")
+      const url = viewingStartupId
+        ? `/api/mvp-planning?startupId=${viewingStartupId}`
+        : `/api/mvp-planning`
+      const response = await fetch(url)
       if (response.ok) {
         const plans = await response.json()
         setSavedPlans(plans)
@@ -101,10 +106,15 @@ export default function MVPPlanningPage() {
     setIsSaving(true)
     try {
       const method = data.id ? "PUT" : "POST"
+
+      const payload = viewingStartupId
+        ? { ...data, startupId: viewingStartupId, lastUpdated: new Date().toISOString() }
+        : { ...data, lastUpdated: new Date().toISOString() }
+
       const response = await fetch("/api/mvp-planning", {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, lastUpdated: new Date().toISOString() })
+        body: JSON.stringify(payload)
       })
 
       if (response.ok) {
@@ -249,14 +259,14 @@ export default function MVPPlanningPage() {
           <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
             <h3 className="font-semibold text-orange-200 mb-2">Definition (Eric Ries - Lean Startup)</h3>
             <p className="text-gray-300">
-              "The Minimum Viable Product is that version of a new product which allows a team to collect the maximum amount 
+              "The Minimum Viable Product is that version of a new product which allows a team to collect the maximum amount
               of validated learning about customers with the least effort."
             </p>
           </div>
           <div className="bg-[#1a1a1a] rounded-lg p-4 shadow-sm">
             <h3 className="font-semibold text-orange-200 mb-2">Y Combinator Perspective</h3>
             <p className="text-gray-300">
-              "Build something people want. Talk to users, iterate quickly, and focus on solving a real problem for a small 
+              "Build something people want. Talk to users, iterate quickly, and focus on solving a real problem for a small
               group of people rather than building everything for everyone."
             </p>
           </div>
@@ -622,7 +632,7 @@ export default function MVPPlanningPage() {
           <p className="text-sm text-gray-400 mb-4">
             Define metrics for Acquisition, Activation, Retention, Revenue, and Referral
           </p>
-          
+
           <div className="space-y-3">
             {data.successMetrics.map((metric, index) => (
               <div key={index} className="grid md:grid-cols-12 gap-3 items-end">
@@ -681,7 +691,7 @@ export default function MVPPlanningPage() {
                 </div>
               </div>
             ))}
-            
+
             <button
               onClick={() => {
                 setData({
@@ -704,7 +714,7 @@ export default function MVPPlanningPage() {
               <DollarSign className="w-5 h-5 mr-2 text-green-600" />
               Budget Estimation
             </h2>
-            
+
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Total Estimated Budget
@@ -778,7 +788,7 @@ export default function MVPPlanningPage() {
               <Clock className="w-5 h-5 mr-2 text-orange-600" />
               Timeline & Phases
             </h2>
-            
+
             <div className="space-y-3">
               {data.timeline.map((phase, index) => (
                 <div key={index} className="border rounded-lg p-3">

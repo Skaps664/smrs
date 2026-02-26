@@ -1,149 +1,180 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import fs from "fs/promises"
-import path from "path"
+import { prisma } from "@/lib/prisma"
 
-const DATA_DIR = path.join(process.cwd(), "data", "mvp-planning")
+// Helper function to verify user has access to the startup
+async function verifyStartupAccess(startupId: string, userId: string): Promise<boolean> {
+  const startup = await prisma.startup.findUnique({
+    where: { id: startupId },
+    include: {
+      mentorAccess: true,
+      investorAccess: true,
+    }
+  });
 
-async function ensureDataDir() {
-  try {
-    await fs.mkdir(DATA_DIR, { recursive: true })
-  } catch (error) {
-    console.error("Error creating data directory:", error)
-  }
+  if (!startup) return false;
+
+  const isOwner = startup.userId === userId;
+  const isMentor = startup.mentorAccess?.mentorId === userId;
+  const isInvestor = startup.investorAccess?.some(inv => inv.investorId === userId);
+
+  return isOwner || isMentor || isInvestor;
 }
 
-function sanitizeEmail(email: string): string {
-  return email.replace(/[^a-zA-Z0-9]/g, "_")
-}
-
+// GET - Load all MVP plans for a startup
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+
+    const { searchParams } = new URL(request.url)
+    let startupId = searchParams.get("startupId")
+
+    if (!startupId) {
+      const startup = await prisma.startup.findFirst({ where: { userId: session.user.id } })
+      if (!startup) return NextResponse.json({ error: "No startup found" }, { status: 400 })
+      startupId = startup.id
+    } else {
+      const hasAccess = await verifyStartupAccess(startupId, session.user.id);
+      if (!hasAccess) return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
 
-    await ensureDataDir()
-    const filename = `${sanitizeEmail(session.user.email)}.json`
-    const filePath = path.join(DATA_DIR, filename)
+    const plans = await prisma.mVP.findMany({
+      where: { startupId },
+      orderBy: { lastUpdated: "desc" }
+    })
 
-    try {
-      const data = await fs.readFile(filePath, "utf-8")
-      return NextResponse.json(JSON.parse(data))
-    } catch (error) {
-      // File doesn't exist yet
-      return NextResponse.json([])
-    }
-  } catch (error) {
-    console.error("Error in GET /api/mvp-planning:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    return NextResponse.json(plans)
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
 
+// POST - Create new MVP plan
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+
+    const data = await request.json()
+    let { startupId, ...planData } = data
+
+    if (!startupId) {
+      const startup = await prisma.startup.findFirst({ where: { userId: session.user.id } })
+      if (!startup) return NextResponse.json({ error: "No startup found" }, { status: 400 })
+      startupId = startup.id
+    } else {
+      const hasAccess = await verifyStartupAccess(startupId, session.user.id)
+      if (!hasAccess) return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
 
-    const newPlan = await request.json()
-    newPlan.id = Date.now().toString()
-    newPlan.lastUpdated = new Date().toISOString()
-
-    await ensureDataDir()
-    const filename = `${sanitizeEmail(session.user.email)}.json`
-    const filePath = path.join(DATA_DIR, filename)
-
-    let plans = []
-    try {
-      const data = await fs.readFile(filePath, "utf-8")
-      plans = JSON.parse(data)
-    } catch (error) {
-      // File doesn't exist yet, start with empty array
-    }
-
-    plans.unshift(newPlan)
-    await fs.writeFile(filePath, JSON.stringify(plans, null, 2))
+    const newPlan = await prisma.mVP.create({
+      data: {
+        startupId,
+        title: planData.title || "New MVP Plan",
+        mvpType: planData.mvpType || "",
+        coreValue: planData.coreValue || "",
+        targetCustomer: planData.targetCustomer || "",
+        problemStatement: planData.problemStatement || "",
+        proposedSolution: planData.proposedSolution || "",
+        features: planData.features || [],
+        hypotheses: planData.hypotheses || [],
+        successMetrics: planData.successMetrics || [],
+        budget: planData.budget || { estimated: "", breakdown: [] },
+        timeline: planData.timeline || [],
+        risks: planData.risks || [],
+        learningGoals: planData.learningGoals || [],
+        nextSteps: planData.nextSteps || [],
+      }
+    })
 
     return NextResponse.json(newPlan)
-  } catch (error) {
-    console.error("Error in POST /api/mvp-planning:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
 
+// PUT - Update existing MVP plan
 export async function PUT(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get("id")
+    const updatedData = await request.json()
+    let { startupId } = updatedData
+
+    if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 })
+
+    const planInfo = await prisma.mVP.findUnique({
+      where: { id },
+      select: { startupId: true }
+    })
+
+    if (!planInfo) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+    startupId = startupId || planInfo.startupId
+
+    const hasAccess = await verifyStartupAccess(startupId, session.user.id)
+    if (!hasAccess || planInfo.startupId !== startupId) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
 
-    const updatedPlan = await request.json()
-    updatedPlan.lastUpdated = new Date().toISOString()
-
-    await ensureDataDir()
-    const filename = `${sanitizeEmail(session.user.email)}.json`
-    const filePath = path.join(DATA_DIR, filename)
-
-    let plans = []
-    try {
-      const data = await fs.readFile(filePath, "utf-8")
-      plans = JSON.parse(data)
-    } catch (error) {
-      return NextResponse.json({ error: "Plan not found" }, { status: 404 })
-    }
-
-    const index = plans.findIndex((p: any) => p.id === updatedPlan.id)
-    if (index === -1) {
-      return NextResponse.json({ error: "Plan not found" }, { status: 404 })
-    }
-
-    plans[index] = updatedPlan
-    await fs.writeFile(filePath, JSON.stringify(plans, null, 2))
+    const updatedPlan = await prisma.mVP.update({
+      where: { id },
+      data: {
+        title: updatedData.title,
+        mvpType: updatedData.mvpType,
+        coreValue: updatedData.coreValue,
+        targetCustomer: updatedData.targetCustomer,
+        problemStatement: updatedData.problemStatement,
+        proposedSolution: updatedData.proposedSolution,
+        features: updatedData.features,
+        hypotheses: updatedData.hypotheses,
+        successMetrics: updatedData.successMetrics,
+        budget: updatedData.budget,
+        timeline: updatedData.timeline,
+        risks: updatedData.risks,
+        learningGoals: updatedData.learningGoals,
+        nextSteps: updatedData.nextSteps,
+      }
+    })
 
     return NextResponse.json(updatedPlan)
-  } catch (error) {
-    console.error("Error in PUT /api/mvp-planning:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
 
+// DELETE - Delete MVP plan
 export async function DELETE(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    }
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
     const { searchParams } = new URL(request.url)
     const id = searchParams.get("id")
 
-    if (!id) {
-      return NextResponse.json({ error: "ID required" }, { status: 400 })
+    if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 })
+
+    const planInfo = await prisma.mVP.findUnique({
+      where: { id },
+      select: { startupId: true }
+    })
+
+    if (!planInfo) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+    const hasAccess = await verifyStartupAccess(planInfo.startupId, session.user.id)
+    if (!hasAccess) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
 
-    await ensureDataDir()
-    const filename = `${sanitizeEmail(session.user.email)}.json`
-    const filePath = path.join(DATA_DIR, filename)
-
-    let plans = []
-    try {
-      const data = await fs.readFile(filePath, "utf-8")
-      plans = JSON.parse(data)
-    } catch (error) {
-      return NextResponse.json({ error: "Plan not found" }, { status: 404 })
-    }
-
-    plans = plans.filter((p: any) => p.id !== id)
-    await fs.writeFile(filePath, JSON.stringify(plans, null, 2))
+    await prisma.mVP.delete({ where: { id } })
 
     return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error("Error in DELETE /api/mvp-planning:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }

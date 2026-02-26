@@ -43,7 +43,7 @@ export function HeroSectionSMRS() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="font-[var(--font-bebas)] text-2xl text-accent tracking-wide">JUST EASY STARTUP</h1>
-            <p className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-1">Startup Management System</p>
+            <p className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-1">Pakistan's Best Startup Management System</p>
           </div>
           <div className="border border-border px-3 py-1.5">
             <p className="font-mono text-[8px] uppercase tracking-widest text-muted-foreground">v.1.0</p>
@@ -76,7 +76,7 @@ export function HeroSectionSMRS() {
         </h2>
 
         <p className="mt-8 md:mt-12 max-w-md font-mono text-xs sm:text-sm text-muted-foreground leading-relaxed">
-          We build systems that scale, not just dashboards that display. Track your startup journey from ideation to growth with precision.
+          The best ever starting point for startups in Pakistan. We build systems that scale, not just dashboards that display. Track your startup journey from ideation to growth with precision.
         </p>
 
         <div className="mt-12 md:mt-16 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-8">

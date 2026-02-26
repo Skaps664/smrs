@@ -59,132 +59,129 @@ export default function MyStartupsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#111] py-8 px-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-orange-500/10 to-amber-500/10 rounded-xl shadow-sm border-2 border-orange-500/30 p-8 mb-8">
-          <h1 className="text-3xl font-bold flex items-center text-gray-100">
-            <Building2 className="w-9 h-9 mr-3 text-orange-600" />
-            My Startups
-          </h1>
-          <p className="text-gray-400 mt-2 text-lg">
+    <div className="max-w-7xl mx-auto space-y-6">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-orange-500/10 to-amber-500/10 rounded-xl shadow-sm border-2 border-orange-500/30 p-8 mb-8">
+        <h1 className="text-3xl font-bold flex items-center text-gray-100">
+          <Building2 className="w-9 h-9 mr-3 text-orange-600" />
+          My Startups
+        </h1>
+        <p className="text-gray-400 mt-2 text-lg">
+          {userRole === "MENTOR"
+            ? "Startups you're mentoring"
+            : "Startups in your investment portfolio"}
+        </p>
+      </div>
+
+      {/* Startups Grid */}
+      {startups.length === 0 ? (
+        <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-12 text-center">
+          <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+          <h3 className="text-xl font-semibold text-gray-100 mb-2">No Startups Yet</h3>
+          <p className="text-gray-400">
             {userRole === "MENTOR"
-              ? "Startups you're mentoring"
-              : "Startups in your investment portfolio"}
+              ? "You haven't joined any startups as a mentor yet. Wait for invite links from startup founders."
+              : "You haven't joined any startups as an investor yet. Wait for invite links from startup founders."}
           </p>
         </div>
-
-        {/* Startups Grid */}
-        {startups.length === 0 ? (
-          <div className="bg-[#1a1a1a] rounded-xl shadow-sm border border-gray-700 p-12 text-center">
-            <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-100 mb-2">No Startups Yet</h3>
-            <p className="text-gray-400">
-              {userRole === "MENTOR"
-                ? "You haven't joined any startups as a mentor yet. Wait for invite links from startup founders."
-                : "You haven't joined any startups as an investor yet. Wait for invite links from startup founders."}
-            </p>
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {startups.map((startup) => (
-              <div
-                key={startup.id}
-                className="bg-[#1a1a1a] rounded-xl shadow-sm border-2 border-gray-700 hover:border-orange-300 transition-all p-6 cursor-pointer group"
-                onClick={() => viewStartup(startup.id)}
-              >
-                {/* Startup Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 text-white flex items-center justify-center text-xl font-bold">
-                    {startup.name.charAt(0)}
-                  </div>
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      startup.accessType === "MENTOR"
-                        ? "bg-green-500/15 text-green-300"
-                        : "bg-blue-500/15 text-blue-300"
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {startups.map((startup) => (
+            <div
+              key={startup.id}
+              className="bg-[#1a1a1a] rounded-xl shadow-sm border-2 border-gray-700 hover:border-orange-300 transition-all p-6 cursor-pointer group"
+              onClick={() => viewStartup(startup.id)}
+            >
+              {/* Startup Header */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 text-white flex items-center justify-center text-xl font-bold">
+                  {startup.name.charAt(0)}
+                </div>
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${startup.accessType === "MENTOR"
+                    ? "bg-green-500/15 text-green-300"
+                    : "bg-blue-500/15 text-blue-300"
                     }`}
-                  >
-                    {startup.accessType === "MENTOR" ? "Mentoring" : "Investing"}
-                  </span>
-                </div>
-
-                {/* Startup Info */}
-                <h3 className="text-xl font-bold text-gray-100 mb-2 group-hover:text-orange-600 transition-colors">
-                  {startup.name}
-                </h3>
-
-                <div className="space-y-2 text-sm mb-4">
-                  <div className="flex items-center text-gray-400">
-                    <Building2 className="w-4 h-4 mr-2" />
-                    {startup.industry}
-                  </div>
-                  <div className="flex items-center text-gray-400">
-                    <TrendingUp className="w-4 h-4 mr-2" />
-                    Stage: {startup.stage}
-                  </div>
-                  {startup.niche && (
-                    <div className="text-gray-400">
-                      Niche: {startup.niche}
-                    </div>
-                  )}
-                  <div className="flex items-center text-gray-400 text-xs">
-                    <Calendar className="w-3 h-3 mr-2" />
-                    Joined {new Date(startup.joinedAt).toLocaleDateString()}
-                  </div>
-                </div>
-
-                {/* Founder Info */}
-                <div className="pt-4 border-t border-gray-700">
-                  <p className="text-xs text-gray-400 mb-1">Founder</p>
-                  <p className="text-sm font-medium text-gray-100">{startup.user.name}</p>
-                </div>
-
-                {/* View Button */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    viewStartup(startup.id)
-                  }}
-                  className="mt-4 w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 flex items-center justify-center gap-2 font-medium"
                 >
-                  <Eye className="w-4 h-4" />
-                  View Dashboard
-                </button>
+                  {startup.accessType === "MENTOR" ? "Mentoring" : "Investing"}
+                </span>
               </div>
-            ))}
-          </div>
-        )}
 
-        {/* Info Box */}
-        {startups.length > 0 && (
-          <div className="mt-8 bg-blue-500/10 border border-blue-500/30 rounded-lg p-6">
-            <h3 className="font-semibold text-blue-200 mb-2">Access Information</h3>
-            <ul className="space-y-2 text-sm text-blue-300">
+              {/* Startup Info */}
+              <h3 className="text-xl font-bold text-gray-100 mb-2 group-hover:text-orange-600 transition-colors">
+                {startup.name}
+              </h3>
+
+              <div className="space-y-2 text-sm mb-4">
+                <div className="flex items-center text-gray-400">
+                  <Building2 className="w-4 h-4 mr-2" />
+                  {startup.industry}
+                </div>
+                <div className="flex items-center text-gray-400">
+                  <TrendingUp className="w-4 h-4 mr-2" />
+                  Stage: {startup.stage}
+                </div>
+                {startup.niche && (
+                  <div className="text-gray-400">
+                    Niche: {startup.niche}
+                  </div>
+                )}
+                <div className="flex items-center text-gray-400 text-xs">
+                  <Calendar className="w-3 h-3 mr-2" />
+                  Joined {new Date(startup.joinedAt).toLocaleDateString()}
+                </div>
+              </div>
+
+              {/* Founder Info */}
+              <div className="pt-4 border-t border-gray-700">
+                <p className="text-xs text-gray-400 mb-1">Founder</p>
+                <p className="text-sm font-medium text-gray-100">{startup.user.name}</p>
+              </div>
+
+              {/* View Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  viewStartup(startup.id)
+                }}
+                className="mt-4 w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 flex items-center justify-center gap-2 font-medium"
+              >
+                <Eye className="w-4 h-4" />
+                View Dashboard
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Info Box */}
+      {startups.length > 0 && (
+        <div className="mt-8 bg-blue-500/10 border border-blue-500/30 rounded-lg p-6">
+          <h3 className="font-semibold text-blue-200 mb-2">Access Information</h3>
+          <ul className="space-y-2 text-sm text-blue-300">
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 mt-0.5">•</span>
+              <span>
+                <strong>Read-Only Access:</strong> You can view all startup data but cannot edit or delete anything.
+              </span>
+            </li>
+            {userRole === "MENTOR" && (
               <li className="flex items-start gap-2">
                 <span className="text-blue-600 mt-0.5">•</span>
                 <span>
-                  <strong>Read-Only Access:</strong> You can view all startup data but cannot edit or delete anything.
+                  <strong>Provide Feedback:</strong> As a mentor, you can give feedback on different sections to guide the startup.
                 </span>
               </li>
-              {userRole === "MENTOR" && (
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-0.5">•</span>
-                  <span>
-                    <strong>Provide Feedback:</strong> As a mentor, you can give feedback on different sections to guide the startup.
-                  </span>
-                </li>
-              )}
-              <li className="flex items-start gap-2">
-                <span className="text-blue-600 mt-0.5">•</span>
-                <span>
-                  <strong>Confidentiality:</strong> All startup information should be kept confidential.
-                </span>
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
+            )}
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 mt-0.5">•</span>
+              <span>
+                <strong>Confidentiality:</strong> All startup information should be kept confidential.
+              </span>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
